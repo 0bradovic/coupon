@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'z',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
