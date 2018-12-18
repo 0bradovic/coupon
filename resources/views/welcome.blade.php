@@ -61,6 +61,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .content {
+                background: black !important;
+            }
         </style>
     </head>
     <body>
