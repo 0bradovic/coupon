@@ -35,4 +35,9 @@ class Offer extends Model
         return $this->belongsToMany(Tag::class, 'offer_to_tag', 'offer_id', 'tag_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

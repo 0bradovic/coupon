@@ -39,4 +39,9 @@ class User extends Authenticatable
         return $this->hasMany(CommentReply::class);
     }
 
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
 }

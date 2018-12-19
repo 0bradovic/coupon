@@ -24,6 +24,7 @@ class CreateOffersTable extends Migration
             $table->datetime('start');
             $table->datetime('end');
             $table->integer('offer_type_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('position')->unique();
             $table->timestamps();
         });
