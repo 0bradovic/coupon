@@ -14,7 +14,11 @@ class Brand extends Model
     public function offers()
     {
         return $this->hasMany(Offer::class);
+    }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'brand_to_category', 'brand_id', 'category_id');
     }
 
 }

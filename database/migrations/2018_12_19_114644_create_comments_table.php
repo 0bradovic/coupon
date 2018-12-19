@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfferTypesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateOfferTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_types', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('color');
+            $table->string('text');
+            $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateOfferTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_types');
+        Schema::dropIfExists('comments');
     }
 }

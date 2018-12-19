@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfferTypesTable extends Migration
+class CreateOfferToTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateOfferTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('color');
-            $table->timestamps();
+        Schema::create('offer_to_tag', function (Blueprint $table) {
+            //$table->increments('id');
+            $table->integer('offer_id')->unsigned()->index();
+            $table->integer('tag_id')->unsigned()->index();
+            //$table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ class CreateOfferTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_types');
+        Schema::dropIfExists('offer_to_tag');
     }
 }

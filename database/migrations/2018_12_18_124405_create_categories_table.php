@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('sku')->nullable()->unique();
             $table->string('img_src')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
     }

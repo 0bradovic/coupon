@@ -20,14 +20,6 @@ class UpdateForeignKeys extends Migration
             $table->foreign('offer_type_id')->references('id')->on('offer_types')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('offer_types', function (Blueprint $table) {
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
-        });
-
-        Schema::table('ordering_offers', function (Blueprint $table) {
-            $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade')->onUpdate('cascade');
-        });
-
         Schema::table('offer_to_category', function (Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade')->onUpdate('cascade');

@@ -8,12 +8,12 @@ class OfferType extends Model
 {
     //
     protected $fillable = [
-        'name' , 'tag_id', 'color'
+        'name' , 'color'
     ];
 
-    public function tag()
+    public function offer()
     {
-        return $this->belongsTo(Tag::class);
+        return $this->hasMany(Offer::class);
     }
 
     

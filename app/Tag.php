@@ -12,8 +12,8 @@ class Tag extends Model
         'name'
     ];
 
-    public function offerTypes()
+    public function offers()
     {
-        return $this->belongsToMany(OfferType::class);
+        return $this->belongsToMany(Offer::class, 'offer_to_tag', 'tag_id', 'offer_id');
     }
 }

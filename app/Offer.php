@@ -22,12 +22,17 @@ class Offer extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'offer_to_category','offer_id','category_id');
+        return $this->belongsToMany(Category::class, 'offer_to_category','offer_id','category_id');
     }
 
     public function offerType()
     {
         return $this->belongsTo(OfferType::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'offer_to_tag', 'offer_id', 'tag_id');
     }
 
 }
