@@ -121,6 +121,38 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        'OFFERS',
+        [
+            'text' => 'Offers',
+            'url'  => 'admin/posts',
+            'submenu' => [
+                [
+                    'text' => 'All Offers',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'New Offer',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Offers Categories',
+                    'url'  => '#',
+                ],
+            ]
+        ],
+        'CATEGORIES',
+        [
+            'text' => 'categories',
+            'url'  => 'admin/posts',
+            
+        ],
+        [
+            'text'        => 'Pages',
+            'url'         => 'admin/pages',
+            'icon'        => 'file',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
