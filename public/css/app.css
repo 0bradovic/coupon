@@ -9528,6 +9528,10 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+body {
+  font-size: 14px;
+}
+
 .offers_holder {
   background: #fff;
   padding: 10px;
@@ -9639,12 +9643,94 @@ a.text-dark:focus {
 
 .new_offer .offer_categories .publish_offer button {
   border: none;
-  background: #19c31a;
+  background: #1cab1d;
   color: #fff;
   line-height: 2;
   font-size: 20px;
   border-radius: 3px;
   padding: 0 25px;
   text-align: center;
+}
+
+.categories_holder {
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categories_holder h3 {
+  font-size: 23px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.categories_holder .add_new_category {
+  width: 38%;
+  margin-right: auto;
+}
+
+.categories_holder .add_new_category .add_new_category_item {
+  margin-bottom: 10px;
+}
+
+.categories_holder .add_new_category .add_new_category_item p {
+  margin-bottom: 4px;
+}
+
+.categories_holder .add_new_category .add_new_category_item input[type=text] {
+  width: 100%;
+}
+
+.categories_holder .add_new_category .add_new_category_item select {
+  width: 50%;
+}
+
+.categories_holder .add_new_category .add_new_category_item button {
+  border: none;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #fff;
+  background: #3c8dbc;
+  border-radius: 3px;
+}
+
+.categories_list {
+  font-size: 16px;
+  width: 60%;
+}
+
+.categories_list .categories_list_item {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 2;
+  border-bottom: 1px solid #ddd;
+}
+
+.categories_list .categories_list_item .offer_crud {
+  width: 100%;
+  margin-left: 6%;
+}
+
+.categories_list .categories_list_item .offer_crud a {
+  margin-right: 10px;
+}
+
+.categories_list .cat_checkbox {
+  width: 6%;
+}
+
+.categories_list .cat_name {
+  width: 67%;
+}
+
+.categories_list .number_of_offers {
+  width: 27%;
+}
+
+.categories_list .categories_list_header {
+  display: flex;
+  line-height: 3;
+  border-bottom: 1px solid #ddd;
 }
 

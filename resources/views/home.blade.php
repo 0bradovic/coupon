@@ -176,4 +176,75 @@
         </div>
 
     </div>
+
+    <div class="categories_holder">
+        <h3>Offers Categories</h3>
+        <div class="add_new_category">
+            <form action="" method="">
+                <div class="add_new_category_item">
+                    <p>Name</p>
+                    <input type="text" name="" id="">
+                </div>
+
+                <div class="add_new_category_item">
+                    <p>Choose Parent Category</p>
+                    <select name="" id="">
+                        <option value="">None</option>
+                        <option value="">Category 1</option>
+                        <option value="">Category 2</option>
+                        <option value="">Category 3</option>
+                    </select>
+                </div>
+                <div class="add_new_category_item">
+                    <button type="submit">Add Category</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="categories_list">
+            <div class="categories_list_header">
+                <div class="cat_checkbox">
+                    <input type="checkbox" name="" id="">
+                </div>
+                <div class="cat_name">Name</div>
+                <div class="number_of_offers">Number of offers</div>
+            </div>
+
+            <div class="categories_list_item">
+                <div class="cat_checkbox">
+                    <input type="checkbox" name="" id="">
+                </div>
+                <div class="cat_name">Do Some Good</div>
+                <div class="number_of_offers">4</div>
+                 <div class="offer_crud">
+                    <a href="">Edit</a>
+                    <a href="">Delete</a>
+                </div>
+            </div>
+
+             <div class="categories_list_item">
+                <div class="cat_checkbox">
+                    <input type="checkbox" name="" id="">
+                </div>
+                <div class="cat_name">Total Shop</div>
+                <div class="number_of_offers">3</div>
+                 <div class="offer_crud">
+                    <a href="">Edit</a>
+                    <a href="">Delete</a>
+                </div>
+            </div>
+
+             <div class="categories_list_item">
+                <div class="cat_checkbox">
+                    <input type="checkbox" name="" id="">
+                </div>
+                <div class="cat_name">Food</div>
+                <div class="number_of_offers">22</div>
+                 <div class="offer_crud">
+                    <a href="">Edit</a>
+                    <a href="">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop

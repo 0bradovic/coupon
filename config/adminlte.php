@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'z',
+        'MAIN NAVIGATION',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
@@ -121,7 +121,7 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        'Offers',
+        'OFFERS',
         [
             'text' => 'Offers',
             'url'  => 'admin/posts',
@@ -139,6 +139,12 @@ return [
                     'url'  => '#',
                 ],
             ]
+        ],
+        'CATEGORIES',
+        [
+            'text' => 'categories',
+            'url'  => 'admin/posts',
+            
         ],
         [
             'text'        => 'Pages',
