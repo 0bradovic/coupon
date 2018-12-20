@@ -92,7 +92,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        $categories = Category::where('parent_id',null)->where('id', '!=', $id)->get();
+        return view('categories.edit',compact('category','categories'));
     }
 
     /**
@@ -104,7 +106,37 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+        $category = Category::find($id);
+        $parent_id = null;
+        $img_src = null;
+        if($category->img_src)
+        {
+            $img_src = $category->img_src;
+        }
+        if($request->parent_id)
+        {
+            $parent_id = $request->parent_id;
+        }
+        if($request->photo)
+        {
+            if($category->img_src)
+            {
+                unlink(public_path().$category->img_src);
+            }
+            $file = $request->photo;
+            $name = time().$file->getClientOriginalName();
+            $file->move('images/category',$name);
+            $img_src = '/images/category/'.$name;
+        }
+        $category->update([
+            'name' => $request->name,
+            'img_src' => $img_src,
+            'parent_id' => $parent_id,
+        ]);
+        return redirect()->back()->with('success','Successfully updated category '.$category->name);
     }
 
     /**
@@ -115,6 +147,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        if($category->img_src)
+        {
+            unlink(public_path().$category->img_src);
+        }
+        $name = $category->name;
+        $category->delete();
+        return redirect()->back()->with('success','Successfully deleted category '.$name);
     }
 }

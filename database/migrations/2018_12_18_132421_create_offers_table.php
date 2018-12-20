@@ -17,7 +17,7 @@ class CreateOffersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('sku')->unique()->nullable();
-            $table->integer('brand_id')->unsigned()->index();
+            $table->integer('brand_id')->unsigned()->index()->nullable();
             $table->string('highlight');
             $table->string('summary');
             $table->text('detail');
