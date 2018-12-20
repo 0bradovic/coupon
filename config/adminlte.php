@@ -128,7 +128,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Offers',
-                    'url'  => '#',
+                    'route'  => 'offer.create',
                 ],
                 [
                     'text' => 'New Offer',

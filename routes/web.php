@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/create/category', 'CategoryController@create')->name('create.category');
 Route::post('/store/category', 'CategoryController@store')->name('store.category');
+
+Route::get('/offers/index', 'OfferController@createOffer')->name('offer.create');
