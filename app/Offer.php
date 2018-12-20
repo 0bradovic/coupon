@@ -9,10 +9,10 @@ class Offer extends Model
     //
 
     protected $fillable = [
-        'sku', 'brand_id', 'highlight', 
+        'name', 'sku', 'brand_id', 'highlight', 
         'summary', 'detail', 'link',
-        'start', 'end', 'offer_type_id',
-        'position'
+        'startDate', 'endDate', 'offer_type_id',
+        'position', 'user_id'
     ];
 
     public function brand()

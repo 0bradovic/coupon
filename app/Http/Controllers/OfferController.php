@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Offer;
 use App\OfferType;
+use App\User;
 
 class OfferController extends Controller
 {
@@ -22,12 +23,14 @@ class OfferController extends Controller
 
     public function createOffer(Request $request)
     {
-        $allOfferTypes = OfferType::all();
+        $offerTypes = OfferType::all();
 
-        return view('offers.offers', compact('allOfferTypes'));
+        $users = User::all();
+
+        return view('offers.create', compact('offerTypes', 'users'));
     }
 
-    public function storeOffer(Request $reuqest)
+    public function storeOffer(Request $request)
     {
         $this->validate($request,[
             'name' => 'required|string',
@@ -35,8 +38,8 @@ class OfferController extends Controller
             'summary' => 'required|string',
             'detail' => 'required|string',
             'link' => 'required|string',
-            'start' => 'required|date',
-            'end' => 'required|date',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date',
             'offer_type_id' => 'required|numeric',
             'user_id' => 'required|numeric',
             'position' => 'required|numeric'
@@ -55,12 +58,12 @@ class OfferController extends Controller
         $newOffer = Offer::create([
             'name' => $request->name,
             'sku' => $sku,
-            'highlight' => $request->hightlight,
+            'highlight' => $request->highlight,
             'summary' => $request->summary,
             'detail' => $request->detail,
             'link' => $request->link,
-            'start' => $request->start,
-            'end' => $request->end,
+            'startDate' => $request->startDate,
+            'endDate' => $request->endDate,
             'offer_type_id' => $request->offer_type_id,
             'user_id' => $request->user_id,
             'position' => $request->position

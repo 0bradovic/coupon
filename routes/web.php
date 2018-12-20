@@ -24,3 +24,4 @@ Route::get('/create/category', 'CategoryController@create')->name('create.catego
 Route::post('/store/category', 'CategoryController@store')->name('store.category');
 
 Route::get('/offers/index', 'OfferController@createOffer')->name('offer.create');
+Route::post('/offers/store', 'OfferController@storeOffer')->name('offer.store');
