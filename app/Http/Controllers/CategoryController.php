@@ -37,7 +37,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->validate($request,[
             'name' => 'required',
         ]);
@@ -61,10 +60,9 @@ class CategoryController extends Controller
         if($request->photo)
         {
             $file = $request->photo;
-            dd($file);
             $name = time().$file->getClientOriginalName();
-            $file->move('/images/categories',$name);
-            $img_src = '/images/categories/'.$name;
+            $file->move('images/category',$name);
+            $img_src = '/images/category/'.$name;
         }
         $category = Category::create([
             'name' => $request->name,
