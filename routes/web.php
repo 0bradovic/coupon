@@ -26,5 +26,6 @@ Route::get('/edit/category/{id}', 'CategoryController@edit')->name('edit.categor
 Route::post('/update/category/{id}', 'CategoryController@update')->name('update.category');
 Route::get('/delete/category/{id}', 'CategoryController@destroy')->name('delete.category');
 
-Route::get('/offers/index', 'OfferController@createOffer')->name('offer.create');
+Route::post('/offers/create', 'OfferController@createOffer')->name('offer.create');
 Route::post('/offers/store', 'OfferController@storeOffer')->name('offer.store');
+Route::get('/offers/index', 'OfferController@allOffersIndex')->name('offer.index');

@@ -13,12 +13,9 @@ class OfferController extends Controller
 
     public function allOffersIndex()
     {
-        return view();
-    }
+        $offers = Offer::with('user')->with('offerType')->get();
 
-    public function newOfferIndex()
-    {
-        return view();
+        return view('offers.index', compact('offers'));
     }
 
     public function createOffer(Request $request)

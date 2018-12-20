@@ -124,10 +124,10 @@ return [
         'OFFERS',
         [
             'text' => 'Offers',
-            'url'  => 'admin/posts',
             'submenu' => [
                 [
                     'text' => 'All Offers',
+                    'route' => 'offer.index',
                 ],
                 [
                     'text' => 'New Offer',
