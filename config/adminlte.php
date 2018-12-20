@@ -142,8 +142,17 @@ return [
         ],
         'CATEGORIES',
         [
-            'text' => 'categories',
-            'url'  => 'admin/posts',
+            'text' => 'Categories',
+            'submenu'  => [
+                [
+                    'text' => 'All categories',
+                    'url' => '/categories',
+                ],
+                [
+                    'text' => 'Create category',
+                    'url' => '/create/category',
+                ],
+            ],
             
         ],
         [

@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +25,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('parent_id',null)->get();
+        return view('categories.create',compact('categories'));
     }
 
     /**
@@ -35,6 +37,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request,[
             'name' => 'required',
         ]);
@@ -55,19 +58,21 @@ class CategoryController extends Controller
             $parent_id = $request->parent_id;
         }
         
-        if($request->file('photo'))
+        if($request->photo)
         {
-            $file = $request->file('photo');
+            $file = $request->photo;
+            dd($file);
             $name = time().$file->getClientOriginalName();
             $file->move('/images/categories',$name);
             $img_src = '/images/categories/'.$name;
         }
-        Category::create([
+        $category = Category::create([
             'name' => $request->name,
             'sku' => $sku,
             'img_src' => $img_src,
             'parent_id' => $parent_id,
         ]);
+        return redirect()->back()->with('success','Successfully added new category '.$category->name);
     }
 
     /**
