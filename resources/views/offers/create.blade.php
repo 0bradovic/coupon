@@ -52,8 +52,6 @@
               <label for="position">Position</label>
               <input type="number" class="form-control" name="position" placeholder="Provide position">
             </div>
-            
-            
             <div class="form-group">
               <label>Offer Type</label>
               <select class="form-control select2 " name="offer_type_id" style="width: 100%;" tabindex="-1" aria-hidden="true">

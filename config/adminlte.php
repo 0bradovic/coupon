@@ -128,11 +128,10 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Offers',
-                    'route'  => 'offer.create',
                 ],
                 [
                     'text' => 'New Offer',
-                    'url'  => '#',
+                    'route'  => 'offer.create',
                 ],
                 [
                     'text' => 'Offers Categories',
