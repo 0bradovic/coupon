@@ -15,6 +15,7 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('sku')->unique()->nullable();
             $table->integer('brand_id')->unsigned()->index();
             $table->string('highlight');
