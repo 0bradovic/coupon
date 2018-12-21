@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
 
 Auth::routes();
 
@@ -27,9 +25,6 @@ Route::get('/edit/category/{id}', 'CategoryController@edit')->name('edit.categor
 Route::post('/update/category/{id}', 'CategoryController@update')->name('update.category');
 Route::get('/delete/category/{id}', 'CategoryController@destroy')->name('delete.category');
 
-Route::post('/offers/create', 'OfferController@createOffer')->name('offer.create');
-Route::post('/offers/store', 'OfferController@storeOffer')->name('offer.store');
-Route::get('/offers/index', 'OfferController@allOffersIndex')->name('offer.index');
 // Offer type routes
 Route::get('/offer-types', 'OfferTypeController@index');
 Route::get('/create/offer-type', 'OfferTypeController@create')->name('create.offer-type');

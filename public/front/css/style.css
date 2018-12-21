@@ -1,0 +1,560 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+a:hover {
+  text-decoration: none; }
+
+#header {
+  background: orange; }
+  #header nav .navbar-brand {
+    color: #fff;
+    font-size: 1.6em;
+    margin-left: 9%;
+    margin-right: 5%; }
+  #header nav .navbar-brand:hover {
+    color: #fff; }
+  #header nav .form-control {
+    border-radius: 20px;
+    width: 350px !important;
+    position: relative; }
+  #header nav .form-control:placeholder-shown {
+    padding-left: 50px; }
+  #header nav .fa-search {
+    color: #495057;
+    line-height: 70px; }
+  #header nav .btn1 {
+    background: none;
+    position: absolute;
+    z-index: 10; }
+
+article #menu .dropbtn {
+  background-color: #fff;
+  color: #000;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  width: 300px;
+  margin-left: 30%;
+  text-align: start; }
+
+article #menu span {
+  background: orange;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 10px;
+  padding: 3px 8px;
+  margin-left: 40px; }
+
+article #menu .spanrr {
+  position: absolute;
+  right: -80px; }
+
+article #menu .spanr {
+  position: absolute;
+  right: 10px; }
+
+article #menu .dropdown {
+  padding: 7px 0;
+  position: relative;
+  display: inline-block; }
+
+article #menu .dropdown-content {
+  margin-left: 30%;
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  width: 300px; }
+
+article #menu .dropdown-content a {
+  color: black;
+  padding: 20px 16px;
+  text-decoration: none;
+  display: block; }
+
+article #menu .dropdown-content a:hover {
+  background-color: #ddd; }
+
+article #menu .dropdown:hover .dropdown-content {
+  display: block; }
+
+article #menu .dropdown:hover .dropbtn {
+  border-top: 3px solid green;
+  background-color: #fff; }
+
+article #carousel {
+  background: #e6e6e6; }
+  article #carousel img {
+    width: auto;
+    height: 300px; }
+  article #carousel h5 {
+    font-weight: 900;
+    font-size: 1.5em; }
+
+article #box {
+  background: #e6e6e6;
+  text-align: center;
+  padding: 30px 0; }
+  article #box img {
+    width: 100px;
+    height: auto;
+    padding: 20px 0; }
+  article #box h3 {
+    font-size: 16px;
+    line-height: 150px; }
+  article #box p {
+    padding-top: 10px; }
+  article #box a {
+    color: black; }
+  article #box .glavni {
+    margin: 0 auto;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+  article #box .hov:hover {
+    border: 1px solid #f00c0c;
+    border-radius: 10px; }
+  article #box .boxx {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    z-index: 1; }
+  article #box .btn-see {
+    background: orange;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    line-height: 170px; }
+
+#footer {
+  background: #222;
+  color: #fff; }
+  #footer a {
+    color: #fff;
+    padding: 0 10px; }
+
+@media only screen and (max-width: 576px) {
+  #box .container-fluid {
+    padding: 10px; }
+  #box .boxx {
+    line-height: 0px; }
+    #box .boxx h3 {
+      line-height: 30px;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      font-size: 22px; }
+    #box .boxx .btn-see {
+      line-height: 50px; } }
+
+#naslov {
+  background: #e6e6e6; }
+  #naslov h2 {
+    display: inline-block;
+    background: #fff;
+    margin: 0 90px;
+    margin-top: 30px;
+    padding: 5px;
+    font-size: 1.5em; }
+
+#work {
+  background: #e6e6e6; }
+  #work .container {
+    padding: 10px 0; }
+  #work .box {
+    background: #fff;
+    width: 100%;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+  #work .box1 {
+    padding: 10px;
+    margin: auto; }
+  #work .box2 {
+    padding: 10px 0; }
+    #work .box2 .naslov {
+      color: #444;
+      font-size: 18px;
+      font-weight: bold; }
+    #work .box2 .text {
+      color: #000;
+      font-size: 12px; }
+  #work .box3 {
+    margin-left: 50%; }
+    #work .box3 button {
+      color: #fff;
+      background: orange;
+      margin: 10px 0;
+      border-radius: 20px;
+      padding: 5px 30px;
+      text-align: center;
+      width: 200px; }
+
+@media only screen and (max-width: 1200px) {
+  #work {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #work .container {
+      max-width: 33.33%; }
+    #work .box {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #work .box1 {
+      text-align: center; }
+    #work .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: center; }
+    #work .box3 {
+      text-align: center;
+      margin: 0 auto; }
+      #work .box3 p {
+        text-align: center; } }
+
+@media only screen and (max-width: 768px) {
+  #work {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #work .container {
+      max-width: 50%; }
+    #work .box {
+      padding: 0 40px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #work .box1 {
+      text-align: center; }
+    #work .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: center; }
+    #work .box3 {
+      text-align: center;
+      margin: 0 auto; }
+      #work .box3 p {
+        text-align: center; } }
+
+@media only screen and (max-width: 576px) {
+  #work {
+    overflow: hidden;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #work .container {
+      max-width: 100%; }
+    #work .box {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #work .box1 {
+      text-align: center; }
+    #work .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: center; }
+    #work .box3 {
+      text-align: center;
+      margin: 0; }
+      #work .box3 p {
+        text-align: center; }
+      #work .box3 button {
+        display: block;
+        width: 100%; } }
+
+#naslov {
+  padding-left: 7.2%; }
+
+#zadnja {
+  background: #e6e6e6; }
+  #zadnja .container {
+    padding: 10px 0;
+    width: 70%; }
+  #zadnja .box {
+    background: #fff;
+    width: 100%;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+  #zadnja .box1 {
+    padding-right: 20px; }
+  #zadnja .box2 {
+    padding: 10px 0; }
+    #zadnja .box2 .naslov {
+      color: #000;
+      font-size: 20px; }
+    #zadnja .box2 .text {
+      color: #000;
+      font-size: 12px; }
+  #zadnja .box3 {
+    margin-left: 20%; }
+    #zadnja .box3 button {
+      color: #fff;
+      background: orange;
+      margin: 10px 0;
+      border-radius: 20px;
+      padding: 5px 30px;
+      text-align: center;
+      width: 200px; }
+    #zadnja .box3 .btn-prvi {
+      color: #fff;
+      background: orange;
+      margin: 10px 0;
+      border-radius: 20px;
+      padding: 5px 30px;
+      text-align: center;
+      width: 200px;
+      margin-top: 40px;
+      margin-left: -50px; }
+
+#form .form-com {
+  border-radius: 10px;
+  background: #fff;
+  text-align: center;
+  width: 250px;
+  height: 400px;
+  position: fixed;
+  bottom: 0px;
+  right: 30px;
+  z-index: 1; }
+  #form .form-com label {
+    padding: 30px 0;
+    font-weight: 500; }
+  #form .form-com i {
+    padding: 10px 0; }
+  #form .form-com button {
+    margin-top: 30px;
+    background: #43c801;
+    color: #fff;
+    border-radius: 20px; }
+
+a[href="#top"] {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #555;
+  color: white;
+  bottom: 30px;
+  right: 50px;
+  line-height: 40px;
+  text-align: center; }
+
+a[href="#top"]:hover {
+  color: #555;
+  background: #fff; }
+
+@media only screen and (max-width: 1200px) {
+  #form .form-com {
+    width: 35%; }
+  #zadnja {
+    overflow: hidden;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #zadnja .container {
+      max-width: 60%;
+      margin-left: 50px; }
+    #zadnja .box {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #zadnja .box1 {
+      text-align: center; }
+    #zadnja .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: center; }
+    #zadnja .box3 {
+      text-align: center;
+      margin: 0; }
+      #zadnja .box3 p {
+        text-align: center; }
+      #zadnja .box3 button {
+        display: block;
+        width: 100%; }
+      #zadnja .box3 .btn-prvi {
+        width: 100%;
+        margin-top: 0px;
+        margin-left: 0px; } }
+
+@media only screen and (max-width: 768px) {
+  #form .form-com {
+    position: static;
+    margin: auto;
+    text-align: center; }
+  #naslov {
+    padding-left: 0 !important; }
+    #naslov .naslov {
+      margin: auto;
+      text-align: center;
+      padding: 20px 0; }
+      #naslov .naslov h2 {
+        width: 75%;
+        margin: 0 auto; }
+  #zadnja {
+    overflow: hidden;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #zadnja .container {
+      max-width: 100%;
+      margin: 0 auto; }
+    #zadnja .box {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #zadnja .box1 {
+      text-align: center;
+      padding-right: 0 !important; }
+    #zadnja .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: start; }
+    #zadnja .box3 {
+      text-align: center;
+      margin: 0; }
+      #zadnja .box3 p {
+        text-align: center; }
+      #zadnja .box3 button {
+        display: block;
+        width: 100%; }
+      #zadnja .box3 .btn-prvi {
+        width: 100%;
+        margin-top: 0px;
+        margin-left: 0px; } }
+
+@media only screen and (max-width: 576px) {
+  #form .form-com {
+    position: static;
+    margin: auto;
+    text-align: center;
+    width: 100%; }
+  #naslov {
+    padding-left: 0 !important; }
+    #naslov .naslov {
+      padding: 0 10px;
+      text-align: center;
+      padding: 20px 0; }
+      #naslov .naslov h2 {
+        width: 100%;
+        margin: 0 auto; }
+  #zadnja {
+    overflow: hidden;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    #zadnja .container {
+      max-width: 100%; }
+    #zadnja .box {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    #zadnja .box1 {
+      text-align: center;
+      padding-right: 0 !important; }
+    #zadnja .box2 {
+      max-width: 100%;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      text-align: center; }
+    #zadnja .box3 {
+      text-align: center;
+      margin: 0; }
+      #zadnja .box3 p {
+        text-align: center; }
+      #zadnja .box3 button {
+        display: block;
+        width: 100%; }
+      #zadnja .box3 .btn-prvi {
+        width: 100%;
+        margin-top: 0px;
+        margin-left: 0px; } }

@@ -24,8 +24,11 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Color</th>
-                  <th>Created</th>
+                  <th>Highlight</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Type</th>
+                  <th>Author</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -33,8 +36,11 @@
                 <tr>
                   <td>{{ $offer->sku }}</td>
                   <td>{{ $offer->name }}</td>
-                  <td><div style="width:25px;height:25px;background-color:{{$offer->color}}"></div></td>
-                  <td>{{ $offer->created_at->toFormattedDateString() }}</td>
+                  <td>{{ $offer->highlight }}</td>
+                  <td>{{ $offer->dateFormat($offer->startDate)->toFormattedDateString() }}</td>
+                  <td>{{ $offer->dateFormat($offer->endDate)->toFormattedDateString() }}</td>
+                  <td>{{ $offer->offerType->name }}</td>
+                  <td>{{ $offer->user->name }}</td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
                 </tr>

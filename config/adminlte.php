@@ -142,15 +142,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Offers',
-                    'route' => 'offer.index',
+                    'url' => '/offes',
                 ],
                 [
-                    'text' => 'New Offer',
-                    'route'  => 'create.offer',
-                ],
-                [
-                    'text' => 'Offers Categories',
-                    'url'  => '#',
+                    'text' => 'Add Offer',
+                    'url'  => '/create/offer',
                 ],
             ]
         ],

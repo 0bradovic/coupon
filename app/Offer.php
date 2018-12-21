@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Offer extends Model
 {
@@ -12,7 +13,7 @@ class Offer extends Model
         'name', 'sku', 'brand_id', 'highlight', 
         'summary', 'detail', 'link',
         'startDate', 'endDate', 'offer_type_id',
-        'position', 'user_id'
+        'position', 'user_id','img_src',
     ];
 
     public function brand()
@@ -38,6 +39,11 @@ class Offer extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function dateFormat($date)
+    {
+        return Carbon::parse($date);
     }
 
 }

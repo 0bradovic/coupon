@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Offer')
+@section('title', 'Edit Offer')
 
 @section('content_header')
     
@@ -12,51 +12,55 @@
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Add New Offer</h3>
+          <h3 class="box-title">Edit Offer</h3>
         </div>
         @include('layouts.errors')
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('store.offer') }}" method="POST" enctype="multipart/form-data">
+        <form role="form"  action="{{ route('update.offer',['id' => $offer->id]) }}" method="POST">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control" name="name" placeholder="Provide name">
+              <input type="text" class="form-control" name="name" value="{{ $offer->name }}">
             </div>
             <div class="form-group">
               <label for="highlight">Highlight</label>
-              <input type="text" class="form-control" name="highlight" placeholder="Provide highlight,max 20 characters...">
+              <input type="text" class="form-control" name="highlight" value="{{ $offer->highlight }}">
             </div>
             <div class="form-group">
               <label for="summary">Summary</label>
-              <textarea class="form-control" name="summary" placeholder="Provide summary,max 50 characters..."></textarea>
+              <textarea class="form-control" name="summary">{{ $offer->summary }}</textarea>
             </div>
             <div class="form-group">
               <label for="detail">Detail</label>
-              <textarea class="form-control" name="detail" placeholder="Provide detail,max 300 characters..."></textarea>
+              <textarea class="form-control" name="detail">{{ $offer->detail }}</textarea>
             </div>
             <div class="form-group">
               <label for="link">Link</label>
-              <input type="text" class="form-control" name="link" placeholder="Provide link">
+              <input type="text" class="form-control" name="link" value="{{ $offer->link }}">
             </div>
             <div class="form-group">
               <label for="startDate">Start Date</label>
-              <input type="date" class="form-control" name="startDate" placeholder="Provide start date">
+              <input type="date" class="form-control" name="startDate" value="{{ $offer->dateFormat($offer->startDate)->toDateString() }}">
             </div>
             <div class="form-group">
               <label for="endDate">End Date</label>
-              <input type="date" class="form-control" name="endDate" placeholder="Provide end date">
+              <input type="date" class="form-control" name="endDate" value="{{ $offer->dateFormat($offer->endDate)->toDateString() }}">
             </div>
             <div class="form-group">
               <label for="position">Position</label>
-              <input type="number" class="form-control" name="position" placeholder="Provide position">
+              <input type="number" class="form-control" name="position" value="{{ $offer->position }}">
             </div>
             <div class="form-group">
               <label>Offer Type</label>
               <select class="form-control select2 " name="offer_type_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
               @foreach($offerTypes as $t)
+                @if($t->id == $offer->offer_type_id)
+                <option value="{{$t->id}}" selected="selected">{{$t->name}}</option>
+                @else
                 <option value="{{$t->id}}">{{$t->name}}</option>
+                @endif
               @endforeach
               
               </select>
@@ -66,7 +70,13 @@
               <select class="form-control select2" multiple="multiple" name="categories[]" data-placeholder="Select a Category"
                         style="width: 100%;">
                   @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @foreach($offer->categories as $cat)
+                        @if($category->id == $cat->id)
+                            <option value="{{ $category->id }}" selected="selected">{{ $category->name }}</option>
+                        @else
+                            <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                        @endif
+                    @endforeach
                   @endforeach
                 </select>
             </div>
@@ -76,14 +86,15 @@
               <select class="form-control select2" multiple="multiple" name="tags[]" data-placeholder="Select a Tag"
                         style="width: 100%;">
                   @foreach($tags as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @foreach($offer->tags as $t)
+                        @if($tag->id == $t->id)
+                            <option value="{{ $tag->id }}" selected="selected">{{ $tag->name }}</option>
+                        @else
+                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endif
+                    @endforeach
                   @endforeach
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label>Upload offer image (optional)</label>
-                <input type="file" name="photo">
             </div>
             
           </div>
@@ -93,7 +104,7 @@
           <!-- /.box-body -->
 
           <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Add Offer</button>
+            <button type="submit" class="btn btn-primary">Update Offer</button>
           </div>
         </form>
       </div>
