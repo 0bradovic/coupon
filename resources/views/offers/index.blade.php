@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Offer types')
+@section('title','Offers')
 
 @section('content_header')
 @stop
@@ -11,7 +11,7 @@
           <div class="box">
           
             <div class="box-header">
-              <h3 class="box-title">All offer types</h3>
+              <h3 class="box-title">All offers</h3>
               @include('layouts.messages')
               @include('layouts.errors')
               <div class="box-tools">
@@ -29,14 +29,14 @@
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
-                @foreach($offerTypes as $offerType)
+                @foreach($offers as $offer)
                 <tr>
-                  <td>{{ $offerType->id }}</td>
-                  <td>{{ $offerType->name }}</td>
-                  <td><div style="width:25px;height:25px;background-color:{{$offerType->color}}"></div></td>
-                  <td>{{ $offerType->created_at->toFormattedDateString() }}</td>
-                  <td><a href="{{ route('edit.offer-type', ['id' => $offerType->id]) }}"><i class="fa fa-pencil"></i></a></td>
-                  <td><a href="{{ route('delete.offer-type', ['id' => $offerType->id]) }}"><i class="fa fa-trash"></i></a></td>
+                  <td>{{ $offer->sku }}</td>
+                  <td>{{ $offer->name }}</td>
+                  <td><div style="width:25px;height:25px;background-color:{{$offer->color}}"></div></td>
+                  <td>{{ $offer->created_at->toFormattedDateString() }}</td>
+                  <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
+                  <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 @endforeach
               </table>

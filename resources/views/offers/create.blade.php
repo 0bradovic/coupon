@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Evelin')
+@section('title', 'Add Offer')
 
 @section('content_header')
     
@@ -18,7 +18,7 @@
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('offer.store') }}" method="POST">
+        <form role="form"  action="{{ route('store.offer') }}" method="POST">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>

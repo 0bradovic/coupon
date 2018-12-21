@@ -5,74 +5,91 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Offer;
 use App\OfferType;
-use App\User;
+use App\Category;
+use App\Tag;
 
 class OfferController extends Controller
 {
-    //
-
-    public function allOffersIndex()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return view();
+        $offers = Offer::all();
+        return view('offers.index',compact('offers'));
     }
 
-    public function newOfferIndex()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return view();
-    }
-
-    public function createOffer(Request $request)
-    {
+        $tags = Tag::all();
         $offerTypes = OfferType::all();
-
-        $users = User::all();
-
-        return view('offers.create', compact('offerTypes', 'users'));
+        $categories = Category::all();
+        return view('offers.create',compact('categories','tags','offerTypes'));
     }
 
-    public function storeOffer(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string',
-            'highlight' => 'required|string',
-            'summary' => 'required|string',
-            'detail' => 'required|string',
-            'link' => 'required|string',
-            'startDate' => 'required|date',
-            'endDate' => 'required|date',
-            'offer_type_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
-            'position' => 'required|numeric'
-        ]); 
 
-        $lastOfferSku = Offer::all()->pluck('sku')->last();
-        if($lastOfferSku)
-        {
-            $sku = intval($lastOfferSku) + 1;
-        }
-        else
-        {
-            $sku = 10000000;
-        }
-
-        $newOffer = Offer::create([
-            'name' => $request->name,
-            'sku' => $sku,
-            'highlight' => $request->highlight,
-            'summary' => $request->summary,
-            'detail' => $request->detail,
-            'link' => $request->link,
-            'startDate' => $request->startDate,
-            'endDate' => $request->endDate,
-            'offer_type_id' => $request->offer_type_id,
-            'user_id' => $request->user_id,
-            'position' => $request->position
         ]);
 
-        return redirect()->back()->with('success', 'Successfully created new '.$newOffer->name.' offer');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

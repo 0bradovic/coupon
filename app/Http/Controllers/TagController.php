@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\OfferType;
+use App\Tag;
 
-class OfferTypeController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class OfferTypeController extends Controller
      */
     public function index()
     {
-        $offerTypes = OfferType::all();
-        return view('offer-types.index',compact('offerTypes'));
+        $tags = Tag::all();
+        return view('tags.index',compact('tags'));
     }
 
     /**
@@ -25,7 +25,7 @@ class OfferTypeController extends Controller
      */
     public function create()
     {
-        return view('offer-types.create');
+        return view('tags.create');
     }
 
     /**
@@ -37,14 +37,12 @@ class OfferTypeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
-            'color' => 'required',
+            'name' => 'required'
         ]);
-        $offerType = OfferType::create([
+        $tag = Tag::create([
             'name' => $request->name,
-            'color' => $request->color,
         ]);
-        return redirect()->back()->with('success', 'Successfully created new offer type '.$offerType->name);
+        return redirect()->back()->with('success', 'Successfully created new tag '.$tag->name);
     }
 
     /**
@@ -66,8 +64,8 @@ class OfferTypeController extends Controller
      */
     public function edit($id)
     {
-        $offerType = OfferType::find($id);
-        return view('offer-types.edit',compact('offerType'));
+        $tag = Tag::find($id);
+        return view('tags.edit',compact('tag'));
     }
 
     /**
@@ -80,15 +78,13 @@ class OfferTypeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required',
-            'color' => 'required',
+            'name' => 'required'
         ]);
-        $offerType = OfferType::find($id);
-        $offerType->update([
+        $tag = Tag::find($id);
+        $tag->update([
             'name' => $request->name,
-            'color' => $request->color,
         ]);
-        return redirect()->back()->with('success', 'Successfully updated offer type '.$offerType->name);
+        return redirect()->back()->with('success', 'Successfully updated tag '.$tag->name);
     }
 
     /**
@@ -99,9 +95,9 @@ class OfferTypeController extends Controller
      */
     public function destroy($id)
     {
-        $offerType = OfferType::find($id);
-        $name = $offerType->name;
-        $offerType->delete();
-        return redirect()->back()->with('success', 'Successfully deleted offer type '.$name);
+        $tag = Tag::find($id);
+        $name = $tag->name;
+        $tag->delete();
+        return redirect()->back()->with('success', 'Successfully deleted tag '.$name);
     }
 }
