@@ -32,7 +32,7 @@
         </nav>
     </header>
     <article>
-        <section id="menu">
+    <section id="menu">
         @foreach($categories as $key=>$value)
             <div class="dropdown">
                
@@ -50,62 +50,31 @@
             </div>
             @endforeach
         </section>
-        <section id="carousel">
-            <div class="container">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{ asset('front/image/1.jpg') }}" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>The only place to find EVERY supermarket coupons</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{ asset('front/image/2.jpg') }}" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Hunderds of coupon from all your favourite brands</h5>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <section id="naslov">
+            <h2>{{ $category->name }}</h2>
         </section>
-        <section id="box">
-            @foreach($categories as $key=>$value)
-                @foreach($value as $cat)
-                @if(is_object($cat) && count($cat->offers) > 0)
-                
-            <div class="container-fluid">
-                <div class="row glavni">
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx">
-                        <h3><b>{{ $cat->name }}</b></h3>
-                    </div>
-                    @foreach($cat->offers()->limit(3)->get() as $offer)
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx hov">
-                        <a href="{{ route('offer',['id' => $offer->id]) }}" class="boxxx">
-                            <img src="{{ $offer->img_src }}" alt="">
-                            <p style="font-size: 12px;">{{ $offer->name }}</p>
-                        </a>
-                    </div>
-                    @endforeach
-                    
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx">
-                        <a href="{{ route('category.offers',['id' => $cat->id]) }}" class="btn-see">@if(count($cat->offers) > 3)See {{ count($cat->offers)-3 }} more...@else No more offers... @endif</a>
+        <section id="work">
+            @foreach($offers as $offer)
+            <div class="container">
+                <div class="row">
+                    <div class="box">
+                        <div class="box1">
+                            <img class="imag" src="{{ $offer->img_src }}" width="150px" height="150px">
+                        </div>
+                        <div class="box2">
+                            <a href="" class="naslov">{{ $offer->name }}</a><br>
+                            <a href="" class="text">{{ $offer->highligth }}</a><br>
+                            <a href="" class="text">{{ $offer->summary }}</a>
+                        </div>
+                        <div class="box3">
+                            <p style="text-align: end; text-align: center;">{{ $offer->created_at->toFormattedDateString() }}</p>
+                            <button class="btn"><a class="text-white" href="#">Get offer</a></button>
+                            <button class="btn"><a class="text-white" href="#">No comments</a></button>
+                        </div>
                     </div>
                 </div>
             </div>
-                @endif
             @endforeach
-            @endforeach
-            
         </section>
     </article>
     <footer id="footer">
@@ -121,5 +90,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js "></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
-
 </html>

@@ -32,7 +32,7 @@
         </nav>
     </header>
     <article>
-        <section id="menu">
+    <section id="menu">
         @foreach($categories as $key=>$value)
             <div class="dropdown">
                
@@ -50,60 +50,72 @@
             </div>
             @endforeach
         </section>
-        <section id="carousel">
+        <section id="form">
+            <form class="form-com" action="">
+                <div class="form-group">
+                    <div class="container">
+                        <label for="area">ADD YOUR COMMENT</label>
+                        <textarea class="form-control" id="area"></textarea>
+                        <i class="fas fa-user"></i><input type="name" class="form-control" id="name" aria-describedby="emailHelp"
+                            placeholder="Name">
+                        <i class="fas fa-envelope-square"></i><input type="E-mail" class="form-control" id="E-mail"
+                            aria-describedby="emailHelp" placeholder="E-mail">
+                        <button class="btn btn-submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section id="naslov">
+            <div class="naslov">
+                <h2>Coupons</h2>
+            </div>
+        </section>
+        <section id="zadnja">
             <div class="container">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{ asset('front/image/1.jpg') }}" alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>The only place to find EVERY supermarket coupons</h5>
-                            </div>
+                <div class="row">
+                    <div class="box col-md-10">
+                        <div class="box1">
+                            <img class="imag" src="{{ $offer->img_src }}" width="150px" height="150px">
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{ asset('front/image/2.jpg') }}" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Hunderds of coupon from all your favourite brands</h5>
-                            </div>
+                        <div class="box2">
+                            <a href="" class="naslov" style="margin-top: 20px;">{{ $offer->name }}</a><br>
+                            <a href="" class="text">{{ $offer->highligth }}</a><br>
+                            <a href="" class="text">{{ $offer->summary }}</a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="box3">
+                            <p style="text-align: end; margin-right: -40%;">{{ $offer->created_at->toFormattedDateString() }}</p>
+                            <button class="btn btn-prvi"><a class="text-white" href="#">Get offer</a></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="box">
-            @foreach($categories as $key=>$value)
-                @foreach($value as $cat)
-                @if(is_object($cat) && count($cat->offers) > 0)
-                
-            <div class="container-fluid">
-                <div class="row glavni">
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx">
-                        <h3><b>{{ $cat->name }}</b></h3>
-                    </div>
-                    @foreach($cat->offers()->limit(3)->get() as $offer)
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx hov">
-                        <a href="{{ route('offer',['id' => $offer->id]) }}" class="boxxx">
-                            <img src="{{ $offer->img_src }}" alt="">
-                            <p style="font-size: 12px;">{{ $offer->name }}</p>
-                        </a>
-                    </div>
-                    @endforeach
-                    
-                    <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx">
-                        <a href="{{ route('category.offers',['id' => $cat->id]) }}" class="btn-see">@if(count($cat->offers) > 3)See {{ count($cat->offers)-3 }} more...@else No more offers... @endif</a>
+        <section id="naslov">
+            <div class="naslov">
+                <h2>More offers you might like</h2>
+            </div>
+        </section>
+        <section id="zadnja">
+            @foreach($simillarOffers as $off)
+            <div class="container">
+                <div class="row">
+                    <div class="box col-md-10">
+                        <div class="box1">
+                            <img class="imag" src="{{ $off->img_src }}" width="150px" height="150px">
+                        </div>
+                        <div class="box2">
+                            <a href="" class="naslov" style="margin-top: 20px;">{{ $off->name }}</a><br>
+                            <a href="" class="text">{{ $off->highligth }}</a><br>
+                            <a href="" class="text">{{ $off->summary }}s</a>
+                        </div>
+                        <div class="box3">
+                            <p style="text-align: end; text-align: end;">{{ $off->created_at->toFormattedDateString() }}</p>
+                            <button class="btn"><a class="text-white" href="#">Get offer</a></button>
+                            <button class="btn"><a class="text-white" href="druga.html">No comments</a></button>
+                        </div>
                     </div>
                 </div>
             </div>
-                @endif
-            @endforeach
             @endforeach
             
         </section>
@@ -114,8 +126,10 @@
             <a class="right" href="#" style="float:right;">Mail Us</a>
             <a class="right" href="#" style="float:right;">Privacy Policy</a>
         </div>
-        </div>
     </footer>
+    <a href="#top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 </body>
 <script src="{{ asset('front/js/jquery-3.3.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js "></script>

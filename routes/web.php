@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'FrontController@index');
+Route::get('/category/{id}', 'FrontController@categoryOffers')->name('category.offers');
+Route::get('/offer/{id}', 'FrontController@offer')->name('offer');
 
 Auth::routes();
 
