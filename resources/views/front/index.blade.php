@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/css/style.css') }}" />
 </head>
 
-<body>
+<body>  
     <header id="header">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="index.html"><b>BeforeTheShop</b></a>
@@ -26,8 +26,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="form-inline my-2 my-lg-0">
                     <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
                 </form>
+                <div class="searchdiv"></div>
             </div>
         </nav>
     </header>
@@ -117,6 +118,9 @@
         </div>
     </footer>
 </body>
+<script> 
+var SITE_URL = '<?php echo env("APP_URL")?>/';
+</script>
 <script src="{{ asset('front/js/jquery-3.3.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js "></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>

@@ -14,6 +14,7 @@
 Route::get('/', 'FrontController@index');
 Route::get('/category/{id}', 'FrontController@categoryOffers')->name('category.offers');
 Route::get('/offer/{id}', 'FrontController@offer')->name('offer');
+Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 
 Auth::routes();
 

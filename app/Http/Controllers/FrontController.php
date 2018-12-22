@@ -89,4 +89,19 @@ class FrontController extends Controller
         return view('front.offer',compact('offer','simillarOffers','categories'));
     }
 
+    public function ajaxSearch($query)
+    {
+        $offers = Offer::where('name','LIKE', '%' . $query . '%')/*->orWhere('summary', 'LIKE' , '%' . $query . '%')*/->get();
+        
+        $category = Category::where('name', $query)->first();
+
+        if($category)
+        {
+            $category_offers = $category->offers()->get();
+            $merged = $offers->merge($category_offers);
+        }
+
+        return response()->json($offers);
+    }
+
 }
