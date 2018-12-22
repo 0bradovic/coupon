@@ -18,12 +18,12 @@ class CreateOffersTable extends Migration
             $table->string('name');
             $table->string('sku')->unique()->nullable();
             $table->integer('brand_id')->unsigned()->index()->nullable();
-            $table->string('highlight');
-            $table->string('summary');
-            $table->text('detail');
+            $table->string('highlight')->nullable();
+            $table->string('summary')->nullable();
+            $table->text('detail')->nullable();
             $table->string('link');
             $table->datetime('startDate');
-            $table->datetime('endDate');
+            $table->datetime('endDate')->nullable();
             $table->string('img_src')->nullable();
             $table->integer('offer_type_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();

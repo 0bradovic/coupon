@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Coupon',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Coupon</b>',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>Coupon</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,9 +108,25 @@ return [
     */
 
     'menu' => [
+        'USERS',
+        [
+            'text' => 'Users',
+            'can' => 'manage users',
+            'submenu' => [
+                [
+                    'text' => 'All Users',
+                    'url' => '/users',
+                ],
+                [
+                    'text' => 'Add User',
+                    'url'  => '/create/user',
+                ],
+            ]
+        ],
         'ROLES',
         [
             'text' => 'Roles',
+            'can' => 'manage roles',
             'submenu' => [
                 [
                     'text' => 'All Roles',
@@ -125,6 +141,7 @@ return [
         'TAGS',
         [
             'text' => 'Tags',
+            'can' => 'manage tags',
             'submenu' => [
                 [
                     'text' => 'All Tags',
@@ -139,6 +156,7 @@ return [
         'OFFER TYPES',
         [
             'text' => 'Offer Types',
+            'can' => 'manage offer types',
             'submenu' => [
                 [
                     'text' => 'All Offer types',
@@ -153,6 +171,7 @@ return [
         'OFFERS',
         [
             'text' => 'Offers',
+            'can' => 'manage offers',
             'submenu' => [
                 [
                     'text' => 'All Offers',
@@ -167,6 +186,7 @@ return [
         'CATEGORIES',
         [
             'text' => 'Categories',
+            'can' => 'manage categories',
             'submenu'  => [
                 [
                     'text' => 'All categories',
