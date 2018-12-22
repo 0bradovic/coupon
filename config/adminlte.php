@@ -126,7 +126,7 @@ return [
         'ROLES',
         [
             'text' => 'Roles',
-            
+            'can' => 'manage roles',
             'submenu' => [
                 [
                     'text' => 'All Roles',

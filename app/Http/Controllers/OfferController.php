@@ -45,12 +45,11 @@ class OfferController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string',
-            'highlight' => 'required|string|max:20',
-            'summary' => 'required|string|max:50',
-            'detail' => 'required|string|max:300',
+            'highlight' => 'max:20',
+            'summary' => 'max:50',
+            'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'endDate' => 'required|date',
             'offer_type_id' => 'required|numeric',
             'position' => 'required|numeric',
             'categories' => 'required'
