@@ -50,3 +50,24 @@ Route::post('/store/tag', 'TagController@store')->name('store.tag');
 Route::get('/edit/tag/{id}', 'TagController@edit')->name('edit.tag');
 Route::post('/update/tag/{id}', 'TagController@update')->name('update.tag');
 Route::get('/delete/tag/{id}', 'TagController@destroy')->name('delete.tag');
+
+// Role routes
+Route::get('/roles', 'RoleController@index');
+Route::get('/create/role', 'RoleController@create')->name('create.role');
+Route::post('/store/role', 'RoleController@store')->name('store.role');
+Route::get('/edit/role/{id}', 'RoleController@edit')->name('edit.role');
+Route::post('/update/role/{id}', 'RoleController@update')->name('update.role');
+Route::get('/delete/role/{id}', 'RoleController@destroy')->name('delete.role');
+
+// User rooutes
+Route::get('/users', 'UserController@index');
+Route::get('/create/user', 'UserController@create')->name('create.user');
+Route::post('/store/user', 'UserController@store')->name('store.user');
+Route::get('/edit/user/{id}', 'UserController@edit')->name('edit.user');
+Route::post('/update/user/{id}', 'UserController@update')->name('update.user');
+Route::get('/delete/user/{id}', 'UserController@destroy')->name('delete.user');
+
+// use Spatie\Permission\Models\Permission;
+// Route::get('/create/permission', function(){
+//     Permission::create(['name' => 'manage roles']);
+// });

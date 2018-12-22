@@ -108,6 +108,20 @@ return [
     */
 
     'menu' => [
+        'ROLES',
+        [
+            'text' => 'Roles',
+            'submenu' => [
+                [
+                    'text' => 'All Roles',
+                    'url' => '/roles',
+                ],
+                [
+                    'text' => 'Add Role',
+                    'url'  => '/create/role',
+                ],
+            ]
+        ],
         'TAGS',
         [
             'text' => 'Tags',
