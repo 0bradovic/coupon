@@ -55,18 +55,14 @@
             <div class="container">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{ asset('front/image/1.jpg') }}" alt="First slide">
+                    @foreach($slides as $slide)
+                        <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
+                            <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>The only place to find EVERY supermarket coupons</h5>
+                                <h5>{{ $slide->down_text }}</h5>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{ asset('front/image/2.jpg') }}" alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Hunderds of coupon from all your favourite brands</h5>
-                            </div>
-                        </div>
+                        @endforeach
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
