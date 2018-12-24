@@ -91,7 +91,7 @@
                     </div>
                     @foreach($cat->offers()->limit(3)->orderBy('position')->get() as $offer)
                     <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx hov">
-                    <div class="popust"><p class="popustText">Popust</p></div>
+                    <div class="popust" style="background-color:{{ $offer->offerType->color }}"><p class="popustText">{{ $offer->offerType->name }}</p></div>
                         <div class="in-box">
                         <a href="{{ route('offer',['id' => $offer->id]) }}" class="boxxx">
                             <img src="{{ $offer->img_src }}" alt="">
