@@ -31,7 +31,7 @@ class OfferController extends Controller
     {
         $tags = Tag::all();
         $offerTypes = OfferType::all();
-        $categories = Category::all();
+        $categories = Category::where('parent_id', '<>', null)->get();
         return view('offers.create',compact('categories','tags','offerTypes'));
     }
 
@@ -51,7 +51,6 @@ class OfferController extends Controller
             'link' => 'required|string',
             'startDate' => 'required|date',
             'offer_type_id' => 'required|numeric',
-            'position' => 'required|numeric',
             'categories' => 'required'
         ]);
         $img_src = null;

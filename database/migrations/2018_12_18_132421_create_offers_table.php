@@ -27,7 +27,7 @@ class CreateOffersTable extends Migration
             $table->string('img_src')->nullable();
             $table->integer('offer_type_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('position')->unique();
+            $table->integer('position')->nullable();
             $table->timestamps();
         });
     }
