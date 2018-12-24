@@ -25,6 +25,15 @@ class UpdateForeignKeys extends Migration
             $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade')->onUpdate('cascade');
         });
 
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('offer_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('comment_replies', function (Blueprint $table) {
+            $table->foreign('comment_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade')->onUpdate('cascade');
+        });
+
     }
 
     /**

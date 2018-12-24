@@ -8,7 +8,7 @@ class CommentReply extends Model
 {
     
     protected $fillable = [
-        'text', 'comment_id', 'user_id',
+        'text', 'comment_id', 'offer_id', 'comment_id', 'email' , 'name'
     ];
 
     public function comment()
@@ -16,9 +16,9 @@ class CommentReply extends Model
         return $this->belongsTo(Comment::class);
     }
 
-    public function user()
+    public function offer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Offer::class);
     }
 
 }
