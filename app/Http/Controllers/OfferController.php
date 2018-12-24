@@ -157,7 +157,6 @@ class OfferController extends Controller
             'startDate' => 'required|date',
             'endDate' => 'required|date',
             'offer_type_id' => 'required|numeric',
-            'position' => 'required|numeric',
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
