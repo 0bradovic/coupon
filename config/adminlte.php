@@ -138,6 +138,20 @@ return [
                 ],
             ]
         ],
+        'SLIDER',
+        [
+            'text' => 'Slider',
+            'submenu' => [
+                [
+                    'text' => 'All Slides',
+                    'url' => '/slides',
+                ],
+                [
+                    'text' => 'Add Slide',
+                    'url'  => '/create/slide',
+                ],
+            ]
+        ],
         'TAGS',
         [
             'text' => 'Tags',

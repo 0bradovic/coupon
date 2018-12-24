@@ -8,6 +8,7 @@ use App\OfferType;
 use App\Category;
 use App\Tag;
 use Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class OfferController extends Controller
 {
@@ -80,9 +81,17 @@ class OfferController extends Controller
         }
         if($request->photo)
         {
+            // $file = $request->photo;
+            // $name = time().$file->getClientOriginalName();
+            // $file->move('images/offer',$name);
+            // $img_src = '/images/offer/'.$name;
             $file = $request->photo;
             $name = time().$file->getClientOriginalName();
-            $file->move('images/offer',$name);
+            $image = Image::make($file->getRealPath());
+            $image->resize(788,null,function($constraint){
+                $constraint->aspectRatio();
+            });
+            $image->save(public_path('images/offer/' .$name));
             $img_src = '/images/offer/'.$name;
         }
         $offer = Offer::create([

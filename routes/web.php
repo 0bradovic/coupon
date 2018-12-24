@@ -82,4 +82,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/user/{id}', 'UserController@update')->name('update.user');
         Route::get('/delete/user/{id}', 'UserController@destroy')->name('delete.user');
     });
+
+    // Slider routes
+    Route::get('/slides', 'SliderController@index');
+    Route::get('/create/slide', 'SliderController@create')->name('create.slide');
+    Route::post('/store/slide', 'SliderController@store')->name('store.slide');
+    Route::get('/preview/slider', 'SliderController@show')->name('preview.slider');
+
 });
