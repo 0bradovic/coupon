@@ -25,6 +25,7 @@
                   <th>ID</th>
                   <th>Name</th>
                   <th>Image</th>
+                  <th>Parent Category</th>
                   <th>Created</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -34,6 +35,12 @@
                   <td>{{ $category->sku }}</td>
                   <td>{{ $category->name }}</td>
                   <td>@if($category->img_src) <img src="{{$category->img_src}}" style="width:50px;height:50px;"> @else No photo @endif </td>
+                  <td>@if($category->parent_id==null)<i>This is Parent Category.</i>
+                  @else
+                  @php $par = App\Category::find($category->parent_id); @endphp 
+                  {{$par->name}}
+                  @endif
+                  </td>
                   <td>{{ $category->created_at->toFormattedDateString() }}</td>
                   <td><a href="{{ route('edit.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.category', ['id' => $category->id]) }}"><i class="fa fa-trash"></i></a></td>

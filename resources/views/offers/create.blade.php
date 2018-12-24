@@ -3,7 +3,11 @@
 @section('title', 'Add Offer')
 
 @section('content_header')
-    
+
+@section('css')
+  <link rel="stylesheet" href="/css/texteditor.css">
+  <link rel="stylesheet" href="/css/displayNone.css">
+@stop
     
 @stop
 
@@ -32,10 +36,20 @@
               <label for="summary">Summary</label>
               <textarea class="form-control" name="summary" placeholder="Provide summary,max 50 characters..."></textarea>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="detail">Detail</label>
               <textarea class="form-control" name="detail" placeholder="Provide detail,max 300 characters..."></textarea>
+            </div> -->
+            
+            <div class="form-group">
+              <label for="detail">Detail</label>
+              <div>
+                  <textarea name="detail" class="textarea" placeholder="Place some text here"
+                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              </div>
             </div>
+
+
             <div class="form-group">
               <label for="link">Link</label>
               <input type="text" class="form-control" name="link" placeholder="Provide link">
@@ -101,6 +115,17 @@
     </div>
 @stop
 @section('js')
+<script src="{{ asset('js/texteditor.js') }}">
+    </script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    //CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
 <script>
   $(function () {
     //Initialize Select2 Elements
@@ -136,6 +161,8 @@
       }
     )
 
+    
+
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true
@@ -167,5 +194,8 @@
       showInputs: false
     })
   })
+
+  
 </script>
+
 @stop

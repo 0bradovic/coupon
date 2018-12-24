@@ -1,0 +1,6 @@
+.glyphicon-picture{
+    display:none;
+}
+a.btn[title="Insert image"]{
+    display:none;
+}

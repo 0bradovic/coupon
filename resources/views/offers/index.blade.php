@@ -29,6 +29,7 @@
                   <th>End</th>
                   <th>Type</th>
                   <th>Author</th>
+                  <th>Position</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -41,6 +42,7 @@
                   <td>{{ $offer->dateFormat($offer->endDate)->toFormattedDateString() }}</td>
                   <td>{{ $offer->offerType->name }}</td>
                   <td>{{ $offer->user->name }}</td>
+                  <td>{{$offer->position}}</td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
                 </tr>
