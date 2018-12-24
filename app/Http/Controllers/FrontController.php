@@ -33,6 +33,49 @@ class FrontController extends Controller
         return view('front.index',compact('categories'));
     }
 
+    public function sendComment(Request $request)
+    {
+        $offer = Offer::find($request->client_id);
+
+        $this->validate($request, [
+            'text' => 'required|string',
+            'email' => 'required|email',
+            'name' => 'required|string'
+        ]);
+
+        $newComment = Comment::create([
+            'text' => $request->text,
+            'email' => $request->email,
+            'name' => $request->name
+        ]);
+
+        $newComment->offer()->attach($offer->id);
+
+        return redirect()->back()->with('success');
+    }
+
+    public function sendCommentReplay(Request $request)
+    {
+        $commentToBeAppliedTo = Comment::find($request->comment_id);
+
+        $this->validate($request, [
+            'text' => 'required|string',
+            'email' => 'required|email',
+            'name' => 'required|string'
+        ]);
+
+        $newCommentReplay = CommentReply::create([
+            'text' => $request->text,
+            'email' => $request->email,
+            'name' => $request->name
+        ]);
+
+        $newCommentReplay->offer()->attach($offer->id);
+
+        return redirect()->back()->with('success');
+
+    }
+
     public function categoryOffers($id)
     {
         $category = Category::find($id);
@@ -60,6 +103,7 @@ class FrontController extends Controller
     public function offer($id)
     {
         $offer = Offer::find($id);
+        $comments = $offer->comments()->with('commentReplies')->get();
         $simillarOffers = [];
         foreach($offer->categories as $cat)
         {
@@ -86,7 +130,10 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
-        return view('front.offer',compact('offer','simillarOffers','categories'));
+
+        //dd($comments);
+
+        return view('front.offer',compact('offer','simillarOffers','categories', 'comments'));
     }
 
     public function ajaxSearch($query)

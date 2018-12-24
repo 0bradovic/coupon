@@ -8,12 +8,12 @@ class Comment extends Model
 {
     
     protected $fillable = [
-        'text', 'user_id'
+        'text', 'email', 'name', 'offer_id'
     ];
 
-    public function user()
+    public function offer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Offer::class);
     }
 
     public function commentReplies()
