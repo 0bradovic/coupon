@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Web</title>
+    <title>TEstttt</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/css/fontawesome-all.min.css') }}" />
@@ -91,10 +91,13 @@
                     </div>
                     @foreach($cat->offers()->limit(3)->get() as $offer)
                     <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx hov">
+                    <div class="popust"><p class="popustText">Popust</p></div>
+                        <div class="in-box">
                         <a href="{{ route('offer',['id' => $offer->id]) }}" class="boxxx">
                             <img src="{{ $offer->img_src }}" alt="">
-                            <p style="font-size: 12px;">{{ $offer->name }}</p>
+                            <p class="boxP">{{ $offer->name }}</p>
                         </a>
+                        </div>
                     </div>
                     @endforeach
                     
