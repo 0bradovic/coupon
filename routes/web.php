@@ -16,6 +16,7 @@ Route::get('/category/{id}', 'FrontController@categoryOffers')->name('category.o
 Route::get('/offer/{id}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
+Route::post('/search', 'FrontController@renderSearch')->name('search.blade');
 
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){

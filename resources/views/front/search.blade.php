@@ -33,6 +33,7 @@
     </header>
     <article>
     <section id="menu">
+    
         @foreach($categories as $key=>$value)
             <div class="dropdown">
                
@@ -50,9 +51,7 @@
             </div>
             @endforeach
         </section>
-        <section id="naslov">
-            <h2>{{ $category->name }}</h2>
-        </section>
+        
         <section id="work">
             @foreach($offers as $offer)
             <div class="container">

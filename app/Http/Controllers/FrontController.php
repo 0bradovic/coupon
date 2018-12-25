@@ -152,4 +152,40 @@ class FrontController extends Controller
         return response()->json($offers);
     }
 
+
+    public function renderSearch(Request $request)
+    {
+        
+        $offers = Offer::where('name','LIKE', '%' . $request->search . '%')->get();
+        
+        // $category = Category::where('name', $request->search)->first();
+
+        // if($category)
+        // {
+        //     $category_offers = $category->offers()->get();
+        //     $merged = $offers->merge($category_offers);
+        // }
+
+        $categories = [];
+        $parentCategories = Category::where('parent_id',null)->get();
+        foreach($parentCategories as $cat)
+        {
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->get();
+            $categories[$cat->name] = array();
+            $count = 0;
+            foreach($cs as $c)
+            {
+               
+                $count += count($c->offers);
+                array_push($categories[$cat->name],$c);
+            }
+           
+            $categories[$cat->name]['count'] = $count;
+
+        }
+
+        return view('front.search', compact('offers', 'categories'));
+
+    }
+
 }
