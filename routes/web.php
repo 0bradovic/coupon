@@ -84,10 +84,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/user/{id}', 'UserController@destroy')->name('delete.user');
     });
 
-    // Slider routes
-    Route::get('/slides', 'SliderController@index');
-    Route::get('/create/slide', 'SliderController@create')->name('create.slide');
-    Route::post('/store/slide', 'SliderController@store')->name('store.slide');
-    Route::get('/preview/slider', 'SliderController@show')->name('preview.slider');
+    Route::group(['middleware' => ['permission:manage slider']], function () {
+        // Slider routes
+        Route::get('/slides', 'SliderController@index');
+        Route::get('/create/slide', 'SliderController@create')->name('create.slide');
+        Route::post('/store/slide', 'SliderController@store')->name('store.slide');
+        Route::get('/preview/slider', 'SliderController@show')->name('preview.slider');
+        Route::get('/edit/slide/{id}', 'SliderController@edit')->name('edit.slide');
+        Route::post('/update/slide/{id}', 'SliderController@update')->name('update.slide');
+        Route::get('/delete/slide/{id}', 'SliderController@destroy')->name('delete.slide');
+        Route::get('/update/slide/activity', 'SliderController@updateSlideActivity');
+    });
 
 });

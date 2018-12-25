@@ -141,6 +141,7 @@ return [
         'SLIDER',
         [
             'text' => 'Slider',
+            'can' => 'manage slider',
             'submenu' => [
                 [
                     'text' => 'All Slides',

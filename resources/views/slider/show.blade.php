@@ -17,11 +17,15 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @foreach($slides as $slide)
-                        <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
+                        <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif >
+                        <a href="{{ $slide->link }}" target="_blank">
                             <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
+                        </a>
+                            @if($slide->down_text)
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>{{ $slide->down_text }}</h5>
+                                <h5 @if($slide->down_text_color) style="color:{{ $slide->down_text_color }}" @endif>{{ $slide->down_text }}</h5>
                             </div>
+                            @endif
                         </div>
                         @endforeach
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

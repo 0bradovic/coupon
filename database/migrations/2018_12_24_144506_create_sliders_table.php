@@ -17,10 +17,15 @@ class CreateSlidersTable extends Migration
             $table->increments('id');
             $table->string('img_src');
             $table->string('up_text')->nullable();
+            $table->string('up_text_color')->nullable();
             $table->string('down_text')->nullable();
+            $table->string('down_text_color')->nullable();
             $table->string('center_text')->nullable();
+            $table->string('center_text_color')->nullable();
             $table->string('left_text')->nullable();
+            $table->string('left_text_color')->nullable();
             $table->string('right_text')->nullable();
+            $table->string('right_text_color')->nullable();
             $table->string('link')->nullable();
             $table->integer('position');
             $table->boolean('active');
