@@ -183,8 +183,9 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
+        $search = $request->search;
 
-        return view('front.search', compact('offers', 'categories'));
+        return view('front.search', compact('offers', 'categories', 'search'));
 
     }
 

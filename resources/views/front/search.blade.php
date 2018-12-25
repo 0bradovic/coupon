@@ -51,7 +51,9 @@
             </div>
             @endforeach
         </section>
-        
+        <section id="naslov">
+            <h2>Search results for {{ $search }}</h2>
+        </section>
         <section id="work">
             @foreach($offers as $offer)
             <div class="container">
