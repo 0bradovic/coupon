@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'manage offers']);
         Permission::create(['name' => 'manage offer types']);
         Permission::create(['name' => 'manage roles']);
+        Permission::create(['name' => 'manage slider']);
         $role = Role::create(['name' => 'Administrator']);
         $role->givePermissionTo(Permission::all());
         $user = User::create([

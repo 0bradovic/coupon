@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Offer;
+use App\Slider;
 
 class FrontController extends Controller
 {
     
     public function index()
     {
-        
+        $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
         foreach($parentCategories as $cat)
@@ -30,7 +31,7 @@ class FrontController extends Controller
 
         }
         
-        return view('front.index',compact('categories'));
+        return view('front.index',compact('categories','slides'));
     }
 
     public function sendComment(Request $request)
