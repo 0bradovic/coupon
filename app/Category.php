@@ -23,4 +23,9 @@ class Category extends Model
         return $this->belongsToMany(Brand::class, 'brand_to_category', 'category_id', 'brand_id');
     }
 
+    public function metaTag()
+    {
+        return $this->hasOne(MetaTag::class);
+    }
+
 }

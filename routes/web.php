@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
         // Offer routes
-        Route::get('/offes', 'OfferController@index');
+        Route::get('/offers', 'OfferController@index');
         Route::get('/create/offer', 'OfferController@create')->name('create.offer');
         Route::post('/store/offer', 'OfferController@store')->name('store.offer');
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');
@@ -95,6 +95,37 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/slide/{id}', 'SliderController@update')->name('update.slide');
         Route::get('/delete/slide/{id}', 'SliderController@destroy')->name('delete.slide');
         Route::get('/update/slide/activity', 'SliderController@updateSlideActivity');
+    });
+
+    Route::group(['middleware' => ['permission:manage seo']], function () {
+        // Seo Meta Tags routes
+        Route::get('/delete/meta/{id}', 'SeoController@destroy')->name('seo.delete');
+        //Route::get('/create/meta', 'SeoController@create')->name('seo.store');
+
+
+        // Offer Meta Tags
+        Route::get('/meta/offer', 'SeoController@indexOffer')->name('offer.seo.index');
+        Route::get('/create/meta/offer', 'SeoController@createOffer')->name('offer.seo.create');
+        Route::post('/store/meta/offer', 'SeoController@storeOffer')->name('offer.seo.store');
+        Route::get('/edit/meta/offer/{id}', 'SeoController@editOffer')->name('offer.seo.edit');
+        Route::post('/update/meta/offer/{id}', 'SeoController@updateOffer')->name('offer.seo.update');
+        //Route::get('/delete/meta/offer/{id}', 'SeoController@destroy')->name('offer.seo.delete');
+
+        // Category Meta Tags
+        Route::get('/meta/category', 'SeoController@indexCategory')->name('category.seo.index');
+        Route::get('/create/meta/category', 'SeoController@createCategory')->name('category.seo.create');
+        Route::post('/store/meta/category', 'SeoController@storeCategory')->name('category.seo.store');
+        Route::get('/edit/meta/category/{id}', 'SeoController@editCategory')->name('category.seo.edit');
+        Route::post('/update/meta/category/{id}', 'SeoController@updateCategory')->name('category.seo.update');
+        //Route::get('/delete/meta/category/{id}', 'SeoController@destroy')->name('category.seo.delete');
+
+        //Custom Meta Tags
+        Route::get('/meta/custom', 'SeoController@indexCustom')->name('custom.seo.index');
+        Route::get('/create/meta/custom', 'SeoController@createCustom')->name('custom.seo.create');
+        Route::post('/store/meta/custom', 'SeoController@storeCustom')->name('custom.seo.store');
+        Route::get('/edit/meta/custom/{id}', 'SeoController@editCustom')->name('custom.seo.edit');
+        Route::post('/update/meta/custom/{id}', 'SeoController@updateCustom')->name('custom.seo.update');
+        //Route::get('/delete/meta/custom/{id}', 'SeoController@destroy')->name('custom.seo.delete');
     });
 
 });

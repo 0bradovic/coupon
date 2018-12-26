@@ -32,6 +32,9 @@
                   <th>Position</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  @can("manage seo")
+                  <th>Seo</th>
+                  @endcan
                 </tr>
                 @foreach($offers as $offer)
                 <tr>
@@ -45,6 +48,9 @@
                   <td>{{$offer->position}}</td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
+                  @can("manage seo")
+                  <td><a href="{{ route('offer.seo.edit', ['id' => $offer->id]) }}"><i class="fa fa-cog"></i></a></td>
+                  @endcan
                 </tr>
                 @endforeach
               </table>

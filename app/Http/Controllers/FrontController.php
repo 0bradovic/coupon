@@ -164,14 +164,6 @@ class FrontController extends Controller
     {
         
         $offers = Offer::where('name','LIKE', '%' . $request->search . '%')->get();
-        
-        // $category = Category::where('name', $request->search)->first();
-
-        // if($category)
-        // {
-        //     $category_offers = $category->offers()->get();
-        //     $merged = $offers->merge($category_offers);
-        // }
 
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
