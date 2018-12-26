@@ -37,42 +37,42 @@
                     <input type="text" name="up_text_color" class="form-control my-colorpicker1">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="down_text">Slide text</label>
                     <input type="text" class="form-control" name="down_text" placeholder="Enter down text...">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label>Pick text color:</label>
                     <input type="text" name="down_text_color" class="form-control my-colorpicker1">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label for="center_text">Center text</label>
                     <input type="text" class="form-control" name="center_text" placeholder="Enter center text...">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label>Pick center text color:</label>
                     <input type="text" name="center_text_color" class="form-control my-colorpicker1">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label for="left_text">Left text</label>
                     <input type="text" class="form-control" name="left_text" placeholder="Enter left text...">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label>Pick left text color:</label>
                     <input type="text" name="left_text_color" class="form-control my-colorpicker1">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label for="right_text">Right text</label>
                     <input type="text" class="form-control" name="right_text" placeholder="Enter right text...">
                 </div>
 
-                <div class="form-group" style="display:none;">
+                <div class="form-group">
                     <label>Pick right text color:</label>
                     <input type="text" name="right_text_color" class="form-control my-colorpicker1">
                 </div>

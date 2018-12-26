@@ -28,7 +28,9 @@
                 <tr>
                   <th>ID</th>
                   <th>Image</th>
-                  <th>Slide text</th>
+                  <th>Center text</th>
+                  <th>Left text</th>
+                  <th>Right text</th>
                   <th>Link</th>
                   <th>Position</th>
                   <th>Active</th>
@@ -39,7 +41,9 @@
                 <tr>
                   <td>{{ $slide->id }}</td>
                   <td><img src="{{ $slide->img_src }}" style="width:100px;height:50px;"></td>
-                  <td @if($slide->down_text_color) style="color:{{ $slide->down_text_color }}" @endif>{{ $slide->down_text }}</td>
+                  <td @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</td>
+                  <td @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{{ $slide->left_text }}</td>
+                  <td @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{{ $slide->right_text }}</td>
                   <td>{{ $slide->link }}</td>
                   <td>{{ $slide->position }}</td>
                   <td><input data-id="{{ $slide->id }}" type="button" @if($slide->active == 1)class="btn btn-success update-activity"  value="Active" @else class="btn btn-danger update-activity" value="Inactive" @endif>{!! csrf_field() !!}</td>
