@@ -5,7 +5,11 @@
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
 }
 
 li {
@@ -34,52 +38,100 @@ header .logo:hover {
 }
 
 header .search {
-    display: inline-block;
-    padding-left: 4%;
     position: relative;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-left: 5%;
 }
 
-header .search-input {
-    border-radius: 20px;
-    width: 400px !important;
-    height: 30px;
-    border: none;
-}
-
-header .search-input::-webkit-input-placeholder {
-    font-size: 16px;
-    padding-left: 13%;
-}
-
-header .search-input:-ms-input-placeholder {
-    font-size: 16px;
-    padding-left: 13%;
-}
-
-header .search-input::-ms-input-placeholder {
-    font-size: 16px;
-    padding-left: 13%;
-}
-
-header .search-input::placeholder {
-    font-size: 16px;
-    padding-left: 13%;
-}
-
-header .search-btn {
-    background: none;
-    border: none;
-    color: #111;
-    opacity: 0.3;
-    font-size: 16px;
-    font-weight: 300;
+header .fa-search {
     position: absolute;
-    top: 22%;
-    left: 12%;
+    top: 8px;
+    left: 10px;
+    color: #ccc;
+}
+
+header .searchh {
+    padding-left: 30px;
+    box-sizing: border-box;
+    text-align: start;
+    border-radius: 20px;
+    border: none;
+    width: 400px;
+    height: 30px;
+}
+
+header .search-div {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    z-index: 10;
+    width: 320px;
+    background: #fff;
+}
+
+header .search-div-1 {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+}
+
+header .search-div-1:hover {
+  background: #ddd;
+}
+
+header .search-div-1:last-child {
+    border: none;
+}
+
+header .allresult {
+    width: 100%;
+    color: #000;
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+header .allresult:hover {
+    color: #000;
+}
+
+header img {
+    width: 80px;
+    height: 90px;
+}
+
+header .articleText {
+    margin: auto 0;
+}
+
+header .articleLink {
+    display: inline-block;
+    background-color: #888885;
+    color: white;
+    font-size: 11px;
+    line-height: 18px;
+    height: 18px;
+    vertical-align: top;
+    padding: 0 4px;
+    text-transform: uppercase;
+    cursor: default;
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+header .article {
+    font-size: 16px;
+    font-weight: bold;
+    float: right;
+    width: 60%;
 }
 
 article {
     background: #f4f4f4;
+    padding-bottom: 20px;
 }
 
 article #menu {
@@ -162,33 +214,33 @@ article #carousel img {
 }
 
 article #carousel .caroP {
-  position: absolute;
-  top: 10%;
-  left: 22%;
-  color: #fff;
-  font-size: 26px;
-  z-index: 10;
-  font-weight: 800;
+    position: absolute;
+    top: 10%;
+    left: 22%;
+    color: #fff;
+    font-size: 26px;
+    z-index: 10;
+    font-weight: 800;
 }
 
 article #carousel .caroPleft {
-  position: absolute;
-  bottom: 10%;
-  left: 5%;
-  color: #fff;
-  font-size: 26px;
-  z-index: 10;
-  font-weight: 800;
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: #fff;
+    font-size: 26px;
+    z-index: 10;
+    font-weight: 800;
 }
 
 article #carousel .caroPright {
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
-  color: #fff;
-  font-size: 26px;
-  z-index: 10;
-  font-weight: 800;
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    color: #fff;
+    font-size: 26px;
+    z-index: 10;
+    font-weight: 800;
 }
 
 article #row img {
@@ -275,7 +327,8 @@ footer {
     background: #222;
     color: #fff;
     font-size: 14px;
-    height: 50px;
+    height: 80px;
+    z-index: 100;
 }
 
 footer .footer-left {
@@ -283,7 +336,7 @@ footer .footer-left {
 }
 
 footer .footer-left p {
-    padding: 15px 0;
+    padding: 30px 0;
     opacity: 0.7;
 }
 
@@ -299,7 +352,7 @@ footer .footer-right {
 }
 
 footer .footer-right p {
-    padding: 15px 10px;
+    padding: 30px 10px;
     opacity: 0.7;
 }
 
@@ -505,6 +558,7 @@ h3 {
 
 .fiksirano {
     position: fixed;
+    top: 4%;
     right: 5%;
     width: 25%;
 }
@@ -766,4 +820,8 @@ h3 {
     .coN {
         padding: 0 !important;
     }
+}
+
+.disable{
+    display:none;
 }

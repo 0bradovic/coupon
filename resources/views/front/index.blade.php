@@ -17,8 +17,13 @@
         <div class="container">
             <a href="/" class="logo">BeforeTheShop</a>
             <div class="search">
-                <input class="search-input" type="text" placeholder="Search">
+            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
+                <input class="searchh" type="text" name="search" id="search" placeholder="Search">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
+                {!! csrf_field() !!}
+            </form>
+            <div class="search-div disable" id="serachDiv">
+                </div>
             </div>
         </div>
     </header>
@@ -131,8 +136,11 @@
         </div>
     </footer>
 </body>
+<script> 
+var SITE_URL = '<?php echo env("APP_URL")?>/';
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
+<script src="{{ asset('front/js/main.js') }}"></script>
 </html>

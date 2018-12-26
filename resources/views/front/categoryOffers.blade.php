@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>BeforeTheShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
@@ -16,8 +16,13 @@
         <div class="container">
             <a href="/" class="logo">BeforeTheShop</a>
             <div class="search">
-                <input class="search-input" type="text" placeholder="Search">
+            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
+                <input class="searchh" type="text" name="search" id="search" placeholder="Search">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
+                {!! csrf_field() !!}
+            </form>
+            <div class="search-div disable" id="serachDiv">
+                </div>
             </div>
         </div>
     </header>
@@ -48,18 +53,20 @@
                 <div class="fiXXX">
                     <div class="fix">
                         <div class="fix-img">
-                        <img class="imag" src="{{ $offer->img_src }}" width="150px" height="150px">
+                        <a href="{{ route('offer',['id' => $offer->id]) }}">
+                        <img class="imag" src="{{ $offer->img_src }}" width="170px" height="140px">
+                        </a>
                         </div>
                         <div class="fix-text">
-                            <a href="#" class="fix-a">{{ $offer->name }}</a>
+                            <a href="{{ route('offer',['id' => $offer->id]) }}" class="fix-a">{{ $offer->name }}</a>
                             @if($offer->detail)
-                            <a href="#" class="fix-a">{!! $offer->detail !!}</a>
+                            <a href="{{ route('offer',['id' => $offer->id]) }}" class="fix-a">{!! $offer->detail !!}</a>
                             @endif
                         </div>
                         <div class="dugmici">
                             <p class="datum">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
                             <a href="{{ $offer->link }}" class="dugme">Get offer</a>
-                            <a href="trecaindex.html" class="dugme">No comments</a>
+                            <a href="{{ route('offer',['id' => $offer->id]) }}" class="dugme">@if(count($offer->comments) > 0){{ count($offer->comments) }} comments @else No comments @endif</a>
                         </div>
                     </div>
                 </div>
@@ -79,5 +86,11 @@
         </div>
     </footer>
 </body>
-
+<script> 
+var SITE_URL = '<?php echo env("APP_URL")?>/';
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="{{ asset('front/js/main.js') }}"></script>
 </html>

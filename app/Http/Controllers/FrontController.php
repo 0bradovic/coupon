@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Offer;
 use App\Slider;
+use Carbon\Carbon;
 
 class FrontController extends Controller
 {
     
     public function index()
     {
+        $now = Carbon::now();
         $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
@@ -31,7 +33,7 @@ class FrontController extends Controller
 
         }
         
-        return view('front.index',compact('categories','slides'));
+        return view('front.index',compact('categories','slides','now'));
     }
 
     public function sendComment(Request $request)
@@ -104,6 +106,8 @@ class FrontController extends Controller
     public function offer($id)
     {
         $offer = Offer::find($id);
+        $mainCategory = $offer->categories()->first();
+        $mainCategory = Category::find($mainCategory->parent_id);
         $comments = $offer->comments()->with('commentReplies')->get();
         $simillarOffers = [];
         foreach($offer->categories as $cat)
@@ -141,7 +145,7 @@ class FrontController extends Controller
 
         //dd($comments);
 
-        return view('front.offer',compact('offer','simillarOffers','categories', 'comments'));
+        return view('front.offer',compact('offer','simillarOffers','categories', 'comments','mainCategory'));
     }
 
     public function ajaxSearch($query)
