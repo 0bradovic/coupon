@@ -29,22 +29,22 @@
                     <input type="file" name="photo">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="up_text">Up text</label>
                     <input type="text" class="form-control" name="up_text" value="{{ $slide->up_text }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label>Pick up text color:</label>
                     <input type="text" name="up_text_color" class="form-control my-colorpicker1" value="{{ $slide->up_text_color }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="down_text">Down text</label>
                     <input type="text" class="form-control" name="down_text" value="{{ $slide->down_text }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label>Pick down text color:</label>
                     <input type="text" name="down_text_color" class="form-control my-colorpicker1" value="{{ $slide->down_text_color }}">
                 </div>
