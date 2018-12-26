@@ -24,9 +24,10 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
                     <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                    <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
+                    {!! csrf_field() !!}
                 </form>
                 <div class="searchdiv"></div>
             </div>
