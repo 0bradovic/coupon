@@ -9,6 +9,7 @@ use App\Category;
 use App\Tag;
 use Auth;
 use Intervention\Image\ImageManagerStatic as Image;
+use Carbon\Carbon;
 
 class OfferController extends Controller
 {
@@ -44,6 +45,7 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request,[
             'name' => 'required|string',
             'highlight' => 'max:20',
@@ -51,11 +53,20 @@ class OfferController extends Controller
             'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'offer_type_id' => 'required|numeric',
             'categories' => 'required'
         ]);
         $img_src = null;
-        
+        $offer_type_id = null;
+        $startDate = Carbon::parse($request->startDate);
+        $endDate = null;
+        if($request->endDate)
+        {
+            $endDate = Carbon::parse($request->endDate);
+        }
+        if($request->offer_type_id)
+        {
+            $offer_type_id = $request->offer_type_id;
+        }
         $url = "http://tinyurl.com/api-create.php?url=".$request->link;
 
         $ch = curl_init();
@@ -81,10 +92,6 @@ class OfferController extends Controller
         }
         if($request->photo)
         {
-            // $file = $request->photo;
-            // $name = time().$file->getClientOriginalName();
-            // $file->move('images/offer',$name);
-            // $img_src = '/images/offer/'.$name;
             $file = $request->photo;
             $name = time().$file->getClientOriginalName();
             $image = Image::make($file->getRealPath());
@@ -101,9 +108,9 @@ class OfferController extends Controller
             'summary' => $request->summary,
             'detail' => $request->detail,
             'link' => $offerLink,
-            'startDate' => $request->startDate,
-            'endDate' => $request->endDate,
-            'offer_type_id' => $request->offer_type_id,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'offer_type_id' => $offer_type_id,
             'user_id' => Auth::user()->id,
             'position' => $request->position,
             'img_src' => $img_src,

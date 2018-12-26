@@ -42,7 +42,7 @@
                 <div class="dropdown-content">
                 @foreach($value as $cat)
                 @if(is_object($cat))
-                    <a href="#">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                    <a href="{{ route('category.offers',['id' => $cat->id]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
                 @endif
                 @endforeach
                 </div>
@@ -62,13 +62,14 @@
                             <img class="imag" src="{{ $offer->img_src }}" width="150px" height="150px">
                         </div>
                         <div class="box2">
-                            <a href="" class="naslov">{{ $offer->name }}</a><br>
-                            <a href="" class="text">{{ $offer->highligth }}</a><br>
-                            <a href="" class="text">{{ $offer->summary }}</a>
+                            <a href="#" class="naslov" style="margin-top: 20px;">{{ $offer->name }}</a><br>
+                            @if($offer->detail)
+                            <a href="#" class="text">{!! $offer->detail !!}</a><br>
+                            @endif
                         </div>
                         <div class="box3">
-                            <p style="text-align: end; text-align: center;">{{ $offer->created_at->toFormattedDateString() }}</p>
-                            <button class="btn"><a class="text-white" href="#">Get offer</a></button>
+                            <p style="text-align: end; text-align: center;">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
+                            <button class="btn"><a class="text-white" href="{{ $offer->link }}">Get offer</a></button>
                             <button class="btn"><a class="text-white" href="#">No comments</a></button>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ class CreateOffersTable extends Migration
             $table->datetime('startDate');
             $table->datetime('endDate')->nullable();
             $table->string('img_src')->nullable();
-            $table->integer('offer_type_id')->unsigned()->index();
+            $table->integer('offer_type_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index();
             $table->integer('position')->nullable();
             $table->timestamps();

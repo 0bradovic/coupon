@@ -28,18 +28,14 @@
               <label for="name">Name</label>
               <input type="text" class="form-control" name="name" placeholder="Provide name">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
               <label for="highlight">Highlight</label>
               <input type="text" class="form-control" name="highlight" placeholder="Provide highlight,max 20 characters...">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
               <label for="summary">Summary</label>
               <textarea class="form-control" name="summary" placeholder="Provide summary,max 50 characters..."></textarea>
             </div>
-            <!-- <div class="form-group">
-              <label for="detail">Detail</label>
-              <textarea class="form-control" name="detail" placeholder="Provide detail,max 300 characters..."></textarea>
-            </div> -->
             
             <div class="form-group">
               <label for="detail">Detail</label>
@@ -69,6 +65,7 @@
             <div class="form-group">
               <label>Offer Type</label>
               <select class="form-control select2 " name="offer_type_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option value="">Select offer type</option>
               @foreach($offerTypes as $t)
                 <option value="{{$t->id}}">{{$t->name}}</option>
               @endforeach

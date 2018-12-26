@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TEstttt</title>
+    <title>BeforeTheShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/css/fontawesome-all.min.css') }}" />
@@ -43,7 +43,7 @@
                 <div class="dropdown-content">
                 @foreach($value as $cat)
                 @if(is_object($cat))
-                    <a href="#">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                    <a href="{{ route('category.offers',['id' => $cat->id]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
                 @endif
                 @endforeach
                 </div>
@@ -92,7 +92,9 @@
                     </div>
                     @foreach($cat->offers()->limit(3)->orderBy('position')->get() as $offer)
                     <div class="col-auto col-12 col-md-12 col-sm-12 col-lg-2 col-xl-2 boxx hov">
-                    <div class="popust" style="background-color:{{ $offer->offerType->color }}"><p class="popustText">{{ $offer->offerType->name }}</p></div>
+                    @if($offer->offerType)
+                    <div class="popust" style="background-color:{{ $offer->offerType->color }}" ><p class="popustText">{{ $offer->offerType->name }}</p></div>
+                    @endif
                         <div class="in-box">
                         <a href="{{ route('offer',['id' => $offer->id]) }}" class="boxxx">
                             <img src="{{ $offer->img_src }}" alt="">

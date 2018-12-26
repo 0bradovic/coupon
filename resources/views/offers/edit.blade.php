@@ -3,7 +3,10 @@
 @section('title', 'Edit Offer')
 
 @section('content_header')
-    
+@section('css')
+  <link rel="stylesheet" href="/css/texteditor.css">
+  <link rel="stylesheet" href="/css/displayNone.css">
+@stop
     
 @stop
 
@@ -24,17 +27,20 @@
               <label for="name">Name</label>
               <input type="text" class="form-control" name="name" value="{{ $offer->name }}">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
               <label for="highlight">Highlight</label>
               <input type="text" class="form-control" name="highlight" value="{{ $offer->highlight }}">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
               <label for="summary">Summary</label>
               <textarea class="form-control" name="summary">{{ $offer->summary }}</textarea>
             </div>
             <div class="form-group">
               <label for="detail">Detail</label>
-              <textarea class="form-control" name="detail">{{ $offer->detail }}</textarea>
+              <div>
+                  <textarea name="detail" class="textarea" placeholder="Place some text here"
+                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $offer->detail }}</textarea>
+              </div>
             </div>
             <div class="form-group">
               <label for="link">Link</label>
@@ -46,7 +52,7 @@
             </div>
             <div class="form-group">
               <label for="endDate">End Date</label>
-              <input type="date" class="form-control" name="endDate" value="{{ $offer->dateFormat($offer->endDate)->toDateString() }}">
+              <input type="date" class="form-control" name="endDate" @if($offer->endDate) value="{{ $offer->dateFormat($offer->endDate)->toDateString() }}"@endif>
             </div>
             <div class="form-group">
               <label for="position">Position</label>
@@ -55,6 +61,7 @@
             <div class="form-group">
               <label>Offer Type</label>
               <select class="form-control select2 " name="offer_type_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option value="">Select offer type</option>
               @foreach($offerTypes as $t)
                 @if($t->id == $offer->offer_type_id)
                 <option value="{{$t->id}}" selected="selected">{{$t->name}}</option>
@@ -97,6 +104,16 @@
                 </select>
             </div>
             
+            @if($offer->img_src)
+                 <div class="form-group">
+                    <img src="{{$offer->img_src}}" style="width:150px;height:150px;">
+                 </div>
+                @endif
+                <div class="form-group">
+                    <label>Upload new offer image (optional)</label>
+                    <input type="file" name="photo">
+                </div>
+
           </div>
 
           {!! csrf_field() !!}
@@ -112,6 +129,17 @@
     </div>
 @stop
 @section('js')
+<script src="{{ asset('js/texteditor.js') }}">
+    </script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    //CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
 <script>
   $(function () {
     //Initialize Select2 Elements
@@ -147,6 +175,8 @@
       }
     )
 
+    
+
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true
@@ -178,5 +208,8 @@
       showInputs: false
     })
   })
+
+  
 </script>
+
 @stop

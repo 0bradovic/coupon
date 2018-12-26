@@ -24,7 +24,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Highlight</th>
+                  <th>Detail</th>
                   <th>Start</th>
                   <th>End</th>
                   <th>Type</th>
@@ -37,10 +37,10 @@
                 <tr>
                   <td>{{ $offer->sku }}</td>
                   <td>{{ $offer->name }}</td>
-                  <td>{{ $offer->highlight }}</td>
+                  <td>{!! $offer->detail !!}</td>
                   <td>{{ $offer->dateFormat($offer->startDate)->toFormattedDateString() }}</td>
-                  <td>{{ $offer->dateFormat($offer->endDate)->toFormattedDateString() }}</td>
-                  <td>{{ $offer->offerType->name }}</td>
+                  <td>@if($offer->endDate){{ $offer->dateFormat($offer->endDate)->toFormattedDateString() }}@else Ongoing @endif</td>
+                  <td>@if($offer->offerType){{ $offer->offerType->name }}@else Don't have @endif</td>
                   <td>{{ $offer->user->name }}</td>
                   <td>{{$offer->position}}</td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>

@@ -110,7 +110,14 @@ class FrontController extends Controller
         {
             foreach($cat->offers as $off)
             {
-                array_push($simillarOffers,$off);
+                if($offer->id != $off->id)
+                {
+                    array_push($simillarOffers,$off);
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
         $simillarOffers = collect($simillarOffers);
