@@ -25,7 +25,7 @@ public static function getMetaTags()
                     <meta property="og:description" content="'.$tag['og_description'].'"/>';
 
         }
-
+        
     }
 
 }
