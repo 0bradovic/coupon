@@ -40,6 +40,7 @@ class CategoryController extends Controller
         $this->validate($request,[
             'name' => 'required',
         ]);
+        $slug = $this->createSlug($request->name);
         $parent_id = null;
         $img_src = null;
         $lastCategorySku = Category::all()->pluck('sku')->last();
@@ -67,6 +68,7 @@ class CategoryController extends Controller
         $category = Category::create([
             'name' => $request->name,
             'sku' => $sku,
+            'slug' => $slug,
             'img_src' => $img_src,
             'parent_id' => $parent_id,
         ]);
@@ -109,6 +111,7 @@ class CategoryController extends Controller
         $this->validate($request,[
             'name' => 'required'
         ]);
+        $slug = $this->createSlug($request->name);
         $category = Category::find($id);
         $parent_id = null;
         $img_src = null;
@@ -134,6 +137,7 @@ class CategoryController extends Controller
         $category->update([
             'name' => $request->name,
             'img_src' => $img_src,
+            'slug' => $slug,
             'parent_id' => $parent_id,
         ]);
         return redirect()->back()->with('success','Successfully updated category '.$category->name);

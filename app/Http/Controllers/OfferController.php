@@ -55,13 +55,16 @@ class OfferController extends Controller
             'startDate' => 'required|date',
             'categories' => 'required'
         ]);
+        $slug = $this->createSlug($request->name);
         $img_src = null;
         $offer_type_id = null;
         $startDate = Carbon::parse($request->startDate);
         $endDate = null;
+        $endDateNull = 1;
         if($request->endDate)
         {
             $endDate = Carbon::parse($request->endDate);
+            $endDateNull = 0;
         }
         if($request->offer_type_id)
         {
@@ -103,6 +106,7 @@ class OfferController extends Controller
         }
         $offer = Offer::create([
             'name' => $request->name,
+            'slug' => $slug,
             'sku' => $sku,
             'highlight' => $request->highlight,
             'summary' => $request->summary,
@@ -110,6 +114,7 @@ class OfferController extends Controller
             'link' => $offerLink,
             'startDate' => $startDate,
             'endDate' => $endDate,
+            'endDateNull' => $endDateNull,
             'offer_type_id' => $offer_type_id,
             'user_id' => Auth::user()->id,
             'position' => $request->position,
@@ -166,24 +171,33 @@ class OfferController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string',
-            'highlight' => 'required|string|max:20',
-            'summary' => 'required|string|max:50',
-            'detail' => 'required|string|max:300',
+            'highlight' => 'max:20',
+            'summary' => 'max:50',
+            'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'endDate' => 'required|date',
             'offer_type_id' => 'required|numeric',
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
+        $slug = $this->createSlug($request->name);
+        $endDate = null;
+        $endDateNull = 1;
+        if($request->endDate)
+        {
+            $endDate = Carbon::parse($request->endDate);
+            $endDateNull = 0;
+        }
         $offer->update([
             'name' => $request->name,
+            'slug' => $slug,
             'highlight' => $request->highlight,
             'summary' => $request->summary,
             'detail' => $request->detail,
             'link' => $request->link,
             'startDate' => $request->startDate,
-            'endDate' => $request->endDate,
+            'endDate' => $endDate,
+            'endDateNull' => $endDateNull,
             'offer_type_id' => $request->offer_type_id,
             'user_id' => Auth::user()->id,
             'position' => $request->position,
