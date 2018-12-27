@@ -25,7 +25,7 @@ class FrontController extends Controller
             foreach($cs as $c)
             {
                
-                $count += count($c->offers);
+                $count += count($c->getLiveOffersByCategory($c->id));
                 array_push($categories[$cat->name],$c);
             }
            
@@ -82,7 +82,7 @@ class FrontController extends Controller
     public function categoryOffers($slug)
     {
         $category = Category::where('slug',$slug)->first();
-        $offers = $category->offers;
+        $offers = $category->getLiveOffersByCategory($category->id);
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
         foreach($parentCategories as $cat)
@@ -93,7 +93,7 @@ class FrontController extends Controller
             foreach($cs as $c)
             {
                
-                $count += count($c->offers);
+                $count += count($c->getLiveOffersByCategory($c->id));
                 array_push($categories[$cat->name],$c);
             }
            
@@ -112,7 +112,7 @@ class FrontController extends Controller
         $simillarOffers = [];
         foreach($offer->categories as $cat)
         {
-            foreach($cat->offers as $off)
+            foreach($cat->getLiveOffersByCategory($cat->id) as $off)
             {
                 if($offer->id != $off->id)
                 {
@@ -135,7 +135,7 @@ class FrontController extends Controller
             foreach($cs as $c)
             {
                
-                $count += count($c->offers);
+                $count += count($c->getLiveOffersByCategory($c->id));
                 array_push($categories[$cat->name],$c);
             }
            
@@ -151,12 +151,13 @@ class FrontController extends Controller
     public function ajaxSearch($query)
     {
         $offers = Offer::where('name','LIKE', '%' . $query . '%')/*->orWhere('summary', 'LIKE' , '%' . $query . '%')*/->get();
-        
+        $off = new Offer();
+        $offers = $off->filterOffers($offers);
         $category = Category::where('name', $query)->first();
 
         if($category)
         {
-            $category_offers = $category->offers()->get();
+            $category_offers = $category->getLiveOffersByCategory($category->id);
             $merged = $offers->merge($category_offers);
         }
 
@@ -168,7 +169,8 @@ class FrontController extends Controller
     {
         
         $offers = Offer::where('name','LIKE', '%' . $request->search . '%')->get();
-
+        $off = new Offer();
+        $offers = $off->filterOffers($offers);
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
         foreach($parentCategories as $cat)
@@ -179,7 +181,7 @@ class FrontController extends Controller
             foreach($cs as $c)
             {
                
-                $count += count($c->offers);
+                $count += count($c->getLiveOffersByCategory($c->id));
                 array_push($categories[$cat->name],$c);
             }
            

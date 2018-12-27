@@ -61,4 +61,21 @@ class Offer extends Model
         return $this->hasOne(MetaTag::class);
     }
 
+    public function filterOffers($allOffers)
+    {
+        $offers = [];
+        foreach($allOffers as $offer)
+        {
+            if($offer->startDate <= Carbon::now())
+            {
+                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                {
+                    array_push($offers,$offer);
+                }
+            }
+        }
+        $offers = collect($offers);
+        return $offers;
+    }
+
 }

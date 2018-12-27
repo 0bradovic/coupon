@@ -45,63 +45,6 @@
             </div>
         </section>
         
-        <div class="fiksirano">
-        @if(count($offer->comments) > 0)
-            <section id="titlee">
-                <h6>1 Comment</h6>
-            </section>
-            <div class="sekcija">
-                <section id="users">
-                    <div class="user">
-                        <img src="./assets/image/user.png">
-                        <div class="gore">
-                            <a href="#" class="ime">Sharpie</a>
-                            <a href="#" class="date">August 21, 2018 at 10:32 am</a>
-                            <a href="#" class="link">Replay</a>
-                        </div>
-                    </div>
-                </section>
-                <section id="users-com">
-                    <div class="com">
-                        <p>This is a great offer</p>
-                    </div>
-                </section>
-            </div>
-            <div class="sekcija aaa">
-                <section id="userss">
-                    <div class="user">
-                        <img src="./assets/image/user.png">
-                        <div class="gore">
-                            <a href="#" class="ime">Sharpie</a>
-                            <a href="#" class="date">August 21, 2018 at 10:32 am</a>
-                        </div>
-                    </div>
-                </section>
-                <section id="users-comm">
-                    <div class="com">
-                        <p>This is a great offer</p>
-                    </div>
-                </section>
-            </div>
-            @endif
-            <section id="forma">
-                <div class="form">
-                    <h5>ADD YOUR COMMENT</h5>
-                    <form action="">
-                        <textarea name="commentar" id="textArea" cols="30" rows="10"></textarea>
-                        <div class="name-box">
-                            <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Name" class="name">
-                        </div>
-                        <div class="name-box">
-                            <i class="fas fa-envelope-square"></i>
-                            <input type="text" placeholder="E-mail" class="name">
-                        </div>
-                        <a href="#" class="submit">Submit</a>
-                    </form>
-                </div>
-            </section>
-        </div>
         <section id="cont">
             <div class="sve">
                 <div class="container">
@@ -122,7 +65,6 @@
                             <div class="dugmici">
                                 <p class="datum">@if($offer->endDate){{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
                                 <a href="{{$offer->link}}" class="dugme">Get offer</a>
-                                <a class="dugme">@if(count($offer->comments) > 0){{ count($offer->comments) }} comments @else No comments @endif</a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +88,6 @@
                             <div class="dugmici">
                                 <p class="datum">@if($off->endDate){{ $off->dateFormat( $off->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
                                 <a href="{{ $off->link }}" class="dugme">Get offer</a>
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="dugme">@if(count($off->comments) > 0){{ count($off->comments) }} comments @else No comments @endif</a>
                             </div>
                         </div>
                         @endforeach

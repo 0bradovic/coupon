@@ -37,7 +37,7 @@
                     <div class="dropdown-content">
                     @foreach($value as $cat)
                     @if(is_object($cat))
-                        <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                        <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
                     @endif
                     @endforeach
                     </div>
@@ -86,12 +86,17 @@
                     <div class="boxes">
                         <div class="box">
                             <div class="box-title">
-                                <a href="{{ route('category.offers',['id' => $cat->id]) }}">
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">
                                 <p class="title">{{ $cat->name }}</p>
                                 </a>
                             </div>
                         </div>
-                        @foreach($cat->offers()->limit(3)->orderBy('position')->get() as $offer)
+                        @php $count = 0; @endphp
+                        @foreach($cat->getLiveOffersByCategory($cat->id) as $offer)
+                        @php $count++; @endphp
+                        @if($count > 3)
+                        @break
+                        @endif
                         <div class="box">
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                             <div class="box-hover">
@@ -112,7 +117,7 @@
                         @endforeach
                         <div class="box">
                             <div class="btn-seeMore">
-                                <a href="{{ route('category.offers',['id' => $cat->id]) }}" class="btnn">@if(count($cat->offers) > 3)See {{ count($cat->offers)-3 }} more...@else No more offers... @endif</a>
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" class="btnn">@if(count($cat->getLiveOffersByCategory($cat->id)) > 3)See {{ count($cat->getLiveOffersByCategory($cat->id))-3 }} more...@else No more offers... @endif</a>
                             </div>
                         </div>
                     </div>

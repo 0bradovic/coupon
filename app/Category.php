@@ -32,13 +32,16 @@ class Category extends Model
     public function getLiveOffersByCategory($id)
     {
         $cat = Category::find($id);
-        $allOffers = $cat->offers;
+        $allOffers = $cat->offers()->orderBy('position')->get();
         $offers = [];
         foreach($allOffers as $offer)
         {
-            if($offer->startDate <= Carbon::now() && $offer->endDate > Carbon::now() || $offer->endDate==null)
+            if($offer->startDate <= Carbon::now())
             {
-                array_push($offers,$offer);
+                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                {
+                    array_push($offers,$offer);
+                }
             }
         }
         $offers = collect($offers);
