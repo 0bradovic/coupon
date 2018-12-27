@@ -21,9 +21,9 @@
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        @if(Request::is('*/custom'))
+        @if(Request::is('*/custom/*'))
         <form role="form"  action="{{ route('custom.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
-        @elseif(Request::is('*/category'))
+        @elseif(Request::is('*/category/*'))
         <form role="form"  action="{{ route('category.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
         @else
         <form role="form"  action="{{ route('offer.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
