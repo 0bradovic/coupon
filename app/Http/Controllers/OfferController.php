@@ -137,6 +137,10 @@ class OfferController extends Controller
             'offer_id' => $offer->id
         ]);
 
+        //$url = env("APP_URL");
+        $newOfferMetaTag->link = 'offer/'.$offer->slug;
+        $newOfferMetaTag->save();
+
         $metaTag = MetaTag::where('offer_id', $offer->id)->first();
         return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
         }

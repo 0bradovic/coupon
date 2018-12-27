@@ -17,6 +17,7 @@ Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
 Route::post('/search', 'FrontController@renderSearch')->name('search.blade');
+Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){

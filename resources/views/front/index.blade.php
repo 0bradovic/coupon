@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
+    {!! Helpers::getMetaTags() !!} 
 </head>
 
 <body>

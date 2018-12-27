@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\MetaTag;
+use Illuminate\Routing\UrlGenerator;
+
 
 
 class CategoryController extends Controller
@@ -78,6 +80,10 @@ class CategoryController extends Controller
         $newCategoryMetaTag = MetaTag::create([
             'category_id' => $category->id
         ]);
+        
+        //$url = env("APP_URL");
+        $newCategoryMetaTag->link = 'category/'.$category->slug;
+        $newCategoryMetaTag->save();
 
         $metaTag = MetaTag::where('category_id', $category->id)->first();
         return redirect()->route('category.seo.edit', ['id' => $category->id])->with('success', 'Successfully added category '.$category->name);

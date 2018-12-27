@@ -97,6 +97,10 @@ class SeoController extends Controller
             'title' => $request->title
         ]);
 
+        
+        $off=Offer::find($request->offer_id);
+        $newMetaTag->link = URL::to('/').'offer/'.$off->slug;
+        $newMetaTag->save();
         $newMetaTag->offer()->attach($request->offer_id);
 
         //$newMetaTag->category()->attach($request->category_id);
@@ -117,7 +121,9 @@ class SeoController extends Controller
             'title' => $request->title
         ]);
 
-       // $newMetaTag->offer()->attach($request->offer_id);
+        
+
+        // $newMetaTag->offer()->attach($request->offer_id);
 
         $newMetaTag->category()->attach($request->category_id);
 
@@ -290,24 +296,24 @@ class SeoController extends Controller
         return redirect()->back()->with('success', 'Successfully deleted meta tag');
     }
 
-    public function getMetaTags()
-    {
-        $path = Request::path();
+    // public function getMetaTags()
+    // {
+    //     $path = Request::path();
 
-        $tag = MetaTag::where('link', $path[0] != '/' ? '/'.$path : $path)->orWhere('is_default', true)->orderBy('is_default', 'asc')->first();
-        if($tag)
-        {
-            $tag = $tag->toArray();
-            return '
-                    <meta name="keywords" content="'.$tag['keywords'].'"/>
-                    <meta name="description" content="'.$tag['description'].'"/>
-                    <meta property="og:title" content="'.$tag['og_title'].'"/>
-                    <meta property="og:image" content="'.$tag['og_image'].'"/>
-                    <meta property="og:description" content="'.$tag['og_description'].'"/>
-                    ';
+    //     $tag = MetaTag::where('link', $path[0] != '/' ? '/'.$path : $path)->orWhere('is_default', true)->orderBy('is_default', 'asc')->first();
+    //     if($tag)
+    //     {
+    //         $tag = $tag->toArray();
+    //         return '
+    //                 <meta name="keywords" content="'.$tag['keywords'].'"/>
+    //                 <meta name="description" content="'.$tag['description'].'"/>
+    //                 <meta property="og:title" content="'.$tag['og_title'].'"/>
+    //                 <meta property="og:image" content="'.$tag['og_image'].'"/>
+    //                 <meta property="og:description" content="'.$tag['og_description'].'"/>
+    //                 ';
 
-        }
+    //     }
 
-    }
+    // }
 
 }
