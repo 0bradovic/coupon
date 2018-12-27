@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\MetaTag;
+
 
 class CategoryController extends Controller
 {
@@ -72,7 +74,13 @@ class CategoryController extends Controller
             'img_src' => $img_src,
             'parent_id' => $parent_id,
         ]);
-        return redirect()->back()->with('success','Successfully added new category '.$category->name);
+
+        $newCategoryMetaTag = MetaTag::create([
+            'category_id' => $category->id
+        ]);
+
+        $metaTag = MetaTag::where('category_id', $category->id)->first();
+        return redirect()->route('category.seo.edit', ['id' => $category->id])->with('success', 'Successfully added category '.$category->name);
     }
 
     /**

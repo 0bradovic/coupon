@@ -101,7 +101,7 @@ class SeoController extends Controller
 
         //$newMetaTag->category()->attach($request->category_id);
 
-        return redirect()->back()->with('Success', 'Successfully created new meta tag');
+        return redirect()->back()->with('success', 'Successfully created new meta tag');
     }
 
     public function storeCatagory(Request $request)
@@ -121,11 +121,15 @@ class SeoController extends Controller
 
         $newMetaTag->category()->attach($request->category_id);
 
-        return redirect()->back()->with('Success', 'Successfully created new meta tag');
+        return redirect()->back()->with('success', 'Successfully created new meta tag');
     }
 
     public function storeCustom(Request $request)
     {
+        $this->validate($request,[
+            'link' => 'required'
+        ]);
+
         $newMetaTag = MetaTag::create([
             'keywords' => $request->keywords,
             'description' => $request->description,
@@ -141,7 +145,7 @@ class SeoController extends Controller
 
         //$newMetaTag->category()->attach($request->category_id);
 
-        return redirect()->back()->with('Success', 'Successfully created new meta tag');
+        return redirect()->back()->with('success', 'Successfully created new meta tag');
     }
 
     // public function edit($id)
@@ -168,7 +172,7 @@ class SeoController extends Controller
 
     public function editCustom($link)
     {
-        $metaTag = MetaTag::where($link)->first();
+        $metaTag = MetaTag::where('link', $link)->first();
         return view('seo.edit',compact('metaTag'));
     }
 
@@ -224,7 +228,7 @@ class SeoController extends Controller
 
     }
 
-    public function updateCatagory(Request $request, $id)
+    public function updateCategory(Request $request, $id)
     {
         $metaTag = MetaTag::find($id);
         $metaTag->update([

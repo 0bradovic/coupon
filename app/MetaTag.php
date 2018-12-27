@@ -8,7 +8,7 @@ class MetaTag extends Model
 {
     //
     protected $fillable = [
-        'keywords', 'description', 'og-title', 'og-image', 'og-description', 
+        'keywords', 'description', 'og_title', 'og_image', 'og_description', 
         'is_default', 'link', 'title', 'offer_id', 'category_id'
     ];
 

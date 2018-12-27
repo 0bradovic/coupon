@@ -36,7 +36,7 @@
                     <div class="dropdown-content">
                     @foreach($value as $cat)
                     @if(is_object($cat))
-                        <a href="{{ route('category.offers',['id' => $cat->id]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                        <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
                     @endif
                     @endforeach
                     </div>

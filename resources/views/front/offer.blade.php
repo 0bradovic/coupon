@@ -36,7 +36,7 @@
                     <div class="dropdown-content">
                     @foreach($value as $cat)
                     @if(is_object($cat))
-                        <a href="{{ route('category.offers',['id' => $cat->id]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                        <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
                     @endif
                     @endforeach
                     </div>
@@ -133,20 +133,20 @@
                         @foreach($simillarOffers as $off)
                         <div class="fix">
                             <div class="fix-img">
-                            <a href="{{ route('offer',['id' => $off->id]) }}">
+                            <a href="{{ route('offer',['slug' => $off->slug]) }}">
                                 <img class="imag" src="{{ $off->img_src }}" width="170px" height="140px">
                             </a>
                             </div>
                             <div class="fix-text">
-                                <a href="{{ route('offer',['id' => $off->id]) }}" class="fix-a">{{ $off->name }}</a>
+                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{{ $off->name }}</a>
                                 @if($off->detail)
-                                <a href="{{ route('offer',['id' => $off->id]) }}" class="fix-a">{!! $off->detail !!}</a>
+                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{!! $off->detail !!}</a>
                                 @endif
                             </div>
                             <div class="dugmici">
                                 <p class="datum">@if($off->endDate){{ $off->dateFormat( $off->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
                                 <a href="{{ $off->link }}" class="dugme">Get offer</a>
-                                <a href="{{ route('offer',['id' => $off->id]) }}" class="dugme">@if(count($off->comments) > 0){{ count($off->comments) }} comments @else No comments @endif</a>
+                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="dugme">@if(count($off->comments) > 0){{ count($off->comments) }} comments @else No comments @endif</a>
                             </div>
                         </div>
                         @endforeach
