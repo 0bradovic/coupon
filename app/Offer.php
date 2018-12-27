@@ -56,4 +56,9 @@ class Offer extends Model
         return Carbon::parse($date);
     }
 
+    public function metaTag()
+    {
+        return $this->hasOne(MetaTag::class);
+    }
+
 }

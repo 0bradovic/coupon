@@ -190,11 +190,16 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Offers',
-                    'url' => '/offes',
+                    'url' => '/offers',
                 ],
                 [
                     'text' => 'Add Offer',
                     'url'  => '/create/offer',
+                ],
+                [
+                    'text' => 'All Offers Meta Tags [SEO]',
+                    'can' => 'manage seo',
+                    'route'  => 'offer.seo.index',
                 ],
             ]
         ],
@@ -211,8 +216,28 @@ return [
                     'text' => 'Create category',
                     'url' => '/create/category',
                 ],
+                [
+                    'text' => 'All Categories Meta Tags [SEO]',
+                    'can' => 'manage seo',
+                    'route'  => 'category.seo.index',
+                ],
             ],
             
+        ],
+        'META TAGS [SEO]',
+        [
+            'text' => 'Custom Meta Tags',
+            'can' => 'manage seo',
+            'submenu'  => [
+                [
+                    'text' => 'All Custom Meta Tags',
+                    'route' => 'custom.seo.index',
+                ],
+                [
+                    'text' => 'Add Custom Meta Tag',
+                    'route' => 'custom.seo.create',
+                ],
+            ],
         ],
         
     ],
