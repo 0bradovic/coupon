@@ -94,6 +94,7 @@
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Add Meta Tag</button>
           </div>
+          
         </form>
       </div>
     </div>

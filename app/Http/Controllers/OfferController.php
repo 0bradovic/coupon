@@ -8,6 +8,7 @@ use App\OfferType;
 use App\Category;
 use App\Tag;
 use Auth;
+use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
 
@@ -131,9 +132,14 @@ class OfferController extends Controller
                 $offer->tags()->attach($tag);
             }
         }
-        return redirect()->back()->with('success', 'Successfully created new offer '.$offer->name);
-    }
 
+        $newOfferMetaTag = MetaTag::create([
+            'offer_id' => $offer->id
+        ]);
+
+        $metaTag = MetaTag::where('offer_id', $offer->id)->first();
+        return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
+        }
     /**
      * Display the specified resource.
      *

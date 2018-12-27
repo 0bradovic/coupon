@@ -37,7 +37,7 @@
                     <div class="dropdown-content">
                     @foreach($value as $cat)
                     @if(is_object($cat))
-                        <a href="{{ route('category.offers',['id' => $cat->id]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
+                        <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->offers) }} offers</span></a>
                     @endif
                     @endforeach
                     </div>
@@ -93,7 +93,7 @@
                         </div>
                         @foreach($cat->offers()->limit(3)->orderBy('position')->get() as $offer)
                         <div class="box">
-                        <a href="{{ route('offer',['id' => $offer->id]) }}">
+                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                             <div class="box-hover">
                             @if($offer->offerType)
                                 <div class="popust" style="background-color:{{ $offer->offerType->color }}">

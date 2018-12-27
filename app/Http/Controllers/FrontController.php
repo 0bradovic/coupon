@@ -79,9 +79,9 @@ class FrontController extends Controller
 
     }
 
-    public function categoryOffers($id)
+    public function categoryOffers($slug)
     {
-        $category = Category::find($id);
+        $category = Category::where('slug',$slug)->first();
         $offers = $category->offers;
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
@@ -103,9 +103,9 @@ class FrontController extends Controller
         return view('front.categoryOffers',compact('category','offers','categories'));
     }
 
-    public function offer($id)
+    public function offer($slug)
     {
-        $offer = Offer::find($id);
+        $offer = Offer::where('slug', $slug)->first();
         $mainCategory = $offer->categories()->first();
         $mainCategory = Category::find($mainCategory->parent_id);
         $comments = $offer->comments()->with('commentReplies')->get();

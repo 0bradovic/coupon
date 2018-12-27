@@ -68,6 +68,11 @@
 
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Update Meta Tag</button>
+            @if(Request::is('*/offer/*'))
+            <a href="{{ route('offer.seo.index')}}" class="btn btn-xs btn-info pull-right">Skip</a>
+            @elseif(Request::is('*/category/*'))
+            <a href="{{ route('category.seo.index')}}" class="btn btn-xs btn-info pull-right">Skip</a>
+            @endif
           </div>
         </form>
       </div>

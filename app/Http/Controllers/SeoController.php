@@ -129,7 +129,7 @@ class SeoController extends Controller
         $this->validate($request,[
             'link' => 'required'
         ]);
-        
+
         $newMetaTag = MetaTag::create([
             'keywords' => $request->keywords,
             'description' => $request->description,
