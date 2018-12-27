@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Category extends Model
 {
@@ -26,6 +27,25 @@ class Category extends Model
     public function metaTag()
     {
         return $this->hasOne(MetaTag::class);
+    }
+
+    public function getLiveOffersByCategory($id)
+    {
+        $cat = Category::find($id);
+        $allOffers = $cat->offers()->orderBy('position')->get();
+        $offers = [];
+        foreach($allOffers as $offer)
+        {
+            if($offer->startDate <= Carbon::now())
+            {
+                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                {
+                    array_push($offers,$offer);
+                }
+            }
+        }
+        $offers = collect($offers);
+        return $offers;
     }
 
 }

@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
         // Offer routes
-        Route::get('/offers', 'OfferController@index');
+        Route::get('/offes', 'OfferController@index');
         Route::get('/create/offer', 'OfferController@create')->name('create.offer');
         Route::post('/store/offer', 'OfferController@store')->name('store.offer');
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');
