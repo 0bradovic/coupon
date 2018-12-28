@@ -12,7 +12,40 @@ use App\Support\Collection;
 class FrontController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
+    {
+        $slides = Slider::where('active',1)->orderBy('position')->get();
+        $categories = [];
+        $parentCategories = Category::where('parent_id',null)->get();
+        foreach($parentCategories as $cat)
+        {
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->get();
+            $categories[$cat->name] = array();
+            $count = 0;
+            foreach($cs as $c)
+            {
+               
+                $count += count($c->getLiveOffersByCategory($c->id));
+                array_push($categories[$cat->name],$c);
+            }
+           
+            $categories[$cat->name]['count'] = $count;
+
+        }
+        $allOffers = Offer::orderBy('position')->get();
+        $off = new Offer();
+        $offers = $off->filterOffers($allOffers);
+        $offers = (new Collection($offers))->paginate(10);
+        if($request->ajax()) {
+            return [
+                'offers' => view('front.indexLazyLoad')->with(compact('offers'))->render(),
+                'next_page' => $offers->nextPageUrl()
+            ];
+        }
+        return view('front.index',compact('categories','slides','offers'));
+    }
+
+    public function indexByCategory()
     {
         $now = Carbon::now();
         $slides = Slider::where('active',1)->orderBy('position')->get();
@@ -34,7 +67,7 @@ class FrontController extends Controller
 
         }
         
-        return view('front.index',compact('categories','slides','now'));
+        return view('front.index-old',compact('categories','slides','now'));
     }
 
     public function sendComment(Request $request)

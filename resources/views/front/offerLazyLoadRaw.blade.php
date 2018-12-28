@@ -1,19 +1,24 @@
 @foreach($simillarOffers as $off)
-                        <div class="fix">
+            <div class="dva">
+                <div class="box">
+                    <div class="fix">
+                        <div class="slika">
                             <div class="fix-img">
                             <a href="{{ route('offer',['slug' => $off->slug]) }}">
-                                <img class="imag" src="{{ '/public/'.$off->img_src }}" width="170px" height="140px">
+                                <img src="{{ '/public/'.$off->img_src }}">
                             </a>
                             </div>
-                            <div class="fix-text">
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{{ $off->name }}</a>
-                                @if($off->detail)
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{!! $off->detail !!}</a>
-                                @endif
-                            </div>
-                            <div class="dugmici">
-                                <p class="datum">@if($off->endDate){{ $off->dateFormat( $off->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
-                                <a href="{{ $off->link }}" class="dugme">Get offer</a>
-                            </div>
                         </div>
-                        @endforeach
+                        <div class="fix-text">
+                            <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{{ $off->name }}</a>
+                            <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{!! $off->detail !!}</a>
+                        </div>
+                        <div class="dugmici">
+                            <p class="datum">@if($off->endDate){{ $off->dateFormat( $off->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
+                            <a href="{{ $off->link }}" class="dugme">Get offers</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        @endforeach
