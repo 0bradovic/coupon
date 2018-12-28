@@ -240,6 +240,8 @@ class OfferController extends Controller
         $offer->categories()->detach();
         $offer->tags()->detach();
         $name = $offer->name;
+        $metaTag = MetaTag::where('offer_id', $id)->first();
+        $metaTag->delete();
         $offer->delete();
         return redirect()->back()->with('success', 'Successfully deleted offer '.$name);
     }
