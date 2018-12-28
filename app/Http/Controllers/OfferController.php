@@ -55,6 +55,14 @@ class OfferController extends Controller
         return view('offers.create',compact('categories','tags','offerTypes'));
     }
 
+    public function searchOffers(Request $request)
+    {
+        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->paginate(15);
+
+        return view('offers.index',compact('offers'));
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

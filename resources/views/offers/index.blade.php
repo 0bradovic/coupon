@@ -8,7 +8,15 @@
 @section('content')
 <div class="row">
         <div class="col-xs-12">
-        <div>{{ $offers->links() }}</div>
+
+        {{ $offers->appends(Request::except('page'))->links() }}
+        <div style="overflow:hidden">
+              <a href="{{ route('offers.index') }}" class="btn btn-primary pull-right">ALL</a> 
+              <a href="{{ route('live.offer') }}" class="btn btn-primary pull-right">LIVE</a> 
+              <a href="{{ route('expired.offer') }}" class="btn btn-primary pull-right">EXPIRED</a>
+              <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
+        </div>
+
           <div class="box">
           
             <div class="box-header">
@@ -16,14 +24,22 @@
               @include('layouts.messages')
               @include('layouts.errors')
               <div class="box-tools">
-              <a href="{{ route('offers.index') }}" class="btn btn-primary">ALL</a> &nbsp; 
-              <a href="{{ route('live.offer') }}" class="btn btn-primary">LIVE</a> &nbsp;
-              <a href="{{ route('expired.offer') }}" class="btn btn-primary">EXPIRED</a>
-              </div>
+
+              <form method="get" action="{{ route('search.offers') }}">
+              <div class="input-group input-group-sm" style="width: 300px;">
+              
+                  <input type="text" name="term" class="form-control pull-right" placeholder="Search offers by name or id...">
+                  {!! csrf_field() !!}
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </form>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-            
+            </br>
               <table class="table table-hover">
                 <tr>
                   <th>ID</th>
@@ -62,9 +78,12 @@
             <!-- /.box-body -->
 
           </div>
-          <div>{{ $offers->links() }}</div>
           
 
           <!-- /.box -->
         </div>
+        <div>{{ $offers->appends(Request::except('page'))->links() }}</div>
+          <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
+          {{ $offers->appends(Request::except('page'))->links() }}
+          
 @stop
