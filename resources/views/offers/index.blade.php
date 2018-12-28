@@ -8,6 +8,7 @@
 @section('content')
 <div class="row">
         <div class="col-xs-12">
+        <div>{{ $offers->links() }}</div>
           <div class="box">
           
             <div class="box-header">
@@ -56,7 +57,10 @@
               </table>
             </div>
             <!-- /.box-body -->
+
           </div>
+          <div>{{ $offers->links() }}</div>
+
           <!-- /.box -->
         </div>
 @stop

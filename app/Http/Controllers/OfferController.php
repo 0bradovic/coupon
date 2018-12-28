@@ -21,8 +21,21 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::orderBy('position')->get();
+        $offers = Offer::orderBy('position')->paginate(15);
         return view('offers.index',compact('offers'));
+    }
+
+    public function liveOffers()
+    {
+        $offers = Offer::orderBy('position')->get();
+        $offer = new Offer();
+        // $offers = $offer->filterOffers($offers)
+        // return view('offers.index',compact('offers'));
+    }
+
+    public function expiredOffers()
+    {
+
     }
 
     /**
