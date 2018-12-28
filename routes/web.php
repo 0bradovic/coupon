@@ -16,7 +16,7 @@ Route::get('/category/{slug}', 'FrontController@categoryOffers')->name('category
 Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
-Route::post('/search', 'FrontController@renderSearch')->name('search.blade');
+Route::get('/search', 'FrontController@renderSearch')->name('search.blade');
 Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 
 Auth::routes();
@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['permission:manage categories']], function () {
         // Category routes
-        Route::get('/categories', 'CategoryController@index')->name('category.index');
+        Route::get('/categories', 'CategoryController@index');
         Route::get('/create/category', 'CategoryController@create')->name('create.category');
         Route::post('/store/category', 'CategoryController@store')->name('store.category');
         Route::get('/edit/category/{id}', 'CategoryController@edit')->name('edit.category');
@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
         // Offer routes
-        Route::get('/offers', 'OfferController@index')->name('offers.index');
+        Route::get('/offers', 'OfferController@index');
         Route::get('/create/offer', 'OfferController@create')->name('create.offer');
         Route::post('/store/offer', 'OfferController@store')->name('store.offer');
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');

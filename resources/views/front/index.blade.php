@@ -16,9 +16,9 @@
 <body>
     <header>
         <div class="container">
-            <a href="/" class="logo">BeforeTheShop</a>
+            <a href="/public/" class="logo">BeforeTheShop</a>
             <div class="search">
-            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
+            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                 <input class="searchh" type="text" name="search" id="search" placeholder="Search">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
                 {!! csrf_field() !!}
@@ -53,7 +53,7 @@
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
                             <a href="{{ $slide->link }}" target="_blank">
-                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ '/public/'.$slide->img_src }}" alt="First slide">
                             </a>
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
@@ -107,7 +107,7 @@
                                 </div>
                             @endif
                                 <div class="box-image">
-                                    <img src="{{ $offer->img_src }}">
+                                    <img src="{{ '/public/'.$offer->img_src }}">
                                 </div>
                                 <div class="box-text">
                                     <p class="text">{{ $offer->name }}</p>

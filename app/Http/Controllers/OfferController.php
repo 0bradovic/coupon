@@ -199,7 +199,6 @@ class OfferController extends Controller
             'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'offer_type_id' => 'required|numeric',
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
