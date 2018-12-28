@@ -17,7 +17,7 @@
         <div class="container">
             <a href="/public/" class="logo">BeforeTheShop</a>
             <div class="search">
-            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
+            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                 <input class="searchh" type="text" name="search" id="search" placeholder="Search">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
                 {!! csrf_field() !!}
@@ -73,7 +73,7 @@
                     <div class="container coN">
                         <h3>More offers you might like</h3>
                     </div>
-                    <div class="fiXXX sirina">
+                    <div class="fiXXX sirina offers endless-pagination" data-next-page="{{ $simillarOffers->nextPageUrl() }}">
                         @foreach($simillarOffers as $off)
                         <div class="fix">
                             <div class="fix-img">
@@ -93,6 +93,7 @@
                             </div>
                         </div>
                         @endforeach
+                        {{--{!! $offers->links() !!}--}}
                     </div>
                     
                 </div>
@@ -118,4 +119,49 @@ var SITE_URL = '<?php echo env("APP_URL")?>/';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
+<script>
+
+$(document).ready(function() {
+ 
+ 
+ 
+ /*    $('body').on('click', '.pagination a', function(e){
+  
+         e.preventDefault();
+         var url = $(this).attr('href');
+  
+         $.get(url, function(data){
+             $('.posts').html(data);
+         });
+  
+     });*/
+  
+     $(window).scroll(fetchPosts);
+  
+     function fetchPosts() {
+  
+         var page = $('.endless-pagination').data('next-page');
+  
+         if(page !== null && page !== '') {
+  
+             clearTimeout( $.data( this, "scrollCheck" ) );
+  
+             $.data( this, "scrollCheck", setTimeout(function() {
+                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 100;
+  
+                 if(scroll_position_for_posts_load >= $(document).height()) {
+                     $.get(page, function(data){
+                         $('.offers').append(data.simillarOffers);
+                         $('.endless-pagination').data('next-page', data.next_page);
+                     });
+                 }
+             }, 350))
+  
+         }
+     }
+  
+  
+ })
+
+</script>
 </html>

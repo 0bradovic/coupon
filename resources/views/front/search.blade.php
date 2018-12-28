@@ -49,7 +49,7 @@
             <div class="container">
                 <h2>Search results for {{ $search }}</h2>
             </div>
-            <div class="container">
+            <div class="container offers endless-pagination" data-next-page="{{ $offers->nextPageUrl() }}">
             @foreach($offers as $offer)
                 <div class="fiXXX">
                     <div class="fix">
@@ -71,6 +71,7 @@
                     </div>
                 </div>
             @endforeach
+            {{--{!! $offers->links() !!}--}}
             </div>
         </section>
     </article>
@@ -93,4 +94,49 @@ var SITE_URL = '<?php echo env("APP_URL")?>/';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
+<script>
+
+$(document).ready(function() {
+ 
+ 
+ 
+ /*    $('body').on('click', '.pagination a', function(e){
+  
+         e.preventDefault();
+         var url = $(this).attr('href');
+  
+         $.get(url, function(data){
+             $('.posts').html(data);
+         });
+  
+     });*/
+  
+     $(window).scroll(fetchPosts);
+  
+     function fetchPosts() {
+  
+         var page = $('.endless-pagination').data('next-page');
+  
+         if(page !== null  && page !== '') {
+  
+             clearTimeout( $.data( this, "scrollCheck" ) );
+  
+             $.data( this, "scrollCheck", setTimeout(function() {
+                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 100;
+  
+                 if(scroll_position_for_posts_load >= $(document).height()) {
+                     $.get(page, function(data){
+                         $('.offers').append(data.offers);
+                         $('.endless-pagination').data('next-page', data.next_page);
+                     });
+                 }
+             }, 350))
+  
+         }
+     }
+  
+  
+ })
+
+</script>
 </html>

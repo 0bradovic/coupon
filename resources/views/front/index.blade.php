@@ -16,9 +16,9 @@
 <body>
     <header>
         <div class="container">
-            <a href="/" class="logo">BeforeTheShop</a>
+            <a href="/public/" class="logo">BeforeTheShop</a>
             <div class="search">
-            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
+            <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                 <input class="searchh" type="text" name="search" id="search" placeholder="Search">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
                 {!! csrf_field() !!}
