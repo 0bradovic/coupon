@@ -11,6 +11,8 @@ use Auth;
 use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
+use App\Support\Collection;
+
 
 class OfferController extends Controller
 {
@@ -21,7 +23,22 @@ class OfferController extends Controller
      */
     public function index()
     {
+        $offers = Offer::orderBy('position')->paginate(15);
+        return view('offers.index',compact('offers'));
+    }
+
+    public function liveOffers()
+    {
         $offers = Offer::orderBy('position')->get();
+        $offer = new Offer();
+        $offers = $offer->filterOffers($offers);
+        $offers = (new Collection($offers))->paginate(15);
+        return view('offers.index',compact('offers'));
+    }
+
+    public function expiredOffers()
+    {
+        $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
         return view('offers.index',compact('offers'));
     }
 
@@ -36,6 +53,14 @@ class OfferController extends Controller
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
         return view('offers.create',compact('categories','tags','offerTypes'));
+    }
+
+    public function searchOffers(Request $request)
+    {
+        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
+
+        return view('offers.index',compact('offers'));
+
     }
 
     /**

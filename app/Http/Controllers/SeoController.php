@@ -20,13 +20,13 @@ class SeoController extends Controller
 
     public function indexOffer()
     {
-        $metaTags = MetaTag::where('category_id', '=', null)->where('link', '=', null)->with('offer')->with('category')->get();
+        $metaTags = MetaTag::where('category_id', '=', null)->where('offer_id', '<>', null)->with('offer')->with('category')->get();
         return view('seo.index',compact('metaTags'));
     }
 
     public function indexCategory()
     {
-        $metaTags = MetaTag::where('offer_id', '=', null)->where('link', '=', null)->with('offer')->with('category')->get();
+        $metaTags = MetaTag::where('offer_id', '=', null)->where('category_id', '<>', null)->with('offer')->with('category')->get();
         return view('seo.index',compact('metaTags'));
     }
 
