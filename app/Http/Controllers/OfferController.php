@@ -57,7 +57,7 @@ class OfferController extends Controller
 
     public function searchOffers(Request $request)
     {
-        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->paginate(15);
+        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
 
         return view('offers.index',compact('offers'));
 
