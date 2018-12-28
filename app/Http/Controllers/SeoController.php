@@ -230,7 +230,10 @@ class SeoController extends Controller
         
         //$metaTag->offer()->attach($request->offer_id);
 
-        return redirect()->back()->with('success', 'Successfully updated meta tag');
+        $offers = Offer::orderBy('position')->get();
+        return redirect()->route('offers.index')->with('success', 'Successfully updated meta tag');
+
+        //return redirect()->back()->with('success', 'Successfully updated meta tag');
 
     }
 
@@ -256,7 +259,12 @@ class SeoController extends Controller
         
         // $metaTag->offer()->attach($request->offer_id);
 
-        return redirect()->back()->with('success', 'Successfully updated meta tag');
+        $categories = Category::all();
+        return redirect()->route('category.index')->with('success', 'Successfully updated meta tag');
+
+        
+
+        //return redirect()->back()->with('success', 'Successfully updated meta tag');
 
     }
 

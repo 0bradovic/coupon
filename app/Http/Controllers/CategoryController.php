@@ -171,6 +171,8 @@ class CategoryController extends Controller
             unlink(public_path().$category->img_src);
         }
         $name = $category->name;
+        $metaTag = MetaTag::where('category_id', $id)->first();
+        $metaTag->delete();
         $category->delete();
         return redirect()->back()->with('success','Successfully deleted category '.$name);
     }
