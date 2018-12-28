@@ -15,7 +15,7 @@
 <body>
     <header>
         <div class="container">
-            <a href="/" class="logo">BeforeTheShop</a>
+            <a href="/public/" class="logo">BeforeTheShop</a>
             <div class="search">
             <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="POST">
                 <input class="searchh" type="text" name="search" id="search" placeholder="Search">
@@ -56,7 +56,7 @@
                     <div class="fiXXX sirina">
                         <div class="fix">
                             <div class="fix-img">
-                                <img class="imag" src="{{ $offer->img_src }}" width="170px" height="140px">
+                                <img class="imag" src="{{ '/public/'.$offer->img_src }}" width="170px" height="140px">
                             </div>
                             <div class="fix-text">
                                 <a  class="fix-a">{{ $offer->name }}</a>
@@ -78,7 +78,7 @@
                         <div class="fix">
                             <div class="fix-img">
                             <a href="{{ route('offer',['slug' => $off->slug]) }}">
-                                <img class="imag" src="{{ $off->img_src }}" width="170px" height="140px">
+                                <img class="imag" src="{{ '/public/'.$off->img_src }}" width="170px" height="140px">
                             </a>
                             </div>
                             <div class="fix-text">
