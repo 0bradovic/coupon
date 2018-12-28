@@ -11,6 +11,8 @@ use Auth;
 use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
+use App\Support\Collection;
+
 
 class OfferController extends Controller
 {
@@ -29,13 +31,15 @@ class OfferController extends Controller
     {
         $offers = Offer::orderBy('position')->get();
         $offer = new Offer();
-        // $offers = $offer->filterOffers($offers)
-        // return view('offers.index',compact('offers'));
+        $offers = $offer->filterOffers($offers);
+        $offers = (new Collection($offers))->paginate(15);
+        return view('offers.index',compact('offers'));
     }
 
     public function expiredOffers()
     {
-
+        $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
+        return view('offers.index',compact('offers'));
     }
 
     /**

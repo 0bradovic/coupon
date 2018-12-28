@@ -16,11 +16,14 @@
               @include('layouts.messages')
               @include('layouts.errors')
               <div class="box-tools">
-                
+              <a href="{{ route('offers.index') }}" class="btn btn-primary">ALL</a> &nbsp; 
+              <a href="{{ route('live.offer') }}" class="btn btn-primary">LIVE</a> &nbsp;
+              <a href="{{ route('expired.offer') }}" class="btn btn-primary">EXPIRED</a>
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+            
               <table class="table table-hover">
                 <tr>
                   <th>ID</th>
@@ -60,6 +63,7 @@
 
           </div>
           <div>{{ $offers->links() }}</div>
+          
 
           <!-- /.box -->
         </div>
