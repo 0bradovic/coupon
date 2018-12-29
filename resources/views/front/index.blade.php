@@ -100,12 +100,19 @@
                 </div>
                 <div class="text">
                 <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                    <p>{!! $offer->detail !!}</p>
+                    @php chop($offer->detail,'<p></p>') @endphp
+                    @if(strpos($offer->detail,'<br><p></p>') !== false)
+                        <p> {!! chop($offer->detail, '<br><p></p>')!!} </p>
+                    @elseif(strpos($offer->detail,'<br></p>') !== false)
+                        <p> {!! chop($offer->detail, '<br></p>')!!} </p>
+                    @else
+                        <p>{!! $offer->detail !!}</p>
+                    @endif
                 </a>
                     
                 
                 </div>
-                <div class="date"><a  class="dateA">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</a></div>
+                <div class="date"><a  class="dateA">@if($offer->endDate)Ends <br> {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</a></div>
                 <div class="btn"><a href="{{ $offer->link }}" class="butt">Get offer</a></div>
             </div>
         @endforeach

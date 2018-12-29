@@ -242,8 +242,9 @@ header .search-div-1:last-child {
 }
 
 #row .red .title {
-    flex: 0 25%;
+    flex: 0 20%;
     margin: auto 0;
+ 
 }
 
 #row .red .title h6 {
@@ -251,13 +252,14 @@ header .search-div-1:last-child {
     font-weight: 500;
     font-size: 20px;
     padding-left: 10px;
+    text-align: center;
 }
 
 #row .red .text {
     margin: auto 0;
     text-align: start;
     flex: 0 25%;
-    margin-left: 2%;
+    padding-left: 2%;
     color: #211c1c;
 }
 
@@ -270,7 +272,7 @@ header .search-div-1:last-child {
 }
 
 #row .red .date {
-    flex: 0 15%;
+    flex: 0 10%;
     text-align: center;
     margin: auto 0;
 }
@@ -286,7 +288,7 @@ header .search-div-1:last-child {
 
 #row .red .btn .butt {
     background: #fe9f0a;
-    padding: 10px 50px;
+    padding: 7px 50px;
     color: #fff;
     border-radius: 20px;
 }
