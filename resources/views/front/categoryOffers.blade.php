@@ -67,7 +67,16 @@
             <div class="fix-text">
               <a href="{{ route('offer',['slug' => $offer->slug]) }}" class="fix-a">{{ $offer->name }}</a>
               @if($offer->detail)
-              <a href="{{ route('offer',['slug' => $offer->slug]) }}" class="fix-a">{!! $offer->detail !!}</a>
+              <a href="{{ route('offer',['slug' => $offer->slug]) }}" class="fix-a">
+                @php chop($offer->detail,'<p></p>') @endphp
+                @if(strpos($offer->detail,'<br><p></p>') !== false)
+                    <p> {!! chop($offer->detail, '<br><p></p>')!!} </p>
+                @elseif(strpos($offer->detail,'<br></p>') !== false)
+                    <p> {!! chop($offer->detail, '<br></p>')!!} </p>
+                @else
+                    <p>{!! $offer->detail !!}</p>
+                @endif
+              </a>
               @endif
             </div>
             <div class="dugmici">
