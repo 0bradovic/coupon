@@ -32,7 +32,7 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
-        $allOffers = Offer::orderBy('position')->get();
+        $allOffers = Offer::orderBy('updated_at','DESC')->orderBy('position')->get();
         $off = new Offer();
         $offers = $off->filterOffers($allOffers);
         $offers = (new Collection($offers))->paginate(10);

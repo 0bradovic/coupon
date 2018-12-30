@@ -32,7 +32,7 @@ class Category extends Model
     public function getLiveOffersByCategory($id)
     {
         $cat = Category::find($id);
-        $allOffers = $cat->offers()->orderBy('position')->get();
+        $allOffers = $cat->offers()->orderBy('updated_at','DESC')->orderBy('position')->get();
         $offers = [];
         foreach($allOffers as $offer)
         {

@@ -12,13 +12,13 @@
                         <div class="fix-text">
                             <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">{{ $off->name }}</a>
                             <a href="{{ route('offer',['slug' => $off->slug]) }}" class="fix-a">
-                                @php chop($offer->detail,'<p></p>') @endphp
-                                @if(strpos($offer->detail,'<br><p></p>') !== false)
-                                    <p> {!! chop($offer->detail, '<br><p></p>')!!} </p>
-                                @elseif(strpos($offer->detail,'<br></p>') !== false)
-                                    <p> {!! chop($offer->detail, '<br></p>')!!} </p>
+                                @php chop($off->detail,'<p></p>') @endphp
+                                @if(strpos($off->detail,'<br><p></p>') !== false)
+                                    <p> {!! chop($off->detail, '<br><p></p>')!!} </p>
+                                @elseif(strpos($off->detail,'<br></p>') !== false)
+                                    <p> {!! chop($off->detail, '<br></p>')!!} </p>
                                 @else
-                                    <p>{!! $offer->detail !!}</p>
+                                    <p>{!! $off->detail !!}</p>
                                 @endif
                             </a>
                         </div>
