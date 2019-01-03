@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('public/front/style.css') }}" />
     {!! Helpers::getMetaTags() !!} 
 </head>
 
@@ -17,7 +17,7 @@
     <header id="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="/public/"><b>BeforeTheShop</b></a>
+                <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -140,7 +140,7 @@ var SITE_URL = '<?php echo env("APP_URL")?>/';
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script src="{{ asset('front/js/main.js') }}"></script>
+<script src="{{ asset('public/front/js/main.js') }}"></script>
 <script>
 
 $(document).ready(function() {
