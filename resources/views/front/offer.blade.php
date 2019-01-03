@@ -111,6 +111,7 @@
             </div>
         @endforeach
         {{--{!! $simillarOffers->links() !!}--}}
+        <a href="#top" class="btn btn-warning" style="position:fixed;bottom:100px;right:100px;"><i class="fas fa-arrow-up"></i></a>
         </div>
     </section>
     <footer>
