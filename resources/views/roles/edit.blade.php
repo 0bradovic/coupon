@@ -31,13 +31,13 @@
               <select class="form-control select2" multiple="multiple" name="permissions[]" data-placeholder="Select a Permission"
                         style="width: 100%;">
                   @foreach($permissions as $permission)
-                    @foreach($role->permissions as $rolePermission)
-                        @if($permission->id == $rolePermission->id)
+                   
+                        @if($role->permissions->contains($permission->id))
                             <option value="{{ $permission->id }}" selected="selected">{{ $permission->name }}</option>
                         @else
                             <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                         @endif
-                    @endforeach
+                    
                   @endforeach
                 </select>
             </div>

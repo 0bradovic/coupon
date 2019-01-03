@@ -77,13 +77,13 @@
               <select class="form-control select2" multiple="multiple" name="categories[]" data-placeholder="Select a Category"
                         style="width: 100%;">
                   @foreach($categories as $category)
-                    @foreach($offer->categories as $cat)
-                        @if($category->id == $cat->id)
+                   
+                        @if($offer->categories->contains($category->id))
                             <option value="{{ $category->id }}" selected="selected">{{ $category->name }}</option>
                         @else
                             <option value="{{ $category->id }}" >{{ $category->name }}</option>
                         @endif
-                    @endforeach
+                    
                   @endforeach
                 </select>
             </div>
@@ -93,20 +93,20 @@
               <select class="form-control select2" multiple="multiple" name="tags[]" data-placeholder="Select a Tag"
                         style="width: 100%;">
                   @foreach($tags as $tag)
-                    @foreach($offer->tags as $t)
-                        @if($tag->id == $t->id)
+                    
+                        @if($offer->tags->contains($tag->id))
                             <option value="{{ $tag->id }}" selected="selected">{{ $tag->name }}</option>
                         @else
                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endif
-                    @endforeach
+                   
                   @endforeach
                 </select>
             </div>
             
             @if($offer->img_src)
                  <div class="form-group">
-                    <img src="{{$offer->img_src}}" style="width:150px;height:150px;">
+                    <img src="{{'/public/'.$offer->img_src}}" style="width:150px;height:150px;">
                  </div>
                 @endif
                 <div class="form-group">

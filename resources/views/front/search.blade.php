@@ -62,7 +62,7 @@
             <div class="slika">
               <div class="fix-img">
               <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                <img src="{{ $offer->img_src }}" alt="">
+                <img src="{{ '/public/'.$offer->img_src }}" alt="">
                 </a>
               </div>
             </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="dugmici">
               <p class="datum">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
-              <a href="{{ $offer->link }}" class="dugme">Get offers</a>
+              <a href="{{ $offer->link }}" target="_blank" class="dugme">Get offers</a>
             </div>
           </div>
         </div>

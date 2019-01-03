@@ -58,7 +58,7 @@
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
                             <a href="{{ $slide->link }}" target="_blank">
-                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ '/public/'.$slide->img_src }}" alt="First slide">
                             </a>
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
@@ -90,7 +90,7 @@
             <div class="red">
                 <div class="image">
                 <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                    <img src="{{ $offer->img_src }}">
+                    <img src="{{ '/public/'.$offer->img_src }}">
                 </a>
                 </div>
                 <div class="title">
@@ -113,7 +113,7 @@
                 
                 </div>
                 <div class="date"><a  class="dateA">@if($offer->endDate)Ends <br> {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</a></div>
-                <div class="btn"><a href="{{ $offer->link }}" class="butt">Get offer</a></div>
+                <div class="btn"><a href="{{ $offer->link }}" target="_blank" class="butt">Get offer</a></div>
             </div>
         @endforeach
         {{--{!! $offers->links() !!}--}}
