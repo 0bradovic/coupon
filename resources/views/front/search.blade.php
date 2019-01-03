@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <input id="search" class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
                     <div class="search-div disable" id="serachDiv">
@@ -62,7 +62,7 @@
             <div class="slika">
               <div class="fix-img">
               <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                <img src="{{ '/public/'.$offer->img_src }}" alt="">
+                <img src="{{ $offer->img_src }}" alt="">
                 </a>
               </div>
             </div>

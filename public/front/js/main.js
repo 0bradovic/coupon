@@ -19,8 +19,7 @@ $("#search").keyup(function(e){
                 var elementDiv = document.createElement('div');
                 elementDiv.innerHTML = "<a href='/public/offer/"+element.slug+"'><div class='search-div-1'> <img src='"+element.img_src+"'> <div class='articleText'> <p class='article'>"+element.name+"</p></div></div></a>"                    
                 serachDiv.appendChild(elementDiv);
-                document.getElementById("serachDiv").style.border="1px solid #A5ACB2";
-                
+                document.getElementById("serachDiv").style.border="1px solid #A5ACB2";``
             });
         }
  

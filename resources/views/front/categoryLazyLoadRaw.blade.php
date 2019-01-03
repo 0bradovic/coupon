@@ -5,7 +5,7 @@
             <div class="slika">
               <div class="fix-img">
               <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                <img src="{{ '/public/'.$offer->img_src }}" alt="">
+                <img src="{{ $offer->img_src }}" alt="">
                 </a>
               </div>
             </div>
