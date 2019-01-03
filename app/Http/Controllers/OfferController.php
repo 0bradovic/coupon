@@ -249,6 +249,22 @@ class OfferController extends Controller
                 $offer->tags()->attach($tag);
             }
         }
+        if($request->photo)
+        {
+            if($offer->img_src)
+            {
+                unlink(public_path().$offer->img_src);
+            }
+            $file = $request->photo;
+            $name = time().$file->getClientOriginalName();
+            $image = Image::make($file->getRealPath());
+            $image->resize(788,null,function($constraint){
+                $constraint->aspectRatio();
+            });
+            $image->save(public_path('images/offer/' .$name));
+            $img_src = '/images/offer/'.$name;
+            $offer->update(['img_src' => $img_src]);
+        }
         return redirect()->back()->with('success', 'Successfully updated offer '.$offer->name);
     }
 
@@ -266,6 +282,10 @@ class OfferController extends Controller
         $name = $offer->name;
         $metaTag = MetaTag::where('offer_id', $id)->first();
         $metaTag->delete();
+        if($offer->img_src)
+        {
+            unlink(public_path().$offer->img_src);
+        }
         $offer->delete();
         return redirect()->back()->with('success', 'Successfully deleted offer '.$name);
     }

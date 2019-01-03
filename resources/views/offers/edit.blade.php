@@ -21,7 +21,7 @@
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('update.offer',['id' => $offer->id]) }}" method="POST">
+        <form role="form"  action="{{ route('update.offer',['id' => $offer->id]) }}" method="POST" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>
