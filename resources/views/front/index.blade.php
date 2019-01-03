@@ -25,7 +25,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <input id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
                     <div class="search-div disable" id="serachDiv">
@@ -58,7 +58,7 @@
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
                             <a href="{{ $slide->link }}" target="_blank">
-                                <img class="d-block w-100" src="{{ '/public/'.$slide->img_src }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
                             </a>
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
@@ -90,7 +90,7 @@
             <div class="red">
                 <div class="image">
                 <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                    <img src="{{ '/public/'.$offer->img_src }}">
+                    <img src="{{ $offer->img_src }}">
                 </a>
                 </div>
                 <div class="title">

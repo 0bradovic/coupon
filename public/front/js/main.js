@@ -17,7 +17,7 @@ $("#search").keyup(function(e){
                 count++;
                 if (count > 5) return;
                 var elementDiv = document.createElement('div');
-                elementDiv.innerHTML = "<a href='/public/offer/"+element.slug+"'><div class='search-div-1'> <img src='/public/"+element.img_src+"'> <div class='articleText'> <p class='article'>"+element.name+"</p></div></div></a>"                    
+                elementDiv.innerHTML = "<a href='/public/offer/"+element.slug+"'><div class='search-div-1'> <img src='"+element.img_src+"'> <div class='articleText'> <p class='article'>"+element.name+"</p></div></div></a>"                    
                 serachDiv.appendChild(elementDiv);
                 document.getElementById("serachDiv").style.border="1px solid #A5ACB2";
                 
