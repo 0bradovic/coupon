@@ -93,7 +93,7 @@ class CustomPageController extends Controller
         ]);
         $customPage = CustomPage::find($id);
         $slug = $this->createSlug($request->name);
-        $customPage::update([
+        $customPage->update([
             'name' => $request->name,
             'text' => $request->text,
             'slug' => $slug,
