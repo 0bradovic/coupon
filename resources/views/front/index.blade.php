@@ -125,7 +125,16 @@
             <div class="foo">
                 <p>2018 MadeByDigital. All rights reserved.</p>
                 <ul>
+
+                    @foreach($customPages as $customPage)
+                    
+                    <a href="#" class="list-foo">{{$customPage->name}}</a>
+
+                    @endforeach
                     <a href="#" class="list-foo">Privacy Policy</a>
+
+
+
                     <a href="#" class="list-foo">Mail Us</a>
                 </ul>
             </div>

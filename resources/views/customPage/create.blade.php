@@ -22,7 +22,7 @@
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('store.customPage') }}" method="POST" enctype="multipart/form-data">
+        <form role="form"  action="{{ route('store.customPage') }}" method="POST">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>
@@ -40,11 +40,10 @@
 
             <div class="form-group">
               <label for="position">Position</label>
-              <input type="text" class="form-control" name="link" placeholder="Provide link">
+              <input type="text" class="form-control" name="position" placeholder="Provide position">
             </div>
 
-            <div class="form-group">
-            <input type="checkbox" name="active"> &nbsp;  <label for="active">Is Active</label>
+            
               
             </div>
             

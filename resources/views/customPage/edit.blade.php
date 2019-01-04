@@ -21,32 +21,28 @@
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('update.customPage',['id' => $customPage->id]) }}" method="POST" enctype="multipart/form-data">
+        <form role="form"  action="{{ route('update.customPage',['id' => $customPage->id]) }}" method="POST">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" class="form-control" name="name" value="{{ $customPage->name }}">
             </div>
-            <div class="form-group" style="display:none">
-              <label for="highlight">Highlight</label>
-              <input type="text" class="form-control" name="highlight" value="{{ $customPage->highlight }}">
-            </div>
             <div class="form-group">
               <label for="text">Text</label>
               <div>
-                  <textarea name="detail" class="textarea" placeholder="Place some text here"
+                  <textarea name="text" class="textarea" placeholder="Place some text here"
                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $customPage->text }}</textarea>
               </div>
             </div>
             <div class="form-group">
               <label for="position">Position</label>
-              <input type="text" class="form-control" name="link" value="{{ $customPage->position }}">
+              <input type="text" class="form-control" name="position" value="{{ $customPage->position }}">
             </div>
             <div class="form-group">
             @if($customPage->active == true)
             <input type="checkbox" name="active" checked="checked"> &nbsp;  <label for="active">Is Active</label>
             @else
-              <input type="checkbox" name="active" > &nbsp;  <label for="is_default">Is Active</label>
+              <input type="checkbox" name="active" > &nbsp;  <label for="active">Is Active</label>
             @endif
             </div>
           </div>

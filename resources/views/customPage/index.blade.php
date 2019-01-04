@@ -22,7 +22,6 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-            </br>
               <table class="table table-hover">
                 <tr>
                   <th>ID</th>
