@@ -36,7 +36,20 @@ class CustomPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'text' => 'required',
+            'position' => 'required',
+        ]);
+        $slug = $this->createSlug($request->name);
+        $customPage = CustomPage::create([
+            'name' => $request->name,
+            'text' => $request->text,
+            'slug' => $slug,
+            'position' => $request->position,
+            'active' => 1,
+        ]);
+        return redirect()->back()->with('success', 'Successfully created new custom page '.$customPage->name);
     }
 
     /**

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'manage roles']);
         Permission::create(['name' => 'manage slider']);
         Permission::create(['name' => 'manage seo']);
+        Permission::create(['name' => 'manage custom pages']);
         $role = Role::create(['name' => 'Administrator']);
         $role->givePermissionTo(Permission::all());
         $user = User::create([
