@@ -26,7 +26,7 @@
             </div>
             <div class="dugmici">
               <p class="datum">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
-              <a href="{{ $offer->link }}" class="dugme">Get offers</a>
+              <a href="{{ $offer->link }}" class="dugme">Get offer</a>
             </div>
           </div>
         </div>

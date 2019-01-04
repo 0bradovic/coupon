@@ -115,4 +115,13 @@ class CustomPageController extends Controller
         $customPage->delete();
         return redirect()->back()->with('success', 'Successfully deleted custom page '.$name);
     }
+
+    public function updateActivity(Request $request)
+    {
+        $customPage = CustomPage::find($request->id);
+        $customPage->update([
+            'active' => $request->active,
+        ]);
+    }
+
 }

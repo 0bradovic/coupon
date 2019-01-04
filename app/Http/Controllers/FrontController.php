@@ -132,7 +132,7 @@ class FrontController extends Controller
     {
         $category = Category::where('slug',$slug)->first();
         $offers = $category->getLiveOffersByCategory($category->id);
-        $offers = (new Collection($offers))->paginate(3);
+        $offers = (new Collection($offers))->paginate(10);
         
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->get();
@@ -151,13 +151,14 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
+        $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
             return [
                 'offers' => view('front.categoryLazyLoadRaw')->with(compact('offers'))->render(),
                 'next_page' => $offers->nextPageUrl()
             ];
         }
-        return view('front.categoryOffers',compact('category','offers','categories'));
+        return view('front.categoryOffers',compact('category','offers','categories','customPages'));
     }
 
     public function offer(Request $request,$slug)
@@ -200,6 +201,7 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
+        $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
             return [
                 'simillarOffers' => view('front.offerLazyLoadRaw')->with(compact('simillarOffers'))->render(),
@@ -209,7 +211,7 @@ class FrontController extends Controller
 
         //dd($comments);
 
-        return view('front.offer',compact('offer','simillarOffers','categories', 'comments','mainCategory'));
+        return view('front.offer',compact('offer','simillarOffers','categories', 'comments','mainCategory','customPages'));
     }
 
     public function ajaxSearch($query)
@@ -253,6 +255,7 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
+        $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $search = $request->search;
         if($request->ajax()) {
             return [
@@ -260,7 +263,7 @@ class FrontController extends Controller
                 'next_page' => $offers->nextPageUrl()
             ];
         }
-        return view('front.search', compact('offers', 'categories', 'search'));
+        return view('front.search', compact('offers', 'categories', 'search','customPages'));
 
     }
 

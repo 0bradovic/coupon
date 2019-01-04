@@ -111,6 +111,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/customPage/{id}', 'CustomPageController@update')->name('update.customPage');
         Route::get('/delete/customPage/{id}', 'CustomPageController@destroy')->name('delete.customPage');
         Route::get('/show/CustomPage/{id}', 'CustomPageController@show')->name('show.customPage');
+        Route::get('/update/customPage/activity', 'CustomPageController@updateActivity');
     });
 
     Route::group(['middleware' => ['permission:manage seo']], function () {

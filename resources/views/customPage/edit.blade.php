@@ -38,13 +38,7 @@
               <label for="position">Position</label>
               <input type="text" class="form-control" name="position" value="{{ $customPage->position }}">
             </div>
-            <div class="form-group">
-            @if($customPage->active == true)
-            <input type="checkbox" name="active" checked="checked"> &nbsp;  <label for="active">Is Active</label>
-            @else
-              <input type="checkbox" name="active" > &nbsp;  <label for="active">Is Active</label>
-            @endif
-            </div>
+           
           </div>
 
           {!! csrf_field() !!}
