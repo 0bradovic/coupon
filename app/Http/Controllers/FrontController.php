@@ -8,6 +8,7 @@ use App\Offer;
 use App\Slider;
 use Carbon\Carbon;
 use App\Support\Collection;
+use App\MetaTag;
 
 class FrontController extends Controller
 {
@@ -16,6 +17,11 @@ class FrontController extends Controller
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = [];
+        $title = MetaTag::where('link','/')->pluck('title')->first();
+        if(!$title)
+        {
+            $title = 'BeforeTheShop';
+        }
         $parentCategories = Category::where('parent_id',null)->get();
         foreach($parentCategories as $cat)
         {
@@ -42,7 +48,7 @@ class FrontController extends Controller
                 'next_page' => $offers->nextPageUrl()
             ];
         }
-        return view('front.index',compact('categories','slides','offers'));
+        return view('front.index',compact('categories','slides','offers','title'));
     }
 
     public function indexByCategory()
