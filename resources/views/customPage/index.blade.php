@@ -37,7 +37,7 @@
                 <tr>
                   <td>{{ $customPage->id }}</td>
                   <td>{{ $customPage->name }}</td>
-                  <td>{{ $customPage->position }</td>
+                  <td>{{ $customPage->position }}</td>
                   <td>{{ $customPage->active }}</td>
                   <td>{{ $customPage->created_at->toFormattedDateString() }}</td>
                   <td>{{ $customPage->updated_at->toFormattedDateString() }}</td>

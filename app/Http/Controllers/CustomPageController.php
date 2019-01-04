@@ -15,7 +15,7 @@ class CustomPageController extends Controller
     public function index()
     {
         $customPages = CustomPage::all();
-        return view('customPage.index',compact('customPage'));
+        return view('customPage.index',compact('customPages'));
     }
 
     /**
