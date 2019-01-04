@@ -71,7 +71,8 @@ class CustomPageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customPage = CustomPage::find($id);
+        return view('customPage.edit',compact('customPage'));
     }
 
     /**
@@ -83,7 +84,20 @@ class CustomPageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'text' => 'required',
+            'position' => 'required',
+        ]);
+        $customPage = CustomPage::find($id);
+        $slug = $this->createSlug($request->name);
+        $customPage::update([
+            'name' => $request->name,
+            'text' => $request->text,
+            'slug' => $slug,
+            'position' => $request->position,
+        ]);
+        return redirect()->back()->with('success', 'Successfully updated custom page '.$customPage->name);
     }
 
     /**
@@ -94,6 +108,9 @@ class CustomPageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customPage = CustomPage::find($id);
+        $name = $customPage->name;
+        $customPage->delete();
+        return redirect()->back()->with('success', 'Successfully deleted custom page '.$name);
     }
 }

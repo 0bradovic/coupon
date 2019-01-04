@@ -224,6 +224,22 @@ return [
             ],
             
         ],
+        'CUSTOM PAGES',
+        [
+            'text' => 'Custom page',
+            'can' => 'manage custom pages',
+            'submenu'  => [
+                [
+                    'text' => 'All custom pages',
+                    'url' => '/customPages',
+                ],
+                [
+                    'text' => 'Create custom page',
+                    'url' => '/create/customPage',
+                ],
+            ],
+            
+        ],
         'META TAGS [SEO]',
         [
             'text' => 'Custom Meta Tags',
