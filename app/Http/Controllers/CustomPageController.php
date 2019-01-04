@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CustomPage;
 
 class CustomPageController extends Controller
 {
@@ -13,7 +14,8 @@ class CustomPageController extends Controller
      */
     public function index()
     {
-        //
+        $customPages = CustomPage::all();
+        return view('customPage.index',compact('customPage'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CustomPageController extends Controller
      */
     public function create()
     {
-        //
+        return view('customPage.create');
     }
 
     /**
