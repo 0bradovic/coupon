@@ -54,6 +54,12 @@ class FrontController extends Controller
         return view('front.index',compact('categories','slides','offers','title', 'customPages'));
     }
 
+    public function getCustomPage($slug)
+    {
+        $customPage = CustomPage::where('slug', $slug)->first();
+        return view('front.customPage', compact('customPage'));
+    }
+
     public function indexByCategory()
     {
         $now = Carbon::now();

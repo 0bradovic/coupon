@@ -18,7 +18,7 @@ Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
 Route::get('/search', 'FrontController@renderSearch')->name('search.blade');
 Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
-Route::get('/page/{slug}', 'FrontController@')->name('custom.page.get');
+Route::get('/page/{slug}', 'FrontController@getCustomPage')->name('custom.page.get');
 
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){

@@ -3,6 +3,6 @@
     <title>{{$customPage->name}}</title>
 </header>
 <body>
-{!! $customPage->text !!}
+<div>{!! html_entity_decode($customPage->text) !!}</div>
 </body>
 </html>
