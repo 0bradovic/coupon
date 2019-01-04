@@ -127,14 +127,9 @@
                 <ul>
 
                     @foreach($customPages as $customPage)
-                    
-                    <a href="#" class="list-foo">{{$customPage->name}}</a>
-
+                    <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" class="list-foo">{{$customPage->name}}</a>
                     @endforeach
-                    <a href="#" class="list-foo">Privacy Policy</a>
-
-
-
+                    
                     <a href="#" class="list-foo">Mail Us</a>
                 </ul>
             </div>

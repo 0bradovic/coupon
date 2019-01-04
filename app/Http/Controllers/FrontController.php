@@ -9,6 +9,7 @@ use App\Slider;
 use Carbon\Carbon;
 use App\Support\Collection;
 use App\MetaTag;
+use App\CustomPage;
 
 class FrontController extends Controller
 {
@@ -42,13 +43,15 @@ class FrontController extends Controller
         $off = new Offer();
         $offers = $off->filterOffers($allOffers);
         $offers = (new Collection($offers))->paginate(10);
+        
         if($request->ajax()) {
             return [
                 'offers' => view('front.indexLazyLoad')->with(compact('offers'))->render(),
                 'next_page' => $offers->nextPageUrl()
             ];
         }
-        return view('front.index',compact('categories','slides','offers','title'));
+        $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
+        return view('front.index',compact('categories','slides','offers','title', 'customPages'));
     }
 
     public function indexByCategory()
