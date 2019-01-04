@@ -30,6 +30,7 @@
                   <th>Active</th>
                   <th>Created At</th>
                   <th>Updated At</th>
+                  <th>View</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -41,6 +42,7 @@
                   <td>{{ $customPage->active }}</td>
                   <td>{{ $customPage->created_at->toFormattedDateString() }}</td>
                   <td>{{ $customPage->updated_at->toFormattedDateString() }}</td>
+                  <td><a href="{{ route('show.customPage', ['id' => $customPage->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('edit.customPage', ['id' => $customPage->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.customPage', ['id' => $customPage->id]) }}"><i class="fa fa-trash"></i></a></td>
                 </tr>

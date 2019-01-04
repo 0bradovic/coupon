@@ -60,7 +60,8 @@ class CustomPageController extends Controller
      */
     public function show($id)
     {
-        //
+        $cutomPage = CustomPage::find($id);
+        return view('',compact('customPage'));
     }
 
     /**
