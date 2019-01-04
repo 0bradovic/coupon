@@ -144,3 +144,7 @@ Route::middleware('auth')->group(function () {
     });
 
 });
+use Spatie\Permission\Models\Permission;
+Route::get('/perm', function(){
+    Permission::create(['name' => 'manage custom pages']);
+});
