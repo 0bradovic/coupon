@@ -101,6 +101,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/update/slide/activity', 'SliderController@updateSlideActivity');
     });
 
+    Route::group(['middleware' => ['permission:manage custom pages']], function () {
+        // Custom page routes
+        Route::get('/customPages', 'CustomPageController@index')->name('customPage.index');
+        Route::get('/create/customPage', 'CustomPageController@create')->name('create.customPage');
+        Route::post('/store/customPage', 'CustomPageController@store')->name('store.customPage');
+        Route::get('/edit/customPage/{id}', 'CustomPageController@edit')->name('edit.customPage');
+        Route::post('/update/customPage/{id}', 'CustomPageController@update')->name('update.customPage');
+        Route::get('/delete/customPage/{id}', 'CustomPageController@destroy')->name('delete.customPage');
+    });
+
     Route::group(['middleware' => ['permission:manage seo']], function () {
         // Seo Meta Tags routes
         Route::get('/delete/meta/{id}', 'SeoController@destroy')->name('seo.delete');

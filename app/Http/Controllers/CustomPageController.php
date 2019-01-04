@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CustomPage;
 
 class CustomPageController extends Controller
 {
@@ -13,7 +14,8 @@ class CustomPageController extends Controller
      */
     public function index()
     {
-        //
+        $customPages = CustomPage::all();
+        return view('customPage.index',compact('customPage'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CustomPageController extends Controller
      */
     public function create()
     {
-        //
+        return view('customPage.create');
     }
 
     /**
@@ -34,7 +36,20 @@ class CustomPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'text' => 'required',
+            'position' => 'required',
+        ]);
+        $slug = $this->createSlug($request->name);
+        $customPage = CustomPage::create([
+            'name' => $request->name,
+            'text' => $request->text,
+            'slug' => $slug,
+            'position' => $request->position,
+            'active' => 1,
+        ]);
+        return redirect()->back()->with('success', 'Successfully created new custom page '.$customPage->name);
     }
 
     /**
