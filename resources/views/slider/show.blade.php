@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('/public/front/style.css') }}" />
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
                             <a href="{{ $slide->link }}" target="_blank">
-                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ '/public/'.$slide->img_src }}" alt="First slide">
                             </a>
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>

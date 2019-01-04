@@ -21,7 +21,7 @@
               <form role="form" action="{{ route('update.slide',['id' => $slide->id]) }}" method="POST" enctype="multipart/form-data">
                 <!-- text input -->
                  <div class="form-group">
-                    <img src="{{$slide->img_src}}" style="width:250px;height:150px;">
+                    <img src="{{'/public/'.$slide->img_src}}" style="width:250px;height:150px;">
                  </div>
                 
                 <div class="form-group">

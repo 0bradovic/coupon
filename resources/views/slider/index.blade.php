@@ -40,7 +40,7 @@
                 @foreach($slides as $slide)
                 <tr>
                   <td>{{ $slide->id }}</td>
-                  <td><img src="{{ $slide->img_src }}" style="width:100px;height:50px;"></td>
+                  <td><img src="{{ '/public/'.$slide->img_src }}" style="width:100px;height:50px;"></td>
                   <td @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</td>
                   <td @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{{ $slide->left_text }}</td>
                   <td @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{{ $slide->right_text }}</td>
