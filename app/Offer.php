@@ -61,6 +61,11 @@ class Offer extends Model
         return $this->hasOne(MetaTag::class);
     }
 
+    public function undoOffer()
+    {
+        return $this->hasOne(UndoOffer::class);
+    }
+
     public function filterOffers($allOffers)
     {
         $offers = [];

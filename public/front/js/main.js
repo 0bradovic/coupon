@@ -4,8 +4,9 @@ $('a[href="#top"]').click(function (e) {
 
 
 $("#search").keyup(function(e){
-
+    console.log(SITE_URL);
     $.ajax({
+        
         url: SITE_URL + "search/" + e.target.value,
         type:"GET",
         success:function(data){
