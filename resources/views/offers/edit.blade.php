@@ -11,6 +11,10 @@
 @stop
 
 @section('content')
+@if($offer->undoOffer)
+<a href="{{ route('undo') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+<br><br>
+@endif
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">

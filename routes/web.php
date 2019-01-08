@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');
         Route::post('/update/offer/{id}', 'OfferController@update')->name('update.offer');
         Route::get('/delete/offer/{id}', 'OfferController@destroy')->name('delete.offer');
+        Route::get('/undo/offer', 'OfferController@undo')->name('undo');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {

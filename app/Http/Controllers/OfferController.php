@@ -12,6 +12,7 @@ use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
 use App\Support\Collection;
+use App\UndoOffer;
 
 
 class OfferController extends Controller
@@ -214,6 +215,25 @@ class OfferController extends Controller
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
+        $undoOffer = UndoOffer::first();
+        $undoOffer->update([
+            'name' => $offer->name,
+            'sku' => $offer->sku,
+            'brand_id' => $offer->brand_id,
+            'highlight' => $offer->highlight,
+            'summary' => $offer->summary,
+            'detail' => $offer->detail,
+            'link' => $offer->link,
+            'startDate' => $offer->startDate,
+            'endDate' => $offer->endDate,
+            'offer_type_id' => $offer->offer_type_id,
+            'position' => $offer->position,
+            'user_id' => $offer->user_id,
+            'img_src' => $offer->img_src,
+            'endDateNull' => $offer->endDateNull,
+            'slug' => $offer->slug,
+            'offer_id' => $offer->id,
+        ]);
         $slug = $this->createSlug($request->name);
         $endDate = null;
         $endDateNull = 1;
@@ -289,4 +309,29 @@ class OfferController extends Controller
         $offer->delete();
         return redirect()->back()->with('success', 'Successfully deleted offer '.$name);
     }
+
+    public function undo()
+    {
+        $undo = UndoOffer::first();
+        $offer = Offer::find($undo->offer_id);
+        $offer->update([
+            'name' => $undo->name,
+            'sku' => $undo->sku,
+            'brand_id' => $undo->brand_id,
+            'highlight' => $undo->highlight,
+            'summary' => $undo->summary,
+            'detail' => $undo->detail,
+            'link' => $undo->link,
+            'startDate' => $undo->startDate,
+            'endDate' => $undo->endDate,
+            'offer_type_id' => $undo->offer_type_id,
+            'position' => $undo->position,
+            'user_id' => $undo->user_id,
+            'img_src' => $undo->img_src,
+            'endDateNull' => $undo->endDateNull,
+            'slug' => $undo->slug,
+        ]);
+        return redirect()->back();
+    }
+
 }
