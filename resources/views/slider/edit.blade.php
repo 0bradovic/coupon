@@ -80,11 +80,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="link">Link</label>
-                    <input type="text" class="form-control" name="link" value="{{ $slide->link }}">
-                </div>
-
-                <div class="form-group">
                     <label for="position">Position</label>
                     <input type="number" class="form-control" name="position" value="{{ $slide->position }}">
                 </div>
@@ -92,7 +87,7 @@
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Update Slide</button>
               </div>
-
+				<input type="hidden" name="link">
                 {!! csrf_field() !!}
               </form>
             </div>

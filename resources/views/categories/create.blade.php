@@ -21,11 +21,17 @@
                   <label>Category name</label>
                   <input type="text" class="form-control" name="name" placeholder="Enter category name...">
                 </div>
+                <div class="form-group">
+                     <label for="position">Position</label>
+                     <input type="number" class="form-control" name="position" placeholder="Provide position">
+                </div>
 
                 <div class="form-group">
                     <label>Upload category image (optional)</label>
                     <input type="file" name="photo">
                 </div>
+                
+                
 
                 <div class="form-group">
                   <label>Select parent category (optional)</label>

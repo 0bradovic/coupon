@@ -21,6 +21,10 @@
                   <label>Category name</label>
                   <input type="text" class="form-control" name="name" value="{{ $category->name }}">
                 </div>
+                <div class="form-group">
+                     <label for="position">Position</label>
+                     <input type="number" class="form-control" name="position" value={{$category->position}}>
+                </div>
                 @if($category->img_src)
                  <div class="form-group">
                     <img src="{{$category->img_src}}" style="width:150px;height:150px;">

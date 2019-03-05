@@ -4,8 +4,8 @@
 
 @section('content_header')
 @section('css')
-  <link rel="stylesheet" href="/css/texteditor.css">
-  <link rel="stylesheet" href="/css/displayNone.css">
+  <link rel="stylesheet" href="/public/css/texteditor.css">
+  <link rel="stylesheet" href="/public/css/displayNone.css">
 @stop
     
 @stop
@@ -80,7 +80,7 @@
     </div>
 @stop
 @section('js')
-<script src="{{ asset('js/texteditor.js') }}">
+<script src="{{ asset('public/js/texteditor.js') }}">
     </script>
 <script>
   $(function () {

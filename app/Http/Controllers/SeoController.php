@@ -298,8 +298,6 @@ class SeoController extends Controller
     public function destroy($id)
     {
         $metaTag = MetaTag::find($id);
-        $metaTag->category()->detach();
-        $metaTag->offer()->detach();
         $metaTag->delete();
         return redirect()->back()->with('success', 'Successfully deleted meta tag');
     }

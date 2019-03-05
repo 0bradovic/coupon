@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'FrontController@index');
+Route::get('/get-offer/{slug}','FrontController@getOffer')->name('get.offer');
 Route::get('/category/{slug}', 'FrontController@categoryOffers')->name('category.offers');
 Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
@@ -53,11 +54,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/offers/search', 'OfferController@searchOffers')->name('search.offers');
         Route::get('/offers/live', 'OfferController@liveOffers')->name('live.offer');
         Route::get('/offers/expired', 'OfferController@expiredOffers')->name('expired.offer');
+        Route::get('/offers/most-popular', 'OfferController@mostPopularOffers')->name('most.popular.offers');
         Route::get('/create/offer', 'OfferController@create')->name('create.offer');
         Route::post('/store/offer', 'OfferController@store')->name('store.offer');
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');
         Route::post('/update/offer/{id}', 'OfferController@update')->name('update.offer');
         Route::get('/delete/offer/{id}', 'OfferController@destroy')->name('delete.offer');
+        Route::get('/undo/offer', 'OfferController@undo')->name('undo');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {
@@ -111,6 +114,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/customPage/{id}', 'CustomPageController@update')->name('update.customPage');
         Route::get('/delete/customPage/{id}', 'CustomPageController@destroy')->name('delete.customPage');
         Route::get('/show/CustomPage/{id}', 'CustomPageController@show')->name('show.customPage');
+        Route::get('/update/customPage/activity', 'CustomPageController@updateActivity');
     });
 
     Route::group(['middleware' => ['permission:manage seo']], function () {

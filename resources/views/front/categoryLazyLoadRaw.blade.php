@@ -1,33 +1,54 @@
 @foreach($offers as $offer)
-      <div class="dva">
-        <div class="box">
-          <div class="fix">
-            <div class="slika">
-              <div class="fix-img">
-              <a href="{{ route('offer',['slug' => $offer->slug]) }}">
-                <img src="{{ $offer->img_src }}" alt="">
-                </a>
-              </div>
-            </div>
-            <div class="fix-text">
-              <a href="{{ route('offer',['slug' => $offer->slug]) }}" class="fix-a">{{ $offer->name }}</a>
-              @if($offer->detail)
-              <a href="{{ route('offer',['slug' => $offer->slug]) }}" class="fix-a">
-                @php chop($offer->detail,'<p></p>') @endphp
-                @if(strpos($offer->detail,'<br><p></p>') !== false)
-                    <p> {!! chop($offer->detail, '<br><p></p>')!!} </p>
-                @elseif(strpos($offer->detail,'<br></p>') !== false)
-                    <p> {!! chop($offer->detail, '<br></p>')!!} </p>
-                @else
-                    <p>{!! $offer->detail !!}</p>
-                @endif
-              </a>
-              @endif
-            </div>
-            <div class="dugmici">
-              <p class="datum">@if($offer->endDate)Ends {{ $offer->dateFormat( $offer->endDate )->toFormattedDateString() }}@else Ongoing @endif</p>
-              <a href="{{ $offer->link }}" class="dugme">Get offers</a>
-            </div>
-          </div>
-        </div>
-       @endforeach
+                    <div class="red">
+                        <div class="image">
+                        @if($offer->img_src)
+                        <?php
+                            list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
+                        ?>
+                        <div class="holdarevitj">
+                        <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                        @else style="height:auto;width:100%"; 
+                        @endif>
+                            <img src="{{ '/public/'.$offer->img_src }}"  
+                            @if($height>$width) style="height:100%;width:auto;"
+                            @else style="height:auto;width:100%"; 
+                            @endif>
+                        </a>
+                        </div>
+                        @else
+                        
+                        <div class="holdarevitj">
+                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                            
+                        </a>
+                        </div>
+                        
+                        @endif
+                        
+                        </div>
+                        <div class="title">
+                            @if($offer->offerType)
+                        <div class="sticker" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</div>
+                        @endif
+                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                            <h6>{{ $offer->name }}</h6>
+                        </a>
+                        <div class="date"><a  class="dateA">@if($offer->endDate)ends <br> {{ $offer->frontDateFormat( $offer->endDate ) }}@else Ongoing @endif</a></div>
+                        </div>
+                        <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get offer</a></div>
+                        <div class="text">
+                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                            
+                            <small>
+                                {!! str_limit(strip_tags($offer->detail),'150','...') !!}
+                            </small>  
+                                        
+                        </a>
+                        <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>    
+                        
+                        </div>
+                       
+                        
+                        
+                    </div>
+                @endforeach

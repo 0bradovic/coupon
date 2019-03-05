@@ -10,7 +10,7 @@ class Category extends Model
     //
 
     protected $fillable = [
-        'name', 'sku', 'img_src', 'parent_id','slug',
+        'name', 'sku', 'img_src', 'parent_id','slug', 'position'
     ];
 
 
@@ -33,6 +33,33 @@ class Category extends Model
     {
         $cat = Category::find($id);
         $allOffers = $cat->offers()->orderBy('updated_at','DESC')->orderBy('position')->get();
+        $offers = [];
+        foreach($allOffers as $offer)
+        {
+            if($offer->startDate <= Carbon::now())
+            {
+                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                {
+                    array_push($offers,$offer);
+                }
+            }
+        }
+        $offers = collect($offers);
+        return $offers;
+    }
+    
+     public function getFilteredLiveOffersByCategory($id,$order,$oredrType)
+    {
+        $cat = Category::find($id);
+        if($order == 'endDate')
+        {
+            $allOffers = $cat->offers()->where('endDate','<>',null)->orderBy($order,$oredrType)->get();
+        }
+        else
+        {
+            $allOffers = $cat->offers()->orderBy($order,$oredrType)->get();
+        }
+        
         $offers = [];
         foreach($allOffers as $offer)
         {

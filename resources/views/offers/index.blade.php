@@ -14,6 +14,7 @@
               <a href="{{ route('offers.index') }}" class="btn btn-primary pull-right">ALL</a> 
               <a href="{{ route('live.offer') }}" class="btn btn-primary pull-right">LIVE</a> 
               <a href="{{ route('expired.offer') }}" class="btn btn-primary pull-right">EXPIRED</a>
+              <a href="{{ route('most.popular.offers') }}" class="btn btn-primary pull-right">MOST POPULAR</a>
               <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
         </div>
 
@@ -49,7 +50,7 @@
                   <th>End</th>
                   <th>Type</th>
                   <th>Author</th>
-                  <th>Position</th>
+                  <th>Clicks p.24h</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   @can("manage seo")
@@ -65,7 +66,7 @@
                   <td>@if($offer->endDate){{ $offer->dateFormat($offer->endDate)->toFormattedDateString() }}@else Ongoing @endif</td>
                   <td>@if($offer->offerType){{ $offer->offerType->name }}@else Don't have @endif</td>
                   <td>{{ $offer->user->name }}</td>
-                  <td>{{$offer->position}}</td>
+                  <td>{{$offer->click}}</td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
                   @can("manage seo")
@@ -84,6 +85,6 @@
         </div>
         <div>{{ $offers->appends(Request::except('page'))->links() }}</div>
           <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
-          {{ $offers->appends(Request::except('page'))->links() }}
+          
           
 @stop

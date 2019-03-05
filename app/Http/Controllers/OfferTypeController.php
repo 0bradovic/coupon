@@ -36,13 +36,20 @@ class OfferTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+         $this->validate($request,[
             'name' => 'required',
-            'color' => 'required',
         ]);
+        if($request->color)
+        {
+            $color = $request->color;
+        }
+        else
+        {
+            $color = '#000';
+        }
         $offerType = OfferType::create([
             'name' => $request->name,
-            'color' => $request->color,
+            'color' => $color,
         ]);
         return redirect()->back()->with('success', 'Successfully created new offer type '.$offerType->name);
     }
@@ -81,12 +88,19 @@ class OfferTypeController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-            'color' => 'required',
         ]);
+        if($request->color)
+        {
+            $color = $request->color;
+        }
+        else
+        {
+            $color = '#000';
+        }
         $offerType = OfferType::find($id);
         $offerType->update([
             'name' => $request->name,
-            'color' => $request->color,
+            'color' => $color,
         ]);
         return redirect()->back()->with('success', 'Successfully updated offer type '.$offerType->name);
     }

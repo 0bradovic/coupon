@@ -31,7 +31,6 @@
                   <th>Center text</th>
                   <th>Left text</th>
                   <th>Right text</th>
-                  <th>Link</th>
                   <th>Position</th>
                   <th>Active</th>
                   <th>Edit</th>
@@ -44,7 +43,6 @@
                   <td @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</td>
                   <td @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{{ $slide->left_text }}</td>
                   <td @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{{ $slide->right_text }}</td>
-                  <td>{{ $slide->link }}</td>
                   <td>{{ $slide->position }}</td>
                   <td><input data-id="{{ $slide->id }}" type="button" @if($slide->active == 1)class="btn btn-success update-activity"  value="Active" @else class="btn btn-danger update-activity" value="Inactive" @endif>{!! csrf_field() !!}</td>
                   <td><a href="{{ route('edit.slide', ['id' => $slide->id]) }}"><i class="fa fa-pencil"></i></a></td>

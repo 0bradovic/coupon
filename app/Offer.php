@@ -13,7 +13,7 @@ class Offer extends Model
         'name', 'sku', 'brand_id', 'highlight', 
         'summary', 'detail', 'link',
         'startDate', 'endDate', 'offer_type_id',
-        'position', 'user_id','img_src','endDateNull','slug',
+        'position', 'user_id','img_src','endDateNull','slug','click',
     ];
 
     public function brand()
@@ -50,7 +50,20 @@ class Offer extends Model
     {
         return $this->hasMany(CommentReply::class);
     }
+    
+    public function offerClicks()
+    {
+        return $this->hasMany(OfferClick::class);
+    }
 
+    public function frontDateFormat($date)
+    {
+        $newDate = Carbon::parse($date);
+        $newDate = $newDate->toFormattedDateString();
+        $newDate = substr( $newDate, 0, -6 );
+        return $newDate;
+    }
+    
     public function dateFormat($date)
     {
         return Carbon::parse($date);
@@ -59,6 +72,11 @@ class Offer extends Model
     public function metaTag()
     {
         return $this->hasOne(MetaTag::class);
+    }
+
+    public function undoOffer()
+    {
+        return $this->hasOne(UndoOffer::class);
     }
 
     public function filterOffers($allOffers)
@@ -76,6 +94,30 @@ class Offer extends Model
         }
         $offers = collect($offers);
         return $offers;
+    }
+    
+    public function formatDetails($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $search = ["</p>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'120','...');
+        return $newString;
+    }
+
+    public function formatDetailsSearch($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $search = ["</p>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'300','...');
+        return $newString;
     }
 
 }

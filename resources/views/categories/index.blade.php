@@ -26,6 +26,7 @@
                   <th>Name</th>
                   <th>Image</th>
                   <th>Parent Category</th>
+                  <th>Position</th>
                   <th>Created</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -44,6 +45,7 @@
                   {{$par->name}}
                   @endif
                   </td>
+                  <td>{{$category->position}}</td>
                   <td>{{ $category->created_at->toFormattedDateString() }}</td>
                   <td><a href="{{ route('edit.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.category', ['id' => $category->id]) }}"><i class="fa fa-trash"></i></a></td>

@@ -21,9 +21,9 @@
                     <div class="carousel-inner">
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
-                            <a href="{{ $slide->link }}" target="_blank">
+                            
                                 <img class="d-block w-100" src="{{ '/public/'.$slide->img_src }}" alt="First slide">
-                            </a>
+                            
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
                             @endif

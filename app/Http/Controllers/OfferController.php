@@ -12,6 +12,7 @@ use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
 use App\Support\Collection;
+use App\UndoOffer;
 
 
 class OfferController extends Controller
@@ -41,6 +42,12 @@ class OfferController extends Controller
         $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
         return view('offers.index',compact('offers'));
     }
+    
+    public function mostPopularOffers()
+    {
+        $offers = Offer::orderBy('click','DESC')->paginate(15);
+        return view('offers.index',compact('offers'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +64,7 @@ class OfferController extends Controller
 
     public function searchOffers(Request $request)
     {
-        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
+        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
 
         return view('offers.index',compact('offers'));
 
@@ -82,6 +89,21 @@ class OfferController extends Controller
             'categories' => 'required'
         ]);
         $slug = $this->createSlug($request->name);
+         $i = 1;
+        if(count(Offer::where('slug', $slug)->get()) > 0)
+        {
+            do{
+            $x=Offer::where('slug', $slug)->get();
+            if($x) $newSlug = $slug.$i;
+            //$slug = $slug.$i;
+            $i++;
+            }while(count(Offer::where('slug', $newSlug)->get())>0);
+            
+            if($newSlug)
+            {
+                $slug = $newSlug;
+            }
+        }
         $img_src = null;
         $offer_type_id = null;
         $startDate = Carbon::parse($request->startDate);
@@ -214,7 +236,41 @@ class OfferController extends Controller
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
+        $undoOffer = UndoOffer::first();
+        $undoOffer->update([
+            'name' => $offer->name,
+            'sku' => $offer->sku,
+            'brand_id' => $offer->brand_id,
+            'highlight' => $offer->highlight,
+            'summary' => $offer->summary,
+            'detail' => $offer->detail,
+            'link' => $offer->link,
+            'startDate' => $offer->startDate,
+            'endDate' => $offer->endDate,
+            'offer_type_id' => $offer->offer_type_id,
+            'position' => $offer->position,
+            'user_id' => $offer->user_id,
+            'img_src' => $offer->img_src,
+            'endDateNull' => $offer->endDateNull,
+            'slug' => $offer->slug,
+            'offer_id' => $offer->id,
+        ]);
         $slug = $this->createSlug($request->name);
+        $i = 1;
+        if(count(Offer::where('slug', $slug)->where('id','!=',$offer->id)->get()) > 0)
+        {
+            do{
+            $x=Offer::where('slug', $slug)->where('id','!=',$offer->id)->get();
+            if($x) $newSlug = $slug.$i;
+            //$slug = $slug.$i;
+            $i++;
+            }while(count(Offer::where('slug', $newSlug)->where('id','!=',$offer->id)->get())>0);
+            
+            if($newSlug)
+            {
+                $slug = $newSlug;
+            }
+        }
         $endDate = null;
         $endDateNull = 1;
         if($request->endDate)
@@ -280,8 +336,11 @@ class OfferController extends Controller
         $offer->categories()->detach();
         $offer->tags()->detach();
         $name = $offer->name;
-        $metaTag = MetaTag::where('offer_id', $id)->first();
-        $metaTag->delete();
+        if($offer->metaTag)
+        {
+            $metaTag = MetaTag::where('offer_id', $id)->first();
+            $metaTag->delete();
+        }
         if($offer->img_src)
         {
             unlink(public_path().$offer->img_src);
@@ -289,4 +348,29 @@ class OfferController extends Controller
         $offer->delete();
         return redirect()->back()->with('success', 'Successfully deleted offer '.$name);
     }
+
+    public function undo()
+    {
+        $undo = UndoOffer::first();
+        $offer = Offer::find($undo->offer_id);
+        $offer->update([
+            'name' => $undo->name,
+            'sku' => $undo->sku,
+            'brand_id' => $undo->brand_id,
+            'highlight' => $undo->highlight,
+            'summary' => $undo->summary,
+            'detail' => $undo->detail,
+            'link' => $undo->link,
+            'startDate' => $undo->startDate,
+            'endDate' => $undo->endDate,
+            'offer_type_id' => $undo->offer_type_id,
+            'position' => $undo->position,
+            'user_id' => $undo->user_id,
+            'img_src' => $undo->img_src,
+            'endDateNull' => $undo->endDateNull,
+            'slug' => $undo->slug,
+        ]);
+        return redirect()->back();
+    }
+
 }

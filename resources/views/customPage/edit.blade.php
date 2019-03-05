@@ -4,8 +4,8 @@
 
 @section('content_header')
 @section('css')
-  <link rel="stylesheet" href="/css/texteditor.css">
-  <link rel="stylesheet" href="/css/displayNone.css">
+  <link rel="stylesheet" href="/public/css/texteditor.css">
+  <link rel="stylesheet" href="/public/css/displayNone.css">
 @stop
     
 @stop
@@ -38,13 +38,7 @@
               <label for="position">Position</label>
               <input type="text" class="form-control" name="position" value="{{ $customPage->position }}">
             </div>
-            <div class="form-group">
-            @if($customPage->active == true)
-            <input type="checkbox" name="active" checked="checked"> &nbsp;  <label for="active">Is Active</label>
-            @else
-              <input type="checkbox" name="active" > &nbsp;  <label for="active">Is Active</label>
-            @endif
-            </div>
+           
           </div>
 
           {!! csrf_field() !!}
@@ -60,7 +54,7 @@
     </div>
 @stop
 @section('js')
-<script src="{{ asset('js/texteditor.js') }}">
+<script src="{{ asset('/public/js/texteditor.js') }}">
     </script>
 <script>
   $(function () {

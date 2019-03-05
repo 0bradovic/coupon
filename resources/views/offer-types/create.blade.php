@@ -6,7 +6,7 @@
 @stop
 
 @section('css')
-    <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/colorpicker.css') }}" rel="stylesheet">
 @stop
 
 @section('content')
@@ -42,7 +42,7 @@
           </div>
 @stop
 @section('js')
-<script src="{{ asset('js/colorpicker.js') }}"></script>
+<script src="{{ asset('public/js/colorpicker.js') }}"></script>
 
 <script>
 $(function () {
