@@ -241,15 +241,13 @@ header .search-div-1:last-child {
 }
 #menu .dropdowns_holder {
     display: flex;
-    flex-direction: column;
     width: 100%;
 }
 #menu .dropdown {
-    width: 100%;
+    width: 120px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 5px 0;
 }
 #menu 
 .main_offers_container {
@@ -778,14 +776,16 @@ header {
 
 
 
-
+.dropdown-content  {
+    width: 80%;
+    margin: 0 auto;
+}
 #menu .dropdown-content .dropdown-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 5px 0;
 }
 #menu .dropdown-content a {
     color: #fff;

@@ -8,9 +8,20 @@
 //   });
 // });
 $(document).ready(function(){
-    $('.dropdown-content').hide()
   $('.dropbtn').hover(function(){
-    $('.dropdown-content').fadeToggle(200)
+    var id = $(this).data('id');
+    $('#'+id+'').children().removeClass('d-none');
+     },function(){
+      var id = $(this).data('id');
+      $('#'+id+'').children().addClass('d-none');
+     }
+    )
+})
+$(document).ready(function(){
+  $('.dropdown-container').hover(function(){
+    $(this).removeClass('d-none');
+  },function(){
+    $(this).addClass('d-none');
   })
 })
 

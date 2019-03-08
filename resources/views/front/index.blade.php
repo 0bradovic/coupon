@@ -30,7 +30,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
-                <a href="#" class="uk-etc">Every	offer	in	the	UK	here	–	and	personalised	suggestions	for you!</a>
+                <a href="#" class="uk-etc"><em>All the best UK offers in one place to save you time & money</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -41,7 +41,7 @@
                     <div class="navbar_search_form" id="navbarSupportedContent">
                     <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search by brand of product" aria-label="Search">
+                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search by brand or product" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
 
@@ -68,8 +68,12 @@
                             <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
                             
                         </div>
-                        <div class="dropdown-content" id="{{$i}}">
-                            <div class="dropdown-container">
+                    @endforeach
+                    </div>
+                    @php $i = 1; @endphp
+                    @foreach($categories as $key=>$value)
+                    <div class="dropdown-content " id="{{$i}}">
+                            <div class="dropdown-container d-none">
                             @foreach($value as $cat)
                             @if(is_object($cat))
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
@@ -77,9 +81,9 @@
                             @endforeach
                             @php $i++; @endphp
                             </div>
-                            </div>
+                        </div>
+                    
                     @endforeach
-                    </div>
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>
                     <a class="btn btn-default newest-offers" id="most-popular-btn">View most popular</a>
@@ -129,7 +133,7 @@
 
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder">
-            <a href="#" class="hidden-xs">Suggestions for you
+            <a href="#" class="hidden-xs">Most popular
             
         </div>    
         @foreach($newestOffers as $offer)
