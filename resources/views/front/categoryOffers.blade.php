@@ -57,10 +57,13 @@
                     @php $i = 1; @endphp
                     @foreach($categories as $key=>$value)
                         <div class="dropdown">
-                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <button class="dropbtn" data-id="{{$i}}"@foreach($value as $cat)
+                            @if(is_object($cat)) @if(Request::path() == 'category/'.$cat->slug) style="text-decoration: underline !important;" @endif @endif @endforeach>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
                             
                         </div>
-                        <div class="dropdown-content" id="{{$i}}">
+                        <div class="dropdown-content" @foreach($value as $cat)
+                            @if(is_object($cat))@if(Request::path() != 'category/'.$cat->slug) class="d-none" @endif @endif
+                            @endforeach id="{{$i}}">
                                 <div class="dropdown-container">
                             @foreach($value as $cat)
                             @if(is_object($cat))

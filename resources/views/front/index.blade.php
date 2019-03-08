@@ -65,8 +65,8 @@
                         @php $i = 1; @endphp
                     @foreach($categories as $key=>$value)
                         <div class="dropdown">
-                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
-                            
+                            <button class="dropbtn" data-id="{{$i}}" 
+                            @foreach($value as $cat) @if(is_object($cat)) @if(Request::is($cat->slug)) style="text-decoration: underline !important;" @endif @endif @endforeach > {{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button> 
                         </div>
                     @endforeach
                     </div>
@@ -76,7 +76,7 @@
                             <div class="dropdown-container d-none">
                             @foreach($value as $cat)
                             @if(is_object($cat))
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
                             @endif
                             @endforeach
                             @php $i++; @endphp
