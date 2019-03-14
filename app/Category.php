@@ -29,6 +29,16 @@ class Category extends Model
         return $this->hasOne(MetaTag::class);
     }
 
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
     public function getLiveOffersByCategory($id)
     {
         $cat = Category::find($id);

@@ -134,13 +134,7 @@ class FrontController extends Controller
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
         $newestOffers = (new Collection($allNewestOffers))->paginate(10);
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
-        if($request->ajax()) {
-            return [
-                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
-                'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
-                'next_page' => $newestOffers->nextPageUrl()
-            ];
-        }
+        
         
         return view('front.categoryOffers',compact('category','newestOffers','popularOffers','categories','customPages','mostRecomended'));
     }
@@ -272,6 +266,60 @@ class FrontController extends Controller
         $offer->save();
         OfferClick::create(['offer_id'=>$offer->id]);
         return Redirect::away($offer->link);
+    }
+
+    public function parentCategoryOffers(Request $request)
+    {
+        $cat = Category::where('name',$request->name)->with('subcategories')->first();
+        $allNewestOffers = [];
+        $allPopularOffers = [];
+        foreach($cat->subcategories as $category)
+        {
+            $allNewestOffers[] = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
+            $allPopularOffers[] = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
+        }
+        $newestOffers = new Collection();
+        $popularOffers = new Collection();
+        foreach($allNewestOffers as $off)
+        {   
+            $newestOffers = $newestOffers->merge($off);
+        }
+        foreach($allPopularOffers as $off)
+        {   
+            $popularOffers = $popularOffers->merge($off);
+        }
+        $newestOffers = $newestOffers->unique();
+        $popularOffers = $popularOffers->unique();
+        $newestOffers = (new Collection($newestOffers))->paginate(10);
+        $popularOffers = (new Collection($popularOffers))->paginate(10);
+        //dd($newestOffers);
+        dd($popularOffers);
+        $categories = [];
+        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        foreach($parentCategories as $cat)
+        {
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $categories[$cat->name] = array();
+            $count = 0;
+            foreach($cs as $c)
+            {
+               
+                $count += count($c->getLiveOffersByCategory($c->id));
+                array_push($categories[$cat->name],$c);
+            }
+           
+            $categories[$cat->name]['count'] = $count;
+
+        }
+        $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
+        if($request->ajax()) {
+            return [
+                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
+                'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                'next_page' => $newestOffers->nextPageUrl()
+            ];
+        }
+        
     }
 
 }

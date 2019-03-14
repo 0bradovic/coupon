@@ -65,21 +65,25 @@
                         @php $i = 1; @endphp
                     @foreach($categories as $key=>$value)
                         <div class="dropdown">
+                        <form method="POST" action="{{ route('parent.category.offers') }}">
+                            @csrf
+                            <input type="hidden" name="name" value="{{ $key }}">
                             <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
-                            
+                        </form>
                         </div>
+                        @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $i = 1; @endphp
+                    @php $j = 1; @endphp
                     @foreach($categories as $key=>$value)
-                    <div class="dropdown-content " id="{{$i}}">
+                    <div class="dropdown-content " id="{{$j}}">
                             <div class="dropdown-container d-none">
                             @foreach($value as $cat)
                             @if(is_object($cat))
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
                             @endif
                             @endforeach
-                            @php $i++; @endphp
+                            @php $j++; @endphp
                             </div>
                         </div>
                     
