@@ -80,7 +80,7 @@
                             <div class="dropdown-container d-none">
                             @foreach($value as $cat)
                             @if(is_object($cat))
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
                             @endif
                             @endforeach
                             @php $j++; @endphp
