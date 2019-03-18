@@ -1,27 +1,15 @@
-//  $(document).ready(function(){
-//      $('.dropdown-content:not(:first)').hide();
-//   $('.dropbtn').click(function(){
-//       $('.dropbtn').css('text-decoration','none');
-//       $(this).css('text-decoration','underline');
-//       var id = $(this).data('id');
-//     $('#'+id+'').slideToggle(1);
-//   });
-// });
+
 $(document).ready(function(){
   $('.dropbtn').hover(function(){
     var id = $(this).data('id');
+    $('.dropdown-container').addClass('d-none');
     $('#'+id+'').children().removeClass('d-none');
-     },function(){
-      var id = $(this).data('id');
-      $('#'+id+'').children().addClass('d-none');
      }
     )
 })
 $(document).ready(function(){
   $('.dropdown-container').hover(function(){
     $(this).removeClass('d-none');
-  },function(){
-    $(this).addClass('d-none');
   })
 })
 

@@ -54,34 +54,38 @@
         </div>
         <section id="menu">
                     <div class="container dropdowns_holder">
-                    @php $i = 1; @endphp
+                        @php $i = 1; @endphp
                     @foreach($categories as $key=>$value)
                         <div class="dropdown">
-                            <button class="dropbtn" data-id="{{$i}}"@foreach($value as $cat)
-                            @if(is_object($cat)) @if(Request::path() == 'category/'.$cat->slug) style="text-decoration: underline !important;" @endif @endif @endforeach>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
-                            
+                        <form method="GET" action="{{ route('parent.category.offers') }}">
+                            @csrf
+                            <input type="hidden" name="name" value="{{ $key }}">
+                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $key) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                        </form>
                         </div>
-                        <div class="dropdown-content" @foreach($value as $cat)
-                            @if(is_object($cat))@if(Request::path() != 'category/'.$cat->slug) class="d-none" @endif @endif
-                            @endforeach id="{{$i}}">
-                                <div class="dropdown-container">
-                            @foreach($value as $cat)
-                            @if(is_object($cat))
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::path() == 'category/'.$cat->slug) class="sub-category" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
-                            @endif
-                            @endforeach
-                            @php $i++; @endphp
-                            </div>
-                            </div>
+                        @php $i++; @endphp
                     @endforeach
                     </div>
+                    @php $j = 1; @endphp
+                    @foreach($categories as $key=>$value)
+                    <div class="dropdown-content " id="{{$j}}">
+                            <div class="dropdown-container @if($key != $category->name) d-none @endif">
+                            @foreach($value as $cat)
+                            @if(is_object($cat))
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
+                            @endif
+                            @endforeach
+                            @php $j++; @endphp
+                            </div>
+                        </div>
+                    
+                    @endforeach
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>
                     <a class="btn btn-default newest-offers" id="most-popular-btn">View most popular</a>
                     <p class="dNone most-popular-offers">Viewing most popular offers </p>
                     <a class="btn btn-default dNone most-popular-offers" id="newest-btn">View newest</a>
-                </div>
-                </section>
+                </div> 
     </header>
 
   <section id="row">
@@ -91,7 +95,7 @@
     </div>
         <div id="cont" class="container main_offers_container">
             
-        <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
+        <div class="offers_list_holder endless-pagination newestOffers" data-name="{{ $category->name }}" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder" style="margin-top:0!important">
             <a href="#" class="suggestions">Suggestions for you</a>
             <!-- <a href="#">Most Popular</a> -->
@@ -249,7 +253,7 @@ console.log(SITE_URL);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script src="{{ asset('front/js/main.js') }}"></script>
+<script src="{{ asset('front/js/parent.js') }}"></script>
 <script>
 $(window).load(function(){
     localStorage.clear();
@@ -263,7 +267,7 @@ $(document).ready(function() {
          var page = $('.newestOffers').data('next-page');
        
          if(page !== null && page !== '') {
-  
+            console.log(page);
              clearTimeout( $.data( this, "scrollCheck" ) );
   
              $.data( this, "scrollCheck", setTimeout(function() {
@@ -276,6 +280,7 @@ $(document).ready(function() {
                             $.get(page, function(data){
                                 $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
+                                $('.newestOffers').data('name',data.name);
                                 $('.newestOffers').data('next-page', data.next_page);
                             });
                         }
@@ -284,6 +289,7 @@ $(document).ready(function() {
                         $.get(page, function(data){
                                 $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
+                                $('.newestOffers').data('name',data.name);
                                 $('.newestOffers').data('next-page', data.next_page);
                             });
                     }

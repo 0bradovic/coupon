@@ -270,13 +270,14 @@ class FrontController extends Controller
 
     public function parentCategoryOffers(Request $request)
     {
-        $cat = Category::where('name',$request->name)->with('subcategories')->first();
+        $category = Category::where('name',$request->name)->with('subcategories')->first();
+        
         $allNewestOffers = [];
         $allPopularOffers = [];
-        foreach($cat->subcategories as $category)
+        foreach($category->subcategories as $cat)
         {
-            $allNewestOffers[] = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
-            $allPopularOffers[] = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
+            $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
+            $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
         }
         $newestOffers = new Collection();
         $popularOffers = new Collection();
@@ -290,10 +291,10 @@ class FrontController extends Controller
         }
         $newestOffers = $newestOffers->unique();
         $popularOffers = $popularOffers->unique();
-        $newestOffers = (new Collection($newestOffers))->paginate(10);
+        $newestOffers = (new Collection($newestOffers))->paginate(10)->appends('name',$request->name);
         $popularOffers = (new Collection($popularOffers))->paginate(10);
         //dd($newestOffers);
-        dd($popularOffers);
+        //dd($popularOffers);
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
         foreach($parentCategories as $cat)
@@ -314,12 +315,14 @@ class FrontController extends Controller
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
             return [
-                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
-                'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                'newest' => view('front.parentCategoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
+                'popular' => view('front.parentCategoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                'name' => $category->name,
                 'next_page' => $newestOffers->nextPageUrl()
             ];
         }
-        
+        //dd($category);
+        return view('front.parentCategoryOffers',compact('newestOffers','popularOffers','categories','customPages','category'));
     }
 
 }

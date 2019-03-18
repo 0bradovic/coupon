@@ -22,7 +22,7 @@ Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 Route::get('/page/{slug}', 'FrontController@getCustomPage')->name('custom.page.get');
 
 //TEST
-Route::post('/category', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
+Route::get('/category', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
 //END TEST
 
 Auth::routes();
