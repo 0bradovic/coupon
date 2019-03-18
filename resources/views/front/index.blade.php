@@ -30,7 +30,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
-                <a href="#" class="uk-etc"><em>All the best UK offers in one place to save you time & money</em></a>
+                <a href="#" class="uk-etc"><em>All the best UK offers in one place</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -49,12 +49,39 @@
                         </div>
                 </div>
                 <div class="social_icons">
+                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind..</a>
+                    <div class="social_icons_all">
+                    <div class="social_icons_div">
                     <a href="https://www.facebook.com/BeforeTheShop" target="_blank">
-                        <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-facebook-f"></i>
                     </a>
+                    Facebook
+                    </div>
+                    <div class="social_icons_div">
                     <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
-                        <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-twitter"></i>
                     </a>
+                    Twitter
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="fab fa-pinterest-p"></i>
+                    </a>
+                    wApp
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="far fa-envelope"></i>
+                    </a>
+                    E-mail
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    </a>
+                    Share
+                    </div>
+                    </div>
                 </div>
                 
                 </div>
@@ -258,7 +285,7 @@
         </div>
 
         {{--{!! $mostPopularOffers->links() !!}--}}
-        <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
+        <a href="#top" class="btn btn-warning go_top">TOP<i class="fas fa-arrow-up"></i></a>
         
 </div>
 
@@ -276,18 +303,35 @@
                 <ul>
                     
 					@foreach($customPages as $customPage)
-						<a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank" class="list-foo">{{$customPage->name}}</a>
-						</br>
+						<!-- <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank" class="list-foo">{{$customPage->name}}</a>
+						</br> -->
                     @endforeach
                     
                     
                 </ul>
-                <p>Copyright 2019 MadeByDigital. All rights reserved.</p>
-                <a href="mailto:hi@madebydigital.com" class="list-foo">hi@madebydigital.com</a>
+                <div class="footer_top">
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Privacy Notice</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer_share">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <p>Copyright 2019 Made By Digital Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
+    <div id="cookie">
+        <div class="cookie_left">
+        <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
+        </div>
+        <div class="cookie_right">
+        <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
+        <button><i class="fas fa-check"></i> Accept Cookies</button>
+        <i class="fas fa-times-circle"></i>
+        </div>
+    </div>
 </body>
 <script> 
 var SITE_URL = '<?php echo env("APP_URL")?>/';

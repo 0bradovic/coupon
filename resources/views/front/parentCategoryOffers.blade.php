@@ -41,12 +41,39 @@
                         </div>
                 </div>
                 <div class="social_icons">
+                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind..</a>
+                    <div class="social_icons_all">
+                    <div class="social_icons_div">
                     <a href="https://www.facebook.com/BeforeTheShop" target="_blank">
-                        <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-facebook-f"></i>
                     </a>
+                    Facebook
+                    </div>
+                    <div class="social_icons_div">
                     <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
-                        <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-twitter"></i>
                     </a>
+                    Twitter
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="fab fa-pinterest-p"></i>
+                    </a>
+                    wApp
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="far fa-envelope"></i>
+                    </a>
+                    E-mail
+                    </div>
+                    <div class="social_icons_div">
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    </a>
+                    Share
+                    </div>
+                    </div>
                 </div>
                 
                 </div>
@@ -60,7 +87,7 @@
                         <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
                             <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $key) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
                         </form>
                         </div>
                         @php $i++; @endphp
@@ -69,7 +96,7 @@
                     @php $j = 1; @endphp
                     @foreach($categories as $key=>$value)
                     <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if($key != $category->name) d-none @endif">
+                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
                             @foreach($value as $cat)
                             @if(is_object($cat))
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
@@ -80,12 +107,7 @@
                         </div>
                     
                     @endforeach
-                    <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
-                    <p class="newest-offers">Viewing newest offers </p>
-                    <a class="btn btn-default newest-offers" id="most-popular-btn">View most popular</a>
-                    <p class="dNone most-popular-offers">Viewing most popular offers </p>
-                    <a class="btn btn-default dNone most-popular-offers" id="newest-btn">View newest</a>
-                </div> 
+                </section>
     </header>
 
   <section id="row">
@@ -231,18 +253,42 @@
   <br>
   @endforeach
   <footer>
-    <div class="container">
-      <div class="foo">
-        <p>Copyright 2019 MadeByDigital. All rights reserved.</p>
-        <ul>
-         @foreach($customPages as $customPage)
-                   <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" class="list-foo">{{$customPage->name}}</a>
-                   @endforeach
-          <a href="mailto:hi@madebydigital.com" class="list-foo">hi@madebydigital.com</a>
-        </ul>
-      </div>
+        
+        <div class="container">
+            <div class="foo">
+                
+                <ul>
+                    
+					@foreach($customPages as $customPage)
+						<!-- <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank" class="list-foo">{{$customPage->name}}</a>
+						</br> -->
+                    @endforeach
+                    
+                    
+                </ul>
+                <div class="footer_top">
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Privacy Notice</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer_share">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <p>Copyright 2019 Made By Digital Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <div id="cookie">
+        <div class="cookie_left">
+        <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
+        </div>
+        <div class="cookie_right">
+        <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
+        <button><i class="fas fa-check"></i> Accept Cookies</button>
+        <i class="fas fa-times-circle"></i>
+        </div>
     </div>
-  </footer>
   
 </body>
 <script> 

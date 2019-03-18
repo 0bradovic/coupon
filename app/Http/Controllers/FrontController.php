@@ -57,7 +57,7 @@ class FrontController extends Controller
             ];
         }
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-        return view('front.index',compact('categories','slides','newestOffers','mostPopularOffers','title', 'customPages','mostRecomended'));
+        return view('front.index',compact('categories','slides','newestOffers','mostPopularOffers','title', 'customPages'));
     }
     
     public function getCustomPage($slug)
@@ -136,7 +136,7 @@ class FrontController extends Controller
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
         
         
-        return view('front.categoryOffers',compact('category','newestOffers','popularOffers','categories','customPages','mostRecomended'));
+        return view('front.categoryOffers',compact('category','newestOffers','popularOffers','categories','customPages'));
     }
 
     public function offer(Request $request,$slug)
@@ -203,7 +203,7 @@ class FrontController extends Controller
                 'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('offer','newestSimillarOffers','popularSimillarOffers','categories', 'comments','mainCategory','customPages','mostRecomended'));
+        return view('front.offer',compact('offer','newestSimillarOffers','popularSimillarOffers','categories','mainCategory','customPages'));
     }
 
     public function ajaxSearch($query)
