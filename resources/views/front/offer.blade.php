@@ -164,27 +164,27 @@
                 </div>
                 <div class="social_icons_all_single">
                         <div class="social_icons_div_single">
-                        <a href="https://www.facebook.com/BeforeTheShop" target="_blank">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop - {{$offer->name}}" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                        <a href="https://twitter.com/intent/tweet?url={{url()->current()}}&text=BeforeTheShop - {{$offer->name}}" target="_blank">
                         <i class="fab fa-twitter"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                        <a href="http://pinterest.com/pin/create/button/?url={{url()->current()}}&media=BeforeTheShop - {{$offer->name}}&description=BeforeTheShop - {{$offer->name}}" target="_blank">
                         <i class="fab fa-pinterest-p"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                        <a href="#" target="_blank">
                         <i class="far fa-envelope"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">
+                        <a href="https://wa.me/?text={{url()->current()}}" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         </a>
                         </div>

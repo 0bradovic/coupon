@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58530673958c246690e6fc87e8605cfc",
+    "content-hash": "c6a8ba5679bce0cdb5c93bc96a5fcf79",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -311,6 +311,69 @@
                 "parser"
             ],
             "time": "2018-03-08T01:11:30+00:00"
+        },
+        {
+            "name": "faustbrian/laravel-social-share",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/faustbrian/Laravel-Social-Share.git",
+                "reference": "149fdf2ecec1cc51cbd85af18a09d3859946b41a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/faustbrian/Laravel-Social-Share/zipball/149fdf2ecec1cc51cbd85af18a09d3859946b41a",
+                "reference": "149fdf2ecec1cc51cbd85af18a09d3859946b41a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.5.* || 5.6.* || 5.7.*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^5.0",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "BrianFaust\\SocialShare\\SocialShareServiceProvider"
+                    ],
+                    "aliases": {
+                        "SocialShare": "BrianFaust\\SocialShare\\Facades\\SocialShare"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BrianFaust\\SocialShare\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Faust",
+                    "email": "hello@brianfaust.me",
+                    "homepage": "https://brianfaust.me"
+                }
+            ],
+            "keywords": [
+                "Brian Faust",
+                "Laravel Social Share",
+                "faustbrian",
+                "framework",
+                "laravel",
+                "laravel-social-share"
+            ],
+            "time": "2018-11-10T06:38:28+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -759,6 +822,65 @@
                 "laravel"
             ],
             "time": "2018-09-20T20:51:42+00:00"
+        },
+        {
+            "name": "jorenvanhocht/laravel-share",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jorenvh/laravel-share.git",
+                "reference": "908abcaf6cf2bf89c99595a79d0821990cf6057b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jorenvh/laravel-share/zipball/908abcaf6cf2bf89c99595a79d0821990cf6057b",
+                "reference": "908abcaf6cf2bf89c99595a79d0821990cf6057b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.1.0|3.2.0|3.3.0",
+                "phpunit/phpunit": "5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jorenvh\\Share\\Providers\\ShareServiceProvider"
+                    ],
+                    "aliases": {
+                        "Share": "Jorenvh\\Share\\ShareFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jorenvh\\Share\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joren Van Hocht",
+                    "email": "joren@codeswitch.be",
+                    "homepage": "https://codeswitch.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optional package for Laravel to generate social share links.",
+            "homepage": "https://github.com/jorenvh/laravel-share",
+            "keywords": [
+                "laravel",
+                "share",
+                "social links",
+                "social share links"
+            ],
+            "time": "2018-12-29T11:38:31+00:00"
         },
         {
             "name": "laravel/framework",

@@ -20,6 +20,7 @@ Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send'
 Route::get('/search', 'FrontController@renderSearch')->name('search.blade');
 Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 Route::get('/page/{slug}', 'FrontController@getCustomPage')->name('custom.page.get');
+Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
 
 //TEST
 Route::get('/category', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
