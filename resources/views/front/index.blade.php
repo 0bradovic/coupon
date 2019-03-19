@@ -322,16 +322,7 @@
             </div>
         </div>
     </footer>
-    <div id="cookie">
-        <div class="cookie_left">
-        <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
-        </div>
-        <div class="cookie_right">
-        <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
-        <button><i class="fas fa-check"></i> Accept Cookies</button>
-        <i class="fas fa-times-circle"></i>
-        </div>
-    </div>
+    
 </body>
 <script> 
 var SITE_URL = '<?php echo env("APP_URL")?>/';

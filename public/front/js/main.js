@@ -66,13 +66,22 @@ $('#newest-btn').click(function (e) {
   $('.newestOffers').removeClass('dNone991')
 })
 
-$(document).ready(function() {
-  $('#cookie').on('click', function() {
-    localStorage.setItem('cookie', true)
-  })
-  console.log(localStorage.getItem('cookie'))
-  if(localStorage.getItem('cookie') == "true") {
-    console.log('kurac')
-    $('#cookie').remove()
+$(document).ready(function () {
+  
+  if (sessionStorage.getItem('cookie') !== 'true') {
+    $('body').append(`<div id="cookie">
+    <div class="cookie_left">
+    <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
+    </div>
+    <div class="cookie_right">
+    <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
+    <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
+    <i class="fas fa-times-circle"></i>
+    </div>
+</div>`)
   }
+  $('#acceptC').on('click', function () {
+    sessionStorage.setItem('cookie', true)
+    $('#cookie').remove()
+  })
 })
