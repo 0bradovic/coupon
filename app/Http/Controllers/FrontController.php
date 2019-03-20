@@ -325,10 +325,5 @@ class FrontController extends Controller
         return view('front.parentCategoryOffers',compact('newestOffers','popularOffers','categories','customPages','category'));
     }
 
-    public function pinterest()
-    {
-        //Share::pinterest(route('post.show', $post->id), $post->title, $post->thumbnail);
-        Share::pinterest(route('post.show', $post->id), $post->title, $post->thumbnail);
-    }
 
 }
