@@ -66,6 +66,11 @@
                     <i class="far fa-envelope"></i>
                     </a>
                     E-mail
+                    
+                    </div>
+                    <div id='email_form' class="social_icons_div_absolute">
+                        <input type="text" placeholder="Enter Email" />
+                        <button>Share</button>
                     </div>
                     <div class="social_icons_div">
                     <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">
