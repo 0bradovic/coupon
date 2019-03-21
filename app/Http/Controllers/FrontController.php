@@ -25,11 +25,11 @@ class FrontController extends Controller
         {
             $title = 'BeforeTheShop';
         }
-        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         
         foreach($parentCategories as $cat)
         {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $cs = Category::where('parent_id',$cat->id)->where('display', true)->with('offers')->orderBy('position')->get();
             $categories[$cat->name] = array();
             $count = 0;
             foreach($cs as $c)
@@ -42,8 +42,8 @@ class FrontController extends Controller
             $categories[$cat->name]['count'] = $count;
 
         }
-        $allNewestOffers = Offer::orderBy('created_at','DESC')->get();
-        $allMostPopularOffers = Offer::orderBy('click','DESC')->get();
+        $allNewestOffers = Offer::orderBy('created_at','DESC')->where('display', true)->get();
+        $allMostPopularOffers = Offer::orderBy('click','DESC')->where('display', true)->get();
         $off = new Offer();
         $newestOffers = $off->filterOffers($allNewestOffers);
         $mostPopularOffers = $off->filterOffers($allMostPopularOffers);
@@ -111,12 +111,12 @@ class FrontController extends Controller
 
     public function categoryOffers(Request $request,$slug)
     {
-        $category = Category::where('slug',$slug)->first();
+        $category = Category::where('slug',$slug)->where('display', true)->first();
         $categories = [];
-        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         foreach($parentCategories as $cat)
         {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $cs = Category::where('parent_id',$cat->id)->where('display', true)->with('offers')->orderBy('position')->get();
             $categories[$cat->name] = array();
             $count = 0;
             foreach($cs as $c)
@@ -141,9 +141,9 @@ class FrontController extends Controller
 
     public function offer(Request $request,$slug)
     {
-        $offer = Offer::where('slug', $slug)->first();
+        $offer = Offer::where('slug', $slug)->where('display', true)->first();
         $mainCategory = $offer->categories()->first();
-        $mainCategory = Category::find($mainCategory->parent_id);
+        $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
         $newestSimillarOffers = [];
         $popularSimillarOffers = [];
         foreach($offer->categories as $cat)
@@ -179,10 +179,10 @@ class FrontController extends Controller
         $popularSimillarOffers = collect($popularSimillarOffers);
         $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
         $categories = [];
-        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         foreach($parentCategories as $cat)
         {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
             $categories[$cat->name] = array();
             $count = 0;
             foreach($cs as $c)
@@ -208,10 +208,10 @@ class FrontController extends Controller
 
     public function ajaxSearch($query)
     {
-        $offers = Offer::where('name','LIKE', '%' . $query . '%')->orWhere('detail', 'LIKE' , '%' . $query . '%')->get();
+        $offers = Offer::where('name','LIKE', '%' . $query . '%')->orWhere('detail', 'LIKE' , '%' . $query . '%')->where('display', true)->get();
         $off = new Offer();
         $offers = $off->filterOffers($offers);
-        $category = Category::where('name', $query)->first();
+        $category = Category::where('name', $query)->where('display', true)->first();
 
         if($category)
         {
@@ -227,14 +227,18 @@ class FrontController extends Controller
     {
         
         $offers = Offer::where('name','LIKE', '%' . $request->search . '%')->orWhere('detail', 'LIKE' , '%' . $request->search . '%')->get();
+        foreach($offers as $key=>$value)
+        {
+            if($value->display==0) $offers->forget($key);
+        }
         $off = new Offer();
         $offers = $off->filterOffers($offers);
         $offers = (new Collection($offers))->paginate(10);
         $categories = [];
-        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         foreach($parentCategories as $cat)
         {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
             $categories[$cat->name] = array();
             $count = 0;
             foreach($cs as $c)
@@ -261,7 +265,7 @@ class FrontController extends Controller
     
     public function getOffer($slug)
     {
-        $offer = Offer::where('slug', $slug)->first();
+        $offer = Offer::where('slug', $slug)->where('display', true)->first();
         $offer->click += 1;
         $offer->save();
         OfferClick::create(['offer_id'=>$offer->id]);
@@ -270,7 +274,7 @@ class FrontController extends Controller
 
     public function parentCategoryOffers(Request $request)
     {
-        $category = Category::where('name',$request->name)->with('subcategories')->first();
+        $category = Category::where('name',$request->name)->where('display', true)->with('subcategories')->first();
         
         $allNewestOffers = [];
         $allPopularOffers = [];
@@ -296,10 +300,10 @@ class FrontController extends Controller
         //dd($newestOffers);
         //dd($popularOffers);
         $categories = [];
-        $parentCategories = Category::where('parent_id',null)->orderBy('position')->get();
+        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         foreach($parentCategories as $cat)
         {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->orderBy('position')->get();
+            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
             $categories[$cat->name] = array();
             $count = 0;
             foreach($cs as $c)

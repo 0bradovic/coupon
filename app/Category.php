@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\UndoCategory;
 
 class Category extends Model
 {
     //
 
     protected $fillable = [
-        'name', 'sku', 'img_src', 'parent_id','slug', 'position'
+        'name', 'sku', 'img_src', 'parent_id','slug', 'position', 'display'
     ];
 
 
@@ -39,10 +40,15 @@ class Category extends Model
         return $this->hasMany(Category::class,'parent_id');
     }
 
+    public function undoCategories()
+    {
+        return $this->hasMany(UndoCategory::class);
+    }
+
     public function getLiveOffersByCategory($id)
     {
-        $cat = Category::find($id);
-        $allOffers = $cat->offers()->orderBy('updated_at','DESC')->orderBy('position')->get();
+        $cat = Category::where('id', $id)->where('display', true)->first();
+        $allOffers = $cat->offers()->orderBy('updated_at','DESC')->where('display', true)->orderBy('position')->get();
         $offers = [];
         foreach($allOffers as $offer)
         {
@@ -60,14 +66,14 @@ class Category extends Model
     
      public function getFilteredLiveOffersByCategory($id,$order,$oredrType)
     {
-        $cat = Category::find($id);
+        $cat = Category::where('id', $id)->where('display', true)->first();
         if($order == 'endDate')
         {
-            $allOffers = $cat->offers()->where('endDate','<>',null)->orderBy($order,$oredrType)->get();
+            $allOffers = $cat->offers()->where('endDate','<>',null)->where('display', true)->orderBy($order,$oredrType)->get();
         }
         else
         {
-            $allOffers = $cat->offers()->orderBy($order,$oredrType)->get();
+            $allOffers = $cat->offers()->orderBy($order,$oredrType)->where('display', true)->get();
         }
         
         $offers = [];

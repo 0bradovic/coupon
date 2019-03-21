@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/category/{id}', 'CategoryController@edit')->name('edit.category');
         Route::post('/update/category/{id}', 'CategoryController@update')->name('update.category');
         Route::get('/delete/category/{id}', 'CategoryController@destroy')->name('delete.category');
+
+        Route::get('/display/category/{id}', 'CategoryController@display')->name('display.category');
+
+        Route::get('/undo/category', 'CategoryController@undoEdit')->name('undoCategory');
+
     });
 
     Route::group(['middleware' => ['permission:manage offer types']], function () {
@@ -66,6 +71,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/offer/{id}', 'OfferController@update')->name('update.offer');
         Route::get('/delete/offer/{id}', 'OfferController@destroy')->name('delete.offer');
         Route::get('/undo/offer', 'OfferController@undo')->name('undo');
+
+        Route::get('/display/offer/{id}', 'OfferController@display')->name('display.offer');
+
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {

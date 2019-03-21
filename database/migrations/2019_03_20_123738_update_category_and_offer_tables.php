@@ -21,6 +21,10 @@ class UpdateCategoryAndOfferTables extends Migration
         Schema::table('categories', function($table) {
             $table->boolean('display')->default(true)->nullable();
         });
+
+        Schema::table('undo_offers', function($table) {
+            $table->boolean('display')->default(true)->nullable();
+        });
     }
 
     /**
@@ -36,6 +40,10 @@ class UpdateCategoryAndOfferTables extends Migration
         });
 
         Schema::table('categories', function($table) {
+            $table->dropColumn('display');
+        });
+
+        Schema::table('undo_offers', function($table) {
             $table->dropColumn('display');
         });
 

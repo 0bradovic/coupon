@@ -6,6 +6,10 @@
 @stop
 
 @section('content')
+@if(count($category->undoCategories)>0)
+<a href="{{ route('undoCategory') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+<br><br>
+@endif
 
     <div class="box box-warning">
             <div class="box-header with-border">

@@ -28,6 +28,8 @@
                   <th>Parent Category</th>
                   <th>Position</th>
                   <th>Created</th>
+                  <th>Visibility</th>
+                  <th>Show/Hide</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   @can("manage seo")
@@ -47,6 +49,8 @@
                   </td>
                   <td>{{$category->position}}</td>
                   <td>{{ $category->created_at->toFormattedDateString() }}</td>
+                  <td> @if($category->display==1)Visible @else Invisible @endif </td>
+                  <td> <a href="{{ route('display.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('edit.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.category', ['id' => $category->id]) }}"><i class="fa fa-trash"></i></a></td>
                   @can("manage seo")

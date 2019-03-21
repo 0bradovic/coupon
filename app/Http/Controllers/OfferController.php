@@ -373,4 +373,14 @@ class OfferController extends Controller
         return redirect()->back();
     }
 
+    
+    public function display($id)
+    {
+        $offer = Offer::find($id);
+        $offer->display = !$offer->display;
+        $offer->save();
+
+        return redirect()->back()->with('success', 'Successfully changed visibility of offer '.$offer->name);
+    }
+
 }

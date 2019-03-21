@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\MetaTag;
 use Illuminate\Routing\UrlGenerator;
+use App\UndoCategory;
 
 
 
@@ -128,6 +129,17 @@ class CategoryController extends Controller
             'name' => 'required',
             'position' => 'required'
         ]);
+        $category = Category::find($id);
+        $undoCategory = CategoryOffer::first();
+        $undoCategory->update([
+            'name' => $undo->name,
+            'sku' => $undo->sku,
+            'img_src' => $undo->img_src,
+            'parent_id' => $undo->parent_id,
+            'summary' => $undo->summary,
+            'slug' => $undo->slug,
+            'display' => $undo->display,
+        ]);
         $slug = $this->createSlug($request->name);
         $category = Category::find($id);
         $parent_id = null;
@@ -192,5 +204,31 @@ class CategoryController extends Controller
             return redirect()->back()->with('success','Successfully deleted category '.$name);
         }
         
+    }
+
+    public function display($id)
+    {
+        $category = Category::find($id);
+        $category->display = !$category->display;
+        $category->save();
+
+        return redirect()->back()->with('success', 'Successfully changed visibility of category '.$category->name);
+    }
+
+
+    public function undoEdit()
+    {
+        $undo = UndoCategory::first();
+        $category = Category::find($undo->category_id);
+        $category->update([
+            'name' => $undo->name,
+            'sku' => $undo->sku,
+            'img_src' => $undo->img_src,
+            'parent_id' => $undo->parent_id,
+            'summary' => $undo->summary,
+            'slug' => $undo->slug,
+            'display' => $undo->display,
+        ]);
+        return redirect()->back();
     }
 }
