@@ -67,7 +67,6 @@ $('#newest-btn').click(function (e) {
 })
 
 $(document).ready(function () {
-  
   if (sessionStorage.getItem('cookie') !== 'true') {
     $('body').append(`<div id="cookie">
     <div class="cookie_left">
@@ -83,5 +82,9 @@ $(document).ready(function () {
   $('#acceptC').on('click', function () {
     sessionStorage.setItem('cookie', true)
     $('#cookie').remove()
+  })
+  $('.social_icons_div_absolute').hide()
+  $('#email_form').on('click', function () {
+    $('.social_icons_div_absolute').fadeToggle(200)
   })
 })
