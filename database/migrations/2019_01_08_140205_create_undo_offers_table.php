@@ -30,6 +30,7 @@ class CreateUndoOffersTable extends Migration
             $table->integer('offer_type_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->integer('position')->nullable();
+            $table->boolean('display')->default(1);
             $table->integer('offer_id')->unsigned()->index()->nullable();
             $table->timestamps();
         });

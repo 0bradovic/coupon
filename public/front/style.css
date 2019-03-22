@@ -1618,6 +1618,7 @@ footer .foo a:last-child {
   width: 120px;
   margin: 0 30px;
   cursor: pointer;
+  border: none;
 }
 
 #cookie .cookie_right button .fa-check {

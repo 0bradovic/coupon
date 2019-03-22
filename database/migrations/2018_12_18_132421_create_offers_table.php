@@ -30,6 +30,8 @@ class CreateOffersTable extends Migration
             $table->integer('offer_type_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index();
             $table->integer('position')->nullable();
+            $table->boolean('display')->default(1);
+            $table->integer('click')->default(0);
             $table->timestamps();
         });
     }

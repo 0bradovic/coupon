@@ -83,6 +83,9 @@ $(document).ready(function () {
     sessionStorage.setItem('cookie', true)
     $('#cookie').remove()
   })
+  $('.fa-times-circle').on('click', function() {
+    $('#cookie').remove()
+  })
   $('.social_icons_div_absolute').hide()
   $('#email_form').on('click', function () {
     $('.social_icons_div_absolute').fadeToggle(200)

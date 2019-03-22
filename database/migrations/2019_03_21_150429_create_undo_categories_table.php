@@ -21,6 +21,7 @@ class CreateUndoCategoriesTable extends Migration
             $table->string('img_src')->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('position');
+            $table->boolean('display')->default(1);
             $table->integer('category_id')->unsigned()->index()->nullable();
             $table->enum('type', ['add', 'edit', 'delete'])->nullable();
             $table->timestamps();

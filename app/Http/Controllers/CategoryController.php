@@ -130,15 +130,17 @@ class CategoryController extends Controller
             'position' => 'required'
         ]);
         $category = Category::find($id);
-        $undoCategory = CategoryOffer::first();
+        $undoCategory = UndoCategory::first();
         $undoCategory->update([
-            'name' => $undo->name,
-            'sku' => $undo->sku,
-            'img_src' => $undo->img_src,
-            'parent_id' => $undo->parent_id,
-            'summary' => $undo->summary,
-            'slug' => $undo->slug,
-            'display' => $undo->display,
+            'name' => $category->name,
+            'sku' => $category->sku,
+            'img_src' => $category->img_src,
+            'parent_id' => $category->parent_id,
+            'summary' => $category->summary,
+            'slug' => $category->slug,
+            'display' => $category->display,
+            'category_id' => $category->id,
+            'position' => $category->position,
         ]);
         $slug = $this->createSlug($request->name);
         $category = Category::find($id);
@@ -228,6 +230,7 @@ class CategoryController extends Controller
             'summary' => $undo->summary,
             'slug' => $undo->slug,
             'display' => $undo->display,
+            'position' => $undo->position,
         ]);
         return redirect()->back();
     }

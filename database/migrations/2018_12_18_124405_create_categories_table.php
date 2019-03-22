@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('img_src')->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('position');
+            $table->boolean('display')->default(1);
             $table->timestamps();
         });
     }
