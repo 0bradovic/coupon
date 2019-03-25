@@ -72,7 +72,7 @@
                   <td>{{$offer->click}}</td>
                   <td>{{ $offer->updated_at }}</td>
                   <td> @if($offer->display==1)Visible @else Invisible @endif </td>
-                  <td> <a href="{{ route('display.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
+                  <td> <a href="{{ route('display.offer', ['id' => $offer->id]) }}"><i class="fa fa-eye"></i></a></td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
                   @can("manage seo")

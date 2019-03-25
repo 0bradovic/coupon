@@ -184,8 +184,12 @@
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="#" target="_blank">
-                        <i class="far fa-envelope"></i>
+                        <a href="#" class="relative_social2">
+                        <i class="far fa-envelope" id="abs2"></i>
+                        <div class="social_icons_div_absolute2" style="display: flex;">
+                            <input type="text" id="offer-email-input" placeholder="Enter Email">
+                            <button><a href="" id="offer-send-mail">Share</a></button>
+                        </div>
                         </a>
                         </div>
                         <div class="social_icons_div_single">

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
-    <link rel="shortcut icon" href="{{{ asset('front/image/favicon.png') }}}">
+    <link rel="shortcut icon" href="/front/image/favicon.png">
     {!! Helpers::getMetaTags() !!} 
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -55,42 +55,49 @@
                     <div class="social_icons_div">
                     <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop" target="_blank">
                     <i class="fab fa-facebook-f"></i>
-                    </a>
+                    
                     Facebook
+                    </a>
                     </div>
                     <div class="social_icons_div">
                     <a href="https://twitter.com/intent/tweet?url=http://www.beforetheshop.com&text=BeforeTheShop" target="_blank">
                     <i class="fab fa-twitter"></i>
-                    </a>
+                    
                     Twitter
+                    </a>
                     </div>
                     <div class="social_icons_div">
                     <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=BeforeTheShop" target="_blank">
                     <i class="fab fa-pinterest-p"></i>
-                    </a>
+                    
                     Pin
+                    </a>
                     </div>
                     <div id='email_form' class="social_icons_div">
-                    <a href="#" target="_blank">
+                    <a id="mailto" href="#">
                     <i class="far fa-envelope"></i>
-                    </a>
-                    E-mail
                     
+                    E-mail
+                    </a>
                     </div>
                     <div class="social_icons_div_absolute">
-                        <input type="text" placeholder="Enter Email" />
-                        <button>Share</button>
+                        <input id="emailinput" type="text" placeholder="Enter Email" />
+                        <button id="mailto_button"><a href="" id="send_mail">Share</a></button>
+                        
                     </div>
+                   
                     <div class="social_icons_div">
                     <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">
                     <i class="fab fa-whatsapp"></i>
-                    </a>
+                   
                     wApp
+                    </a>
                     </div>
                     </div>
                 </div>
                 
                 </div>
+                
             </nav>
         </div>
         <section id="menu">
@@ -305,24 +312,18 @@
         
         <div class="container">
             <div class="foo">
-                
-                <ul>
-                    
-					@foreach($customPages as $customPage)
-						<!-- <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank" class="list-foo">{{$customPage->name}}</a>
-						</br> -->
-                    @endforeach
-                    
-                    
-                </ul>
                 <div class="footer_top">
-                    <a href="#">Cookie Policy</a>
-                    <a href="#">Privacy Notice</a>
-                    <a href="#">Contact Us</a>
+                    <a href="mailto:hi@madebydigital.com">Contact us</a>
+                    <a href="https://www.cookielaw.org/the-cookie-law/" target="_blank">Cookie Policy</a>
+                    @foreach($customPages as $customPage)
+                         <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank">{{$customPage->name}}</a>
+                    @endforeach
+                    <!-- <a href="#">Privacy Notice</a>
+                    <a href="#">Contact Us</a> -->
                 </div>
                 <div class="footer_share">
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
+                    <a href="https://www.facebook.com/BeforeTheShop" target="_blank">Facebook</a>
+                    <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">Twitter</a>
                 </div>
                 <p>Copyright 2019 Made By Digital Ltd. All rights reserved.</p>
             </div>

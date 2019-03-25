@@ -87,7 +87,22 @@ $(document).ready(function () {
     $('#cookie').remove()
   })
   $('.social_icons_div_absolute').hide()
-  $('#email_form').on('click', function () {
+  $('#email_form').on('click', function (e) {
+    e.preventDefault();
     $('.social_icons_div_absolute').fadeToggle(200)
   })
+})
+$("#emailinput").keyup(function() {
+  var content = 'http://www.beforetheshop.com';
+  var email = $(this).val();
+  $('#send_mail').attr('href','mailto:'+email+'?subject=look at this website&body='+content);
+})
+$('.social_icons_div_absolute2').hide()
+$('#abs2').on('click', function() {
+  $('.social_icons_div_absolute2').fadeToggle(200)
+})
+$('#offer-email-input').keyup(function() {
+  var content = window.location.href;;
+  var email = $(this).val();
+  $('#offer-send-mail').attr('href','mailto:'+email+'?subject=look at this offer&body='+content);
 })

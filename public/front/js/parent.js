@@ -11,6 +11,9 @@ $(document).ready(function(){
     $('.dropdown-container').hover(function(){
       $(this).removeClass('d-none');
     })
+    $('.fa-times-circle').on('click', function () {
+      $('#cookie').remove()
+    })
   })
   
   $('a[href="#top"]').click(function(e) {
@@ -63,6 +66,38 @@ $(document).ready(function(){
     $('.mostPopularOffers').addClass('dNone991');
     $('.newestOffers').removeClass('dNone991');
   });
+
+  $(document).ready(function () {
+    if (sessionStorage.getItem('cookie') !== 'true') {
+      $('body').append(`<div id="cookie">
+      <div class="cookie_left">
+      <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
+      </div>
+      <div class="cookie_right">
+      <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
+      <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
+      <i class="fas fa-times-circle"></i>
+      </div>
+  </div>`)
+    }
+    $('#acceptC').on('click', function () {
+      sessionStorage.setItem('cookie', true)
+      $('#cookie').remove()
+    })
+    $('.fa-times-circle').on('click', function() {
+      $('#cookie').remove()
+    })
+    $('.social_icons_div_absolute').hide()
+    $('#email_form').on('click', function (e) {
+      e.preventDefault();
+      $('.social_icons_div_absolute').fadeToggle(200)
+    })
+  })
+  $("#emailinput").keyup(function() {
+    var content = 'http://www.beforetheshop.com';
+    var email = $(this).val();
+    $('#send_mail').attr('href','mailto:'+email+'?subject=look at this website&body='+content);
+  })
   
   
   
