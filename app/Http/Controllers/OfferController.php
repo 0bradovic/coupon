@@ -78,7 +78,6 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->validate($request,[
             'name' => 'required|string',
             'highlight' => 'max:20',
@@ -167,6 +166,7 @@ class OfferController extends Controller
             'user_id' => Auth::user()->id,
             'position' => $request->position,
             'img_src' => $img_src,
+            'display' => $request->display,
         ]);
         foreach($request->categories as $category)
         {

@@ -142,6 +142,13 @@ class FrontController extends Controller
     public function offer(Request $request,$slug)
     {
         $offer = Offer::where('slug', $slug)->where('display', true)->first();
+        if($offer->endDate != null)
+        {
+            if($offer->dateFormat($offer->endDate) < Carbon::now())
+            {
+            return redirect('/')->withErrors('Offer has expired');
+            }
+        }
         $mainCategory = $offer->categories()->first();
         $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
         $newestSimillarOffers = [];
@@ -266,6 +273,13 @@ class FrontController extends Controller
     public function getOffer($slug)
     {
         $offer = Offer::where('slug', $slug)->where('display', true)->first();
+        if($offer->endDate != null)
+        {
+            if($offer->dateFormat($offer->endDate) < Carbon::now())
+            {
+            return redirect('/')->withErrors('Offer has expired');
+            }
+        }
         $offer->click += 1;
         $offer->save();
         OfferClick::create(['offer_id'=>$offer->id]);

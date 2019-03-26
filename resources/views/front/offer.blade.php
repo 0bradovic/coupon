@@ -169,17 +169,17 @@
                 </div>
                 <div class="social_icons_all_single">
                         <div class="social_icons_div_single">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop" target="_blank">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop&summary=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} plus {{ $offer->urlOfferDetails($offer->detail) }} I thought you'd love it too! " target="_blank">
                         <i class="fab fa-facebook-f"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://twitter.com/intent/tweet?url={{url()->current()}}&text=BeforeTheShop" target="_blank">
+                        <a href="https://twitter.com/intent/tweet?url={{url()->current()}}&text=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} plus {{ $offer->urlOfferDetails($offer->detail) }} I thought you'd love it too! " target="_blank">
                         <i class="fab fa-twitter"></i>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="http://pinterest.com/pin/create/button/?url={{url()->current()}}&media=BeforeTheShop&description=BeforeTheShop" target="_blank">
+                        <a href="http://pinterest.com/pin/create/button/?url={{url()->current()}}&media=BeforeTheShop&description=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} plus {{ $offer->urlOfferDetails($offer->detail) }} I thought you'd love it too! {{url()->current()}}" target="_blank">
                         <i class="fab fa-pinterest-p"></i>
                         </a>
                         </div>
@@ -187,13 +187,13 @@
                         <a href="#" class="relative_social2">
                         <i class="far fa-envelope" id="abs2"></i>
                         <div class="social_icons_div_absolute2" style="display: flex;">
-                            <input type="text" id="offer-email-input" placeholder="Enter Email">
+                            <input type="text" id="offer-email-input" placeholder="Enter Email" data-content="I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} plus {{ $offer->urlOfferDetails($offer->detail) }} I thought you'd love it too! {{url()->current()}}">
                             <button><a href="" id="offer-send-mail">Share</a></button>
                         </div>
                         </a>
                         </div>
                         <div class="social_icons_div_single">
-                        <a href="https://wa.me/?text={{url()->current()}}" target="_blank">
+                        <a href="https://wa.me/?text=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} plus {{ $offer->urlOfferDetails($offer->detail) }} I thought you'd love it too! {{url()->current()}}" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         </a>
                         </div>

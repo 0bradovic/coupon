@@ -93,16 +93,17 @@ $(document).ready(function () {
   })
 })
 $("#emailinput").keyup(function() {
-  var content = 'http://www.beforetheshop.com';
+  var content = "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com";
   var email = $(this).val();
-  $('#send_mail').attr('href','mailto:'+email+'?subject=look at this website&body='+content);
+  $('#send_mail').attr('href','mailto:'+email+'?subject=BeforeTheShop&body='+content);
 })
 $('.social_icons_div_absolute2').hide()
 $('#abs2').on('click', function() {
   $('.social_icons_div_absolute2').fadeToggle(200)
 })
 $('#offer-email-input').keyup(function() {
-  var content = window.location.href;;
+  //var content = window.location.href;
+  var content = $(this).data('content');
   var email = $(this).val();
-  $('#offer-send-mail').attr('href','mailto:'+email+'?subject=look at this offer&body='+content);
+  $('#offer-send-mail').attr('href','mailto:'+email+'?subject=BeforeTheShop&body='+content);
 })

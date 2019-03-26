@@ -53,21 +53,21 @@
                     <a href="#" class="social_icons_like">Like us?<br>Tell a freind..</a>
                     <div class="social_icons_all">
                     <div class="social_icons_div">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop" target="_blank">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop&summary=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-facebook-f"></i>
                     
                     Facebook
                     </a>
                     </div>
                     <div class="social_icons_div">
-                    <a href="https://twitter.com/intent/tweet?url=http://www.beforetheshop.com&text=BeforeTheShop" target="_blank">
+                    <a href="https://twitter.com/intent/tweet?url=http://www.beforetheshop.com&text=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too!" target="_blank">
                     <i class="fab fa-twitter"></i>
                     
                     Twitter
                     </a>
                     </div>
                     <div class="social_icons_div">
-                    <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=BeforeTheShop" target="_blank">
+                    <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-pinterest-p"></i>
                     
                     Pin
@@ -87,7 +87,7 @@
                     </div>
                    
                     <div class="social_icons_div">
-                    <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">
+                    <a href="https://wa.me/?text=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                    
                     wApp
@@ -136,6 +136,8 @@
                 </div> 
                 </section>
     </header>
+    @include('layouts.errors')
+    @include('layouts.messages')
     @if(count($slides) > 0)
     <section id="carousel">
             <div class="container">

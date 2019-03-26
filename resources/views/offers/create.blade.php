@@ -96,6 +96,12 @@
                 <label>Upload offer image (optional)</label>
                 <input type="file" name="photo">
             </div>
+
+            <div class="form-group">
+              <label>Display?</label><br>
+              <input checked type="radio" name="display" value="1">Yes
+              <input type="radio" name="display" value="0">No
+            </div>
             
           </div>
 

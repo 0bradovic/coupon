@@ -120,4 +120,26 @@ class Offer extends Model
         return $newString;
     }
 
+    public function urlOfferName($string)
+    {
+        $string = preg_replace("/%/", " percent", $string);
+        $string = preg_replace("/[^a-zA-Z0-9\s]/", "", $string);
+        return $string;
+    }
+
+    public function urlOfferDetails($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $findSpace = ["&nbsp;"];
+        $replaceSpace = " ";
+        $string = str_replace($findSpace,$replaceSpace,$string);
+        $search = ["</p>","</div>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'30','...');
+        return $newString;
+    }
+
 }
