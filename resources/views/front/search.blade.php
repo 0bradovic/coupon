@@ -42,25 +42,21 @@
                     <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop" target="_blank">
                     <i class="fab fa-facebook-f"></i>
                     </a>
-                    Facebook
                     </div>
                     <div class="social_icons_div">
                     <a href="https://twitter.com/intent/tweet?url=http://www.beforetheshop.com&text=BeforeTheShop" target="_blank">
                     <i class="fab fa-twitter"></i>
                     </a>
-                    Twitter
                     </div>
                     <div class="social_icons_div">
                     <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=BeforeTheShop" target="_blank">
                     <i class="fab fa-pinterest-p"></i>
                     </a>
-                    Pin
                     </div>
                     <div id='email_form' class="social_icons_div">
                     <a href="#" target="_blank">
                     <i class="far fa-envelope"></i>
                     </a>
-                    E-mail
                    
                     </div>
                     <div class="social_icons_div_absolute">
@@ -71,7 +67,6 @@
                     <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                     </a>
-                    wApp
                     </div>
                     </div>
                 </div>

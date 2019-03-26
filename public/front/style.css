@@ -92,8 +92,10 @@ nav.navbar.navbar-expand-lg {
   color: #fff;
   padding: 3px;
   margin: 0 3px;
-  width: 70px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  border-radius: 50%;
 }
 .social_icons_div_absolute {
   position: absolute;
@@ -208,6 +210,7 @@ nav.navbar.navbar-expand-lg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 }
 .social_icons_div_single {
   width: 25px;
@@ -270,7 +273,7 @@ section#boxes {
 .social_icons .social_icons_div .fab,
 .far,
 .fas {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .social_icons a {
@@ -826,17 +829,6 @@ a.go_top:focus {
   #header nav .form-control:placeholder-shown {
     padding-left: 35px;
   }
-  nav.navbar.navbar-expand-lg {
-    flex-direction: column;
-  }
-  .header-navbar-right {
-    width: 100%;
-    justify-content: center;
-  }
-  .header-form-left {
-    width: 100%;
-    justify-content: center;
-  }
 }
 @media screen and (max-width: 1220px) {
   #menu .dropdowns_holder {
@@ -872,7 +864,20 @@ a.go_top:focus {
     margin-left: 10% !important;
   }
 }
-
+@media screen and (max-width: 1030px) {
+  nav.navbar.navbar-expand-lg {
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+  .header-navbar-right {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .header-navbar-left {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
 @media screen and (max-width: 1004px) {
   #menu .dropdowns_holder .dropdown-content .dropdown-container {
     justify-content: flex-start;
@@ -946,7 +951,6 @@ a.go_top:focus {
     top: 100px !important;
   }
   .uk-etc {
-    padding: 10px 0;
     text-align: center;
   }
   #menu .dropdowns_holder .dropdown .dropdown-content {
@@ -1526,7 +1530,7 @@ footer .foo a:last-child {
     display: block;
   }
 }
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
   .social_icons_all {
     flex-wrap: wrap;
     justify-content: center;
@@ -1543,7 +1547,7 @@ footer .foo a:last-child {
   .social_icons_like {
     margin-bottom: 10px;
   }
-}
+} */
 @media screen and (max-width: 480px) {
   #row .red .btn {
     width: 150px;

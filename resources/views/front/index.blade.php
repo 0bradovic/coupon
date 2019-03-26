@@ -56,28 +56,24 @@
                     <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop&summary=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-facebook-f"></i>
                     
-                    Facebook
                     </a>
                     </div>
                     <div class="social_icons_div">
                     <a href="https://twitter.com/intent/tweet?url=http://www.beforetheshop.com&text=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too!" target="_blank">
                     <i class="fab fa-twitter"></i>
                     
-                    Twitter
                     </a>
                     </div>
                     <div class="social_icons_div">
                     <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-pinterest-p"></i>
                     
-                    Pin
                     </a>
                     </div>
                     <div id='email_form' class="social_icons_div">
                     <a id="mailto" href="#">
                     <i class="far fa-envelope"></i>
                     
-                    E-mail
                     </a>
                     </div>
                     <div class="social_icons_div_absolute">
@@ -90,7 +86,6 @@
                     <a href="https://wa.me/?text=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                    
-                    wApp
                     </a>
                     </div>
                     </div>
