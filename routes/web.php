@@ -33,6 +33,11 @@ Route::match(['get', 'post'], 'register', function(){
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::group(['middleware' => ['permission:manage tagline']], function () {
+        Route::get('/tagline', 'TaglineController@index');
+        Route::post('/update/tagline', 'TaglineController@update')->name('update.tagline');
+    });
+
     Route::group(['middleware' => ['permission:manage categories']], function () {
         // Category routes
         Route::get('/categories', 'CategoryController@index')->name('category.index');
@@ -164,5 +169,5 @@ Route::middleware('auth')->group(function () {
 });
 use Spatie\Permission\Models\Permission;
 Route::get('/perm', function(){
-    Permission::create(['name' => 'manage custom pages']);
+    Permission::create(['name' => 'manage tagline']);
 });

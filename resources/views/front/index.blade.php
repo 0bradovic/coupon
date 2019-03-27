@@ -31,7 +31,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
-                <a href="#" class="uk-etc"><em>All the best UK offers in one place</em></a>
+                <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>

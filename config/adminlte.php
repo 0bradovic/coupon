@@ -153,6 +153,12 @@ return [
                 ],
             ]
         ],
+        'TAGLINE',
+        [
+            'text' => 'Tagline',
+            'can' => 'manage tagline',
+            'url' => '/tagline',
+        ],
         'TAGS',
         [
             'text' => 'Tags',

@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use Request;
 use App\MetaTag;
+use App\Tagline;
 
 class Helpers
 {
@@ -45,6 +46,11 @@ public static function getMetaTags()
                     <meta property="og:description" content="'.$tag['og_description'].'"/>';
 
         }
+    }
+
+    public static function getTagline()
+    {
+        return Tagline::first();
     }
 
 }
