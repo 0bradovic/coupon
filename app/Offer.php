@@ -123,7 +123,7 @@ class Offer extends Model
     public function urlOfferName($string)
     {
         $string = preg_replace("/%/", " percent", $string);
-        $string = preg_replace("/[^a-zA-Z0-9\s]/", "", $string);
+        //$string = preg_replace("/[^a-zA-Z0-9\s]/", "", $string);
         return $string;
     }
 
@@ -140,6 +140,19 @@ class Offer extends Model
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
         $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'30','...');
         return $newString;
+    }
+
+    public function formatUrlDetails($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $search = ["</p>","</div>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'120','...');
+        $string = explode('.',$newString);
+        return $string[0];
     }
 
 }

@@ -93,7 +93,7 @@ $(document).ready(function () {
   })
 })
 $("#emailinput").keyup(function() {
-  var content = "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! www.beforetheshop.com";
+  var content = "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
   var email = $(this).val();
   $('#send_mail').attr('href','mailto:'+email+'?subject=BeforeTheShop&body='+content);
 })
