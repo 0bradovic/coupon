@@ -103,7 +103,7 @@
                         <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
                             <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
                         </form>
                         </div>
                         @php $i++; @endphp
@@ -211,9 +211,9 @@
                     <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                         <h6>{{ $offer->name }}</h6>
                     </a>
-                    <div class="date"><a  class="dateA"><p>@if($offer->endDate)ends</p>  <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
+                    <div class="date"><a  class="dateA" @if($offer->endDate != null) @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif @endif><p>@if($offer->endDate)ends</p>  <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
                     </div>
-                    <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
+                    <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This ></a></div>
                     <div class="text">
                     <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                         
@@ -223,7 +223,7 @@
                                     
                     </a>
                         
-                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
+                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This ></a></div>
                     </div>
                    
                    
@@ -273,7 +273,7 @@
                     <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                         <h6>{{ $offer->name }}</h6>
                     </a>
-                    <div class="date"><a  class="dateA"><p>@if($offer->endDate)ends</p>  <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
+                    <div class="date"><a  class="dateA" @if($offer->endDate != null) @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif @endif><p>@if($offer->endDate)ends</p>  <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
                     </div>
                     <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
                     <div class="text">

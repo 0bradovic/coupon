@@ -6,6 +6,7 @@ namespace App\Helpers;
 use Request;
 use App\MetaTag;
 use App\Tagline;
+use Carbon\Carbon;
 
 class Helpers
 {
@@ -51,6 +52,11 @@ public static function getMetaTags()
     public static function getTagline()
     {
         return Tagline::first();
+    }
+
+    public static function expireSoon()
+    {
+        return Carbon::now()->addHours(48);
     }
 
 }
