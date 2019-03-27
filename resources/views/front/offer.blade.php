@@ -29,7 +29,7 @@
                 <div class="navbar_search_form" id="navbarSupportedContent">
                     <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search by brand of product" aria-label="Search">
+                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search here" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
 
@@ -37,7 +37,7 @@
                         </div>
                 </div>
                 <div class="social_icons">
-                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind..</a>
+                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind...</a>
                     <div class="social_icons_all">
                         <div class="social_icons_div">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop" target="_blank">
@@ -150,7 +150,7 @@
                 <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                     <h6>{{ $offer->name }}</h6>
                 </a>
-                 <div class="date"><a  class="dateA">@if($offer->endDate)ends <br> {{ $offer->frontDateFormat( $offer->endDate ) }}@else Ongoing @endif</a></div>
+                 <div class="date"><a  class="dateA"><p>@if($offer->endDate)ends </p> <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
                 </div>
                 <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get offer</a></div>
                 <div class="text">
@@ -160,7 +160,7 @@
                                 
                 </a>
                     
-                <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>
+                <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
                 </div>
                 <div class="social_icons_all_single">
                     Share me!
@@ -202,13 +202,13 @@
         
         
         <div class="container dropdowns_holder">
-            <h2 class="title2 title-padding" style="margin-top:0!important">More offers you might like</h2>
+            <h2 class="title2 title-padding" style="margin-top:0!important">Here's more you might like</h2>
         </div>
         <div id="cont" class="container main_offers_container" >
             
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder" style="margin-top:0!important">
-            <a href="#" class="suggestions">Suggestions for you</a>
+            <a href="#" class="suggestions">Most Popular</a>
             <!-- <a href="#" >Most Popular</a>
             <a href="#">Ends soon</a> -->
         </div>
@@ -246,7 +246,7 @@
                     <a href="{{ route('offer',['slug' => $off->slug]) }}">
                         <h6>{{ $off->name }}</h6>
                     </a>
-                    <div class="date"><a  class="dateA">@if($off->endDate)ends <br> {{ $off->frontDateFormat( $off->endDate ) }}@else Ongoing @endif</a></div>
+                    <div class="date"><a  class="dateA"><p>@if($off->endDate)ends</p>  <p>{{ $off->frontDateFormat( $off->endDate ) }}</p>@else Ongoing @endif</a></div>
                     </div>
                     <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get offer</a></div>
                     <div class="text">
@@ -257,7 +257,7 @@
                         </small>  
                                     
                     </a>
-                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>    
+                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>    
                     
                     </div>
                     
@@ -308,7 +308,7 @@
                     <a href="{{ route('offer',['slug' => $off->slug]) }}">
                         <h6>{{ $off->name }}</h6>
                     </a>
-                    <div class="date"><a  class="dateA">@if($off->endDate)ends <br> {{ $off->frontDateFormat( $off->endDate ) }}@else Ongoing @endif</a></div>
+                    <div class="date"><a  class="dateA"><p>@if($off->endDate)ends</p>  <p>{{ $off->frontDateFormat( $off->endDate ) }}</p>@else Ongoing @endif</a></div>
                     </div>
                     <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get offer</a></div>
                     <div class="text">
@@ -319,7 +319,7 @@
                         </small>  
                                     
                     </a>
-                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>   
+                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>   
                     
                     </div>
                    

@@ -11,7 +11,7 @@ body {
 
 .single-offer {
   height: auto !important;
-  margin: 20px auto !important;
+  margin: 10px auto !important;
   width: 97% !important;
 }
 
@@ -62,7 +62,7 @@ nav.navbar.navbar-expand-lg {
 }
 
 .header-navbar-right {
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -71,7 +71,7 @@ nav.navbar.navbar-expand-lg {
 .header-form-left {
   display: flex;
   align-items: center;
-  width: 60%;
+  width: 50%;
   justify-content: space-between;
   position: relative;
 }
@@ -211,6 +211,7 @@ nav.navbar.navbar-expand-lg {
   align-items: center;
   justify-content: center;
   font-size: 12px;
+  color: orange;
 }
 .social_icons_div_single {
   width: 25px;
@@ -241,7 +242,7 @@ nav.navbar.navbar-expand-lg {
 }
 .uk-etc {
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .uk-etc:hover {
@@ -377,7 +378,6 @@ header .search-div-1:last-child {
 
 #menu {
   width: 100%;
-  margin-top: 10px;
 }
 
 #menu .dropbtn {
@@ -448,7 +448,7 @@ header .search-div-1:last-child {
 }
 
 .tabs_nav_holder a {
-  font-size: 16px;
+  font-size: 13px;
   color: #fff;
   text-align: center;
   background: #fe9f0a;
@@ -456,7 +456,7 @@ header .search-div-1:last-child {
   margin: 0;
   box-shadow: 0 5px 5px 0 #00000030;
   border: 3px solid;
-  padding: 5px 10px;
+  padding: 3px;
 }
 
 .sidebar_offers {
@@ -585,14 +585,16 @@ header .search-div-1:last-child {
   box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.06);
   background-color: #ffa000c7;
   z-index: 10;
-  width: auto !important;
+  width: 40px !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 10px;
 }
-
+.go_top i {
+  font-size: 12px !important;
+}
 a.go_top:hover,
 a.go_top:active,
 a.go_top:focus {
@@ -654,6 +656,7 @@ a.go_top:focus {
   position: relative;
   overflow: hidden;
   height: 100px;
+  padding-bottom: 10px !important;
 }
 
 #row .red li {
@@ -755,9 +758,14 @@ a.go_top:focus {
   color: #211c1c;
   font-size: 11px;
 }
-
+#row .red .dateA p {
+  margin: 0 !important;
+}
+#row .red .dateA:last-child p {
+  margin-top: 10px !important;
+}
 #row .red .btn {
-  width: 250px;
+  width: 160px;
   padding: 0;
 }
 
@@ -774,8 +782,11 @@ a.go_top:focus {
   max-height: 30px;
   border-radius: 5px;
   font-size: 14px;
+  align-items: center;
 }
-
+#row .red .btn .butt i {
+  margin-left: 5px;
+}
 .search-page .search_page .red .title {
   flex: 0 30% !important;
 }
@@ -1035,7 +1046,8 @@ header {
 
 #menu .dropdown-content a {
   color: #fff;
-  padding: 5px;
+  padding: 5px 0;
+  padding-right: 5px;
   font-size: 14px !important;
 }
 
@@ -1374,14 +1386,16 @@ footer .foo a:last-child {
 .title2 {
   color: #fff;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   background: orange;
+  border-radius: 3px;
   display: inline-block;
-  padding: 5px 10px;
+  padding: 3px;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 5px;
   box-shadow: 0 5px 5px 0 #00000030;
   border: 3px solid;
+  margin-left: 12px;
 }
 
 @media screen and (max-width: 430px) {

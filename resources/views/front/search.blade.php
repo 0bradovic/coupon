@@ -28,7 +28,7 @@
                 <div class="navbar_search_form" id="navbarSupportedContent">
                     <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search by brand of product" aria-label="Search">
+                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search here" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
 
@@ -36,7 +36,7 @@
                         </div>
                 </div>
                 <div class="social_icons">
-                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind..</a>
+                    <a href="#" class="social_icons_like">Like us?<br>Tell a freind...</a>
                     <div class="social_icons_all">
                     <div class="social_icons_div">
                     <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.beforetheshop.com&title=BeforeTheShop" target="_blank">
@@ -146,7 +146,7 @@
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                             <h6>{{ $offer->name }}</h6>
                         </a>
-                        <div class="date"><a  class="dateA">@if($offer->endDate)ends <br> {{ $offer->frontDateFormat( $offer->endDate ) }}@else Ongoing @endif</a></div>
+                        <div class="date"><a  class="dateA"><p>@if($offer->endDate)ends</p>  <p>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>@else Ongoing @endif</a></div>
                         </div>
                         <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get offer</a></div>
                         <div class="text">
@@ -157,7 +157,7 @@
                             </small>  
                                         
                         </a>
-                        <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>    
+                        <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>    
                         
                         </div>
                        

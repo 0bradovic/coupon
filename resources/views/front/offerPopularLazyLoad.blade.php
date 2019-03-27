@@ -32,7 +32,7 @@
                 <a href="{{ route('offer',['slug' => $off->slug]) }}">
                     <h6>{{ $off->name }}</h6>
                 </a>
-                <div class="date"><a  class="dateA">@if($off->endDate)ends <br> {{ $off->frontDateFormat( $off->endDate ) }}@else Ongoing @endif</a></div>
+                <div class="date"><a  class="dateA"><p>@if($off->endDate)ends</p>  <p>{{ $off->frontDateFormat( $off->endDate ) }}</p>@else Ongoing @endif</a></div>
                 </div>
                 <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get offer</a></div>
                 <div class="text">
@@ -44,7 +44,7 @@
                                 
                 </a>
                     
-                <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Click here to get this offer</a></div>
+                <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
                 </div>
                 
                 
