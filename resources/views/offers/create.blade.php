@@ -83,16 +83,6 @@
             </div>
 
             <div class="form-group">
-            <label>Select tags</label>
-              <select class="form-control select2" multiple="multiple" name="tags[]" data-placeholder="Select a Tag"
-                        style="width: 100%;">
-                  @foreach($tags as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                  @endforeach
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label>Upload offer image (optional)</label>
                 <input type="file" name="photo">
             </div>

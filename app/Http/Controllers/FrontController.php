@@ -134,8 +134,13 @@ class FrontController extends Controller
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
         $newestOffers = (new Collection($allNewestOffers))->paginate(10);
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
-        
-        
+        if($request->ajax()) {
+            return [
+                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
+                'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                'next_page' => $newestOffers->nextPageUrl(),
+            ];
+        }
         return view('front.categoryOffers',compact('category','newestOffers','popularOffers','categories','customPages'));
     }
 

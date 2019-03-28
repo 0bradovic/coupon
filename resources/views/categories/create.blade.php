@@ -43,6 +43,12 @@
                   </select>
                 </div>
 
+                <div class="form-group">
+                  <label>Display?</label><br>
+                  <input checked type="radio" name="display" value="1">Yes
+                  <input type="radio" name="display" value="0">No
+                </div>
+
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Add Category</button>
               </div>

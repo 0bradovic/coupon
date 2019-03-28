@@ -1,31 +1,27 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Offer')
+@section('title', 'Create Offer')
 
 @section('content_header')
 @section('css')
-  <link rel="stylesheet" href="/public/css/texteditor.css">
-  <link rel="stylesheet" href="/public/css/displayNone.css">
+  <link rel="stylesheet" href="/css/texteditor.css">
+  <link rel="stylesheet" href="/css/displayNone.css">
 @stop
     
 @stop
 
 @section('content')
-@if($offer->undoOffer)
-<a href="{{ route('undo') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
-<br><br>
-@endif
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Edit Offer</h3>
+          <h3 class="box-title">Create Offer</h3>
         </div>
         @include('layouts.errors')
         @include('layouts.messages')
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form"  action="{{ route('update.offer',['id' => $offer->id]) }}" method="POST" enctype="multipart/form-data">
+        <form role="form"  action="{{ route('store.offer') }}" method="POST" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group">
               <label for="name">Name</label>
@@ -91,16 +87,17 @@
                   @endforeach
                 </select>
             </div>
-            
-            @if($offer->img_src)
-                 <div class="form-group">
-                    <img src="{{'/public/'.$offer->img_src}}" style="width:150px;height:150px;">
-                 </div>
-                @endif
+        
                 <div class="form-group">
                     <label>Upload new offer image (optional)</label>
                     <input type="file" name="photo">
                 </div>
+
+            <div class="form-group">
+              <label>Display?</label><br>
+              <input @if($offer->display == 1)checked @endif type="radio" name="display" value="1">Yes
+              <input @if($offer->display == 0)checked @endif type="radio" name="display" value="0">No
+            </div>
 
           </div>
 
@@ -109,7 +106,7 @@
           <!-- /.box-body -->
 
           <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Update Offer</button>
+            <button type="submit" class="btn btn-primary">Create new Offer</button>
           </div>
         </form>
       </div>
@@ -117,7 +114,7 @@
     </div>
 @stop
 @section('js')
-<script src="{{ asset('public/js/texteditor.js') }}">
+<script src="{{ asset('/js/texteditor.js') }}">
     </script>
 <script>
   $(function () {

@@ -56,10 +56,10 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
+        //$tags = Tag::all();
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
-        return view('offers.create',compact('categories','tags','offerTypes'));
+        return view('offers.create',compact('categories','offerTypes'));
     }
 
     public function searchOffers(Request $request)
@@ -172,24 +172,25 @@ class OfferController extends Controller
         {
             $offer->categories()->attach($category);
         }
-        if($request->tags)
-        {
-            foreach($request->tags as $tag)
-            {
-                $offer->tags()->attach($tag);
-            }
-        }
+        // if($request->tags)
+        // {
+        //     foreach($request->tags as $tag)
+        //     {
+        //         $offer->tags()->attach($tag);
+        //     }
+        // }
 
-        $newOfferMetaTag = MetaTag::create([
-            'offer_id' => $offer->id
-        ]);
+        // $newOfferMetaTag = MetaTag::create([
+        //     'offer_id' => $offer->id
+        // ]);
 
-        //$url = env("APP_URL");
-        $newOfferMetaTag->link = 'offer/'.$offer->slug;
-        $newOfferMetaTag->save();
+        // //$url = env("APP_URL");
+        // $newOfferMetaTag->link = 'offer/'.$offer->slug;
+        // $newOfferMetaTag->save();
 
-        $metaTag = MetaTag::where('offer_id', $offer->id)->first();
-        return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
+        // $metaTag = MetaTag::where('offer_id', $offer->id)->first();
+        //return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
+        return redirect()->back()->with('success', 'Successfully added offer '.$offer->name);
         }
     /**
      * Display the specified resource.
@@ -211,10 +212,10 @@ class OfferController extends Controller
     public function edit($id)
     {
         $offer = Offer::find($id);
-        $tags = Tag::all();
+        //$tags = Tag::all();
         $offerTypes = OfferType::all();
         $categories = Category::all();
-        return view('offers.edit',compact('offer','tags','offerTypes','categories'));
+        return view('offers.edit',compact('offer','offerTypes','categories'));
     }
 
     /**
@@ -297,14 +298,14 @@ class OfferController extends Controller
         {
             $offer->categories()->attach($category);
         }
-        $offer->tags()->detach();
-        if($request->tags)
-        {
-            foreach($request->tags as $tag)
-            {
-                $offer->tags()->attach($tag);
-            }
-        }
+        // $offer->tags()->detach();
+        // if($request->tags)
+        // {
+        //     foreach($request->tags as $tag)
+        //     {
+        //         $offer->tags()->attach($tag);
+        //     }
+        // }
         if($request->photo)
         {
             if($offer->img_src)
@@ -334,13 +335,13 @@ class OfferController extends Controller
     {
         $offer = Offer::find($id);
         $offer->categories()->detach();
-        $offer->tags()->detach();
+        //$offer->tags()->detach();
         $name = $offer->name;
-        if($offer->metaTag)
-        {
-            $metaTag = MetaTag::where('offer_id', $id)->first();
-            $metaTag->delete();
-        }
+        // if($offer->metaTag)
+        // {
+        //     $metaTag = MetaTag::where('offer_id', $id)->first();
+        //     $metaTag->delete();
+        // }
         if($offer->img_src)
         {
             unlink(public_path().$offer->img_src);
@@ -381,6 +382,14 @@ class OfferController extends Controller
         $offer->save();
 
         return redirect()->back()->with('success', 'Successfully changed visibility of offer '.$offer->name);
+    }
+
+    public function copy($id)
+    {
+        $offer = Offer::find($id);
+        $offerTypes = OfferType::all();
+        $categories = Category::where('parent_id', '<>', null)->get();
+        return view('offers.copy',compact('offer','offerTypes','categories'));
     }
 
 }

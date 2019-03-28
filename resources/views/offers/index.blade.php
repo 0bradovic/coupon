@@ -53,11 +53,9 @@
                   <th>Clicks p.24h</th>
                   <th>Date/Time Last Edited</th>
                   <th>Display</th>
+                  <th>Copy</th>
                   <th>Edit</th>
                   <th>Delete</th>
-                  @can("manage seo")
-                  <th>Seo</th>
-                  @endcan
                 </tr>
                 @foreach($offers as $offer)
                 <tr>
@@ -79,11 +77,9 @@
                   @else
                   <td> <a href="{{ route('display.offer', ['id' => $offer->id]) }}" class="btn btn-danger">No</a></td>
                   @endif
+                  <td><a href="{{ route('copy.offer', ['id' => $offer->id]) }}"><i class="fa fa-clone"></i></a></td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
-                  @can("manage seo")
-                  <td><a href="{{ route('offer.seo.edit', ['id' => $offer->id]) }}"><i class="fa fa-cog"></i></a></td>
-                  @endcan
                 </tr>
                 @endforeach
               </table>

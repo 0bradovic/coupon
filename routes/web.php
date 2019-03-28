@@ -79,6 +79,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/display/offer/{id}', 'OfferController@display')->name('display.offer');
 
+        Route::get('/copy/offer/{id}', 'OfferController@copy')->name('copy.offer');
+
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {

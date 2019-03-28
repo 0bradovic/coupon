@@ -159,21 +159,6 @@ return [
             'can' => 'manage tagline',
             'url' => '/tagline',
         ],
-        'TAGS',
-        [
-            'text' => 'Tags',
-            'can' => 'manage tags',
-            'submenu' => [
-                [
-                    'text' => 'All Tags',
-                    'url' => '/tags',
-                ],
-                [
-                    'text' => 'Add Tag',
-                    'url'  => '/create/tag',
-                ],
-            ]
-        ],
         'OFFER TYPES',
         [
             'text' => 'Offer Types',
@@ -202,11 +187,6 @@ return [
                     'text' => 'Add Offer',
                     'url'  => '/create/offer',
                 ],
-                [
-                    'text' => 'All Offers Meta Tags [SEO]',
-                    'can' => 'manage seo',
-                    'route'  => 'offer.seo.index',
-                ],
             ]
         ],
         'CATEGORIES',
@@ -221,11 +201,6 @@ return [
                 [
                     'text' => 'Create category',
                     'url' => '/create/category',
-                ],
-                [
-                    'text' => 'All Categories Meta Tags [SEO]',
-                    'can' => 'manage seo',
-                    'route'  => 'category.seo.index',
                 ],
             ],
             
@@ -246,22 +221,6 @@ return [
             ],
             
         ],
-        'META TAGS [SEO]',
-        [
-            'text' => 'Custom Meta Tags',
-            'can' => 'manage seo',
-            'submenu'  => [
-                [
-                    'text' => 'All Custom Meta Tags',
-                    'route' => 'custom.seo.index',
-                ],
-                [
-                    'text' => 'Add Custom Meta Tag',
-                    'route' => 'custom.seo.create',
-                ],
-            ],
-        ],
-        
     ],
 
     /*

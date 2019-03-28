@@ -44,7 +44,7 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-            'position' => 'required'
+            'position' => 'required',
         ]);
         $slug = $this->createSlug($request->name);
         $parent_id = null;
@@ -77,19 +77,21 @@ class CategoryController extends Controller
             'slug' => $slug,
             'img_src' => $img_src,
             'parent_id' => $parent_id,
-            'position' => $request->position
+            'position' => $request->position,
+            'display' => $request->display,
         ]);
 
-        $newCategoryMetaTag = MetaTag::create([
-            'category_id' => $category->id
-        ]);
+        // $newCategoryMetaTag = MetaTag::create([
+        //     'category_id' => $category->id
+        // ]);
         
         //$url = env("APP_URL");
-        $newCategoryMetaTag->link = 'category/'.$category->slug;
-        $newCategoryMetaTag->save();
+        // $newCategoryMetaTag->link = 'category/'.$category->slug;
+        // $newCategoryMetaTag->save();
 
-        $metaTag = MetaTag::where('category_id', $category->id)->first();
-        return redirect()->route('category.seo.edit', ['id' => $category->id])->with('success', 'Successfully added category '.$category->name);
+        // $metaTag = MetaTag::where('category_id', $category->id)->first();
+        // return redirect()->route('category.seo.edit', ['id' => $category->id])->with('success', 'Successfully added category '.$category->name);
+        return redirect()->back()->with('success', 'Successfully added category '.$category->name);
     }
 
     /**
@@ -196,11 +198,11 @@ class CategoryController extends Controller
                 unlink(public_path().$category->img_src);
             }
             $name = $category->name;
-            if($category->metaTag)
-            {
-                $metaTag = MetaTag::where('category_id', $id)->first();
-                $metaTag->delete();
-            }
+            // if($category->metaTag)
+            // {
+            //     $metaTag = MetaTag::where('category_id', $id)->first();
+            //     $metaTag->delete();
+            // }
             
             $category->delete();
             return redirect()->back()->with('success','Successfully deleted category '.$name);
