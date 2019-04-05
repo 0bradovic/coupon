@@ -187,6 +187,14 @@ return [
                     'text' => 'Add Offer',
                     'url'  => '/create/offer',
                 ],
+                [
+                    'text' => 'Upload Offer',
+                    'url'  => '/upload/csv',
+                ],
+                [
+                    'text' => 'Download Offer',
+                    'url'  => '/download/csv',
+                ],
             ]
         ],
         'CATEGORIES',

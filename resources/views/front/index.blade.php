@@ -65,7 +65,7 @@
                     </a>
                     </div>
                     <div class="social_icons_div">
-                    <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&media=BeforeTheShop&description=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com" target="_blank">
+                    <a href="http://pinterest.com/pin/create/button/?url=http://www.beforetheshop.com&description=I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com" target="_blank">
                     <i class="fab fa-pinterest-p"></i>
                     
                     </a>

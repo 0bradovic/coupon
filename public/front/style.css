@@ -9,12 +9,24 @@ body {
   position: relative;
 }
 
-.single-offer {
+#row .singe-container .single-offer {
   height: auto !important;
   margin: 10px auto !important;
   width: 97% !important;
+  padding:0 0 10px 0 !important;
 }
 
+#row .singe-container .single-offer .sticker{
+  top:0px !important;
+}
+#row .red .search-image{
+  width: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+}
 .single-offer .text {
   flex-direction: column;
 }
@@ -225,20 +237,23 @@ nav.navbar.navbar-expand-lg {
 .fas {
   color: #fff;
 }
-.social_icons_all_single .social_icons_div_single:nth-child(1) {
+.social_icons_all_single .social_icons_div_single:nth-child(2) {
   background: #425f9c;
 }
-.social_icons_all_single .social_icons_div_single:nth-child(2) {
+.social_icons_all_single .social_icons_div_single:nth-child(3) {
   background: #1da1f2;
 }
-.social_icons_all_single .social_icons_div_single:nth-child(3) {
+.social_icons_all_single .social_icons_div_single:nth-child(4) {
   background: #c50808;
 }
-.social_icons_all_single .social_icons_div_single:nth-child(4) {
+.social_icons_all_single .social_icons_div_single:nth-child(5) {
   background: #5f5f5f;
 }
-.social_icons_all_single .social_icons_div_single:nth-child(5) {
+.social_icons_all_single .social_icons_div_single:nth-child(6) {
   background: #52b60f;
+}
+.social_icons_all_single p {
+  margin-top: 1rem;
 }
 .uk-etc {
   color: #fff;

@@ -154,42 +154,51 @@ class FrontController extends Controller
             return redirect('/')->withErrors('Offer has expired');
             }
         }
-        $mainCategory = $offer->categories()->first();
-        $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
-        $newestSimillarOffers = [];
-        $popularSimillarOffers = [];
-        foreach($offer->categories as $cat)
+        if(count($offer->categories) > 0)
         {
-            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
+            $mainCategory = $offer->categories()->first();
+            $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
+            $newestSimillarOffers = [];
+            $popularSimillarOffers = [];
+            foreach($offer->categories as $cat)
             {
-                if($offer->id != $off->id)
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
                 {
-                    array_push($newestSimillarOffers,$off);
-                }
-                else
-                {
-                    continue;
+                    if($offer->id != $off->id)
+                    {
+                        array_push($newestSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
-        }
-        foreach($offer->categories as $cat)
-        {
-            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
+            foreach($offer->categories as $cat)
             {
-                if($offer->id != $off->id)
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
                 {
-                    array_push($popularSimillarOffers,$off);
-                }
-                else
-                {
-                    continue;
+                    if($offer->id != $off->id)
+                    {
+                        array_push($popularSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
+            $newestSimillarOffers = collect($newestSimillarOffers);
+            $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
+            $popularSimillarOffers = collect($popularSimillarOffers);
+            $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
         }
-        $newestSimillarOffers = collect($newestSimillarOffers);
-        $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
-        $popularSimillarOffers = collect($popularSimillarOffers);
-        $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
+        else
+        {
+            $mainCategory = null;
+            $newestSimillarOffers = null;
+            $popularSimillarOffers = null;
+        }
         $categories = [];
         $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
         foreach($parentCategories as $cat)

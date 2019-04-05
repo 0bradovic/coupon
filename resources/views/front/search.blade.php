@@ -113,7 +113,7 @@
         <div class="offers_list_holder endless-pagination offers w100 search_page" data-next-page="{{ $offers->nextPageUrl() }}">
                 @foreach($offers as $offer)
                     <div class="red">
-                        <div class="image">
+                        <div class="search-image">
                         @if($offer->img_src)
                         <?php
                             list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);

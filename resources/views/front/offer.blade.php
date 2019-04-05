@@ -4,13 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@if($offer->metaTag->title)  @if($offer->metaTag) {{$offer->metaTag->title}} @else BeforeTheShop @endif @else BeforeTheShop @endif </title>
+    <title>BeforeTheShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
-    {!! Helpers::getMetaTags() !!} 
 </head>
 
 <body>
@@ -114,7 +113,9 @@
 
     <section id="row">
         <div class="container">
+            @if($mainCategory)
             <h2 class="title2">{{ $mainCategory->name }}</h2>
+            @endif
         </div>
         <div class="container singe-container offers-page">
             <div class="red single-offer offers_page">
@@ -162,8 +163,9 @@
                     
                 <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>
                 </div>
+                
                 <div class="social_icons_all_single">
-                    Share me!
+                <p>Share me!</p>
                         <div class="social_icons_div_single">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop&summary=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} {{ $offer->formatUrlDetails($offer->detail) }}... I thought you'd love it too! " target="_blank">
                         <i class="fab fa-facebook-f"></i>
@@ -206,12 +208,13 @@
         </div>
         <div id="cont" class="container main_offers_container" >
             
-        <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}">
+        <div class="offers_list_holder endless-pagination newestOffers" @if($newestSimillarOffers) data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}" @endif>
         <div class="tabs_nav_holder" style="margin-top:0!important">
             <a href="#" class="suggestions">Most Popular</a>
             <!-- <a href="#" >Most Popular</a>
             <a href="#">Ends soon</a> -->
         </div>
+        @if($newestSimillarOffers)
             @foreach($newestSimillarOffers as $off)
                 <div class="red">
                     <div class="image">
@@ -265,15 +268,17 @@
                    
                 </div>
             @endforeach
+        @endif
         </div>
 
         {{--{!! $newestSimillarOffers->links() !!}--}}
-        <div class="offers_list_holder endless-pagination mostPopularOffers dNone991" data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}">
+        <div class="offers_list_holder endless-pagination mostPopularOffers dNone991" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
 <div class="tabs_nav_holder" style="margin-top:0!important">
             <!-- <a href="#">Newest</a> -->
             <a href="#" class="suggestions">Newest offers</a>
             <!-- <a href="#">Ends soon</a> -->
         </div>
+        @if($popularSimillarOffers)
             @foreach($popularSimillarOffers as $off)
                 <div class="red">
                     <div class="image">
@@ -327,6 +332,7 @@
                     
                 </div>
             @endforeach
+            @endif
         </div>
 
         {{--{!! $popularSimillarOffers->links() !!}--}}

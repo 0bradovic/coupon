@@ -13,6 +13,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
 use App\Support\Collection;
 use App\UndoOffer;
+use Response;
 
 
 class OfferController extends Controller
@@ -390,6 +391,179 @@ class OfferController extends Controller
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
         return view('offers.copy',compact('offer','offerTypes','categories'));
+    }
+
+    public function uploadCsv()
+    {
+        return view('offers.upload');
+    }
+
+    public function uploadOffer(Request $request)
+    {
+        $this->validate($request,[
+            'csv' => 'required|file',
+        ]);
+        $file = $request->csv;
+        $filename = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $tempPath = $file->getRealPath();
+
+        // Valid File Extensions
+        $valid_extension = array("csv");
+
+         // Check file extension
+        if(in_array(strtolower($extension),$valid_extension)){
+            // File upload location
+            $location = 'uploads';
+            // Upload file
+            $file->move($location,$filename);
+            // Import CSV to Database
+            $filepath = public_path($location."/".$filename);
+            // Reading file
+            $file = fopen($filepath,"r");
+
+            $importData_arr = array();
+            $i = 0;
+            while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+                $num = count($filedata );
+                
+                // Skip first row (Remove below comment if you want to skip the first row)
+                if($i == 0){
+                   $i++;
+                   continue; 
+                }
+                for ($c=0; $c < $num; $c++) {
+                    if($filedata [$c] != '')
+                    {
+                        $importData_arr[$i][] = $filedata [$c];
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                   
+                }
+                $i++;
+             }
+             fclose($file);
+             //dd($importData_arr);
+             foreach($importData_arr as $data)
+             {
+                 //$startDate = Carbon::parse($data[4]);
+                //dd($startDate);
+                 $slug = $this->createSlug($data[0]);
+                 $i = 1;
+                if(count(Offer::where('slug', $slug)->get()) > 0)
+                {
+                    do{
+                    $x=Offer::where('slug', $slug)->get();
+                    if($x) $newSlug = $slug.$i;
+                    //$slug = $slug.$i;
+                    $i++;
+                    }while(count(Offer::where('slug', $newSlug)->get())>0);
+                    
+                    if($newSlug)
+                    {
+                        $slug = $newSlug;
+                    }
+                }
+                $url = "http://tinyurl.com/api-create.php?url=".$data[2];
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+            
+                    $output = curl_exec($ch);
+                    $info = curl_getinfo($ch);
+                    curl_close($ch);
+            
+                    $offerLink = $output;
+
+                    $lastOfferSku = Offer::all()->pluck('sku')->last();
+                    if($lastOfferSku)
+                    {
+                        $sku = intval($lastOfferSku) + 1;
+                    }
+                    else
+                    {
+                        $sku = 10000000;
+                    }
+                    $startDate = Carbon::parse($data[3]);
+                    $endDate = $data[4];
+                    
+                    if($endDate == 'Ongoing')
+                    {
+                        $endDate = null;
+                        $endDateNull = 1;
+                    }
+                    else
+                    {
+                        $endDate = Carbon::parse($endDate);
+                        $endDateNull = 0;
+                    }
+                $img_url = $data[5];
+                $info = pathinfo($img_url);
+                $contents = file_get_contents($img_url);
+                $name = time().$info['basename'];
+                $img_src = '/images/offer/'.$name;
+                file_put_contents(public_path().$img_src, $contents);
+                $insertData = array(
+                 'name' => $data[0],
+                 'slug' => $slug,
+                 'detail' => $data[1],
+                 'link' => $offerLink,
+                 'sku' => $sku,
+                 'startDate' => $startDate,
+                 'endDate' => $endDate,
+                 'endDateNull' => $endDateNull,
+                 'img_src' => $img_src,
+                 'user_id' => Auth::user()->id,
+                );
+                Offer::create($insertData);
+             }
+        }else{
+            return redirect()->back()->withErrors('Invalid File Extension.');
+         }
+         return redirect()->back()->with('success', 'Import Successful.');
+    }
+
+    public function downloadCsv()
+    {
+        $offers = Offer::orderBy('position')->get();
+        return view('offers.download',compact('offers'));
+    }
+
+    public function downloadOffer(Request $request)
+    {
+        $offers = Offer::find($request->offers);
+        $filename = 'offers.csv';
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image'));
+        foreach($offers as $offer)
+        {
+            if($offer['endDate'] == null)
+            {
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src']));
+            }
+            else
+            {
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src']));
+            }
+                
+        }
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return Response::download($filename, 'offers.csv', $headers);
+    }
+
+    public function downloadOfferSearch(Request $request)
+    {
+        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->get();
+        return view('offers.download',compact('offers'));
     }
 
 }

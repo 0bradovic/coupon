@@ -81,6 +81,12 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/copy/offer/{id}', 'OfferController@copy')->name('copy.offer');
 
+        Route::get('/upload/csv', 'OfferController@uploadCsv');
+        Route::post('/upload/offer', 'OfferController@uploadOffer')->name('upload.offer');
+
+        Route::get('/download/csv', 'OfferController@downloadCsv');
+        Route::post('/download/offer', 'OfferController@downloadOffer')->name('download.offer');
+        Route::get('/download/offer/search', 'OfferController@downloadOfferSearch')->name('search.offers.download');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {
