@@ -281,6 +281,7 @@ nav.navbar.navbar-expand-lg {
 
 .social_icons_all_single p {
   margin-top: 1rem;
+  text-align: center;
 }
 
 .uk-etc {
@@ -809,7 +810,7 @@ a.go_top:focus {
 }
 
 #row .red .dateA:last-child p {
-  margin-top: 10px !important;
+  margin-top: 2px !important;
 }
 
 #row .red .btn {
@@ -907,9 +908,6 @@ a.go_top:focus {
 }
 
 @media screen and (max-width: 1200px) {
-  #row .title2 {
-    margin-left: 50px !important;
-  }
 
   #row .container {
     max-width: 100% !important;
@@ -1107,7 +1105,7 @@ a.go_top:focus {
     z-index: 10000 !important;
     align-items: center;
     justify-content: space-around;
-    padding: 10px;
+    padding-bottom: 10px;
     background: orange;
     color: orange;
   }
@@ -1588,7 +1586,14 @@ footer .foo a:last-child {
     margin-bottom: 0;
   }
 }
-
+@media (max-width: 450px) {
+  #menu .dropdown-content a {
+    padding: 0 !important;
+  }
+  #menu .dropdowns_holder {
+    padding: 0 !important;
+  }
+}
 @media screen and (max-width: 992px) {
   #boxes .box .first-btn {
     margin-top: 0;
