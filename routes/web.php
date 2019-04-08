@@ -175,7 +175,9 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-use Spatie\Permission\Models\Permission;
-Route::get('/perm', function(){
-    Permission::create(['name' => 'manage tagline']);
-});
+// use Spatie\Permission\Models\Permission;
+// Route::get('/perm', function(){
+//     Permission::create(['name' => 'manage tagline']);
+// });
+
+Route::get('/subscribe', 'MailChimpController@subscribe');

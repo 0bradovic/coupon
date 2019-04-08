@@ -168,6 +168,7 @@ return [
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        NZTim\Mailchimp\MailchimpServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -228,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Helpers' => App\Helpers\Helpers::class,
-
+        'Mailchimp' => NZTim\Mailchimp\MailchimpFacade::class,
     ],
 
 ];
