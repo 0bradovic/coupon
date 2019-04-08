@@ -296,7 +296,16 @@
 
         {{--{!! $mostPopularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top">TOP<i class="fas fa-arrow-up"></i></a>
-        
+        <div class="fixed_btn">
+            <div class="fixed_abs">
+            <a href="#">Sign Up</a>
+            </div>
+            <div class="fixed_btn_form">
+                    <p>Sign up for newsletter</p>
+                    <input type="email" placeholder="Enter your e-mail">
+                    <button>Sign Up</button>
+            </div>
+        </div>
 </div>
 
     </section>

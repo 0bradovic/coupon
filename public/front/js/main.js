@@ -13,6 +13,12 @@ $(document).ready(function () {
   $('.fa-times-circle').on('click', function () {
     $('#cookie').remove()
   })
+
+  //newsleter
+  $('.fixed_btn_form').hide()
+  $('.fixed_abs').on('click', function () {
+    $('.fixed_btn_form').fadeToggle(300)
+  })
 })
 
 $('a[href="#top"]').click(function (e) {

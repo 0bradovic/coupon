@@ -13,13 +13,14 @@ body {
   height: auto !important;
   margin: 10px auto !important;
   width: 97% !important;
-  padding:0 0 10px 0 !important;
+  padding: 0 0 10px 0 !important;
 }
 
-#row .singe-container .single-offer .sticker{
-  top:0px !important;
+#row .singe-container .single-offer .sticker {
+  top: 0px !important;
 }
-#row .red .search-image{
+
+#row .red .search-image {
   width: 100px;
   position: relative;
   display: flex;
@@ -27,6 +28,7 @@ body {
   overflow: hidden;
   justify-content: center;
 }
+
 .single-offer .text {
   flex-direction: column;
 }
@@ -87,15 +89,18 @@ nav.navbar.navbar-expand-lg {
   justify-content: space-between;
   position: relative;
 }
+
 .social_icons_all {
   display: flex;
   align-items: center;
 }
+
 .social_icons_like {
   font-size: 12px;
   width: 80px;
   text-align: center;
 }
+
 .social_icons_div {
   display: flex;
   align-items: center;
@@ -109,6 +114,7 @@ nav.navbar.navbar-expand-lg {
   cursor: pointer;
   border-radius: 50%;
 }
+
 .social_icons_div_absolute {
   position: absolute;
   top: 40px;
@@ -123,9 +129,11 @@ nav.navbar.navbar-expand-lg {
   padding: 10px 0;
   border-radius: 5px;
 }
+
 .relative_social2 {
   position: relative;
 }
+
 .social_icons_div_absolute2 {
   position: absolute;
   top: 0px;
@@ -151,10 +159,12 @@ nav.navbar.navbar-expand-lg {
   margin-bottom: 10px;
   background: transparent;
 }
+
 .social_icons_div_absolute2 input::placeholder {
   color: #fff;
   font-size: 14px;
 }
+
 .social_icons_div_absolute2 button {
   border: none;
   width: 120px;
@@ -170,6 +180,7 @@ nav.navbar.navbar-expand-lg {
   justify-content: center;
   cursor: pointer;
 }
+
 .social_icons_div_absolute input {
   border: none;
   border-bottom: 1px solid #000;
@@ -179,13 +190,16 @@ nav.navbar.navbar-expand-lg {
   line-height: 2;
   margin-bottom: 10px;
 }
+
 .social_icons_div_absolute input:focus {
   border-bottom: 1px solid #000;
 }
+
 .social_icons_div_absolute input::placeholder {
   color: #000;
   font-size: 14px;
 }
+
 .social_icons_div_absolute button {
   border: none;
   width: 120px;
@@ -201,18 +215,23 @@ nav.navbar.navbar-expand-lg {
   justify-content: center;
   cursor: pointer;
 }
+
 .social_icons .social_icons_div:nth-child(1) {
   background: #425f9c;
 }
+
 .social_icons .social_icons_div:nth-child(2) {
   background: #1da1f2;
 }
+
 .social_icons .social_icons_div:nth-child(3) {
   background: #c50808;
 }
+
 .social_icons .social_icons_div:nth-child(4) {
   background: #5f5f5f;
 }
+
 .social_icons .social_icons_div:nth-child(6) {
   background: #52b60f;
 }
@@ -225,6 +244,7 @@ nav.navbar.navbar-expand-lg {
   font-size: 12px;
   color: orange;
 }
+
 .social_icons_div_single {
   width: 25px;
   height: 25px;
@@ -232,29 +252,37 @@ nav.navbar.navbar-expand-lg {
   align-items: center;
   justify-content: center;
 }
+
 .social_icons_all_single .social_icons_div_single .fab,
 .far,
 .fas {
   color: #fff;
 }
+
 .social_icons_all_single .social_icons_div_single:nth-child(2) {
   background: #425f9c;
 }
+
 .social_icons_all_single .social_icons_div_single:nth-child(3) {
   background: #1da1f2;
 }
+
 .social_icons_all_single .social_icons_div_single:nth-child(4) {
   background: #c50808;
 }
+
 .social_icons_all_single .social_icons_div_single:nth-child(5) {
   background: #5f5f5f;
 }
+
 .social_icons_all_single .social_icons_div_single:nth-child(6) {
   background: #52b60f;
 }
+
 .social_icons_all_single p {
   margin-top: 1rem;
 }
+
 .uk-etc {
   color: #fff;
   font-size: 16px;
@@ -286,6 +314,7 @@ section#boxes {
   align-items: center;
   font-size: 26px;
 }
+
 .social_icons .social_icons_div .fab,
 .far,
 .fas {
@@ -607,9 +636,11 @@ header .search-div-1:last-child {
   justify-content: center;
   font-size: 10px;
 }
+
 .go_top i {
   font-size: 12px !important;
 }
+
 a.go_top:hover,
 a.go_top:active,
 a.go_top:focus {
@@ -773,12 +804,15 @@ a.go_top:focus {
   color: #211c1c;
   font-size: 11px;
 }
+
 #row .red .dateA p {
   margin: 0 !important;
 }
+
 #row .red .dateA:last-child p {
   margin-top: 10px !important;
 }
+
 #row .red .btn {
   width: 160px;
   padding: 0;
@@ -799,9 +833,11 @@ a.go_top:focus {
   font-size: 14px;
   align-items: center;
 }
+
 #row .red .btn .butt i {
   margin-left: 5px;
 }
+
 .search-page .search_page .red .title {
   flex: 0 30% !important;
 }
@@ -816,14 +852,17 @@ a.go_top:focus {
   left: 15% !important;
   right: 15% !important;
 }
+
 @media screen and (max-width: 1630px) {
   #header nav .form-control {
     width: 230px !important;
   }
+
   #header nav .form-control:placeholder-shown {
     padding-left: 40px;
   }
 }
+
 @media screen and (max-width: 1350px) {
   .red {
     padding: 10px 20px !important;
@@ -846,16 +885,20 @@ a.go_top:focus {
   #header nav .form-control {
     width: 230px !important;
   }
+
   .uk-etc {
     font-size: 12px;
   }
+
   #header nav .navbar-brand {
     margin-right: 10px;
   }
+
   #header nav .form-control:placeholder-shown {
     padding-left: 35px;
   }
 }
+
 @media screen and (max-width: 1220px) {
   #menu .dropdowns_holder {
     display: flex;
@@ -863,13 +906,16 @@ a.go_top:focus {
     justify-content: center;
   }
 }
+
 @media screen and (max-width: 1200px) {
   #row .title2 {
     margin-left: 50px !important;
   }
+
   #row .container {
     max-width: 100% !important;
   }
+
   #cont {
     max-width: 100% !important;
   }
@@ -879,35 +925,43 @@ a.go_top:focus {
   #row .offers_list_holder {
     margin: 0 auto !important;
   }
+
   #row .offers_list_holder:nth-child(odd) {
     margin-right: 0px;
   }
+
   #row .offers_list_holder:nth-child(even) {
     margin-right: 0px;
   }
+
   .offers_list_holder:first-child {
     margin: 0 !important;
     margin-left: 10% !important;
   }
 }
+
 @media screen and (max-width: 1030px) {
   nav.navbar.navbar-expand-lg {
     flex-direction: column !important;
     justify-content: center !important;
   }
+
   .header-navbar-right {
     width: 100% !important;
     justify-content: center !important;
   }
+
   .header-navbar-left {
     width: 100% !important;
     justify-content: center !important;
   }
 }
+
 @media screen and (max-width: 1004px) {
   #menu .dropdowns_holder .dropdown-content .dropdown-container {
     justify-content: flex-start;
   }
+
   #menu .dropdown-content a {
     margin: 5px 0;
   }
@@ -920,9 +974,11 @@ a.go_top:focus {
     margin-left: 0 !important;
     text-align: center;
   }
+
   .text_offers {
     display: none;
   }
+
   #menu .spanrr,
   #menu .spanr {
     width: 60px !important;
@@ -933,6 +989,7 @@ a.go_top:focus {
   #row .offers_list_holder {
     width: 100% !important;
   }
+
   #row .red .sticker {
     width: 95px;
   }
@@ -942,21 +999,26 @@ a.go_top:focus {
   .tabs_nav_holder {
     width: 100% !important;
   }
+
   .navbar-toggler {
     display: none !important;
   }
+
   .offers_list_holder:first-child {
     margin-left: 0 !important;
   }
 }
+
 @media screen and (max-width: 700px) {
   #cookie {
     flex-direction: column;
   }
+
   #cookie .cookie_left {
     width: 80% !important;
     order: 2 !important;
   }
+
   #cookie .cookie_right {
     width: 80%;
     justify-content: center;
@@ -964,21 +1026,26 @@ a.go_top:focus {
     margin: 20px 0;
   }
 }
+
 @media screen and (max-width: 800px) {
   .header-navbar-right {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .header-form-left {
     flex-direction: column;
   }
+
   .social_icons_div_absolute {
     top: 100px !important;
   }
+
   .uk-etc {
     text-align: center;
   }
+
   #menu .dropdowns_holder .dropdown .dropdown-content {
     top: 157px !important;
   }
@@ -988,17 +1055,21 @@ a.go_top:focus {
   #cookie .cookie_left p {
     font-size: 10px !important;
   }
+
   #cookie .cookie_right button {
     margin: 0 10px !important;
     font-size: 12px !important;
     line-height: 2.3 !important;
   }
+
   .tabs_nav_holder a {
     display: none;
   }
+
   .tabs_nav_holder {
     display: none !important;
   }
+
   .navbar-buttons {
     display: flex;
     z-index: 10000 !important;
@@ -1008,29 +1079,36 @@ a.go_top:focus {
     background: orange;
     color: orange;
   }
+
   .navbar-buttons p {
     color: #fff;
     font-style: italic;
     padding: 7px;
     margin: 0;
   }
+
   .navbar-buttons a {
     background: #fff;
     color: orange;
   }
+
   .dNone991 {
     display: none;
   }
+
   #row .red .image {
     flex: 0 20%;
   }
+
   #row .red .title {
     flex: 0 30%;
   }
+
   #row .red .text {
     flex: 0 35%;
     align-items: flex-start;
   }
+
   #row .red .sticker {
     width: 75%;
     left: 15%;
@@ -1184,7 +1262,7 @@ header {
   text-align: center;
 }
 
-#boxes .offer-title > a {
+#boxes .offer-title>a {
   color: #211c1c;
   font-weight: 500;
   font-size: 20px !important;
@@ -1196,7 +1274,7 @@ header {
   margin: auto 0;
 }
 
-#boxes .dugmici > a {
+#boxes .dugmici>a {
   padding: 7px 50px;
 }
 
@@ -1238,9 +1316,11 @@ footer .foo p {
 footer .foo ul {
   margin: 0;
 }
+
 footer .footer_share {
   margin: 5px 0;
 }
+
 footer .foo a {
   color: #fff;
   font-size: 12px;
@@ -1248,9 +1328,11 @@ footer .foo a {
   padding: 0 5px;
   text-decoration: underline !important;
 }
+
 footer .foo a:last-child {
   border-right: 0;
 }
+
 .container {
   max-width: 80% !important;
   margin: 0 auto !important;
@@ -1261,12 +1343,14 @@ footer .foo a:last-child {
   footer .foo p {
     padding: 5px 0;
   }
+
   .dva {
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
     -ms-flex-direction: column !important;
     flex-direction: column !important;
   }
+
   .foo {
     text-align: center !important;
     -webkit-box-orient: vertical !important;
@@ -1274,12 +1358,15 @@ footer .foo a:last-child {
     -ms-flex-direction: column !important;
     flex-direction: column !important;
   }
+
   #header nav .form-control {
     width: 100% !important;
   }
+
   .carousel-item {
     height: 200px !important;
   }
+
   #carousel .caroP {
     position: absolute;
     top: 10%;
@@ -1291,6 +1378,7 @@ footer .foo a:last-child {
     text-align: center;
     font-size: 20px;
   }
+
   #carousel .caroPright {
     position: absolute;
     bottom: 0;
@@ -1300,6 +1388,7 @@ footer .foo a:last-child {
     z-index: 10;
     font-weight: 800;
   }
+
   #carousel .caroPleft {
     position: absolute;
     bottom: 0;
@@ -1309,9 +1398,11 @@ footer .foo a:last-child {
     z-index: 10;
     font-weight: 800;
   }
+
   header .search-div {
     width: 100%;
   }
+
   /*#row .red .date {*/
   /*    margin-left: 10px;*/
   /*}*/
@@ -1367,6 +1458,7 @@ footer .foo a:last-child {
     display: block;
     text-align: left;
   }
+
   #boxes .slika {
     display: inline-block;
     margin-top: 20px;
@@ -1374,22 +1466,26 @@ footer .foo a:last-child {
     margin-left: 0;
     margin-right: 15px !important;
   }
+
   .slika .fix-img {
     margin-bottom: 50px;
     width: 100px;
     height: auto;
     margin: 0 !important;
   }
+
   #boxes .fix-img img {
     width: 100%;
     height: auto;
   }
+
   .offer-title {
     display: inline-block;
     width: calc(100% - 120px);
     text-align: center;
   }
-  .offer-title > a {
+
+  .offer-title>a {
     text-align: left;
   }
 }
@@ -1414,43 +1510,52 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 430px) {
+
   #carousel .caroP,
   #carousel .caroPleft,
   #carousel .caroPright {
     font-size: 16px;
   }
+
   #boxes .datum {
     text-align: end;
     position: absolute;
     top: 15px;
     right: 15px;
   }
+
   .slika .fix-img {
     display: flex;
     align-items: center;
   }
+
   #carousel .caroPright {
     right: 10px;
   }
+
   #carousel .caroPleft {
     left: 10px;
   }
+
   .carousel-item {
     height: 150px !important;
   }
 }
 
 @media screen and (max-width: 320px) {
+
   #carousel .caroP,
   #carousel .caroPleft,
   #carousel .caroPright {
     font-size: 13px;
   }
+
   #carousel .caroPright {
     right: 10px;
     bottom: 30px;
     margin-bottom: 0;
   }
+
   #carousel .caroPleft {
     left: 10px;
     bottom: 30px;
@@ -1462,6 +1567,7 @@ footer .foo a:last-child {
   #boxes .box .first-btn {
     margin-top: 0;
   }
+
   #boxes .box .dugmici {
     padding: 0;
   }
@@ -1518,47 +1624,57 @@ footer .foo a:last-child {
   #boxes .fix {
     position: relative;
   }
-  #boxes .offer-title > a {
+
+  #boxes .offer-title>a {
     color: #211c1c;
     font-weight: 500;
     font-size: 18px !important;
     line-height: 15px !important;
   }
+
   #boxes .slika {
     display: inline-block;
     vertical-align: middle;
     margin-right: 8px !important;
   }
-  #boxes .offer-title > a {
+
+  #boxes .offer-title>a {
     padding-left: 0;
   }
+
   #boxes .offer-title {
     display: inline-block;
     vertical-align: middle;
     text-align: left;
   }
-  #boxes .offer-title > a {
+
+  #boxes .offer-title>a {
     text-align: left;
   }
+
   #boxes .fix-text {
     text-align: left;
     padding-bottom: 0;
   }
+
   #boxes .datum {
     position: absolute;
     right: 20px;
     top: 10px;
     font-size: 12px;
   }
+
   #boxes .dugmici {
     margin: 0 auto;
     padding-top: 10px !important;
   }
-  #boxes .dugmici > a {
+
+  #boxes .dugmici>a {
     width: 100%;
     display: block;
   }
 }
+
 /* @media screen and (max-width: 550px) {
   .social_icons_all {
     flex-wrap: wrap;
@@ -1581,19 +1697,24 @@ footer .foo a:last-child {
   #row .red .btn {
     width: 150px;
   }
+
   #row .red .btn.mobile {
     display: none;
   }
+
   #row .red .btn .butt {
     padding: 7px 10px;
     font-size: 12px !important;
   }
+
   .dropdowns_holder:first-child {
     padding: 5px !important;
   }
+
   .search-page .search_page .red .text {
     flex: 0 40% !important;
   }
+
   .search-page .search_page .red .text a {
     font-size: 12px !important;
   }
@@ -1603,41 +1724,52 @@ footer .foo a:last-child {
   #menu a {
     font-size: 12px;
   }
+
   #menu .dropbtn {
     padding: 5px 5px;
   }
+
   .navbar {
     padding: 10px 10px;
   }
+
   #row .title-padding {
     margin-left: 5px !important;
   }
 }
 
 @media screen and (max-width: 450px) {
+
   .navbar-buttons p,
   a {
     font-size: 12px;
   }
+
   #row .search-page .search_page .red .text a {
     font-size: 12px !important;
   }
+
   #row .red .text a {
     font-size: 14px !important;
   }
+
   .navbar-buttons a {
     font-size: 12px;
   }
+
   .uk-etc {
     font-size: 12px;
   }
+
   #header nav .form-control {
     font-size: 12px;
   }
+
   #menu .dropdown .dropbtn {
     width: auto;
     font-size: 12px;
   }
+
   #header nav .form-control::placeholder {
     font-size: 12px;
   }
@@ -1660,9 +1792,11 @@ footer .foo a:last-child {
   justify-content: space-around;
   padding: 10px 0;
 }
+
 #cookie .cookie_left {
   width: 40%;
 }
+
 #cookie .cookie_left p {
   font-size: 12px;
   color: #fff;
@@ -1674,6 +1808,7 @@ footer .foo a:last-child {
   display: flex;
   align-items: center;
 }
+
 #cookie .cookie_right a {
   display: flex;
   align-items: center;
@@ -1681,6 +1816,7 @@ footer .foo a:last-child {
   font-size: 12px;
   text-decoration: underline !important;
 }
+
 #cookie .cookie_right .fa-angle-right {
   margin-right: 10px;
   color: #fff;
@@ -1709,4 +1845,84 @@ footer .foo a:last-child {
   font-size: 22px;
   color: #d8d8d8;
   cursor: pointer;
+}
+
+
+.fixed_btn {
+  position: fixed;
+  left: 0;
+  bottom: 100px;
+  width: 60px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.06);
+  background-color: #ffa000c7;
+  border: 2px solid #fff;
+  border-radius: 0 8px 8px 0;
+}
+
+.fixed_btn:hover {
+  background: #ffa400;
+}
+
+.fixed_btn a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+}
+
+.fixed_btn .fixed_btn_form {
+  position: absolute;
+  left: 60px;
+  height: 200px;
+  width: 300px;
+  background: #ffa400;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding:10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fixed_btn .fixed_btn_form p {
+  font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.fixed_btn .fixed_btn_form input {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  width: 80%;
+  text-align: center;
+}
+
+.fixed_btn .fixed_btn_form input::placeholder {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
+
+.fixed_btn .fixed_btn_form button {
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 2;
+  width: 150px;
 }

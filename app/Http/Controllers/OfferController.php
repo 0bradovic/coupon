@@ -449,79 +449,86 @@ class OfferController extends Controller
              //dd($importData_arr);
              foreach($importData_arr as $data)
              {
-                 //$startDate = Carbon::parse($data[4]);
-                //dd($startDate);
-                 $slug = $this->createSlug($data[0]);
-                 $i = 1;
-                if(count(Offer::where('slug', $slug)->get()) > 0)
-                {
-                    do{
-                    $x=Offer::where('slug', $slug)->get();
-                    if($x) $newSlug = $slug.$i;
-                    //$slug = $slug.$i;
-                    $i++;
-                    }while(count(Offer::where('slug', $newSlug)->get())>0);
-                    
-                    if($newSlug)
+                 if(count(Offer::where('name',$data[0])->where('detail',$data[1])->get()) > 0)
+                 {
+                    continue;
+                 }
+                 else
+                 {
+
+                 
+                    $slug = $this->createSlug($data[0]);
+                    $i = 1;
+                    if(count(Offer::where('slug', $slug)->get()) > 0)
                     {
-                        $slug = $newSlug;
+                        do{
+                        $x=Offer::where('slug', $slug)->get();
+                        if($x) $newSlug = $slug.$i;
+                        //$slug = $slug.$i;
+                        $i++;
+                        }while(count(Offer::where('slug', $newSlug)->get())>0);
+                        
+                        if($newSlug)
+                        {
+                            $slug = $newSlug;
+                        }
                     }
+                    $url = "http://tinyurl.com/api-create.php?url=".$data[2];
+
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+                
+                        $output = curl_exec($ch);
+                        $info = curl_getinfo($ch);
+                        curl_close($ch);
+                
+                        $offerLink = $output;
+
+                        $lastOfferSku = Offer::all()->pluck('sku')->last();
+                        if($lastOfferSku)
+                        {
+                            $sku = intval($lastOfferSku) + 1;
+                        }
+                        else
+                        {
+                            $sku = 10000000;
+                        }
+                        $startDate = Carbon::parse($data[3]);
+                        $endDate = $data[4];
+                        
+                        if($endDate == 'Ongoing')
+                        {
+                            $endDate = null;
+                            $endDateNull = 1;
+                        }
+                        else
+                        {
+                            $endDate = Carbon::parse($endDate);
+                            $endDateNull = 0;
+                        }
+                    $img_url = $data[5];
+                    $info = pathinfo($img_url);
+                    $contents = file_get_contents($img_url);
+                    $name = time().$info['basename'];
+                    $img_src = '/images/offer/'.$name;
+                    file_put_contents(public_path().$img_src, $contents);
+                    $insertData = array(
+                    'name' => $data[0],
+                    'slug' => $slug,
+                    'detail' => $data[1],
+                    'link' => $offerLink,
+                    'sku' => $sku,
+                    'startDate' => $startDate,
+                    'endDate' => $endDate,
+                    'endDateNull' => $endDateNull,
+                    'img_src' => $img_src,
+                    'user_id' => Auth::user()->id,
+                    );
+                    Offer::create($insertData);
                 }
-                $url = "http://tinyurl.com/api-create.php?url=".$data[2];
-
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
-            
-                    $output = curl_exec($ch);
-                    $info = curl_getinfo($ch);
-                    curl_close($ch);
-            
-                    $offerLink = $output;
-
-                    $lastOfferSku = Offer::all()->pluck('sku')->last();
-                    if($lastOfferSku)
-                    {
-                        $sku = intval($lastOfferSku) + 1;
-                    }
-                    else
-                    {
-                        $sku = 10000000;
-                    }
-                    $startDate = Carbon::parse($data[3]);
-                    $endDate = $data[4];
-                    
-                    if($endDate == 'Ongoing')
-                    {
-                        $endDate = null;
-                        $endDateNull = 1;
-                    }
-                    else
-                    {
-                        $endDate = Carbon::parse($endDate);
-                        $endDateNull = 0;
-                    }
-                $img_url = $data[5];
-                $info = pathinfo($img_url);
-                $contents = file_get_contents($img_url);
-                $name = time().$info['basename'];
-                $img_src = '/images/offer/'.$name;
-                file_put_contents(public_path().$img_src, $contents);
-                $insertData = array(
-                 'name' => $data[0],
-                 'slug' => $slug,
-                 'detail' => $data[1],
-                 'link' => $offerLink,
-                 'sku' => $sku,
-                 'startDate' => $startDate,
-                 'endDate' => $endDate,
-                 'endDateNull' => $endDateNull,
-                 'img_src' => $img_src,
-                 'user_id' => Auth::user()->id,
-                );
-                Offer::create($insertData);
              }
         }else{
             return redirect()->back()->withErrors('Invalid File Extension.');
