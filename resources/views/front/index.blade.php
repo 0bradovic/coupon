@@ -296,11 +296,8 @@
 
         {{--{!! $mostPopularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top">TOP<i class="fas fa-arrow-up"></i></a>
-        <div class="fixed_btn">
-            <div class="fixed_abs">
-            <a href="#">Sign Up</a>
-            </div>
             <div class="fixed_btn_form">
+                <span class="close_popUp"><i class="fas fa-times"></i></span>
                     <div class="fixed_btn_in_form">
                         <div class="fixed_btn_in_form_title">
                             <h2>Sign Up!</h2>
@@ -325,7 +322,6 @@
                         </div>
                     </div>
             </div>
-        </div>
 </div>
 
     </section>
@@ -350,6 +346,7 @@
                 <div class="footer_share">
                     <a href="https://www.facebook.com/BeforeTheShop" target="_blank">Facebook</a>
                     <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">Twitter</a>
+                    <a href="#"><span id="open_popup">Share</span></a>
                 </div>
                 <p>Copyright 2019 Made By Digital Ltd. All rights reserved.</p>
             </div>

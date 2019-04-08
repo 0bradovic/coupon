@@ -16,9 +16,12 @@ $(document).ready(function () {
 
   //newsleter
   $('.fixed_btn_form').hide()
-  $('.fixed_abs').on('click', function () {
+  $('#open_popup').on('click', function () {
     $('.fixed_btn_form').fadeToggle(300)
   })
+})
+$('.close_popUp').on('click', function() {
+  $('.fixed_btn_form').hide()
 })
 
 $('a[href="#top"]').click(function (e) {

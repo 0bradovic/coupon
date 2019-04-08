@@ -1095,8 +1095,6 @@ a.go_top:focus {
     display: none;
   }
 
- 
-
   #row .red .title {
     flex: 0 30%;
   }
@@ -1841,34 +1839,7 @@ footer .foo a:last-child {
   cursor: pointer;
 }
 
-.fixed_btn {
-  position: fixed;
-  left: 0;
-  bottom: 100px;
-  width: 60px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.06);
-  background-color: #ffa000c7;
-  border: 2px solid #fff;
-  border-radius: 0 8px 8px 0;
-}
-
-.fixed_btn:hover {
-  background: #ffa400;
-}
-
-.fixed_btn a {
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  position: relative;
-}
-
-.fixed_btn .fixed_btn_form {
+.fixed_btn_form {
   position: fixed;
   left: 0px;
   right: 0;
@@ -1880,7 +1851,7 @@ footer .foo a:last-child {
   justify-content: center;
   z-index: 99999999999999;
 }
-.fixed_btn .fixed_btn_in_form {
+.fixed_btn_in_form {
   width: 600px;
   height: 600px;
   border: 2px solid #ffa400;
@@ -1892,21 +1863,22 @@ footer .foo a:last-child {
   justify-content: space-around;
   padding: 30px 0;
   overflow: hidden;
+  text-align: center;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title {
+.fixed_btn_in_form .fixed_btn_in_form_title {
   display: flex;
   flex-direction: column;
   width: 70%;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title h2 {
+.fixed_btn_in_form .fixed_btn_in_form_title h2 {
   font-size: 4em;
   font-weight: 200;
   color: #ffa400;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title h3 {
+.fixed_btn_in_form .fixed_btn_in_form_title h3 {
   margin: 0;
   text-align: center;
   font-size: 25px;
@@ -1915,37 +1887,37 @@ footer .foo a:last-child {
   margin: 0;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey {
+.fixed_btn_in_form .fixed_btn_in_form_grey {
   background: rgb(228, 228, 228);
   width: 100%;
   padding: 10px 0;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h4 {
+.fixed_btn_in_form .fixed_btn_in_form_grey h4 {
   color: #ffa400;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h5 {
+.fixed_btn_in_form .fixed_btn_in_form_grey h5 {
   font-size: 20px;
   font-weight: 400;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h5 span {
+.fixed_btn_in_form .fixed_btn_in_form_grey h5 span {
   color: #ffa400;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit {
+.fixed_btn_in_form .fixed_btn_in_form_submit {
   width: 100%;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy {
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy input {
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy input {
   width: 80%;
   line-height: 2;
   padding: 7px;
@@ -1953,7 +1925,7 @@ footer .foo a:last-child {
   background: #fff;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
   position: absolute;
   right: 11%;
   height: 80%;
@@ -1965,25 +1937,48 @@ footer .foo a:last-child {
   font-size: 15px;
   border-radius: 5px;
 }
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit p {
+.fixed_btn_in_form .fixed_btn_in_form_submit p {
   margin-top: 10px;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text {
+.fixed_btn_in_form .fixed_btn_in_form_text {
   width: 50%;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text_first {
+.fixed_btn_in_form .fixed_btn_in_form_text_first {
   width: 70%;
 }
 
-.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text_first span {
+.fixed_btn_in_form .fixed_btn_in_form_text_first span {
   color: #ffa400;
 }
 
-.fixed_btn .fixed_btn_form p {
+.fixed_btn_form p {
   font-size: 12px;
   color: #222;
   margin: 0;
   padding: 0;
+}
+
+.fixed_btn_form .close_popUp {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  color: #fff;
+  font-size: 30px;
+  background: #ffa400;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: 2px solid #fff;
+  text-align: center;
+}
+
+.fixed_btn_form .close_popUp i {
+  font-size: 24px;
 }
