@@ -814,7 +814,7 @@ a.go_top:focus {
 }
 
 #row .red .btn {
-  width: 160px;
+  width: 100%;
   padding: 0;
 }
 

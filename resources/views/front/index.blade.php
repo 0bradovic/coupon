@@ -346,7 +346,7 @@
                 <div class="footer_share">
                     <a href="https://www.facebook.com/BeforeTheShop" target="_blank">Facebook</a>
                     <a href="https://twitter.com/BeforeTheShop?lang=en" target="_blank">Twitter</a>
-                    <a href="#"><span id="open_popup">Share</span></a>
+                    <a href="#"><span id="open_popup">Sign up!</span></a>
                 </div>
                 <p>Copyright 2019 Made By Digital Ltd. All rights reserved.</p>
             </div>
