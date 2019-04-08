@@ -363,7 +363,6 @@ section#boxes {
 #header nav .btn1 {
   background: none;
   position: absolute;
-  z-index: 10;
 }
 
 header .search-div {
@@ -711,7 +710,7 @@ a.go_top:focus {
 
 #row .red .image {
   width: 100px;
-  flex: 0 15%;
+  width: 150px;
   position: relative;
   display: flex;
   align-items: center;
@@ -1096,9 +1095,7 @@ a.go_top:focus {
     display: none;
   }
 
-  #row .red .image {
-    flex: 0 20%;
-  }
+ 
 
   #row .red .title {
     flex: 0 30%;
@@ -1262,7 +1259,7 @@ header {
   text-align: center;
 }
 
-#boxes .offer-title>a {
+#boxes .offer-title > a {
   color: #211c1c;
   font-weight: 500;
   font-size: 20px !important;
@@ -1274,7 +1271,7 @@ header {
   margin: auto 0;
 }
 
-#boxes .dugmici>a {
+#boxes .dugmici > a {
   padding: 7px 50px;
 }
 
@@ -1485,7 +1482,7 @@ footer .foo a:last-child {
     text-align: center;
   }
 
-  .offer-title>a {
+  .offer-title > a {
     text-align: left;
   }
 }
@@ -1510,7 +1507,6 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 430px) {
-
   #carousel .caroP,
   #carousel .caroPleft,
   #carousel .caroPright {
@@ -1543,7 +1539,6 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 320px) {
-
   #carousel .caroP,
   #carousel .caroPleft,
   #carousel .caroPright {
@@ -1625,7 +1620,7 @@ footer .foo a:last-child {
     position: relative;
   }
 
-  #boxes .offer-title>a {
+  #boxes .offer-title > a {
     color: #211c1c;
     font-weight: 500;
     font-size: 18px !important;
@@ -1638,7 +1633,7 @@ footer .foo a:last-child {
     margin-right: 8px !important;
   }
 
-  #boxes .offer-title>a {
+  #boxes .offer-title > a {
     padding-left: 0;
   }
 
@@ -1648,7 +1643,7 @@ footer .foo a:last-child {
     text-align: left;
   }
 
-  #boxes .offer-title>a {
+  #boxes .offer-title > a {
     text-align: left;
   }
 
@@ -1669,7 +1664,7 @@ footer .foo a:last-child {
     padding-top: 10px !important;
   }
 
-  #boxes .dugmici>a {
+  #boxes .dugmici > a {
     width: 100%;
     display: block;
   }
@@ -1739,7 +1734,6 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 450px) {
-
   .navbar-buttons p,
   a {
     font-size: 12px;
@@ -1847,7 +1841,6 @@ footer .foo a:last-child {
   cursor: pointer;
 }
 
-
 .fixed_btn {
   position: fixed;
   left: 0;
@@ -1876,53 +1869,121 @@ footer .foo a:last-child {
 }
 
 .fixed_btn .fixed_btn_form {
-  position: absolute;
-  left: 60px;
-  height: 200px;
-  width: 300px;
-  background: #ffa400;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  padding:10px 0px;
+  position: fixed;
+  left: 0px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999999999;
+}
+.fixed_btn .fixed_btn_in_form {
+  width: 600px;
+  height: 600px;
+  border: 2px solid #ffa400;
+  background: #fff;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  padding: 30px 0;
+  overflow: hidden;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title h2 {
+  font-size: 4em;
+  font-weight: 200;
+  color: #ffa400;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_title h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
+  color: #222;
+  margin: 0;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey {
+  background: rgb(228, 228, 228);
+  width: 100%;
+  padding: 10px 0;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h4 {
+  color: #ffa400;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h5 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_grey h5 span {
+  color: #ffa400;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit {
+  width: 100%;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy input {
+  width: 80%;
+  line-height: 2;
+  padding: 7px;
+  text-indent: 10px;
+  background: #fff;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
+  position: absolute;
+  right: 11%;
+  height: 80%;
+  width: 20%;
+  background: #ffa400;
+  border: none;
+  color: #fff;
+  font-weight: 200;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_submit p {
+  margin-top: 10px;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text {
+  width: 50%;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text_first {
+  width: 70%;
+}
+
+.fixed_btn .fixed_btn_in_form .fixed_btn_in_form_text_first span {
+  color: #ffa400;
 }
 
 .fixed_btn .fixed_btn_form p {
-  font-size: 14px;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-size: 12px;
+  color: #222;
   margin: 0;
   padding: 0;
-}
-
-.fixed_btn .fixed_btn_form input {
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  color: #fff;
-  font-size: 14px;
-  width: 80%;
-  text-align: center;
-}
-
-.fixed_btn .fixed_btn_form input::placeholder {
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-}
-
-.fixed_btn .fixed_btn_form button {
-  background: transparent;
-  border-radius: 10px;
-  border: 1px solid #fff;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 2;
-  width: 150px;
 }
