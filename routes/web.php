@@ -22,6 +22,8 @@ Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 Route::get('/page/{slug}', 'FrontController@getCustomPage')->name('custom.page.get');
 Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
 
+Route::post('/subscribe', 'MailChimpController@subscribe')->name('subscribe');
+
 //TEST
 Route::get('/category', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
 //END TEST
@@ -174,8 +176,14 @@ Route::middleware('auth')->group(function () {
         //Route::get('/delete/meta/custom/{id}', 'SeoController@destroy')->name('custom.seo.delete');
     });
 
+    Route::group(['middleware' => ['permission:manage popup']], function () {
+        Route::get('/subscribe/popup', 'PopupController@index');
+        Route::post('/update/popup', 'PopupController@update')->name('update.popup');
+    });
+
 });
-use Spatie\Permission\Models\Permission;
-Route::get('/perm', function(){
-    Permission::create(['name' => 'manage tagline']);
-});
+// use Spatie\Permission\Models\Permission;
+// Route::get('/perm', function(){
+//     Permission::create(['name' => 'manage popup']);
+// });
+

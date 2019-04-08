@@ -12,6 +12,7 @@ use App\MetaTag;
 use App\CustomPage;
 use App\OfferClick;
 use Illuminate\Support\Facades\Redirect;
+use App\SubscribePopup;
 
 class FrontController extends Controller
 {
@@ -57,7 +58,8 @@ class FrontController extends Controller
             ];
         }
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-        return view('front.index',compact('categories','slides','newestOffers','mostPopularOffers','title', 'customPages'));
+        $popup = SubscribePopup::first();
+        return view('front.index',compact('categories','slides','newestOffers','mostPopularOffers','title', 'customPages','popup'));
     }
     
     public function getCustomPage($slug)
