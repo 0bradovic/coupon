@@ -710,7 +710,7 @@ a.go_top:focus {
 
 #row .red .image {
   width: 100px;
-  width: 150px;
+  flex: 0 15%;
   position: relative;
   display: flex;
   align-items: center;
@@ -1024,6 +1024,39 @@ a.go_top:focus {
     order: 1;
     margin: 20px 0;
   }
+  .fixed_btn_in_form {
+    width: 85% !important;
+    height: 85% !important;
+    border-radius: 20px !important;
+    overflow-y: scroll !important;
+    justify-content: unset !important;
+    padding: 10px !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title {
+    width: 100% !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title h2 {
+    font-size: 2em !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title h3 {
+    font-size: 16px !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_grey {
+    margin: 10px 0 !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_grey h4 {
+    font-size: 16px !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_grey h5 {
+    font-size: 14px !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
+    width: 30% !important;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_text {
+    width: 100% !important;
+    margin-top: 10px !important;
+}
 }
 
 @media screen and (max-width: 800px) {
