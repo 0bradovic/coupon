@@ -213,6 +213,12 @@ return [
             ],
             
         ],
+        'SUBSCRIPTION POPUP',
+        [
+            'text' => 'Subscription Popup',
+            'can' => 'manage popup',
+            'url' => '/subscribe/popup',
+        ],
         'CUSTOM PAGES',
         [
             'text' => 'Custom page',

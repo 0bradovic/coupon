@@ -303,25 +303,25 @@
             <div class="fixed_btn_form">
                     <div class="fixed_btn_in_form">
                         <div class="fixed_btn_in_form_title">
-                            <h2>Sign Up!</h2>
-                            <h3>Save up to 70% on 1000s of awesome Leeds & Bradform deals</h3>
+                            <h2>{{ $popup->title }}</h2>
+                            <h3>{{ $popup->second_title }}</h3>
                         </div>
                         <div class="fixed_btn_in_form_grey">
-                            <h4>Extra 20% Off Your First Groupon*</h4>
-                            <h5>Enter vode <span>HELLO20</span> at checkout</h5>
-                            <p>Discover new restaurants, spas, getaways, things to do & more great deals added daily!</p>
+                            {!! $popup->first_section !!}
                         </div>
                         <div class="fixed_btn_in_form_submit">
+                            <form method="POST" action="{{ route('subscribe') }}">
                             <div class="fixedMy">
-                            <input type="text">
-                            <button>Continue</button>
+                            @csrf
+                            <input type="email" name="email">
+                            <button type="submit">{{ $popup->button }}</button>
                             </div>
-                            <p>You can change your email preferences at any time</p>
+                            </form>
+                            <!-- <p>You can change your email preferences at any time</p> -->
                         </div>
-                        <p class="fixed_btn_in_form_text_first">Yes, I want to save money by receiving personailsed Groupon emails with awesome deals. By subscribing I agree to the <span>Terms of Use</span> and have read the <span>Privacy Statement.</span></p>
+                        <!-- <p class="fixed_btn_in_form_text_first">Yes, I want to save money by receiving personailsed Groupon emails with awesome deals. By subscribing I agree to the <span>Terms of Use</span> and have read the <span>Privacy Statement.</span></p> -->
                         <div class="fixed_btn_in_form_text">
-                            <h6>No thanks</h6>
-                            <p>Valid on max 1 deal chose from the Local or Getaways categories. New customers only. Max discount $20. Exclusions apply.More info on www.groupon.co.uk/faq Full details: gr.pn/promofaquk</p>
+                            {!! $popup->second_section !!}
                         </div>
                     </div>
             </div>
