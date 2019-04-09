@@ -58,15 +58,16 @@
                     <i class="fab fa-pinterest-p"></i>
                     </a>
                     </div>
-                    <div class="social_icons_div">
-                    <a href="#" target="_blank">
+                    <div id='email_form' class="social_icons_div">
+                    <a id="mailto" href="#">
                     <i class="far fa-envelope"></i>
-                    </a>
                     
+                    </a>
                     </div>
-                    <div id='email_form' class="social_icons_div_absolute">
-                        <input type="text" placeholder="Enter Email" />
-                        <button>Share</button>
+                    <div class="social_icons_div_absolute">
+                        <input id="emailinput" type="text" placeholder="Enter Email" />
+                        <button id="mailto_button"><a href="" id="send_mail">Share</a></button>
+                        
                     </div>
                     <div class="social_icons_div">
                     <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">

@@ -93,10 +93,24 @@ $(document).ready(function(){
       $('.social_icons_div_absolute').fadeToggle(200)
     })
   })
+  $(document).click(function(e){
+    if( $(e.target).closest("#email_form").length > 0 ) {
+        return true;
+    }
+    else if($(e.target).closest(".social_icons_div_absolute").length > 0){
+        return true;
+    }
+    // Otherwise
+    // trigger your click function
+    $('.social_icons_div_absolute').fadeOut(200)
+  });
   $("#emailinput").keyup(function() {
     var content = 'http://www.beforetheshop.com';
     var email = $(this).val();
     $('#send_mail').attr('href','mailto:'+email+'?subject=look at this website&body='+content);
+  })
+  $('#mailto_button').click(function(){
+    $('.social_icons_div_absolute').fadeOut(200)
   })
   
   

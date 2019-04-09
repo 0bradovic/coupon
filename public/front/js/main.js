@@ -101,18 +101,48 @@ $(document).ready(function () {
     $('.social_icons_div_absolute').fadeToggle(200)
   })
 })
+$(document).click(function(e){
+  if( $(e.target).closest("#email_form").length > 0 ) {
+      return true;
+  }
+  else if($(e.target).closest(".social_icons_div_absolute").length > 0){
+      return true;
+  }
+  // Otherwise
+  // trigger your click function
+  $('.social_icons_div_absolute').fadeOut(200)
+});
+
 $("#emailinput").keyup(function() {
   var content = "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
   var email = $(this).val();
   $('#send_mail').attr('href','mailto:'+email+'?subject=BeforeTheShop&body='+content);
 })
+$('#mailto_button').click(function(){
+  $('.social_icons_div_absolute').fadeOut(200)
+})
 $('.social_icons_div_absolute2').hide()
 $('#abs2').on('click', function() {
   $('.social_icons_div_absolute2').fadeToggle(200)
 })
+$(document).click(function(e){
+  if( $(e.target).closest("#email_form2").length > 0 ) {
+      return true;
+  }
+  else if($(e.target).closest(".social_icons_div_absolute2").length > 0){
+      return true;
+  }
+  // Otherwise
+  // trigger your click function
+  $('.social_icons_div_absolute2').fadeOut(200)
+});
+
 $('#offer-email-input').keyup(function() {
   //var content = window.location.href;
   var content = $(this).data('content');
   var email = $(this).val();
   $('#offer-send-mail').attr('href','mailto:'+email+'?subject=BeforeTheShop&body='+content);
+})
+$('#offer-send-mail').click(function(){
+  $('.social_icons_div_absolute2').fadeOut(200)
 })

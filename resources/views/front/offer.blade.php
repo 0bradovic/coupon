@@ -60,9 +60,10 @@
                         
                         </div>
                         <div class="social_icons_div_absolute">
-                            <input type="text" placeholder="Enter Email" />
-                            <button>Share</button>
-                        </div>
+                        <input id="emailinput" type="text" placeholder="Enter Email" />
+                        <button id="mailto_button"><a href="" id="send_mail">Share</a></button>
+                        
+                    </div>
                         <div class="social_icons_div">
                         <a href="https://wa.me/?text=http://www.beforetheshop.com" target="_blank">
                         <i class="fab fa-whatsapp"></i>
@@ -181,7 +182,7 @@
                         <i class="fab fa-pinterest-p"></i>
                         </a>
                         </div>
-                        <div class="social_icons_div_single">
+                        <div class="social_icons_div_single" id="email_form2">
                         <a href="#" class="relative_social2">
                         <i class="far fa-envelope" id="abs2"></i>
                         <div class="social_icons_div_absolute2" style="display: flex;">
