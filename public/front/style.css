@@ -85,8 +85,8 @@ nav.navbar.navbar-expand-lg {
 .header-form-left {
   display: flex;
   align-items: center;
-  width: 50%;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: center;
   position: relative;
 }
 
@@ -853,6 +853,10 @@ a.go_top:focus {
   right: 15% !important;
 }
 
+.search-title{
+  margin-left:0 !important;
+}
+
 @media screen and (max-width: 1630px) {
   #header nav .form-control {
     width: 230px !important;
@@ -908,11 +912,12 @@ a.go_top:focus {
 }
 
 @media screen and (max-width: 1200px) {
-
   #row .container {
     max-width: 100% !important;
   }
-
+  .title_holder {
+    width: 98% !important;
+  }
   #cont {
     max-width: 100% !important;
   }
@@ -986,7 +991,9 @@ a.go_top:focus {
   #row .offers_list_holder {
     width: 100% !important;
   }
-
+  .title_holder {
+    width: 100% !important;
+  }
   #row .red .sticker {
     width: 95px;
   }
@@ -1109,12 +1116,14 @@ a.go_top:focus {
     background: orange;
     color: orange;
   }
-
   .navbar-buttons p {
-    color: #fff;
+    color: orange;
     font-style: italic;
     padding: 7px;
     margin: 0;
+    background: #fff;
+    border-radius: 5px;
+    text-decoration: underline;
   }
 
   .navbar-buttons a {
@@ -1429,6 +1438,10 @@ footer .foo a:last-child {
     width: 100%;
   }
 
+  #menu .dropdown-content a{
+    padding:0 5px !important;
+  }
+
   /*#row .red .date {*/
   /*    margin-left: 10px;*/
   /*}*/
@@ -1534,6 +1547,7 @@ footer .foo a:last-child {
   border: 3px solid;
   margin-left: 16px;
 }
+
 
 @media screen and (max-width: 430px) {
   #carousel .caroP,
@@ -2019,4 +2033,12 @@ footer .foo a:last-child {
 
 .fixed_btn_form .close_popUp i {
   font-size: 24px;
+}
+.title_holder {
+  width: 78%;
+  margin: 0 auto;
+}
+
+.title_holder .titleFix {
+  margin: 0 !important;
 }

@@ -202,9 +202,9 @@
             
         </div>
         
-        
+        <div class="title_holder"> <h2 class="title2 title-padding titleFix" style="margin-top:0!important">Here's more you might like</h2></div>
         <div class="container dropdowns_holder">
-            <h2 class="title2 title-padding" style="margin-top:0!important">Here's more you might like</h2>
+           
         </div>
         <div id="cont" class="container main_offers_container" >
             

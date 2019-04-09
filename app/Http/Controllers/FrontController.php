@@ -305,7 +305,7 @@ class FrontController extends Controller
     public function parentCategoryOffers(Request $request)
     {
         $category = Category::where('name',$request->name)->where('display', true)->with('subcategories')->first();
-        
+
         $allNewestOffers = [];
         $allPopularOffers = [];
         foreach($category->subcategories as $cat)
@@ -325,8 +325,8 @@ class FrontController extends Controller
         }
         $newestOffers = $newestOffers->unique();
         $popularOffers = $popularOffers->unique();
-        $newestOffers = (new Collection($newestOffers))->paginate(10)->appends('name',$request->name);
-        $popularOffers = (new Collection($popularOffers))->paginate(10);
+        $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10)->appends('name',$request->name);
+        $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         //dd($newestOffers);
         //dd($popularOffers);
         $categories = [];

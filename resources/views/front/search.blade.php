@@ -106,7 +106,7 @@
 
   <section id="row">
    <div class="container">
-      <h2 class="title2">Search results for {{ $search }}</h2>
+      <h2 class="title2 search-title">Search results for {{ $search }}</h2>
     </div>
         <div id="cont" class="container main_offers_container search-page">
 
