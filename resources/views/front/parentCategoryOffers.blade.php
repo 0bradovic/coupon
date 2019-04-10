@@ -88,7 +88,7 @@
                         <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
                             <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $key) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
                         </form>
                         </div>
                         @php $i++; @endphp
@@ -97,7 +97,7 @@
                     @php $j = 1; @endphp
                     @foreach($categories as $key=>$value)
                     <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
+                            <div class="dropdown-container @if($key != $category->name) d-none @endif">
                             @foreach($value as $cat)
                             @if(is_object($cat))
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
@@ -108,7 +108,13 @@
                         </div>
                     
                     @endforeach
-                </section>
+                    <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
+                    <p class="dNone newest-offers">Viewing newest</p>
+                    <a class="btn btn-default dNone newest-offers" id="most-popular-btn">View most popular</a>
+                    <p class="most-popular-offers">Viewing most popular</p>
+                    <a class="btn btn-default most-popular-offers" id="newest-btn">View newest</a>
+                </div> 
+            </section>
     </header>
 
   <section id="row">

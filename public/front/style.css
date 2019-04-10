@@ -316,7 +316,26 @@ section#boxes {
   align-items: center;
   font-size: 26px;
 }
-
+/*AAAAA*/
+.single-offer .sticker {
+  line-height: 2.5 !important;
+}
+.single-offer .title {
+  padding-top: 30px !important;
+}
+.single-offer .title h6  {
+  font-size: 24px !important;
+}
+.single-offer .title .dateA {
+  font-size: 20px !important;
+}
+.single-offer .butt {
+  padding: 10px 34px !important;
+}
+.single-offer .text p {
+  font-size: 18px !important;
+}
+/*AAAAA*/
 .social_icons .social_icons_div .fab,
 .far,
 .fas {
@@ -1091,16 +1110,24 @@ a.go_top:focus {
     margin-top: 10px !important;
 }
 }
-
+@media (max-width: 500px) {
+  .social_icons_div {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .social_icons .social_icons_div .fab, .far, .fas {
+    font-size: 10px !important;
+  }
+  #header nav .form-control:placeholder-shown {
+    width: 100px !important;
+    padding-left: 30px !important;
+  }
+}
 @media screen and (max-width: 800px) {
   .header-navbar-right {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .header-form-left {
-    flex-direction: column;
   }
 
   .social_icons_div_absolute {
@@ -1196,14 +1223,14 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 #menu .dropdown-content a {
   color: #fff;
   padding: 5px 0;
-  padding-right: 5px;
+  padding-right: 80px;
   font-size: 14px !important;
 }
 
@@ -1401,7 +1428,11 @@ footer .foo a:last-child {
   margin: 0 auto !important;
   padding: 0;
 }
-
+@media (max-width: 1300px) {
+  #menu .dropdown-content a {
+    padding-right: 40px;
+  }
+}
 @media screen and (max-width: 630px) {
   footer .foo p {
     padding: 5px 0;
@@ -1630,10 +1661,10 @@ footer .foo a:last-child {
 }
 @media (max-width: 450px) {
   #menu .dropdown-content a {
-    padding: 0 !important;
+    padding: 0 5px !important;
   }
-  #menu .dropdowns_holder {
-    padding: 0 !important;
+  .social_icons_like {
+    font-size: 10px !important;
   }
 }
 @media screen and (max-width: 992px) {
@@ -1830,13 +1861,15 @@ footer .foo a:last-child {
   }
 
   .uk-etc {
-    font-size: 12px;
+    font-size: 8px;
   }
 
   #header nav .form-control {
     font-size: 12px;
   }
-
+  #menu .dropdown-content a {
+    font-size: 12px !important;
+  }
   #menu .dropdown .dropbtn {
     width: auto;
     font-size: 12px;
@@ -1862,11 +1895,11 @@ footer .foo a:last-child {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 #cookie .cookie_left {
-  width: 40%;
+  width: 60%;
 }
 
 #cookie .cookie_left p {

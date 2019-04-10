@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <header id="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
@@ -113,7 +114,7 @@
     </header>
 
     <section id="row">
-        <div class="container">
+    <div class="container">
             @if($mainCategory)
             <h2 class="title2">{{ $mainCategory->name }}</h2>
             @endif
