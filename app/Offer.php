@@ -104,7 +104,7 @@ class Offer extends Model
         $search = ["</p>","</div>"]; 
         $replace = ". ";  
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
-        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'120','...');
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'90','...');
         return $newString;
     }
 

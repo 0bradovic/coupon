@@ -76,7 +76,7 @@ nav.navbar.navbar-expand-lg {
 }
 
 .header-navbar-right {
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -287,6 +287,7 @@ nav.navbar.navbar-expand-lg {
 .uk-etc {
   color: #fff;
   font-size: 16px;
+  margin-top:5px;
 }
 
 .uk-etc:hover {
@@ -749,7 +750,7 @@ a.go_top:focus {
   flex: 0 20%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   line-height: 1;
   position: relative;
 }
@@ -763,7 +764,9 @@ a.go_top:focus {
   line-height: 1;
   margin-top: 21px;
 }
-
+.date p {
+  margin-bottom: 0 !important;
+}
 #row .red .text {
   text-align: start;
   flex: 0 40%;
@@ -855,6 +858,31 @@ a.go_top:focus {
 
 .search-title{
   margin-left:0 !important;
+}
+
+.close-modal{
+  background:#fff;
+}
+
+.close-msg{
+  position:absolute;
+  top:5%;
+  right:5%;
+  border-radius:50%;
+  border:2px solid #fff;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-msg i{
+  font-size:12px !important;
+}
+
+.title a{
+  margin-top:5px;
 }
 
 @media screen and (max-width: 1630px) {

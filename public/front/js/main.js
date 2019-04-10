@@ -15,7 +15,10 @@ $(document).ready(function () {
   })
 
   //newsleter
-  $('.fixed_btn_form').hide()
+  // $('.fixed_btn_form').hide()
+  $('.close-modal').click(function(){
+    $('.fixed_btn_form').hide()
+  })
   $('#open_popup').on('click', function () {
     $('.fixed_btn_form').fadeToggle(300)
   })
@@ -145,4 +148,8 @@ $('#offer-email-input').keyup(function() {
 })
 $('#offer-send-mail').click(function(){
   $('.social_icons_div_absolute2').fadeOut(200)
+})
+
+$('.close-msg').click(function(){
+  $(this).parent().fadeOut(200);
 })

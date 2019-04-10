@@ -76,7 +76,7 @@
                     
                     </a>
                     </div>
-                    <div class="social_icons_div_absolute">
+                    <div class="social_icons_div_absolute" style="display:none;">
                         <input id="emailinput" type="text" placeholder="Enter Email" />
                         <button id="mailto_button"><a href="" id="send_mail">Share</a></button>
                         
@@ -296,7 +296,7 @@
 
         {{--{!! $mostPopularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top">TOP<i class="fas fa-arrow-up"></i></a>
-            <div class="fixed_btn_form">
+            <div class="fixed_btn_form" style="display:none;">
                 <span class="close_popUp"><i class="fas fa-times"></i></span>
                     <div class="fixed_btn_in_form">
                         <div class="fixed_btn_in_form_title">
@@ -320,6 +320,7 @@
                         <div class="fixed_btn_in_form_text">
                             {!! $popup->second_section !!}
                         </div>
+                        <button class="btn close-modal">No thanks</button>
                     </div>
             </div>
 </div>
