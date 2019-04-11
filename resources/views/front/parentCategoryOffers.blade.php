@@ -83,25 +83,25 @@
         <section id="menu">
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
-                    @foreach($categories as $key=>$value)
+                    @foreach($categories as $cate)
                         <div class="dropdown">
                         <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
-                            <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $key) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <input type="hidden" name="name" value="{{ $cate->name }}">
+                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $cate->name) style="text-decoration:underline;" @endif>{{ $cate->name }}</button>
                         </form>
                         </div>
                         @php $i++; @endphp
                     @endforeach
                     </div>
                     @php $j = 1; @endphp
-                    @foreach($categories as $key=>$value)
+                    @foreach($categories as $cate)
                     <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if($key != $category->name) d-none @endif">
-                            @foreach($value as $cat)
-                            @if(is_object($cat))
+                            <div class="dropdown-container @if($cate->name != $category->name) d-none @endif">
+                            @foreach($cate->liveSubcategories as $cat)
+                           
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
-                            @endif
+                            
                             @endforeach
                             @php $j++; @endphp
                             </div>

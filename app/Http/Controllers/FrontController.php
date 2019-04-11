@@ -20,28 +20,12 @@ class FrontController extends Controller
    public function index(Request $request)
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
-        $categories = [];
+        $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
+        
         $title = MetaTag::where('link','/')->pluck('title')->first();
         if(!$title)
         {
             $title = 'BeforeTheShop';
-        }
-        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
-        
-        foreach($parentCategories as $cat)
-        {
-            $cs = Category::where('parent_id',$cat->id)->where('display', true)->with('offers')->orderBy('position')->get();
-            $categories[$cat->name] = array();
-            $count = 0;
-            foreach($cs as $c)
-            {
-               
-                $count += count($c->getLiveOffersByCategory($c->id));
-                array_push($categories[$cat->name],$c);
-            }
-           
-            $categories[$cat->name]['count'] = $count;
-
         }
         $allNewestOffers = Offer::orderBy('created_at','DESC')->where('display', true)->get();
         $allMostPopularOffers = Offer::orderBy('click','DESC')->where('display', true)->get();
@@ -114,23 +98,7 @@ class FrontController extends Controller
     public function categoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->first();
-        $categories = [];
-        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
-        foreach($parentCategories as $cat)
-        {
-            $cs = Category::where('parent_id',$cat->id)->where('display', true)->with('offers')->orderBy('position')->get();
-            $categories[$cat->name] = array();
-            $count = 0;
-            foreach($cs as $c)
-            {
-               
-                $count += count($c->getLiveOffersByCategory($c->id));
-                array_push($categories[$cat->name],$c);
-            }
-           
-            $categories[$cat->name]['count'] = $count;
-
-        }
+        $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
@@ -201,23 +169,7 @@ class FrontController extends Controller
             $newestSimillarOffers = null;
             $popularSimillarOffers = null;
         }
-        $categories = [];
-        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
-        foreach($parentCategories as $cat)
-        {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
-            $categories[$cat->name] = array();
-            $count = 0;
-            foreach($cs as $c)
-            {
-               
-                $count += count($c->getLiveOffersByCategory($c->id));
-                array_push($categories[$cat->name],$c);
-            }
-           
-            $categories[$cat->name]['count'] = $count;
-
-        }
+        $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
             return [
@@ -257,23 +209,7 @@ class FrontController extends Controller
         $off = new Offer();
         $offers = $off->filterOffers($offers);
         $offers = (new Collection($offers))->paginate(10);
-        $categories = [];
-        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
-        foreach($parentCategories as $cat)
-        {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
-            $categories[$cat->name] = array();
-            $count = 0;
-            foreach($cs as $c)
-            {
-               
-                $count += count($c->getLiveOffersByCategory($c->id));
-                array_push($categories[$cat->name],$c);
-            }
-           
-            $categories[$cat->name]['count'] = $count;
-
-        }
+        $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $search = $request->search;
         if($request->ajax()) {
@@ -329,23 +265,7 @@ class FrontController extends Controller
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         //dd($newestOffers);
         //dd($popularOffers);
-        $categories = [];
-        $parentCategories = Category::where('parent_id',null)->where('display', true)->orderBy('position')->get();
-        foreach($parentCategories as $cat)
-        {
-            $cs = Category::where('parent_id',$cat->id)->with('offers')->where('display', true)->orderBy('position')->get();
-            $categories[$cat->name] = array();
-            $count = 0;
-            foreach($cs as $c)
-            {
-               
-                $count += count($c->getLiveOffersByCategory($c->id));
-                array_push($categories[$cat->name],$c);
-            }
-           
-            $categories[$cat->name]['count'] = $count;
-
-        }
+        $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
             return [

@@ -40,6 +40,11 @@ class Category extends Model
         return $this->hasMany(Category::class,'parent_id');
     }
 
+    public function liveSubcategories()
+    {
+        return $this->hasMany(Category::class,'parent_id')->where('display',true)->orderBy('position');
+    }
+
     public function undoCategories()
     {
         return $this->hasMany(UndoCategory::class);

@@ -7,9 +7,11 @@
 
 @section('content')
 <div class="row">
+
         <div class="col-xs-12">
+        
         <div class="box">
-          
+        
           <div class="box-header">
             <h3 class="box-title">All offers</h3>
             @include('layouts.messages')
@@ -20,6 +22,7 @@
             <div class="input-group input-group-sm" style="width: 300px;">
             
                 <input type="text" name="term" class="form-control pull-right" placeholder="Search offers by name or id...">
+                
                 {!! csrf_field() !!}
                 <div class="input-group-btn">
                   <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -28,8 +31,15 @@
             </form>
             
           </div>
+          <div>
+            <form class="pull-left" method="POST" action="{{ route('download.offer')}}">
+                {!! csrf_field() !!}
+                <input type="hidden" name="offers" value="all">
+                <button type="submit" class="btn btn-primary" style="margin-bottom:5px;">Download all</button>
+            </form>
+          </div>
           <!-- /.box-header -->
-          <form method="POST" id="download" action="{{ route('download.offer') }}">
+          <form class="pull-left" method="POST" id="download" action="{{ route('download.offer') }}">
           @csrf
           <button type="submit" class="btn btn-primary" id="selected_button">Download selected</button>
           <div class="box-body table-responsive no-padding">

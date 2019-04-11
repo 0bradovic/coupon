@@ -910,7 +910,7 @@ a.go_top:focus {
   }
 
   #header nav .form-control:placeholder-shown {
-    padding-left: 40px;
+    padding-left: 40px !important;
   }
 }
 
@@ -946,7 +946,7 @@ a.go_top:focus {
   }
 
   #header nav .form-control:placeholder-shown {
-    padding-left: 35px;
+    padding-left: 35px !important;
   }
 }
 
@@ -1066,7 +1066,7 @@ a.go_top:focus {
   }
 
   #cookie .cookie_left {
-    width: 80% !important;
+    width: 95% !important;
     order: 2 !important;
   }
 
@@ -1074,7 +1074,7 @@ a.go_top:focus {
     width: 80%;
     justify-content: center;
     order: 1;
-    margin: 20px 0;
+    margin: 10px 0;
   }
   .fixed_btn_in_form {
     width: 85% !important;

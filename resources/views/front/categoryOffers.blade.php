@@ -79,39 +79,44 @@
             </nav>
         </div>
         <section id="menu">
+                    
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
-                    @foreach($categories as $key=>$value)
+                    @foreach($categories as $category)
                         <div class="dropdown">
-                        <form method="GET" action="{{ route('parent.category.offers') }}">
+                            <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
-                            <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}">{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
-                        </form>
+                            <input type="hidden" name="name" value="{{ $category->name }}">
+                            <button class="dropbtn" data-id="{{$i}}" @foreach($category->liveSubcategories as $cat)
+                             @if(Request::path() == 'category/'.$cat->slug) style="text-decoration: underline !important;" @endif  @endforeach>{{ $category->name }}</button>
+                            </form>
+                            @php $i++; @endphp
                         </div>
-                        @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $j = 1; @endphp
-                    @foreach($categories as $key=>$value)
-                    <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
-                            @foreach($value as $cat)
-                            @if(is_object($cat))
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
-                            @endif
+                    @php $i = 1; @endphp
+                    
+                    @foreach($categories as $category)
+                    
+                    <div class="dropdown-content" id="{{$i}}">
+                            <div class="dropdown-container" @if($category->liveSubcategories->contains('slug',Request::segment(2))) @else style="display:none;" @endif>
+                            @foreach($category->liveSubcategories as $cat)
+                            
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::path() == 'category/'.$cat->slug) class="sub-category" @endif >{{ $cat->name }}</a>
+                           
                             @endforeach
-                            @php $j++; @endphp
+                            @php $i++; @endphp
                             </div>
                         </div>
                     
                     @endforeach
+                    
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
-                    <p class="newest-offers">Viewing newest offers </p>
-                    <a class="btn btn-default newest-offers" id="most-popular-btn">View most popular</a>
-                    <p class="dNone most-popular-offers">Viewing most popular offers </p>
-                    <a class="btn btn-default dNone most-popular-offers" id="newest-btn">View newest</a>
-                </div> 
+                    <p class="dNone newest-offers">Viewing newest</p>
+                    <a class="btn btn-default dNone newest-offers" id="most-popular-btn">View most popular</a>
+                    <p class=" most-popular-offers">Viewing most popular</p>
+                    <a class="btn btn-default  most-popular-offers" id="newest-btn">View newest</a>
+                </div>
                 </section>
     </header>
 

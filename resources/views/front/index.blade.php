@@ -42,7 +42,7 @@
                     <div class="navbar_search_form" id="navbarSupportedContent">
                     <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search here" aria-label="Search">
+                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
 
@@ -96,33 +96,35 @@
             </nav>
         </div>
         <section id="menu">
+                    
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
-                    @foreach($categories as $key=>$value)
+                    @foreach($categories as $category)
                         <div class="dropdown">
                         <form method="GET" action="{{ route('parent.category.offers') }}">
                             @csrf
-                            <input type="hidden" name="name" value="{{ $key }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $key }}<span class="spanrr">{{end($value)}} <span class="text_offers">offers</span></span></button>
+                            <input type="hidden" name="name" value="{{ $category->name }}">
+                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $category->name }}</button>
                         </form>
                         </div>
                         @php $i++; @endphp
                     @endforeach
                     </div>
                     @php $j = 1; @endphp
-                    @foreach($categories as $key=>$value)
+                    @foreach($categories as $category)
                     <div class="dropdown-content " id="{{$j}}">
                             <div class="dropdown-container @if(!$loop->first) d-none @endif">
-                            @foreach($value as $cat)
-                            @if(is_object($cat))
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
-                            @endif
+                            @foreach($category->liveSubcategories as $cat)
+                            
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                           
                             @endforeach
                             @php $j++; @endphp
                             </div>
                         </div>
                     
                     @endforeach
+                    
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>
                     <a class="btn btn-default newest-offers" id="most-popular-btn">View most popular</a>
@@ -337,7 +339,7 @@
             <div class="foo">
                 <div class="footer_top">
                     <a href="mailto:hi@madebydigital.com">Contact us</a>
-                    <a href="https://www.cookielaw.org/the-cookie-law/" target="_blank">Cookie Policy</a>
+                    <a href="/front/Privacy Policy.pdf" target="_blank">Cookie Policy</a>
                     @foreach($customPages as $customPage)
                          <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank">{{$customPage->name}}</a>
                     @endforeach

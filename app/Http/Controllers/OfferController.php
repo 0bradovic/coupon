@@ -544,7 +544,17 @@ class OfferController extends Controller
 
     public function downloadOffer(Request $request)
     {
-        $offers = Offer::find($request->offers);
+        $this->validate($request,[
+            'offers' => 'required',
+        ]);
+        if($request->offers == 'all')
+        {
+            $offers = Offer::all();
+        }
+        else
+        {
+            $offers = Offer::find($request->offers);
+        }
         $filename = 'offers.csv';
         $handle = fopen($filename, 'w+');
         fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image'));

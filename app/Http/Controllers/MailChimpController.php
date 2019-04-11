@@ -24,7 +24,7 @@ class MailChimpController extends Controller
         else
         {
             $mc->subscribe($this->listId, $emailAddress, $merge = [], $confirm = true);
-            return redirect()->back()->with('success', 'Thanks for subscribing.');
+            return redirect()->back()->with('success', 'Thanks for registering.');
         }
     }
 
