@@ -21,19 +21,41 @@ class FrontController extends Controller
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-        
+        $defaultCategory = Category::where('parent_id',null)->where('display', true)->with('subcategories')->orderBy('position')->first();
+        //dd($defaultCategory);
+        $allNewestOffers = [];
+        $allPopularOffers = [];
+        foreach($defaultCategory->subcategories as $cat)
+        {
+            $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
+            $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
+        }
+        $newestOffers = new Collection();
+        $mostPopularOffers = new Collection();
+        foreach($allNewestOffers as $off)
+        {   
+            $newestOffers = $newestOffers->merge($off);
+        }
+        foreach($allPopularOffers as $off)
+        {   
+            $mostPopularOffers = $mostPopularOffers->merge($off);
+        }
+        $newestOffers = $newestOffers->unique();
+        $mostPopularOffers = $mostPopularOffers->unique();
+        $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10)->appends('name',$request->name);
+        $mostPopularOffers = (new Collection($mostPopularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         $title = MetaTag::where('link','/')->pluck('title')->first();
         if(!$title)
         {
             $title = 'BeforeTheShop';
         }
-        $allNewestOffers = Offer::orderBy('created_at','DESC')->where('display', true)->get();
-        $allMostPopularOffers = Offer::orderBy('click','DESC')->where('display', true)->get();
-        $off = new Offer();
-        $newestOffers = $off->filterOffers($allNewestOffers);
-        $mostPopularOffers = $off->filterOffers($allMostPopularOffers);
-        $newestOffers = (new Collection($newestOffers))->paginate(10);
-        $mostPopularOffers = (new Collection($mostPopularOffers))->paginate(10);
+        // $allNewestOffers = Offer::orderBy('created_at','DESC')->where('display', true)->get();
+        // $allMostPopularOffers = Offer::orderBy('click','DESC')->where('display', true)->get();
+        // $off = new Offer();
+        // $newestOffers = $off->filterOffers($allNewestOffers);
+        // $mostPopularOffers = $off->filterOffers($allMostPopularOffers);
+        // $newestOffers = (new Collection($newestOffers))->paginate(10);
+        // $mostPopularOffers = (new Collection($mostPopularOffers))->paginate(10);
         if($request->ajax()) {
             return [
                 'newest' => view('front.indexNewestLazyLoad')->with(compact('newestOffers'))->render(),
