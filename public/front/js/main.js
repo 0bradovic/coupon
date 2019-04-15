@@ -14,9 +14,17 @@ $(document).ready(function () {
     $('#cookie').remove()
   })
 
+  $(document).ready(function(){
+    if(sessionStorage.getItem('newsletter') !== 'true')
+    {
+      $('.fixed_btn_form').show()
+    }
+  })
+
   //newsleter
   // $('.fixed_btn_form').hide()
   $('.close-modal').click(function(){
+    sessionStorage.setItem('newsletter',true);
     $('.fixed_btn_form').hide()
   })
   $('#open_popup').on('click', function () {
@@ -24,6 +32,7 @@ $(document).ready(function () {
   })
 })
 $('.close_popUp').on('click', function() {
+  sessionStorage.setItem('newsletter',true);
   $('.fixed_btn_form').hide()
 })
 

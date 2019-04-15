@@ -171,7 +171,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/meta/custom', 'SeoController@indexCustom')->name('custom.seo.index');
         Route::get('/create/meta/custom', 'SeoController@createCustom')->name('custom.seo.create');
         Route::post('/store/meta/custom', 'SeoController@storeCustom')->name('custom.seo.store');
-        Route::get('/edit/meta/custom/{link}', 'SeoController@editCustom')->name('custom.seo.edit');
+        Route::get('/edit/meta/custom/{id}', 'SeoController@editCustom')->name('custom.seo.edit');
         Route::post('/update/meta/custom/{id}', 'SeoController@updateCustom')->name('custom.seo.update');
         //Route::get('/delete/meta/custom/{id}', 'SeoController@destroy')->name('custom.seo.delete');
     });

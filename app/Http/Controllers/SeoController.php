@@ -166,19 +166,48 @@ class SeoController extends Controller
     {
         $offer = Offer::find($id);
         $metaTag = MetaTag::where('offer_id', $offer->id)->first();
-        return view('seo.edit',compact('metaTag','offer'));
+        if($metaTag)
+        {
+            return view('seo.edit',compact('metaTag','offer'));
+        }
+        else
+        {
+            
+            $metaTag = MetaTag::create([
+                'offer_id' => $offer->id
+            ]);
+            $url = env("APP_URL");
+            $metaTag->link = 'offer/'.$offer->slug;
+            $metaTag->save();
+            return view('seo.edit',compact('metaTag','offer'));
+        }
+        
     }
 
     public function editCategory($id)
     {
         $category = Category::find($id);
         $metaTag = MetaTag::where('category_id', $category->id)->first();
-        return view('seo.edit',compact('metaTag','category'));
+        if($metaTag)
+        {
+            return view('seo.edit',compact('metaTag','category'));
+        }
+        else
+        {
+            $metaTag = MetaTag::create([
+                'category_id' => $category->id
+            ]);
+            $url = env("APP_URL");
+            $metaTag->link = 'category/'.$category->slug;
+            $metaTag->save();
+            return view('seo.edit',compact('metaTag','category'));
+        }
+        
     }
 
-    public function editCustom($link)
+    public function editCustom($id)
     {
-        $metaTag = MetaTag::where('link', $link)->first();
+        $metaTag = MetaTag::find($id);
         return view('seo.edit',compact('metaTag'));
     }
 
