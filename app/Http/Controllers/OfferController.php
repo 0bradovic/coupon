@@ -449,9 +449,35 @@ class OfferController extends Controller
              //dd($importData_arr);
              foreach($importData_arr as $data)
              {
-                 if(count(Offer::where('name',$data[0])->where('detail',$data[1])->get()) > 0)
+                 if(Offer::where('name',$data[0])->where('detail',$data[1])->first() != null)
                  {
-                    continue;
+                     $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
+                     if($offer->endDate != null)
+                     {
+                        if($data[4] == 'Ongoing')
+                        {
+                            $offer->endDate = null;
+                            $offer->endDateNull = 1;
+                            $offer->save();
+                            continue;
+                        }
+                        elseif(Carbon::parse($data[4]) > $offer->endDate)
+                        {
+                            $offer->endDate = Carbon::parse($data[4]);
+                            $offer->endDateNull = 0;
+                            $offer->save();
+                            continue;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                     }
+                     else
+                     {
+                        continue;
+                     }
+                    
                  }
                  else
                  {
