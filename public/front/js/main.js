@@ -36,6 +36,12 @@ $('.close_popUp').on('click', function() {
   $('.fixed_btn_form').hide()
 })
 
+$('#newsletter_submit').click(function(e){
+  e.preventDefault();
+  sessionStorage.setItem('newsletter',true);
+  $('#newsletter_form').submit();
+})
+
 $('a[href="#top"]').click(function (e) {
   $('html, body').animate({ scrollTop: '0px' }, 250)
 })
@@ -91,10 +97,9 @@ $(document).ready(function () {
   if (sessionStorage.getItem('cookie') !== 'true') {
     $('body').append(`<div id="cookie">
     <div class="cookie_left">
-    <p>This site uses cookies and other tracking technologies to assist with navigation and your ability to provide feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties.</p>
+    <p>We use cookies to give you the best service. To learn more please read our <a href="https://www.beforetheshop.com/public/front/Privacy Policy.pdf" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/public/front/Cookie Policy.pdf" target="_blank" class="cookie_link">cookie</a> policy.</p>
     </div>
     <div class="cookie_right">
-    <i class="fas fa-angle-right"></i><a href="https://www.cookielaw.org/the-cookie-law/">Cookie Policy</a>
     <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
     <i class="fas fa-times-circle"></i>
     </div>
