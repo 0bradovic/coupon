@@ -21,11 +21,11 @@ class FrontController extends Controller
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-        $defaultCategory = Category::where('parent_id',null)->where('display', true)->with('subcategories')->orderBy('position')->first();
+        $defaultCategory = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->first();
         //dd($defaultCategory);
         $allNewestOffers = [];
         $allPopularOffers = [];
-        foreach($defaultCategory->subcategories as $cat)
+        foreach($defaultCategory->liveSubcategories as $cat)
         {
             $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
             $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
