@@ -340,11 +340,11 @@
                             {!! $popup->first_section !!}
                         </div>
                         <div class="fixed_btn_in_form_submit">
-                            <form method="POST" action="{{ route('subscribe') }}">
+                            <form method="POST" action="{{ route('subscribe') }}" id="newsletter_form">
                             <div class="fixedMy">
                             @csrf
                             <input type="email" name="email">
-                            <button type="submit">{{ $popup->button }}</button>
+                            <button type="submit" id="newsletter_submit">{{ $popup->button }}</button>
                             </div>
                             </form>
                             <!-- <p>You can change your email preferences at any time</p> -->

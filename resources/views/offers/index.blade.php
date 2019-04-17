@@ -56,6 +56,7 @@
                   <th>Copy</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th>SEO</th>
                 </tr>
                 @foreach($offers as $offer)
                 <tr>
@@ -80,6 +81,7 @@
                   <td><a href="{{ route('copy.offer', ['id' => $offer->id]) }}"><i class="fa fa-clone"></i></a></td>
                   <td><a href="{{ route('edit.offer', ['id' => $offer->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.offer', ['id' => $offer->id]) }}"><i class="fa fa-trash"></i></a></td>
+                  <td><a href="{{ route('offer.seo.edit', ['id' => $offer->id]) }}"><i class="fa fa-cog"></i></a></td>
                 </tr>
                 @endforeach
               </table>

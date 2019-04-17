@@ -195,6 +195,11 @@ return [
                     'text' => 'Download Offer',
                     'url'  => '/download/csv',
                 ],
+                [
+                    'text' => 'All offer meta tags',
+                    'can' => 'manage seo',
+                    'url' => '/meta/offer',
+                ],
             ]
         ],
         'CATEGORIES',
@@ -209,6 +214,27 @@ return [
                 [
                     'text' => 'Create category',
                     'url' => '/create/category',
+                ],
+                [
+                    'text' => 'All category meta tags',
+                    'can' => 'manage seo',
+                    'url' => '/meta/category',
+                ],
+            ],
+            
+        ],
+        'CUSTOM SEO',
+        [
+            'text' => 'Custom SEO',
+            'can' => 'manage seo',
+            'submenu'  => [
+                [
+                    'text' => 'All custom meta tags',
+                    'url' => '/meta/custom',
+                ],
+                [
+                    'text' => 'Create custom meta tag',
+                    'url' => '/create/meta/custom',
                 ],
             ],
             

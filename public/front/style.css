@@ -940,6 +940,14 @@ a.go_top:focus {
   margin-top: 5px;
 }
 
+.cookie_link{
+  text-decoration:underline !important;
+  color:#fff;
+}
+.cookie_link:hover{
+  color:#fff;
+}
+
 @media screen and (max-width: 1630px) {
   #header nav .form-control {
     width: 230px !important;
@@ -1117,7 +1125,7 @@ a.go_top:focus {
     width: 80%;
     justify-content: center;
     order: 1;
-    margin: 10px 0;
+    margin: 5px 0 10px 0;
   }
   .fixed_btn_in_form {
     width: 85% !important;
@@ -1267,8 +1275,13 @@ a.go_top:focus {
   #cookie .cookie_left p {
     font-size: 10px !important;
   }
+
+  .cookie-link{
+    font-size: 10px !important;
+  }
+
   #cookie .cookie_right button {
-    margin: 0 10px !important;
+    margin: 5px 10px 0 10px !important;
     font-size: 12px !important;
     line-height: 2.3 !important;
   }
@@ -1929,8 +1942,12 @@ footer .foo a:last-child {
     font-size: 12px;
   }
 
+  .cookie_link{
+    font-size:10px !important;
+  }
+
   .uk-etc {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   #header nav .form-control {
@@ -1964,7 +1981,7 @@ footer .foo a:last-child {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 5px 0;
+  padding: 0 0 5px 0;
 }
 
 #cookie .cookie_left {
@@ -1972,7 +1989,7 @@ footer .foo a:last-child {
 }
 
 #cookie .cookie_left p {
-  font-size: 12px;
+  /* font-size: 12px; */
   color: #fff;
   text-align: left;
   margin: 0;

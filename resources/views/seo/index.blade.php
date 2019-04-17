@@ -58,7 +58,7 @@
                   @endif
                   <td>{{ $metaTag->title }}</td>
                   @if(Request::is('*/custom'))
-                  <td><a href="{{ route('custom.seo.edit', ['link' => $metaTag->link]) }}"><i class="fa fa-pencil"></i></a></td>
+                  <td><a href="{{ route('custom.seo.edit', ['id' => $metaTag->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   @elseif(Request::is('*/category'))
                   <td><a href="{{ route('category.seo.edit', ['id' => $metaTag->category_id]) }}"><i class="fa fa-pencil"></i></a></td>
                   @else

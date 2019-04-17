@@ -181,17 +181,17 @@ class OfferController extends Controller
         //     }
         // }
 
-        // $newOfferMetaTag = MetaTag::create([
-        //     'offer_id' => $offer->id
-        // ]);
+        $newOfferMetaTag = MetaTag::create([
+            'offer_id' => $offer->id
+        ]);
 
-        // //$url = env("APP_URL");
-        // $newOfferMetaTag->link = 'offer/'.$offer->slug;
-        // $newOfferMetaTag->save();
+        //$url = env("APP_URL");
+        $newOfferMetaTag->link = 'offer/'.$offer->slug;
+        $newOfferMetaTag->save();
 
-        // $metaTag = MetaTag::where('offer_id', $offer->id)->first();
-        //return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
-        return redirect()->back()->with('success', 'Successfully added offer '.$offer->name);
+        $metaTag = MetaTag::where('offer_id', $offer->id)->first();
+        return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
+        //return redirect()->back()->with('success', 'Successfully added offer '.$offer->name);
         }
     /**
      * Display the specified resource.
@@ -338,11 +338,11 @@ class OfferController extends Controller
         $offer->categories()->detach();
         //$offer->tags()->detach();
         $name = $offer->name;
-        // if($offer->metaTag)
-        // {
-        //     $metaTag = MetaTag::where('offer_id', $id)->first();
-        //     $metaTag->delete();
-        // }
+        if($offer->metaTag)
+        {
+            $metaTag = MetaTag::where('offer_id', $id)->first();
+            $metaTag->delete();
+        }
         if($offer->img_src)
         {
             unlink(public_path().$offer->img_src);
@@ -449,9 +449,35 @@ class OfferController extends Controller
              //dd($importData_arr);
              foreach($importData_arr as $data)
              {
-                 if(count(Offer::where('name',$data[0])->where('detail',$data[1])->get()) > 0)
+                 if(Offer::where('name',$data[0])->where('detail',$data[1])->first() != null)
                  {
-                    continue;
+                     $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
+                     if($offer->endDate != null)
+                     {
+                        if($data[4] == 'Ongoing')
+                        {
+                            $offer->endDate = null;
+                            $offer->endDateNull = 1;
+                            $offer->save();
+                            continue;
+                        }
+                        elseif(Carbon::parse($data[4]) > $offer->endDate)
+                        {
+                            $offer->endDate = Carbon::parse($data[4]);
+                            $offer->endDateNull = 0;
+                            $offer->save();
+                            continue;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                     }
+                     else
+                     {
+                        continue;
+                     }
+                    
                  }
                  else
                  {

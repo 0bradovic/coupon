@@ -31,6 +31,7 @@
                   <th>Display</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th>SEO</th>
                 </tr>
                 @foreach($categories as $category)
                 <tr>
@@ -52,6 +53,7 @@
                   @endif
                   <td><a href="{{ route('edit.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.category', ['id' => $category->id]) }}"><i class="fa fa-trash"></i></a></td>
+                  <td><a href="{{ route('category.seo.edit', ['id' => $category->id]) }}"><i class="fa fa-cog"></i></a></td>
                 </tr>
                 @endforeach
               </table>
