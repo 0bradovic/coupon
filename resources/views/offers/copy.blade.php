@@ -94,6 +94,11 @@
                 </div>
 
             <div class="form-group">
+              <label for="alt_tag">Image alt tag</label>
+              <input type="text" class="form-control" name="alt_tag" value="{{ $offer->alt_tag }}">
+            </div>
+
+            <div class="form-group">
               <label>Display?</label><br>
               <input @if($offer->display == 1)checked @endif type="radio" name="display" value="1">Yes
               <input @if($offer->display == 0)checked @endif type="radio" name="display" value="0">No

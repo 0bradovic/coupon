@@ -13,7 +13,11 @@
 <div class="row">
         <div class="col-xs-12">
           <div class="box">
-          
+          <div style="position:absolute;top:0;right:0;z-index:1000;">
+            @if($undoDeleted != null)
+              <a href="{{ route('undo.deleted.slide') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo last deleted</a>
+            @endif
+          </div>
             <div class="box-header">
               <h3 class="box-title">All slides</h3>
               @include('layouts.messages')
@@ -39,7 +43,7 @@
                 @foreach($slides as $slide)
                 <tr>
                   <td>{{ $slide->id }}</td>
-                  <td><img src="{{ '/public/'.$slide->img_src }}" style="width:100px;height:50px;"></td>
+                  <td><img src="{{ $slide->img_src }}" style="width:100px;height:50px;"></td>
                   <td @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</td>
                   <td @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{{ $slide->left_text }}</td>
                   <td @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{{ $slide->right_text }}</td>

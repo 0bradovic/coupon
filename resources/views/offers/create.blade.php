@@ -88,6 +88,11 @@
             </div>
 
             <div class="form-group">
+              <label for="alt_tag">Image alt tag</label>
+              <input type="text" class="form-control" name="alt_tag" placeholder="Enter image alt tag">
+            </div>
+
+            <div class="form-group">
               <label>Display?</label><br>
               <input checked type="radio" name="display" value="1">Yes
               <input type="radio" name="display" value="0">No

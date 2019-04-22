@@ -11,13 +11,15 @@
 @stop
 
 @section('content')
-@if($offer->undoOffer)
-<a href="{{ route('undo') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
-<br><br>
-@endif
+
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
+      <div style="position:absolute;top:0;right:0;z-index:1000;">
+        @if($undoEdited != null)
+          <a href="{{ route('undo.edited.offer',['id' => $offer->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+        @endif
+      </div>
         <div class="box-header with-border">
           <h3 class="box-title">Edit Offer</h3>
         </div>
@@ -94,13 +96,18 @@
             
             @if($offer->img_src)
                  <div class="form-group">
-                    <img src="{{'/public/'.$offer->img_src}}" style="width:150px;height:150px;">
+                    <img src="{{$offer->img_src}}" style="width:150px;height:150px;">
                  </div>
                 @endif
                 <div class="form-group">
                     <label>Upload new offer image (optional)</label>
                     <input type="file" name="photo">
                 </div>
+
+            <div class="form-group">
+              <label for="alt_tag">Image alt tag</label>
+              <input type="text" class="form-control" name="alt_tag" value="{{ $offer->alt_tag }}">
+            </div>
 
           </div>
 

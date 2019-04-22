@@ -5,23 +5,52 @@
 @section('content_header')
 @stop
 
+@section('css')
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('back/css/style.css') }}" />
+@stop
+
 @section('content')
 <div class="row">
         <div class="col-xs-12">
 
         {{ $offers->appends(Request::except('page'))->links() }}
-        <div style="overflow:hidden">
+        <div >
               <a href="{{ route('offers.index') }}" class="btn btn-primary pull-right">ALL</a> 
               <a href="{{ route('live.offer') }}" class="btn btn-primary pull-right">LIVE</a> 
               <a href="{{ route('expired.offer') }}" class="btn btn-primary pull-right">EXPIRED</a>
               <a href="{{ route('most.popular.offers') }}" class="btn btn-primary pull-right">MOST POPULAR</a>
+              <div class="parent_categories pull-right">
+                <button class="btn btn-primary select-category" id="category-dropbtn">BY PARENT CATEGORY <i class="fa fa-angle-down" id="drop-pointer"></i></button>
+                <div class="category-options">
+                @foreach($categories as $cat)
+                  <a href="{{ route('backend.parent.category.offers',['id' => $cat->id]) }}">{{ $cat->name }}</a>
+                @endforeach
+                </div>
+                
+              </div>
               <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
         </div>
 
           <div class="box">
-          
+            <div style="z-index:1000;">
+              @if($undoDeleted != null)
+                <a href="{{ route('undo.deleted.offer') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo last deleted</a>
+              @endif
+            </div>
             <div class="box-header">
-              <h3 class="box-title">All offers</h3>
+              <h3 class="box-title">
+                @if(isset($category))
+                  {{ $category->name }} offers
+                @elseif(Request::path() == 'offers/most-popular')
+                  Most popular offers
+                @elseif(Request::path() == 'offers/expired')
+                  Expired offers
+                @elseif(Request::path() == 'offers/live')
+                  Live offers
+                @else
+                All offers
+                @endif
+              </h3>
               @include('layouts.messages')
               @include('layouts.errors')
               <div class="box-tools">
@@ -98,3 +127,13 @@
           
           
 @stop
+
+@section('js')
+<script src="{{ asset('back/js/main.js') }}"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  });
+</script>
+@endsection

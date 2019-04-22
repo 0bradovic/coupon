@@ -6,11 +6,16 @@
 @stop
 
 @section('css')
-    <link href="{{ asset('public/css/colorpicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
 @stop
 
 @section('content')
     <div class="box box-info">
+      <div style="position:absolute;top:0;right:0;z-index:1000;">
+        @if($undoEdited != null)
+          <a href="{{ route('undo.edited.offer-type',['id' => $offerType->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+        @endif
+      </div>
             <div class="box-header">
               <h3 class="box-title">Edit offer type {{ $offerType->name }}</h3>
             </div>
@@ -42,7 +47,7 @@
           </div>
 @stop
 @section('js')
-<script src="{{ asset('public/js/colorpicker.js') }}"></script>
+<script src="{{ asset('js/colorpicker.js') }}"></script>
 
 <script>
 $(function () {

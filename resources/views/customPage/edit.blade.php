@@ -4,8 +4,8 @@
 
 @section('content_header')
 @section('css')
-  <link rel="stylesheet" href="/public/css/texteditor.css">
-  <link rel="stylesheet" href="/public/css/displayNone.css">
+  <link rel="stylesheet" href="/css/texteditor.css">
+  <link rel="stylesheet" href="/css/displayNone.css">
 @stop
     
 @stop
@@ -14,6 +14,11 @@
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
+      <div style="position:absolute;top:0;right:0;z-index:1000;">
+            @if($undoEdited != null)
+              <a href="{{ route('undo.edited.custom-page',['id' => $customPage->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+            @endif
+          </div>
         <div class="box-header with-border">
           <h3 class="box-title">Edit Custom Page</h3>
         </div>
@@ -54,7 +59,7 @@
     </div>
 @stop
 @section('js')
-<script src="{{ asset('/public/js/texteditor.js') }}">
+<script src="{{ asset('/js/texteditor.js') }}">
     </script>
 <script>
   $(function () {

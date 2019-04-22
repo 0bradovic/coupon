@@ -8,7 +8,13 @@
 @section('content')
 <div class="row">
         <div class="col-xs-12">
+        
           <div class="box">
+          <div style="position:absolute;top:0;right:0;z-index:1000;">
+            @if($undoDeleted != null)
+              <a href="{{ route('undo.deleted.category') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo last deleted</a>
+            @endif
+          </div>
           
             <div class="box-header">
               <h3 class="box-title">All categories</h3>
@@ -24,6 +30,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Slug</th>
                   <th>Image</th>
                   <th>Parent Category</th>
                   <th>Position</th>
@@ -37,6 +44,7 @@
                 <tr>
                   <td>{{ $category->sku }}</td>
                   <td>{{ $category->name }}</td>
+                  <td>{{ $category->slug }}</td>
                   <td>@if($category->img_src) <img src="{{$category->img_src}}" style="width:50px;height:50px;"> @else No photo @endif </td>
                   <td>@if($category->parent_id==null)<i>This is Parent Category.</i>
                   @else

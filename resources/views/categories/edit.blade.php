@@ -6,12 +6,13 @@
 @stop
 
 @section('content')
-@if(count($category->undoCategories)>0)
-<a href="{{ route('undoCategory') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
-<br><br>
-@endif
 
     <div class="box box-warning">
+      @if($undoEdited != null)
+        <div style="position:absolute;top:0;right:0;z-index:1000;">
+            <a href="{{ route('undo.edited.category',['id' => $category->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+        </div>
+      @endif
             <div class="box-header with-border">
               <h3 class="box-title">Edit category {{ $category->name }}</h3>
             </div>
@@ -27,7 +28,7 @@
                 </div>
                 <div class="form-group">
                      <label for="position">Position</label>
-                     <input type="number" class="form-control" name="position" value={{$category->position}}>
+                     <input type="number" class="form-control" name="position" value="{{$category->position}}">
                 </div>
                 @if($category->img_src)
                  <div class="form-group">

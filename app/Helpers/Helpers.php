@@ -14,7 +14,7 @@ public static function getMetaTags()
     {
         $path = Request::path();
 
-        $tag = MetaTag::where('link', $path)->orWhere('is_default', true)->orderBy('is_default', 'asc')->first();
+        $tag = MetaTag::where('link', $path)->orWhere('is_default', 1)->orderBy('is_default', 'asc')->first();
         if($tag)
         {
 

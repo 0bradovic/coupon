@@ -1,0 +1,31 @@
+
+.parent_categories{
+    position:relative;
+}
+
+.category-options{
+    background-color:#fff;
+    border: 1px solid #D2D6DE;
+    position:absolute;
+    top:33px;
+    z-index:100;
+    width:100%;
+    display:none;
+    text-align:center;
+}
+
+.category-options a{
+    display:block;
+    padding:5px;
+    border-bottom:1px solid #D2D6DE;
+    text-align:center;
+    transition:0.8s;
+}
+.category-options a:hover{
+    background-color:#D2D6DE;
+    color:#333;
+}
+
+.select-category i{
+    margin-left:5px;
+}

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\MetaTag;
 use Illuminate\Routing\UrlGenerator;
-use App\UndoCategory;
-
+use App\Undo;
+use App\Offer;
 
 
 class CategoryController extends Controller
@@ -20,7 +20,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $undoDeleted = Undo::where('category_id','<>',null)->where('type','Deleted')->first();
+        return view('categories.index', compact('categories','undoDeleted'));
     }
 
     /**
@@ -46,7 +47,23 @@ class CategoryController extends Controller
             'name' => 'required',
             'position' => 'required',
         ]);
+        //$slug = $this->createSlug($request->name);
         $slug = $this->createSlug($request->name);
+         $i = 1;
+        if(count(Category::where('slug', $slug)->get()) > 0)
+        {
+            do{
+            $x=Category::where('slug', $slug)->get();
+            if($x) $newSlug = $slug.$i;
+            //$slug = $slug.$i;
+            $i++;
+            }while(count(Category::where('slug', $newSlug)->get())>0);
+            
+            if($newSlug)
+            {
+                $slug = $newSlug;
+            }
+        }
         $parent_id = null;
         $img_src = null;
         $lastCategorySku = Category::all()->pluck('sku')->last();
@@ -115,7 +132,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $categories = Category::where('parent_id',null)->where('id', '!=', $id)->get();
-        return view('categories.edit',compact('category','categories'));
+        $undoEdited = Undo::where('type','Edited')->where('category_id',$category->id)->first();
+        return view('categories.edit',compact('category','categories','undoEdited'));
     }
 
     /**
@@ -132,19 +150,40 @@ class CategoryController extends Controller
             'position' => 'required'
         ]);
         $category = Category::find($id);
-        $undoCategory = UndoCategory::first();
-        $undoCategory->update([
-            'name' => $category->name,
-            'sku' => $category->sku,
-            'img_src' => $category->img_src,
-            'parent_id' => $category->parent_id,
-            'summary' => $category->summary,
-            'slug' => $category->slug,
-            'display' => $category->display,
-            'category_id' => $category->id,
-            'position' => $category->position,
-        ]);
+        $hasUndo = Undo::where('category_id','<>',null)->where('type','Edited')->first();
+        $properties = $category->toJson();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'category_id' => $category->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'category_id' => $category->id,
+            ]);
+        }
         $slug = $this->createSlug($request->name);
+        $i = 1;
+        if(count(Category::where('slug', $slug)->get()) > 0)
+        {
+            do{
+            $x=Category::where('slug', $slug)->get();
+            if($x) $newSlug = $slug.$i;
+            //$slug = $slug.$i;
+            $i++;
+            }while(count(Category::where('slug', $newSlug)->get())>0);
+            
+            if($newSlug)
+            {
+                $slug = $newSlug;
+            }
+        }
         $category = Category::find($id);
         $parent_id = null;
         $img_src = null;
@@ -186,6 +225,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        
         $subCategories = Category::where('parent_id', $category->id)->get();
         if(count($subCategories) > 0)
         {
@@ -203,11 +243,114 @@ class CategoryController extends Controller
                 $metaTag = MetaTag::where('category_id', $id)->first();
                 $metaTag->delete();
             }
+            $offerIds = $category->offers()->pluck('id');
+            $properties = $category->toJson();
+            $properties = json_decode($properties);
+            $properties->offers = $offerIds;
+            $properties = json_encode($properties);
+            $hasUndo = Undo::where('category_id','<>',null)->where('type','Deleted')->first();
+            if($hasUndo == null)
+            {
+                $undo = Undo::create([
+                    'properties' => $properties,
+                    'type' => 'Deleted',
+                    'category_id' => $category->id,
+                ]);
+            }
+            else
+            {
+                $hasUndo->update([
+                    'properties' => $properties,
+                    'type' => 'Deleted',
+                    'category_id' => $category->id,
+                ]);
+            }
             
             $category->delete();
             return redirect()->back()->with('success','Successfully deleted category '.$name);
         }
         
+    }
+
+    public function undoDeleted()
+    {
+        $undo = Undo::where('category_id','<>',null)->where('type','Deleted')->first();
+        $props = json_decode($undo->properties);
+        //dd($props);
+        $slug = $this->createSlug($props->name);
+         $i = 1;
+        if(count(Category::where('slug', $slug)->get()) > 0)
+        {
+            do{
+            $x=Category::where('slug', $slug)->get();
+            if($x) $newSlug = $slug.$i;
+            //$slug = $slug.$i;
+            $i++;
+            }while(count(Category::where('slug', $newSlug)->get())>0);
+            
+            if($newSlug)
+            {
+                $slug = $newSlug;
+            }
+        }
+        $lastCategorySku = Category::all()->pluck('sku')->last();
+        if($lastCategorySku)
+        {
+            $sku = intval($lastCategorySku) + 1;
+        }
+        else
+        {
+            $sku = 1000;
+        }
+        
+        $category = Category::create([
+            'name' => $props->name,
+            'sku' => $sku,
+            'slug' => $slug,
+            'img_src' => null,
+            'parent_id' => $props->parent_id,
+            'position' => $props->position,
+            'display' => $props->display,
+        ]);
+        foreach($props->offers as $offer)
+        {
+            $category->offers()->attach($offer);
+        }
+        $newCategoryMetaTag = MetaTag::create([
+            'category_id' => $category->id
+        ]);
+        
+        $url = env("APP_URL");
+        $newCategoryMetaTag->link = 'category/'.$category->slug;
+        $newCategoryMetaTag->save();
+        $undo->delete();
+        return redirect()->back()->with('success', 'Successfully restore last deleted category.');
+       
+    }
+
+    public function undoEdited($id)
+    {
+        $category = Category::find($id);
+        $undo = Undo::where('type','Edited')->where('category_id',$category->id)->first();
+        if($undo != null)
+        {
+            $props = json_decode($undo->properties);
+            $category->update([
+                'name' => $props->name,
+                'slug' => $props->slug,
+                'sku' => $props->sku,
+                'img_src' => $props->img_src,
+                'parent_id' => $props->parent_id,
+                'position' => $props->position,
+                'display' => $props->display,
+            ]);
+            $undo->delete();
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        return redirect()->back()->with('success', 'Successfully undo category.');
     }
 
     public function display($id)
@@ -219,21 +362,4 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Successfully changed visibility of category '.$category->name);
     }
 
-
-    public function undoEdit()
-    {
-        $undo = UndoCategory::first();
-        $category = Category::find($undo->category_id);
-        $category->update([
-            'name' => $undo->name,
-            'sku' => $undo->sku,
-            'img_src' => $undo->img_src,
-            'parent_id' => $undo->parent_id,
-            'summary' => $undo->summary,
-            'slug' => $undo->slug,
-            'display' => $undo->display,
-            'position' => $undo->position,
-        ]);
-        return redirect()->back();
-    }
 }

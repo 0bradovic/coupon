@@ -11,6 +11,11 @@
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
+      <div style="position:absolute;top:0;right:0;z-index:1000;">
+        @if($undoEdited != null)
+          <a href="{{ route('undo.edited.user',['id' => $user->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+        @endif
+      </div>
         <div class="box-header with-border">
           <h3 class="box-title">Edit User</h3>
         </div>

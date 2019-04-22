@@ -12,8 +12,8 @@ use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
 use App\Support\Collection;
-use App\UndoOffer;
 use Response;
+use App\Undo;
 
 
 class OfferController extends Controller
@@ -26,7 +26,9 @@ class OfferController extends Controller
     public function index()
     {
         $offers = Offer::orderBy('position')->paginate(15);
-        return view('offers.index',compact('offers'));
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','undoDeleted'));
     }
 
     public function liveOffers()
@@ -35,19 +37,25 @@ class OfferController extends Controller
         $offer = new Offer();
         $offers = $offer->filterOffers($offers);
         $offers = (new Collection($offers))->paginate(15);
-        return view('offers.index',compact('offers'));
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','undoDeleted'));
     }
 
     public function expiredOffers()
     {
         $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
-        return view('offers.index',compact('offers'));
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','undoDeleted'));
     }
     
     public function mostPopularOffers()
     {
         $offers = Offer::orderBy('click','DESC')->paginate(15);
-        return view('offers.index',compact('offers'));
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','undoDeleted'));
     }
 
     /**
@@ -66,8 +74,9 @@ class OfferController extends Controller
     public function searchOffers(Request $request)
     {
         $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
-
-        return view('offers.index',compact('offers'));
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','undoDeleted'));
 
     }
 
@@ -167,6 +176,7 @@ class OfferController extends Controller
             'user_id' => Auth::user()->id,
             'position' => $request->position,
             'img_src' => $img_src,
+            'alt_tag' => $request->alt_tag,
             'display' => $request->display,
         ]);
         foreach($request->categories as $category)
@@ -216,7 +226,8 @@ class OfferController extends Controller
         //$tags = Tag::all();
         $offerTypes = OfferType::all();
         $categories = Category::all();
-        return view('offers.edit',compact('offer','offerTypes','categories'));
+        $undoEdited = Undo::where('offer_id',$id)->where('type','Edited')->first();
+        return view('offers.edit',compact('offer','offerTypes','categories','undoEdited'));
     }
 
     /**
@@ -238,25 +249,41 @@ class OfferController extends Controller
             'categories' => 'required'
         ]);
         $offer = Offer::find($id);
-        $undoOffer = UndoOffer::first();
-        $undoOffer->update([
-            'name' => $offer->name,
-            'sku' => $offer->sku,
-            'brand_id' => $offer->brand_id,
-            'highlight' => $offer->highlight,
-            'summary' => $offer->summary,
-            'detail' => $offer->detail,
-            'link' => $offer->link,
-            'startDate' => $offer->startDate,
-            'endDate' => $offer->endDate,
-            'offer_type_id' => $offer->offer_type_id,
-            'position' => $offer->position,
-            'user_id' => $offer->user_id,
-            'img_src' => $offer->img_src,
-            'endDateNull' => $offer->endDateNull,
-            'slug' => $offer->slug,
-            'offer_id' => $offer->id,
-        ]);
+        $hasUndo = Undo::where('offer_id','<>',null)->where('type','Edited')->first();
+        $properties = $offer->toJson();
+        $categoryIds = $offer->categories()->pluck('id');
+        $properties = json_decode($properties);
+        $properties->categories = $categoryIds;
+        $properties->img_changed = 0;
+        $img_src = $offer->img_src;
+        if($request->photo)
+        {
+            $img_url = public_path().$offer->img_src;
+            $info = pathinfo($img_url);
+            $contents = file_get_contents($img_url);
+            $name = $info['basename'];
+            $offer_img_src = '/images/undo/offer/'.$name;
+            file_put_contents(public_path().$offer_img_src, $contents);
+            $properties->img_src = $offer_img_src;
+            $properties->img_changed = 1;
+        }
+        $properties = json_encode($properties);
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'offer_id' => $offer->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'offer_id' => $offer->id,
+            ]);
+        }
         $slug = $this->createSlug($request->name);
         $i = 1;
         if(count(Offer::where('slug', $slug)->where('id','!=',$offer->id)->get()) > 0)
@@ -293,6 +320,7 @@ class OfferController extends Controller
             'offer_type_id' => $request->offer_type_id,
             'user_id' => Auth::user()->id,
             'position' => $request->position,
+            'alt_tag' => $request->alt_tag,
         ]);
         $offer->categories()->detach();
         foreach($request->categories as $category)
@@ -335,6 +363,35 @@ class OfferController extends Controller
     public function destroy($id)
     {
         $offer = Offer::find($id);
+        $img_url = public_path().$offer->img_src;
+        $info = pathinfo($img_url);
+        $contents = file_get_contents($img_url);
+        $name = $info['basename'];
+        $img_src = '/images/undo/offer/'.$name;
+        file_put_contents(public_path().$img_src, $contents);
+        $categoryIds = $offer->categories()->pluck('id');
+        $properties = $offer->toJson();
+        $properties = json_decode($properties);
+        $properties->img_src = $img_src;
+        $properties->categories = $categoryIds;
+        $properties = json_encode($properties);
+        $hasUndo = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'offer_id' => $offer->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'offer_id' => $offer->id,
+            ]);
+        }
         $offer->categories()->detach();
         //$offer->tags()->detach();
         $name = $offer->name;
@@ -351,28 +408,163 @@ class OfferController extends Controller
         return redirect()->back()->with('success', 'Successfully deleted offer '.$name);
     }
 
-    public function undo()
+    public function undoDeleted()
     {
-        $undo = UndoOffer::first();
-        $offer = Offer::find($undo->offer_id);
-        $offer->update([
-            'name' => $undo->name,
-            'sku' => $undo->sku,
-            'brand_id' => $undo->brand_id,
-            'highlight' => $undo->highlight,
-            'summary' => $undo->summary,
-            'detail' => $undo->detail,
-            'link' => $undo->link,
-            'startDate' => $undo->startDate,
-            'endDate' => $undo->endDate,
-            'offer_type_id' => $undo->offer_type_id,
-            'position' => $undo->position,
-            'user_id' => $undo->user_id,
-            'img_src' => $undo->img_src,
-            'endDateNull' => $undo->endDateNull,
-            'slug' => $undo->slug,
-        ]);
-        return redirect()->back();
+        $undo = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            $slug = $this->createSlug($props->name);
+            $i = 1;
+            if(count(Offer::where('slug', $slug)->get()) > 0)
+            {
+                do{
+                $x=Offer::where('slug', $slug)->get();
+                if($x) $newSlug = $slug.$i;
+                //$slug = $slug.$i;
+                $i++;
+                }while(count(Offer::where('slug', $newSlug)->get())>0);
+                
+                if($newSlug)
+                {
+                    $slug = $newSlug;
+                }
+            }
+            $lastOfferSku = Offer::all()->pluck('sku')->last();
+            if($lastOfferSku)
+            {
+                $sku = intval($lastOfferSku) + 1;
+            }
+            else
+            {
+                $sku = 10000000;
+            }
+            $img_url = public_path().$props->img_src;
+            $info = pathinfo($img_url);
+            $contents = file_get_contents($img_url);
+            $name = $info['basename'];
+            $img_src = '/images/offer/'.$name;
+            file_put_contents(public_path().$img_src, $contents);
+            $offerType = OfferType::find($props->offer_type_id);
+            if($offerType == null)
+            {
+                $offer_type_id = null;
+            }
+            else
+            {
+                $offer_type_id = $offerType->id;
+            }
+            $offer = Offer::create([
+                'name' => $props->name,
+                'slug' => $slug,
+                'sku' => $sku,
+                'detail' => $props->detail,
+                'link' => $props->link,
+                'startDate' => $props->startDate,
+                'endDate' => $props->endDate,
+                'endDateNull' => $props->endDateNull,
+                'img_src' => $img_src,
+                'alt_tag' => $props->alt_tag,
+                'offer_type_id' => $offer_type_id,
+                'user_id' => $props->user_id,
+                'position' => $props->position,
+                'display' => $props->display,
+                'click' => $props->click,
+            ]);
+            $categories = Category::find($props->categories);
+            foreach($categories as $category)
+            {
+                $offer->categories()->attach($category->id);
+            }
+            $newOfferMetaTag = MetaTag::create([
+                'offer_id' => $offer->id
+            ]);
+    
+            //$url = env("APP_URL");
+            $newOfferMetaTag->link = 'offer/'.$offer->slug;
+            $newOfferMetaTag->save();
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully restore last deleted offer.');
+        }
+    }
+
+    public function undoEdited($id)
+    {
+        $offer = Offer::find($id);
+        $undo = Undo::where('offer_id',$id)->where('type','Edited')->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            if($props->img_changed == 0)
+            {
+                $offer->update([
+                    'name' => $props->name,
+                    'slug' => $props->slug,
+                    'sku' => $props->sku,
+                    'detail' => $props->detail,
+                    'link' => $props->link,
+                    'startDate' => $props->startDate,
+                    'endDate' => $props->endDate,
+                    'endDateNull' => $props->endDateNull,
+                    'img_src' => $props->img_src,
+                    'alt_tag' => $props->alt_tag,
+                    'offer_type_id' => $props->offer_type_id,
+                    'user_id' => $props->user_id,
+                    'position' => $props->position,
+                    'display' => $props->display,
+                    'click' => $props->click,
+                ]);
+                $offer->categories()->detach();
+                $categories = Category::find($props->categories);
+                foreach($categories as $category)
+                {
+                    $offer->categories()->attach($category->id);
+                }
+            }
+            else
+            {
+                $img_url = public_path().$props->img_src;
+                $info = pathinfo($img_url);
+                $contents = file_get_contents($img_url);
+                $name = $info['basename'];
+                $img_src = '/images/offer/'.$name;
+                file_put_contents(public_path().$img_src, $contents);
+                unlink(public_path().$offer->img_src);
+                $offer->update([
+                    'name' => $props->name,
+                    'slug' => $props->slug,
+                    'sku' => $props->sku,
+                    'detail' => $props->detail,
+                    'link' => $props->link,
+                    'startDate' => $props->startDate,
+                    'endDate' => $props->endDate,
+                    'endDateNull' => $props->endDateNull,
+                    'img_src' => $img_src,
+                    'alt_tag' => $props->alt_tag,
+                    'offer_type_id' => $props->offer_type_id,
+                    'user_id' => $props->user_id,
+                    'position' => $props->position,
+                    'display' => $props->display,
+                    'click' => $props->click,
+                ]);
+                $offer->categories()->detach();
+                $categories = Category::find($props->categories);
+                foreach($categories as $category)
+                {
+                    $offer->categories()->attach($category->id);
+                }
+            }
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully undo offer.');
+        }
     }
 
     
@@ -410,7 +602,7 @@ class OfferController extends Controller
 
         // Valid File Extensions
         $valid_extension = array("csv");
-
+        
          // Check file extension
         if(in_array(strtolower($extension),$valid_extension)){
             // File upload location
@@ -421,18 +613,21 @@ class OfferController extends Controller
             $filepath = public_path($location."/".$filename);
             // Reading file
             $file = fopen($filepath,"r");
-
+            
             $importData_arr = array();
             $i = 0;
             while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-                $num = count($filedata );
                 
+                $num = count($filedata );
+                //dd($filedata);
                 // Skip first row (Remove below comment if you want to skip the first row)
                 if($i == 0){
                    $i++;
                    continue; 
                 }
+                
                 for ($c=0; $c < $num; $c++) {
+                    
                     if($filedata [$c] != '')
                     {
                         $importData_arr[$i][] = $filedata [$c];
@@ -446,9 +641,10 @@ class OfferController extends Controller
                 $i++;
              }
              fclose($file);
-             //dd($importData_arr);
+             
              foreach($importData_arr as $data)
              {
+                 //dd(Carbon::parse($data[4]));
                  if(Offer::where('name',$data[0])->where('detail',$data[1])->first() != null)
                  {
                      $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
@@ -541,6 +737,15 @@ class OfferController extends Controller
                     $name = time().$info['basename'];
                     $img_src = '/images/offer/'.$name;
                     file_put_contents(public_path().$img_src, $contents);
+                    $offerType = OfferType::where('name',$data[6])->first();
+                    if($offerType == null)
+                    {
+                        $offer_type_id = null;
+                    }
+                    else
+                    {
+                        $offer_type_id = $offerType->id;
+                    }
                     $insertData = array(
                     'name' => $data[0],
                     'slug' => $slug,
@@ -552,8 +757,19 @@ class OfferController extends Controller
                     'endDateNull' => $endDateNull,
                     'img_src' => $img_src,
                     'user_id' => Auth::user()->id,
+                    'offer_type_id' => $offer_type_id,
                     );
-                    Offer::create($insertData);
+                    $offer = Offer::create($insertData);
+                    $categorySlugs = explode(',',$data[7]);
+                    foreach($categorySlugs as $categorySlug)
+                    {
+                        $category = Category::where('slug',$categorySlug)->first();
+                        if($category != null)
+                        {
+                            $offer->categories()->attach($category->id);
+                        }
+                    }
+
                 }
              }
         }else{
@@ -581,18 +797,21 @@ class OfferController extends Controller
         {
             $offers = Offer::find($request->offers);
         }
+        
         $filename = 'offers.csv';
         $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image'));
+        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories'));
         foreach($offers as $offer)
         {
+            $categories = $offer->categories()->pluck('slug')->toArray();
+            $categories = implode(',',$categories);
             if($offer['endDate'] == null)
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src']));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offer->offerType->name,$categories));
             }
             else
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src']));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offer->offerType->name,$categories));
             }
                 
         }
@@ -607,6 +826,25 @@ class OfferController extends Controller
     {
         $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->get();
         return view('offers.download',compact('offers'));
+    }
+
+    public function parentCategoryOffers($id)
+    {
+        $category = Category::find($id);
+        $collections = [];
+        foreach($category->subcategories as $cat)
+        {
+            $collections[] = $cat->offers;
+        }
+        $offers = new Collection();
+        foreach($collections as $item)
+        {
+            $offers = $offers->merge($item);
+        }
+        $offers = (new Collection($offers))->paginate(15);
+        $categories = Category::where('parent_id',null)->get();
+        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+        return view('offers.index',compact('offers','categories','category','undoDeleted'));
     }
 
 }

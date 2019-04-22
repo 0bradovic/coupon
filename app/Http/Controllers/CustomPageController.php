@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CustomPage;
+use App\Undo;
 
 class CustomPageController extends Controller
 {
@@ -15,7 +16,8 @@ class CustomPageController extends Controller
     public function index()
     {
         $customPages = CustomPage::all();
-        return view('customPage.index',compact('customPages'));
+        $undoDeleted = Undo::where('custom_page_id','<>',null)->where('type','Deleted')->first();
+        return view('customPage.index',compact('customPages','undoDeleted'));
     }
 
     /**
@@ -74,7 +76,8 @@ class CustomPageController extends Controller
     public function edit($id)
     {
         $customPage = CustomPage::find($id);
-        return view('customPage.edit',compact('customPage'));
+        $undoEdited = Undo::where('type','Edited')->where('custom_page_id',$customPage->id)->first();
+        return view('customPage.edit',compact('customPage','undoEdited'));
     }
 
     /**
@@ -92,6 +95,24 @@ class CustomPageController extends Controller
             'position' => 'required',
         ]);
         $customPage = CustomPage::find($id);
+        $properties = $customPage->toJson();
+        $hasUndo = Undo::where('custom_page_id','<>',null)->where('type','Edited')->first();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'custom_page_id' => $customPage->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'custom_page_id' => $customPage->id,
+            ]);
+        }
         $slug = $this->createSlug($request->name);
         $customPage->update([
             'name' => $request->name,
@@ -111,6 +132,24 @@ class CustomPageController extends Controller
     public function destroy($id)
     {
         $customPage = CustomPage::find($id);
+        $properties = $customPage->toJson();
+        $hasUndo = Undo::where('custom_page_id','<>',null)->where('type','Deleted')->first();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'custom_page_id' => $customPage->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'custom_page_id' => $customPage->id,
+            ]);
+        }
         $name = $customPage->name;
         $customPage->delete();
         return redirect()->back()->with('success', 'Successfully deleted custom page '.$name);
@@ -122,6 +161,44 @@ class CustomPageController extends Controller
         $customPage->update([
             'active' => $request->active,
         ]);
+    }
+
+    public function undoDeleted()
+    {
+        $undo = Undo::where('custom_page_id','<>',null)->where('type','Deleted')->first();
+        $props = json_decode($undo->properties);
+        $customPage = CustomPage::create([
+            'name' => $props->name,
+            'text' => $props->text,
+            'slug' => $props->slug,
+            'position' => $props->position,
+            'active' => $props->active,
+        ]);
+        $undo->delete();
+        return redirect()->back()->with('success', 'Successfully restore last deleted custom page.');
+    }
+
+    public function undoEdited($id)
+    {
+        $customPage = CustomPage::find($id);
+        $undo = Undo::where('type','Edited')->where('custom_page_id',$customPage->id)->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            $customPage->update([
+                'name' => $props->name,
+                'text' => $props->text,
+                'slug' => $props->slug,
+                'position' => $props->position,
+                'active' => $props->active,
+            ]);
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully undo custom page.');
+        }
     }
 
 }

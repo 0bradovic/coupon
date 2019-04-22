@@ -101,11 +101,9 @@
                         @php $i = 1; @endphp
                     @foreach($categories as $category)
                         <div class="dropdown">
-                        <form method="GET" action="{{ route('parent.category.offers') }}">
-                            @csrf
-                            <input type="hidden" name="name" value="{{ $category->name }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $category->name }}</button>
-                        </form>
+                        
+                            <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;" @endif>{{ $category->name }}</a>
+                        
                         </div>
                         @php $i++; @endphp
                     @endforeach
@@ -143,7 +141,7 @@
                     @foreach($slides as $slide)
                         <div @if($slide == $slides[0]) class="carousel-item active" @else class="carousel-item" @endif>
                             
-                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ $slide->img_src }}" alt="{{ $slide->alt_tag }}">
                             
                             @if($slide->center_text)
                                 <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
@@ -190,7 +188,7 @@
                     <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
-                        <img src="{{ $offer->img_src }}"  
+                        <img src="{{ $offer->img_src }}"  alt="{{ $offer->alt_tag }}"
                         @if($height>$width) style="height:100%;width:auto;"
                         @else style="height:auto;width:100%"; 
                         @endif>
@@ -221,6 +219,7 @@
                         
                         <small>
                             {!! $offer->formatDetails($offer->detail) !!}
+                            
                         </small>  
                                     
                     </a>
@@ -252,7 +251,7 @@
                     <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
-                        <img src="{{ $offer->img_src }}"  
+                        <img src="{{ $offer->img_src }}"  alt="{{ $offer->alt_tag }}"
                         @if($height>$width) style="height:100%;width:auto;"
                         @else style="height:auto;width:100%"; 
                         @endif>

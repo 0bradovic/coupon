@@ -27,6 +27,11 @@
                     <input type="file" name="photo">
                 </div>
 
+                <div class="form-group">
+                    <label for="alt_tag">Slide alt tag</label>
+                    <input type="text" class="form-control" name="alt_tag" placeholder="Enter image alt tag...">
+                </div>
+
                 <div class="form-group" style="display:none;">
                     <label for="up_text">Up text</label>
                     <input type="text" class="form-control" name="up_text" placeholder="Enter up text...">

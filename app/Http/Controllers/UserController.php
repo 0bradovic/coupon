@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Undo;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index',compact('users'));
+        $undoDeleted = Undo::where('user_id','<>',null)->where('type','Deleted')->first();
+        return view('users.index',compact('users','undoDeleted'));
     }
 
     /**
@@ -77,7 +79,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::all();
-        return view('users.edit',compact('user','roles'));
+        $undoEdited = Undo::where('type','Edited')->where('user_id',$user->id)->first();
+        return view('users.edit',compact('user','roles','undoEdited'));
     }
 
     /**
@@ -97,6 +100,29 @@ class UserController extends Controller
                 'password' => 'required|confirmed',
             ]);
             $user = User::find($id);
+            $properties = $user->toJson();
+            $roleIds = $user->roles()->pluck('id');
+            $properties = json_decode($properties);
+            $properties->roles = $roleIds;
+            $properties = json_encode($properties);
+            $hasUndo = Undo::where('user_id','<>',null)->where('type','Edited')->first();
+            //dd($hasUndo);
+            if($hasUndo == null)
+            {
+                $undo = Undo::create([
+                    'properties' => $properties,
+                    'type' => 'Edited',
+                    'user_id' => $user->id,
+                ]);
+            }
+            else
+            {
+                $hasUndo->update([
+                    'properties' => $properties,
+                    'type' => 'Edited',
+                    'user_id' => $user->id,
+                ]);
+            } 
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -115,6 +141,28 @@ class UserController extends Controller
                 'email' => 'required|email',
             ]);
             $user = User::find($id);
+            $properties = $user->toJson();
+            $roleIds = $user->roles()->pluck('id');
+            $properties = json_decode($properties);
+            $properties->roles = $roleIds;
+            $properties = json_encode($properties);
+            $hasUndo = Undo::where('user_id','<>',null)->where('type','Edited')->first();
+            if($hasUndo == null)
+            {
+                $undo = Undo::create([
+                    'properties' => $properties,
+                    'type' => 'Edited',
+                    'user_id' => $user->id,
+                ]);
+            }
+            else
+            {
+                $hasUndo->update([
+                    'properties' => $properties,
+                    'type' => 'Edited',
+                    'user_id' => $user->id,
+                ]);
+            }
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -137,7 +185,78 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $name = $user->name;
+        $roleIds = $user->roles()->pluck('id');
+        $properties = $user->toJson();
+        $properties = json_decode($properties);
+        $properties->roles = $roleIds;
+        $properties = json_encode($properties);
+        $hasUndo = Undo::where('user_id','<>',null)->where('type','Deleted')->first();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'user_id' => $user->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'user_id' => $user->id,
+            ]);
+        }
         $user->delete();
         return redirect()->back()->with('success','Successfully deleted user '.$name);
     }
+
+    public function undoDeleted()
+    {
+        $undo = Undo::where('user_id','<>',null)->where('type','Deleted')->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            $user = User::create([
+                'name' => $props->name,
+                'email' => $props->email,
+                'password' => $props->password,
+            ]);
+            $roles = Role::find($props->roles);
+            if($roles)
+            {
+                $user->assignRole($roles);
+            }
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully restore last deleted user.');
+        }
+    }
+
+    public function undoEdited($id)
+    {
+        $user = User::find($id);
+        $undo = Undo::where('user_id',$id)->where('type','Edited')->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            $user->update([
+                'name' => $props->name,
+                'email' => $props->email,
+                'password' => $props->password,
+            ]);
+            $roles = Role::find($props->roles);
+            $user->syncRoles($roles);
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully undo user');
+        }
+    }
+
 }

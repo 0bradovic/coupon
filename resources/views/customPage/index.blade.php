@@ -11,7 +11,11 @@
 
        
           <div class="box">
-          
+          <div style="position:absolute;top:0;right:0;z-index:1000;">
+            @if($undoDeleted != null)
+              <a href="{{ route('undo.deleted.custom-page') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo last deleted</a>
+            @endif
+          </div>
             <div class="box-header">
               <h3 class="box-title">All Custom Pages</h3>
               @include('layouts.messages')

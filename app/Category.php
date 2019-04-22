@@ -50,6 +50,11 @@ class Category extends Model
         return $this->hasMany(UndoCategory::class);
     }
 
+    public function undo()
+    {
+        return $this->hasOne(Undo::class);
+    }
+
     public function getLiveOffersByCategory($id)
     {
         $cat = Category::where('id', $id)->where('display', true)->first();

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\OfferType;
+use App\Undo;
+use App\Offer;
 
 class OfferTypeController extends Controller
 {
@@ -15,7 +17,8 @@ class OfferTypeController extends Controller
     public function index()
     {
         $offerTypes = OfferType::all();
-        return view('offer-types.index',compact('offerTypes'));
+        $undoDeleted = Undo::where('offer_type_id','<>',null)->where('type','Deleted')->first();
+        return view('offer-types.index',compact('offerTypes','undoDeleted'));
     }
 
     /**
@@ -74,7 +77,8 @@ class OfferTypeController extends Controller
     public function edit($id)
     {
         $offerType = OfferType::find($id);
-        return view('offer-types.edit',compact('offerType'));
+        $undoEdited = Undo::where('type','Edited')->where('offer_type_id',$id)->first();
+        return view('offer-types.edit',compact('offerType','undoEdited'));
     }
 
     /**
@@ -98,6 +102,24 @@ class OfferTypeController extends Controller
             $color = '#000';
         }
         $offerType = OfferType::find($id);
+        $hasUndo = Undo::where('offer_type_id','<>',null)->where('type','Edited')->first();
+        $properties = $offerType->toJson();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'offer_type_id' => $offerType->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Edited',
+                'offer_type_id' => $offerType->id,
+            ]);
+        }
         $offerType->update([
             'name' => $request->name,
             'color' => $color,
@@ -114,8 +136,78 @@ class OfferTypeController extends Controller
     public function destroy($id)
     {
         $offerType = OfferType::find($id);
+        $offerIds = Offer::where('offer_type_id',$offerType->id)->pluck('id')->toArray();
+        //dd($offerIds);
+        $properties = $offerType->toJson();
+        //dd($properties);
+        $properties = json_decode($properties);
+        $properties->offers = $offerIds;
+        $properties = json_encode($properties);
+        //dd($properties);
+        $hasUndo = Undo::where('offer_type_id','<>',null)->where('type','Deleted')->first();
+        if($hasUndo == null)
+        {
+            $undo = Undo::create([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'offer_type_id' => $offerType->id,
+            ]);
+        }
+        else
+        {
+            $hasUndo->update([
+                'properties' => $properties,
+                'type' => 'Deleted',
+                'offer_type_id' => $offerType->id,
+            ]);
+        }
         $name = $offerType->name;
         $offerType->delete();
         return redirect()->back()->with('success', 'Successfully deleted offer type '.$name);
+    }
+
+    public function undoDeleted()
+    {
+        $undo = Undo::where('offer_type_id','<>',null)->where('type','Deleted')->first();
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $props = json_decode($undo->properties);
+            $offerType = OfferType::create([
+                'name' => $props->name,
+                'color' => $props->color,
+            ]);
+            $offers = Offer::find($props->offers);
+            foreach($offers as $offer)
+            {
+                $offer->offer_type_id = $offerType->id;
+                $offer->save();
+            }
+            $undo->delete();
+            return redirect()->back()->with('success','Successfully restore last deleted offer type');
+        }
+    }
+
+    public function undoEdited($id)
+    {
+        $offerType = OfferType::find($id);
+        $undo = Undo::where('offer_type_id',$id)->where('type','Edited')->first();
+        $props = json_decode($undo->properties);
+        if($undo == null)
+        {
+            return redirect()->back()->withErrors(['Something went wrong.']);
+        }
+        else
+        {
+            $offerType->update([
+                'name' => $props->name,
+                'color' => $props->color,
+            ]);
+            $undo->delete();
+            return redirect()->back()->with('success', 'Successfully undo offer type.');
+        }
     }
 }

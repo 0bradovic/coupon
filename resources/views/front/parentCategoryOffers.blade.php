@@ -85,11 +85,8 @@
                         @php $i = 1; @endphp
                     @foreach($categories as $cate)
                         <div class="dropdown">
-                        <form method="GET" action="{{ route('parent.category.offers') }}">
-                            @csrf
-                            <input type="hidden" name="name" value="{{ $cate->name }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($category->name == $cate->name) style="text-decoration:underline;" @endif>{{ $cate->name }}</button>
-                        </form>
+                        
+                        <a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($category->name == $cate->name) style="text-decoration:underline !important;" @endif>{{ $cate->name }}</a>
                         </div>
                         @php $i++; @endphp
                     @endforeach
@@ -124,7 +121,7 @@
     </div>
         <div id="cont" class="container main_offers_container">
             
-        <div class="offers_list_holder endless-pagination newestOffers" data-name="{{ $category->name }}" data-next-page="{{ $newestOffers->nextPageUrl() }}">
+        <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder" style="margin-top:0!important">
             <a href="#" class="suggestions">Most Popular</a>
             <!-- <a href="#">Most Popular</a> -->
@@ -141,7 +138,7 @@
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                         @else style="height:auto;width:100%"; 
                         @endif>
-                            <img src="{{ $offer->img_src }}"  
+                            <img src="{{ $offer->img_src }}"  alt="{{ $offer->alt_tag }}"
                             @if($height>$width) style="height:100%;width:auto;"
                             @else style="height:auto;width:100%"; 
                             @endif>
@@ -203,7 +200,7 @@
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                         @else style="height:auto;width:100%"; 
                         @endif>
-                            <img src="{{ $offer->img_src }}"  
+                            <img src="{{ $offer->img_src }}"  alt="{{ $offer->alt_tag }}"
                             @if($height>$width) style="height:100%;width:auto;"
                             @else style="height:auto;width:100%"; 
                             @endif>
@@ -323,7 +320,7 @@ $(document).ready(function() {
                             $.get(page, function(data){
                                 $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
-                                $('.newestOffers').data('name',data.name);
+                               
                                 $('.newestOffers').data('next-page', data.next_page);
                             });
                         }
@@ -332,7 +329,7 @@ $(document).ready(function() {
                         $.get(page, function(data){
                                 $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
-                                $('.newestOffers').data('name',data.name);
+                                
                                 $('.newestOffers').data('next-page', data.next_page);
                             });
                     }

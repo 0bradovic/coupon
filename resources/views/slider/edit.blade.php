@@ -11,6 +11,11 @@
 
 @section('content')
     <div class="box box-info">
+        <div style="position:absolute;top:0;right:0;z-index:1000;">
+            @if($undoEdited != null)
+              <a href="{{ route('undo.edited.slide',['id' => $slide->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Undo</a>
+            @endif
+        </div>
             <div class="box-header">
               <h3 class="box-title">Edit slide</h3>
             </div>
@@ -21,12 +26,17 @@
               <form role="form" action="{{ route('update.slide',['id' => $slide->id]) }}" method="POST" enctype="multipart/form-data">
                 <!-- text input -->
                  <div class="form-group">
-                    <img src="{{'/public/'.$slide->img_src}}" style="width:250px;height:150px;">
+                    <img src="{{$slide->img_src}}" style="width:250px;height:150px;">
                  </div>
                 
                 <div class="form-group">
                     <label>Upload new slide image (optional)</label>
                     <input type="file" name="photo">
+                </div>
+
+                <div class="form-group">
+                    <label for="alt_tag">Slide alt tag</label>
+                    <input type="text" class="form-control" name="alt_tag" value="{{ $slide->alt_tag }}">
                 </div>
 
                 <div class="form-group" style="display:none">

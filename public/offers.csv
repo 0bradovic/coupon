@@ -1,2 +1,2 @@
-Name,Detail1,Link,"Todays Date","End Date",Image
-"30% off","<p><small>Your first £60+ Ocado shop</small></p><p><small>Free deliveries for a year</small></p><p><br></p>",http://tinyurl.com/ybxde7pr,"2019-01-22 00:00:00","2019-02-14 00:00:00","C:\xampp\htdocs\coupon\public/images/offer/1548232525Ocado.png"
+Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories
+"50p test","<p><small>Any Ella's Kitchen pouch</small><br></p><p><small>Valid at all major supermarkets</small></p><p><small>Account registration required<br></small></p>",http://tinyurl.com/yd9lx895,"2019-01-22 00:00:00","2019-04-30 00:00:00","C:\xampp\htdocs\coupon\public/images/offer/15559418891548232141ella.jpg",Coupon,"fresh-chilled,test"

@@ -13,7 +13,7 @@ class Offer extends Model
         'name', 'sku', 'brand_id', 'highlight', 
         'summary', 'detail', 'link',
         'startDate', 'endDate', 'offer_type_id',
-        'position', 'user_id','img_src','endDateNull','slug','click', 'display'
+        'position', 'user_id','img_src', 'alt_tag', 'endDateNull','slug','click', 'display'
     ];
 
     public function brand()
@@ -104,7 +104,7 @@ class Offer extends Model
         $search = ["</p>","</div>"]; 
         $replace = ". ";  
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
-        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'90','...');
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'95','...');
         return $newString;
     }
 

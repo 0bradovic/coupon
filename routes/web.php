@@ -24,8 +24,16 @@ Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
 
 Route::post('/subscribe', 'MailChimpController@subscribe')->name('subscribe');
 
+Route::get('/parent-category/{slug}', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
 //TEST
-Route::get('/category', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
+// Route::get('/return',function(){
+//     $offers = \App\Offer::where('offer_type_id',null)->get();
+//     foreach($offers as $offer)
+//     {
+//         $offer->offer_type_id = 15;
+//         $offer->save();
+//     }
+// });
 //END TEST
 
 Auth::routes();
@@ -51,7 +59,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/display/category/{id}', 'CategoryController@display')->name('display.category');
 
-        Route::get('/undo/category', 'CategoryController@undoEdit')->name('undoCategory');
+        //Route::get('/undo/category', 'CategoryController@undoEdit')->name('undoCategory');
+
+        Route::get('/undo/deleted/category', 'CategoryController@undoDeleted')->name('undo.deleted.category');
+        Route::get('/undo/edited/category/{id}', 'CategoryController@undoEdited')->name('undo.edited.category');
 
     });
 
@@ -63,6 +74,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/offer-type/{id}', 'OfferTypeController@edit')->name('edit.offer-type');
         Route::post('/update/offer-type/{id}', 'OfferTypeController@update')->name('update.offer-type');
         Route::get('/delete/offer-type/{id}', 'OfferTypeController@destroy')->name('delete.offer-type');
+
+        Route::get('/undo/deleted/offer-type', 'OfferTypeController@undoDeleted')->name('undo.deleted.offer-type');
+        Route::get('/undo/edited/offer-type/{id}', 'OfferTypeController@undoEdited')->name('undo.edited.offer-type');
     });
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
@@ -79,6 +93,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/offer/{id}', 'OfferController@destroy')->name('delete.offer');
         Route::get('/undo/offer', 'OfferController@undo')->name('undo');
 
+        Route::get('/undo/deleted/offer', 'OfferController@undoDeleted')->name('undo.deleted.offer');
+        Route::get('/undo/edited/offer/{id}', 'OfferController@undoEdited')->name('undo.edited.offer');
+
         Route::get('/display/offer/{id}', 'OfferController@display')->name('display.offer');
 
         Route::get('/copy/offer/{id}', 'OfferController@copy')->name('copy.offer');
@@ -89,6 +106,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/csv', 'OfferController@downloadCsv');
         Route::post('/download/offer', 'OfferController@downloadOffer')->name('download.offer');
         Route::get('/download/offer/search', 'OfferController@downloadOfferSearch')->name('search.offers.download');
+
+        Route::get('offers/parent-category/{id}', 'OfferController@parentCategoryOffers')->name('backend.parent.category.offers');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {
@@ -109,6 +128,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/role/{id}', 'RoleController@edit')->name('edit.role');
         Route::post('/update/role/{id}', 'RoleController@update')->name('update.role');
         Route::get('/delete/role/{id}', 'RoleController@destroy')->name('delete.role');
+
+        Route::get('/undo/deleted/role', 'RoleController@undoDeleted')->name('undo.deleted.role');
+        Route::get('/undo/edited/role/{id}', 'RoleController@undoEdited')->name('undo.edited.role');
     });
 
     Route::group(['middleware' => ['permission:manage users']], function () {
@@ -119,6 +141,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/user/{id}', 'UserController@edit')->name('edit.user');
         Route::post('/update/user/{id}', 'UserController@update')->name('update.user');
         Route::get('/delete/user/{id}', 'UserController@destroy')->name('delete.user');
+
+        Route::get('/undo/deleted/user', 'UserController@undoDeleted')->name('undo.deleted.user');
+        Route::get('/undo/edited/user/{id}', 'UserController@undoEdited')->name('undo.edited.user');
     });
 
     Route::group(['middleware' => ['permission:manage slider']], function () {
@@ -131,6 +156,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/slide/{id}', 'SliderController@update')->name('update.slide');
         Route::get('/delete/slide/{id}', 'SliderController@destroy')->name('delete.slide');
         Route::get('/update/slide/activity', 'SliderController@updateSlideActivity');
+
+        Route::get('/undo/deleted/slide', 'SliderController@undoDeleted')->name('undo.deleted.slide');
+        Route::get('/undo/edited/slide/{id}', 'SliderController@undoEdited')->name('undo.edited.slide');
     });
 
     Route::group(['middleware' => ['permission:manage custom pages']], function () {
@@ -143,6 +171,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/customPage/{id}', 'CustomPageController@destroy')->name('delete.customPage');
         Route::get('/show/CustomPage/{id}', 'CustomPageController@show')->name('show.customPage');
         Route::get('/update/customPage/activity', 'CustomPageController@updateActivity');
+
+        Route::get('/undo/deleted/custom-page', 'CustomPageController@undoDeleted')->name('undo.deleted.custom-page');
+        Route::get('/undo/edited/custom-page/{id}', 'CustomPageController@undoEdited')->name('undo.edited.custom-page');
     });
 
     Route::group(['middleware' => ['permission:manage seo']], function () {

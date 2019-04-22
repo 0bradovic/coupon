@@ -84,12 +84,7 @@
                         @php $i = 1; @endphp
                     @foreach($categories as $category)
                         <div class="dropdown">
-                            <form method="GET" action="{{ route('parent.category.offers') }}">
-                            @csrf
-                            <input type="hidden" name="name" value="{{ $category->name }}">
-                            <button class="dropbtn" data-id="{{$i}}" @foreach($category->liveSubcategories as $cat)
-                             @if(Request::path() == 'category/'.$cat->slug) style="text-decoration: underline !important;" @endif  @endforeach>{{ $category->name }}</button>
-                            </form>
+                        <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $category->name }}</a>
                             @php $i++; @endphp
                         </div>
                     @endforeach

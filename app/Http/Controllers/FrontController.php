@@ -260,13 +260,13 @@ class FrontController extends Controller
         return Redirect::away($offer->link);
     }
 
-    public function parentCategoryOffers(Request $request)
+    public function parentCategoryOffers(Request $request,$slug)
     {
-        $category = Category::where('name',$request->name)->where('display', true)->with('subcategories')->first();
+        $category = Category::where('slug',$slug)->where('display', true)->with('liveSubcategories')->first();
 
         $allNewestOffers = [];
         $allPopularOffers = [];
-        foreach($category->subcategories as $cat)
+        foreach($category->liveSubcategories as $cat)
         {
             $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
             $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
@@ -283,7 +283,7 @@ class FrontController extends Controller
         }
         $newestOffers = $newestOffers->unique();
         $popularOffers = $popularOffers->unique();
-        $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10)->appends('name',$request->name);
+        $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10);
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         //dd($newestOffers);
         //dd($popularOffers);
@@ -293,7 +293,6 @@ class FrontController extends Controller
             return [
                 'newest' => view('front.parentCategoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
                 'popular' => view('front.parentCategoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
-                'name' => $category->name,
                 'next_page' => $newestOffers->nextPageUrl()
             ];
         }
