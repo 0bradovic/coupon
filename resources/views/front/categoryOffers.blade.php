@@ -241,7 +241,7 @@
                     </div>
                 @endforeach
         </div>
-
+            <div class="adSense"></div>
         {{--{!! $popularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

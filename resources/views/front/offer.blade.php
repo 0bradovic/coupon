@@ -337,7 +337,7 @@
             @endforeach
             @endif
         </div>
-
+        <div class="adSense"></div>
         {{--{!! $popularSimillarOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

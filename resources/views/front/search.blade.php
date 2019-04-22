@@ -199,7 +199,7 @@
                 <p class="sidebar_offers_date">ends 31.Jan</p>
             </div>
         </div>
-
+        <div class="search_adSense"><div class="search_adSense_reclame"></div><div class="search_adSense_reclame"></div></div>
         {{--{!! $offers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

@@ -30,6 +30,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
+                    <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                 <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -104,6 +105,41 @@
                         
                             <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;" @endif>{{ $category->name }}</a>
                         
+                            <div class="new_sub_menu">
+                                                        
+                            <a >Cupboard Food</a>
+                                                   
+                                                                                
+                <a >Fresh &amp; Chilled</a>
+                                                   
+                                                                                
+            <a >Frozen</a>
+                                                   
+                                                                                
+            <a >Drinks</a>
+                                                   
+                                                                                
+            <a >Health &amp; Beauty</a>
+                                                   
+                                                                                
+            <a>Babycare</a>
+                                                   
+                                                                                
+            <a >Homecare</a>
+                                                   
+                                                                                
+            <a href="http://localhost/coupon/public/category/petcare">Petcare</a>
+                                                   
+                                                                                
+            <a href="http://localhost/coupon/public/category/total-shop">Total Shop</a>
+                                                   
+                                                                                                         
+                            </div>
+                        <form method="GET" action="{{ route('parent.category.offers') }}">
+                            @csrf
+                            <input type="hidden" name="name" value="{{ $category->name }}">
+                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first)  @endif>{{ $category->name }}<i id="open_sub" class="fas fa-caret-right"></i></button>
+                        </form>
                         </div>
                         @php $i++; @endphp
                     @endforeach
