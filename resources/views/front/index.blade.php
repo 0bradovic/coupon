@@ -103,7 +103,7 @@
                     @foreach($categories as $category)
                         <div class="dropdown">
                         
-                            <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;" @endif>{{ $category->name }}</a>
+                        <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first)  @endif>{{ $category->name }}</a><i id="open_sub" class="fas fa-caret-right"></i>
                         
                             <div class="new_sub_menu">
                                                         
@@ -135,11 +135,10 @@
                                                    
                                                                                                          
                             </div>
-                        <form method="GET" action="{{ route('parent.category.offers') }}">
-                            @csrf
-                            <input type="hidden" name="name" value="{{ $category->name }}">
-                            <button class="dropbtn" data-id="{{$i}}" @if($loop->first)  @endif>{{ $category->name }}<i id="open_sub" class="fas fa-caret-right"></i></button>
-                        </form>
+                        
+                            
+                            
+                       
                         </div>
                         @php $i++; @endphp
                     @endforeach
