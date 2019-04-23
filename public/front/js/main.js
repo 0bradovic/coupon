@@ -26,8 +26,15 @@ $(document).ready(function () {
       $(this).addClass('fa-bars')
     }
   })
-  $('#open_sub').on('click', function () {
-    var id = $(this).data('id');
+  $('.back').click(function(){
+    $(this).parent().removeClass('active_sub_menu')
+    $('.dropdown_row').show()
+  })
+  $('.open_sub').on('click',function(){
+    $('.dropdown_row').hide()
+  })
+  $('.open_sub').on('click', function () {
+    var id = $(this).prev().data('id');
     $('#'+id).toggleClass('active_sub_menu')
   })
 

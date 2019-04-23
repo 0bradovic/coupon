@@ -104,41 +104,18 @@
                     @foreach($categories as $category)
                         <div class="dropdown">
                         
-                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;"  @endif>{{ $category->name }}</a><i id="open_sub" class="fas fa-caret-right"></i></div>
+                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;"  @endif>{{ $category->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
                         
-                            <div class="new_sub_menu">
-                            <a><i id="open_sub" class="fas fa-caret-right"></i> <b>Main menu</b></a>               
-                            <a >Cupboard Food</a>
-                                                   
-                                                                                
-                <a >Fresh &amp; Chilled</a>
-                                                   
-                                                                                
-            <a >Frozen</a>
-                                                   
-                                                                                
-            <a >Drinks</a>
-                                                   
-                                                                                
-            <a >Health &amp; Beauty</a>
-                                                   
-                                                                                
-            <a>Babycare</a>
-                                                   
-                                                                                
-            <a >Homecare</a>
-                                                   
-                                                                                
-            <a href="http://localhost/coupon/public/category/petcare">Petcare</a>
-                                                   
-                                                                                
-            <a href="http://localhost/coupon/public/category/total-shop">Total Shop</a>
-                                                   
+                            <div class="new_sub_menu" id="{{ $i }}">
+                            <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
+                                @foreach($category->liveSubcategories as $cat)
+                            
+                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                       
+                                @endforeach       
                                                                                                          
                             </div>
                         
-                            
-                            
                        
                         </div>
                         @php $i++; @endphp

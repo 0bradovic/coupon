@@ -1701,13 +1701,25 @@ footer .foo a:last-child {
     display: none;
     cursor: pointer;
     transform: translateX(-100%);
-    position: absolute;
+    position: fixed;
     z-index: 99999999999;
-    top: 100%;
+    top: 0;
     left: 0;
     right: 0;
     height: 100vh;
     transition: all 0.4s ease-in-out;
+  }
+  .back{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start;
+    font-weight: bold;
+  }
+  
+  .back i{
+    color:#ffa400;
+    font-size:20px !important;
+    margin-right: 5px;
   }
   #menu .dropbtn {
     width: 100% !important;
@@ -1729,6 +1741,7 @@ footer .foo a:last-child {
     display: inline;
     font-size: 20px !important;
     color: #fff;
+    margin-left:10px;
   }
   #menu .dropdown .new_sub_menu a:last-child {
     border-bottom: none !important;
