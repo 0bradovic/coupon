@@ -31,6 +31,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
                     <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
+                    
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                 <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -103,10 +104,10 @@
                     @foreach($categories as $category)
                         <div class="dropdown">
                         
-                        <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;"  @endif>{{ $category->name }}</a><i id="open_sub" class="fas fa-caret-right"></i>
+                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;"  @endif>{{ $category->name }}</a><i id="open_sub" class="fas fa-caret-right"></i></div>
                         
                             <div class="new_sub_menu">
-                                                        
+                            <a><i id="open_sub" class="fas fa-caret-right"></i> <b>Main menu</b></a>               
                             <a >Cupboard Food</a>
                                                    
                                                                                 
@@ -143,20 +144,7 @@
                         @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $j = 1; @endphp
-                    @foreach($categories as $category)
-                    <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
-                            @foreach($category->liveSubcategories as $cat)
-                            
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
-                           
-                            @endforeach
-                            @php $j++; @endphp
-                            </div>
-                        </div>
-                    
-                    @endforeach
+                   
                     
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>

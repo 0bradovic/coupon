@@ -14,38 +14,47 @@ $(document).ready(function () {
     $('#cookie').remove()
   })
   $('.dropdown').on('click', function () {
-    $(this).children('.new_sub_menu').slideToggle(200)
     $(this).find('.fa-caret-right').toggleClass('rotate_arrow')
   })
-  $('#mob_menu').on('click', function() {
-    $('.dropdowns_holder').slideToggle(200)
+  $('#mob_menu').on('click', function () {
+    $('.dropdowns_holder').toggleClass('active_dropdown_holder')
+    if ($(this).hasClass('fa-bars')) {
+      $(this).removeClass('fa-bars')
+      $(this).addClass('fa-times')
+    }else if($(this).hasClass('fa-times')) {
+      $(this).removeClass('fa-times')
+      $(this).addClass('fa-bars')
+    }
+  })
+  $('#open_sub').on('click', function () {
+    var id = $(this).data('id');
+    $('#'+id).toggleClass('active_sub_menu')
   })
 
-  $(document).ready(function(){
-    if(sessionStorage.getItem('newsletter') !== 'true')
-    {
+  $(document).ready(function () {
+    if (sessionStorage.getItem('newsletter') !== 'true') {
       $('.fixed_btn_form').show()
     }
   })
 
   //newsleter
   // $('.fixed_btn_form').hide()
-  $('.close-modal').click(function(){
-    sessionStorage.setItem('newsletter',true);
+  $('.close-modal').click(function () {
+    sessionStorage.setItem('newsletter', true);
     $('.fixed_btn_form').hide()
   })
   $('#open_popup').on('click', function () {
     $('.fixed_btn_form').fadeToggle(300)
   })
 })
-$('.close_popUp').on('click', function() {
-  sessionStorage.setItem('newsletter',true);
+$('.close_popUp').on('click', function () {
+  sessionStorage.setItem('newsletter', true);
   $('.fixed_btn_form').hide()
 })
 
-$('#newsletter_submit').click(function(e){
+$('#newsletter_submit').click(function (e) {
   e.preventDefault();
-  sessionStorage.setItem('newsletter',true);
+  sessionStorage.setItem('newsletter', true);
   $('#newsletter_form').submit();
 })
 
@@ -76,7 +85,7 @@ $('#search').keyup(function (e) {
           '</p></div></div></a>'
         serachDiv.appendChild(elementDiv)
         document.getElementById('serachDiv').style.border = '1px solid #A5ACB2'
-        
+
       })
     }
   })
