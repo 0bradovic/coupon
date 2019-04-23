@@ -144,7 +144,20 @@
                         @php $i++; @endphp
                     @endforeach
                     </div>
-                   
+                    @php $j = 1; @endphp
+                    @foreach($categories as $category)
+                    <div class="dropdown-content " id="{{$j}}">
+                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
+                            @foreach($category->liveSubcategories as $cat)
+                            
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                           
+                            @endforeach
+                            @php $j++; @endphp
+                            </div>
+                        </div>
+                    
+                    @endforeach
                     
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>
