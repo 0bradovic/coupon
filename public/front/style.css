@@ -113,6 +113,10 @@ nav.navbar.navbar-expand-lg {
   display: none;
 }
 
+.header-navbar-right .fa-times {
+  display: none;
+}
+
 .header-form-left {
   display: flex;
   align-items: center;
@@ -1643,6 +1647,7 @@ footer .foo a:last-child {
   }
   .header-navbar-right .fa-times {
     position: absolute;
+    display: inline;
     left: 0px;
     top: 10px;
     color: #fff;
