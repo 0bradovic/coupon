@@ -14,6 +14,9 @@ body {
 .rotate_arrow {
   transform: rotate(90deg) !important;
 }
+.tdu {
+  text-decoration: underline !important;
+}
 #row .singe-container .single-offer {
   height: auto !important;
   margin: 10px auto !important;
@@ -1629,6 +1632,9 @@ footer .foo a:last-child {
     margin: 0 !important;
     max-width: 100% !important;
   }
+  .tdu {
+    text-decoration: none !important;
+  }
   .header-navbar-right {
     position: relative;
   }
@@ -1664,7 +1670,7 @@ footer .foo a:last-child {
     flex-direction: column !important;
     padding: 0 !important;
     position: fixed;
-    top: 110px;
+    top: 85px;
     left: 0;
     right: 0;
     height: 100vh;
@@ -1674,6 +1680,9 @@ footer .foo a:last-child {
     display: flex !important;
     justify-content: flex-start;
     transition: all 0.4s ease-in-out;
+  }
+  #menu .dropdowns_holder  .dropbtn {
+    text-decoration: none !important;
   }
   .active_dropdown_holder {
     transform: translateX(0) !important;
@@ -1832,6 +1841,9 @@ footer .foo a:last-child {
 
   #menu .dropdowns_holder .dropdown .dropdown-content {
     top: 157px !important;
+  }
+  #menu .dropdowns_holder {
+    top: 110px !important;
   }
 }
 

@@ -21,21 +21,23 @@ $(document).ready(function () {
     if ($(this).hasClass('fa-bars')) {
       $(this).removeClass('fa-bars')
       $(this).addClass('fa-times')
-    }else if($(this).hasClass('fa-times')) {
+      $('body').css('overflow', 'hidden')
+    } else if ($(this).hasClass('fa-times')) {
       $(this).removeClass('fa-times')
       $(this).addClass('fa-bars')
+      $('body').css('overflow', 'scroll')
     }
   })
-  $('.back').click(function(){
+  $('.back').click(function () {
     $(this).parent().removeClass('active_sub_menu')
     $('.dropdown_row').show()
   })
-  $('.open_sub').on('click',function(){
+  $('.open_sub').on('click', function () {
     $('.dropdown_row').hide()
   })
   $('.open_sub').on('click', function () {
     var id = $(this).prev().data('id');
-    $('#'+id).toggleClass('active_sub_menu')
+    $('#' + id).toggleClass('active_sub_menu')
   })
 
   $(document).ready(function () {
