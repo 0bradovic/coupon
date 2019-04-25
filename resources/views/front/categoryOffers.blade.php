@@ -22,6 +22,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
+                <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
                 <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                  <a href="#" class="uk-etc"><em>All the best UK offers in one place</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -82,20 +83,31 @@
                     
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
-                    @foreach($categories as $category)
+                    @foreach($categories as $cate)
                         <div class="dropdown">
-                        <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $category->name }}</a>
-                            @php $i++; @endphp
+                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($cate->liveSubcategories->contains('slug',Request::segment(2))) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+                            
+                            <div class="new_sub_menu" id="{{ $i }}">
+                            <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
+                                @foreach($cate->liveSubcategories as $cat)
+                            
+                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}</a>
+                       
+                                @endforeach       
+                                                                                                         
+                            </div>
+
                         </div>
+                        @php $i++; @endphp
                     @endforeach
                     </div>
                     @php $i = 1; @endphp
                     
-                    @foreach($categories as $category)
+                    @foreach($categories as $cate)
                     
                     <div class="dropdown-content" id="{{$i}}">
-                            <div class="dropdown-container" @if($category->liveSubcategories->contains('slug',Request::segment(2))) @else style="display:none;" @endif>
-                            @foreach($category->liveSubcategories as $cat)
+                            <div class="dropdown-container" @if($cate->liveSubcategories->contains('slug',Request::segment(2))) @else style="display:none;" @endif>
+                            @foreach($cate->liveSubcategories as $cat)
                             
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::path() == 'category/'.$cat->slug) class="sub-category" @endif >{{ $cat->name }}</a>
                            
@@ -116,9 +128,12 @@
     </header>
 
   <section id="row">
-    
+    <div class="container dropdowns_holder">
+      
+    <h2 class="title2 category-title">{{ $category->parentCategory->name }} > {{ $category->name }}</h2>
+    </div>
         <div id="cont" class="container main_offers_container">
-            
+        
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder" style="margin-top:0!important">
             <a href="#" class="suggestions">Most Popular</a>
@@ -241,7 +256,20 @@
                     </div>
                 @endforeach
         </div>
-            <div class="adSense"></div>
+            <div class="adSense">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5885241180759942"
+                 data-ad-slot=""
+                 data-ad-format="auto"></ins>
+                 <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-5885241180759942",
+                    enable_page_level_ads: true
+                    });
+                </script>
+            </div>
         {{--{!! $popularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

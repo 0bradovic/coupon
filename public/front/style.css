@@ -20,7 +20,7 @@ body {
 #row .singe-container .single-offer {
   height: auto !important;
   margin: 10px auto !important;
-  width: 100% !important;
+  width: 97% !important;
   padding: 0 0 10px 0 !important;
 }
 #row .singe-container .single-offer .sticker {
@@ -365,12 +365,14 @@ section#boxes {
   font-size: 26px;
 }
 /*AAAAA*/
-.single-offer .sticker {
+ .single-offer .sticker {
   line-height: 2.5 !important;
 }
+
 .single-offer .title {
   padding-top: 30px !important;
 }
+/*
 .single-offer .title h6 {
   font-size: 24px !important;
 }
@@ -382,7 +384,7 @@ section#boxes {
 }
 .single-offer .text p {
   font-size: 18px !important;
-}
+} */
 /*AAAAA*/
 .social_icons .social_icons_div .fab,
 .far,
@@ -769,9 +771,9 @@ a.go_top:focus {
   padding-bottom: 10px !important;
 }
 
-#row .red:last-child {
+/* #row .red:last-child {
   margin-bottom: 0 !important;
-}
+} */
 
 #row .red li {
   list-style: none;
@@ -1461,6 +1463,10 @@ footer .foo a:last-child {
   margin: 0 !important;
 }
 
+.category-title{
+  margin-left:0px !important;
+}
+
 /* MEDIAAAAAAAAA SRCREEN */
 
 @media screen and (max-width: 1630px) {
@@ -1628,6 +1634,9 @@ footer .foo a:last-child {
   .search_adSense {
     display: none !important;
   }
+  #row .singe-container .single-offer{
+    width:100% !important;
+  }
 }
 
 @media screen and (max-width: 890px) {
@@ -1755,7 +1764,7 @@ footer .foo a:last-child {
     display: inline;
     font-size: 20px !important;
     color: #fff;
-    margin-left:10px;
+    margin-left:20px;
   }
   #menu .dropdown .new_sub_menu a:last-child {
     border-bottom: none !important;
@@ -1853,20 +1862,23 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 700px) {
-  #cookie {
+  /* #cookie {
     flex-direction: column;
-  }
+  } */
 
   #cookie .cookie_left {
-    width: 95% !important;
-    order: 2 !important;
+    /* width: 95% !important; */
+    /* order: 2 !important; */
+    margin-left:5px;
+    flex:2;
   }
 
   #cookie .cookie_right {
-    width: 80%;
+    /* width: 80%; */
     justify-content: center;
-    order: 1;
-    margin: 5px 0 10px 0;
+    /* order: 1; */
+    margin: 5px 5px 10px 0;
+    flex:1;
   }
   .fixed_btn_in_form {
     width: 85% !important;

@@ -104,13 +104,13 @@
                     @foreach($categories as $category)
                         <div class="dropdown">
                         
-                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline !important;"  @endif>{{ $category->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
                         
                             <div class="new_sub_menu" id="{{ $i }}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
                                 @foreach($category->liveSubcategories as $cat)
                             
-                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}</a>
                        
                                 @endforeach       
                                                                                                          

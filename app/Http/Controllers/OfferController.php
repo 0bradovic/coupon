@@ -31,33 +31,6 @@ class OfferController extends Controller
         return view('offers.index',compact('offers','categories','undoDeleted'));
     }
 
-    public function liveOffers()
-    {
-        $offers = Offer::orderBy('position')->get();
-        $offer = new Offer();
-        $offers = $offer->filterOffers($offers);
-        $offers = (new Collection($offers))->paginate(15);
-        $categories = Category::where('parent_id',null)->get();
-        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
-        return view('offers.index',compact('offers','categories','undoDeleted'));
-    }
-
-    public function expiredOffers()
-    {
-        $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
-        $categories = Category::where('parent_id',null)->get();
-        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
-        return view('offers.index',compact('offers','categories','undoDeleted'));
-    }
-    
-    public function mostPopularOffers()
-    {
-        $offers = Offer::orderBy('click','DESC')->paginate(15);
-        $categories = Category::where('parent_id',null)->get();
-        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
-        return view('offers.index',compact('offers','categories','undoDeleted'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -805,13 +778,18 @@ class OfferController extends Controller
         {
             $categories = $offer->categories()->pluck('slug')->toArray();
             $categories = implode(',',$categories);
+            $offerType = '';
+            if($offer->offerType != null)
+            {
+                $offerType = $offer->offerType->name;
+            }
             if($offer['endDate'] == null)
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offer->offerType->name,$categories));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories));
             }
             else
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offer->offerType->name,$categories));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories));
             }
                 
         }
@@ -828,23 +806,118 @@ class OfferController extends Controller
         return view('offers.download',compact('offers'));
     }
 
-    public function parentCategoryOffers($id)
+    public function getOffers(Request $request)
     {
-        $category = Category::find($id);
-        $collections = [];
-        foreach($category->subcategories as $cat)
+        if($request->category == 'all')
         {
-            $collections[] = $cat->offers;
+            if($request->offers == 'all')
+            {
+                $offers = Offer::orderBy('position')->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'most-popular')
+            {
+                $offers = Offer::orderBy('click','DESC')->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'live')
+            {
+                $offers = Offer::orderBy('position')->get();
+                $offer = new Offer();
+                $offers = $offer->filterOffers($offers);
+                $offers = (new Collection($offers))->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'expired')
+            {
+                $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
         }
-        $offers = new Collection();
-        foreach($collections as $item)
+        else
         {
-            $offers = $offers->merge($item);
+            $parentCategory = Category::find($request->category);
+            //dd($parentCategory);
+            if($request->offers == 'all')
+            {
+                $collections = [];
+                foreach($parentCategory->subcategories as $cat)
+                {
+                    $collections[] = $cat->offers;
+                }
+                $offers = new Collection();
+                foreach($collections as $item)
+                {
+                    $offers = $offers->merge($item);
+                }
+                $offers = (new Collection($offers))->sortBy('position',SORT_REGULAR, false)->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'most-popular')
+            {
+                $collections = [];
+                foreach($parentCategory->subcategories as $cat)
+                {
+                    $collections[] = $cat->offers;
+                }
+                $offers = new Collection();
+                foreach($collections as $item)
+                {
+                    $offers = $offers->merge($item);
+                }
+                $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true)->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'live')
+            {
+                $collections = [];
+                foreach($parentCategory->subcategories as $cat)
+                {
+                    $collections[] = $cat->offers;
+                }
+                $offers = new Collection();
+                foreach($collections as $item)
+                {
+                    $offers = $offers->merge($item);
+                }
+                $offers = (new Collection($offers))->sortBy('position',SORT_REGULAR, false);
+                $offer = new Offer();
+                $offers = $offer->filterOffers($offers);
+                $offers = (new Collection($offers))->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
+            elseif($request->offers == 'expired')
+            {
+                $collections = [];
+                foreach($parentCategory->subcategories as $cat)
+                {
+                    $collections[] = $cat->offers;
+                }
+                $offers = new Collection();
+                foreach($collections as $item)
+                {
+                    $offers = $offers->merge($item);
+                }
+                $offers = (new Collection($offers))->where('endDate', '<', Carbon::now())->sortBy('position',SORT_REGULAR, false)->paginate(15);
+                $categories = Category::where('parent_id',null)->get();
+                $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
+                return view('offers.index',compact('offers','categories','undoDeleted'));
+            }
         }
-        $offers = (new Collection($offers))->paginate(15);
-        $categories = Category::where('parent_id',null)->get();
-        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
-        return view('offers.index',compact('offers','categories','category','undoDeleted'));
     }
 
 }

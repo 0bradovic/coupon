@@ -19,6 +19,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
+                <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
                 <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                  <a href="#" class="uk-etc"><em>All the best UK offers in one place</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -84,7 +85,17 @@
                         
                         <div class="dropdown">
                         
-                            <a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($loop->first) style="text-decoration:underline;" @endif>{{ $category->name }}</a>
+                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+
+                            <div class="new_sub_menu" id="{{ $i }}">
+                            <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
+                                @foreach($category->liveSubcategories as $cat)
+                            
+                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}</a>
+                       
+                                @endforeach       
+                                                                                                         
+                            </div>
                         
                         </div>
                         
@@ -97,7 +108,7 @@
                             <div class="dropdown-container @if(!$loop->first) d-none @endif">
                             @foreach($category->liveSubcategories as $cat)
                             
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}</a>
                             
                             @endforeach
                             @php $j++; @endphp
@@ -337,7 +348,20 @@
             @endforeach
             @endif
         </div>
-        <div class="adSense"></div>
+        <!-- <div class="adSense">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5885241180759942"
+                 data-ad-slot=""
+                 data-ad-format="auto"></ins>
+                 <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-5885241180759942",
+                    enable_page_level_ads: true
+                    });
+                </script>
+        </div> -->
         {{--{!! $popularSimillarOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

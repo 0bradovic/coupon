@@ -12,22 +12,41 @@
 @section('content')
 <div class="row">
         <div class="col-xs-12">
-
+          
+              <form role="form" method="GET" action="{{ route('get-offers') }}" class="pull-right" style="background-color:#fff;padding:5px;display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-around;">
+                  @csrf
+                  
+                  <div class="form-group">
+                    <label>Select parent category</label>
+                    <select class="form-control select2 " name="category" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    <option value="all" @if(Request::get('category') == null || Request::get('category') == 'all') selected="selected" @endif>All</option>
+                    @foreach($categories as $cat)
+                      <option value="{{$cat->id}}" @if(Request::get('category') == $cat->id) selected="selected" @endif >{{$cat->name}}</option>
+                    @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Select which offers to show</label>
+                    <select class="form-control select2 " name="offers" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    <option value="all" @if(Request::get('offers') == 'all') selected="selected" @endif>All</option>
+                    <option value="most-popular" @if(Request::get('offers') == 'most-popular') selected="selected" @endif>Most popular</option>
+                    <option value="live" @if(Request::get('offers') == 'live') selected="selected" @endif>Live</option>
+                    <option value="expired" @if(Request::get('offers') == 'expired') selected="selected" @endif>Expired</option>
+                    </select>
+                  </div>
+                
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-primary">Filter offers</button>
+                </div>
+              </form>  
+            
+            
         {{ $offers->appends(Request::except('page'))->links() }}
         <div >
-              <a href="{{ route('offers.index') }}" class="btn btn-primary pull-right">ALL</a> 
-              <a href="{{ route('live.offer') }}" class="btn btn-primary pull-right">LIVE</a> 
-              <a href="{{ route('expired.offer') }}" class="btn btn-primary pull-right">EXPIRED</a>
-              <a href="{{ route('most.popular.offers') }}" class="btn btn-primary pull-right">MOST POPULAR</a>
-              <div class="parent_categories pull-right">
-                <button class="btn btn-primary select-category" id="category-dropbtn">BY PARENT CATEGORY <i class="fa fa-angle-down" id="drop-pointer"></i></button>
-                <div class="category-options">
-                @foreach($categories as $cat)
-                  <a href="{{ route('backend.parent.category.offers',['id' => $cat->id]) }}">{{ $cat->name }}</a>
-                @endforeach
-                </div>
-                
-              </div>
+              
               <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
         </div>
 
@@ -39,17 +58,7 @@
             </div>
             <div class="box-header">
               <h3 class="box-title">
-                @if(isset($category))
-                  {{ $category->name }} offers
-                @elseif(Request::path() == 'offers/most-popular')
-                  Most popular offers
-                @elseif(Request::path() == 'offers/expired')
-                  Expired offers
-                @elseif(Request::path() == 'offers/live')
-                  Live offers
-                @else
-                All offers
-                @endif
+                Offers
               </h3>
               @include('layouts.messages')
               @include('layouts.errors')

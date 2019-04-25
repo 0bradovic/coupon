@@ -122,7 +122,7 @@ $(document).ready(function () {
   if (sessionStorage.getItem('cookie') !== 'true') {
     $('body').append(`<div id="cookie">
     <div class="cookie_left">
-    <p>We use cookies to give you the best service. To learn more please read our <a href="https://www.beforetheshop.com/public/front/Privacy Policy.pdf" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/public/front/Cookie Policy.pdf" target="_blank" class="cookie_link">cookie</a> policy.</p>
+    <p>We use cookies to give you the best service. Read our <a href="https://www.beforetheshop.com/public/front/Privacy Policy.pdf" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/public/front/Cookie Policy.pdf" target="_blank" class="cookie_link">cookie</a> policy to learn more.</p>
     </div>
     <div class="cookie_right">
     <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>

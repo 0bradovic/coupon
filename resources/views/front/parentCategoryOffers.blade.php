@@ -22,6 +22,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
+                <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
                 <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                  <a href="#" class="uk-etc">Every	offer	in	the	UK	here	–	and	personalised	suggestions	for you!</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -86,7 +87,18 @@
                     @foreach($categories as $cate)
                         <div class="dropdown">
                         
-                        <a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn" data-id="{{$i}}" @if($category->name == $cate->name) style="text-decoration:underline !important;" @endif>{{ $cate->name }}</a>
+                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($category->name == $cate->name) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+
+                            <div class="new_sub_menu" id="{{$i}}">
+                            <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
+                                @foreach($cate->liveSubcategories as $cat)
+                            
+                                    <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}</a>
+                       
+                                @endforeach       
+                                                                                                         
+                            </div>
+
                         </div>
                         @php $i++; @endphp
                     @endforeach
@@ -97,7 +109,7 @@
                             <div class="dropdown-container @if($cate->name != $category->name) d-none @endif">
                             @foreach($cate->liveSubcategories as $cat)
                            
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
                             
                             @endforeach
                             @php $j++; @endphp

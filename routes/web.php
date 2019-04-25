@@ -83,9 +83,6 @@ Route::middleware('auth')->group(function () {
         // Offer routes
         Route::get('/offers', 'OfferController@index')->name('offers.index');
         Route::get('/offers/search', 'OfferController@searchOffers')->name('search.offers');
-        Route::get('/offers/live', 'OfferController@liveOffers')->name('live.offer');
-        Route::get('/offers/expired', 'OfferController@expiredOffers')->name('expired.offer');
-        Route::get('/offers/most-popular', 'OfferController@mostPopularOffers')->name('most.popular.offers');
         Route::get('/create/offer', 'OfferController@create')->name('create.offer');
         Route::post('/store/offer', 'OfferController@store')->name('store.offer');
         Route::get('/edit/offer/{id}', 'OfferController@edit')->name('edit.offer');
@@ -107,7 +104,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/download/offer', 'OfferController@downloadOffer')->name('download.offer');
         Route::get('/download/offer/search', 'OfferController@downloadOfferSearch')->name('search.offers.download');
 
-        Route::get('offers/parent-category/{id}', 'OfferController@parentCategoryOffers')->name('backend.parent.category.offers');
+        Route::get('/get-offers', 'OfferController@getOffers')->name('get-offers');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {
