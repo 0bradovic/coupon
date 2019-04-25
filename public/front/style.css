@@ -412,6 +412,7 @@ section#boxes {
   color: #d8d8d8;
   font-style: italic;
   font-size: 14px;
+  box-shadow: none !important;
 }
 
 #header nav .form-control::placeholder {
