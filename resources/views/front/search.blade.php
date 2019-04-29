@@ -77,9 +77,12 @@
         <section id="menu">
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
+                        <div class="mobile-menu-paragraph">
+                            <p>CATEGORIES (click down icon to see more)</p>
+                        </div>
                     @foreach($categories as $category)
                         <div class="dropdown">
-                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+                        <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
                             <div class="new_sub_menu" id="{{ $i }}">
                                 <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
                                 @foreach($category->liveSubcategories as $cat)
@@ -209,7 +212,7 @@
                 <p class="sidebar_offers_date">ends 31.Jan</p>
             </div>
         </div>
-        <div class="search_adSense">
+        <!-- <div class="search_adSense">
         
             <div class="search_adSense_reclame">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -240,7 +243,7 @@
                 </script>
             </div>
             
-        </div>
+        </div> -->
         {{--{!! $offers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

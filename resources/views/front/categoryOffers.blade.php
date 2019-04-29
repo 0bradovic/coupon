@@ -83,9 +83,12 @@
                     
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
+                        <div class="mobile-menu-paragraph">
+                            <p>CATEGORIES (click down icon to see more)</p>
+                        </div>
                     @foreach($categories as $cate)
                         <div class="dropdown">
-                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($cate->liveSubcategories->contains('slug',Request::segment(2))) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($cate->liveSubcategories->contains('slug',Request::segment(2))) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
                             
                             <div class="new_sub_menu" id="{{ $i }}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
@@ -256,7 +259,7 @@
                     </div>
                 @endforeach
         </div>
-            <div class="adSense">
+            <!-- <div class="adSense">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                  style="display:block"
@@ -269,7 +272,7 @@
                     enable_page_level_ads: true
                     });
                 </script>
-            </div>
+            </div> -->
         {{--{!! $popularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

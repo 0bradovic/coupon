@@ -84,10 +84,13 @@
         <section id="menu">
                     <div class="container dropdowns_holder">
                         @php $i = 1; @endphp
+                        <div class="mobile-menu-paragraph">
+                            <p>CATEGORIES (click down icon to see more)</p>
+                        </div>
                     @foreach($categories as $cate)
                         <div class="dropdown">
                         
-                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($category->name == $cate->name) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-right open_sub"></i></div>
+                            <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($category->name == $cate->name) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
 
                             <div class="new_sub_menu" id="{{$i}}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               

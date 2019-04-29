@@ -11,6 +11,9 @@ body {
 .new_sub_menu {
   display: none;
 }
+.mobile-menu-paragraph{
+  display: none;
+}
 .rotate_arrow {
   transform: rotate(90deg) !important;
 }
@@ -104,6 +107,7 @@ nav.navbar.navbar-expand-lg {
   display: flex;
   padding: 0;
   justify-content: space-between;
+  padding-left:16px;
 }
 
 .header-navbar-right {
@@ -132,7 +136,7 @@ nav.navbar.navbar-expand-lg {
   display: flex;
   align-items: center;
 }
-#menu .fa-caret-right {
+#menu .fa-caret-down {
   display: none;
 }
 .social_icons_like {
@@ -354,7 +358,7 @@ section#boxes {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 0px 20px 0px 0px;
   width: 100%;
   line-height: 2.5;
   position: relative;
@@ -489,6 +493,7 @@ header .search-div-1:last-child {
 
 #menu {
   width: 100%;
+  padding-left:18px;
 }
 
 #menu .dropbtn {
@@ -926,8 +931,12 @@ a.go_top:focus {
   right: 15% !important;
 }
 
-.search-title {
+/* .search-title {
   margin-left: 0 !important;
+} */
+
+#cont .search_page{
+  margin:0 16px;
 }
 
 .close-modal {
@@ -990,12 +999,18 @@ header {
   padding-right: 80px;
   font-size: 14px !important;
 }
+#menu .dropdown-content a:last-child{
+  padding-right: 0;
+}
 
 #row .red .dateA {
   display: block;
   margin-top: 5px;
 }
-
+.single-offer .dateA{
+  font-size:14px !important;
+  margin-bottom:10px;
+}
 .title {
   text-align: center;
 }
@@ -1256,7 +1271,7 @@ footer .foo a:last-child {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 0 5px 0;
+  padding: 5px 0;
 }
 
 #cookie .cookie_left {
@@ -1646,6 +1661,16 @@ footer .foo a:last-child {
     margin: 0 !important;
     max-width: 100% !important;
   }
+  .mobile-menu-paragraph{
+    display:block;
+    width:100%;
+    padding-left:5px;
+  }
+  .mobile-menu-paragraph p{
+    color:#fff;
+    margin:5px 0!important;
+    font-size:12px;
+  }
   .tdu {
     text-decoration: none !important;
   }
@@ -1698,6 +1723,7 @@ footer .foo a:last-child {
   }
   #menu .dropdowns_holder  .dropbtn {
     text-decoration: none !important;
+    padding-left:15px;
   }
   .active_dropdown_holder {
     transform: translateX(0) !important;
@@ -1761,11 +1787,11 @@ footer .foo a:last-child {
     text-indent: 20px;
     background: #fff;
   }
-  #menu .fa-caret-right {
+  #menu .fa-caret-down {
     display: inline;
     font-size: 20px !important;
     color: #fff;
-    margin-left:20px;
+    padding-left:40px;
   }
   #menu .dropdown .new_sub_menu a:last-child {
     border-bottom: none !important;
@@ -1774,7 +1800,7 @@ footer .foo a:last-child {
     display: none;
   }
   #cookie .cookie_left p {
-    font-size: 10px !important;
+    font-size: 7px !important;
   }
 
   .cookie-link {
@@ -2142,7 +2168,7 @@ footer .foo a:last-child {
   }
 
   .cookie_link {
-    font-size: 10px !important;
+    font-size: 7px !important;
   }
 
   .uk-etc {
