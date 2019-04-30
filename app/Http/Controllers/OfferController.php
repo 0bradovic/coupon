@@ -620,7 +620,66 @@ class OfferController extends Controller
                  //dd(Carbon::parse($data[4]));
                  if(Offer::where('name',$data[0])->where('detail',$data[1])->first() != null)
                  {
-                     $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
+                    $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
+                    $offerType = OfferType::where('name',$data[6])->first();
+                    if($offerType == null)
+                    {
+                        $offer->offer_type_id = null;
+                        $offer->save();
+                    }
+                    else
+                    {
+                        $offer->offer_type_id = $offerType->id;
+                        $offer->save();
+                    }
+                    $offer->categories()->detach();
+                    $categorySlugs = explode(',',$data[7]);
+                    foreach($categorySlugs as $categorySlug)
+                    {
+                        $category = Category::where('slug',$categorySlug)->first();
+                        if($category != null)
+                        {
+                            $offer->categories()->attach($category->id);
+                        }
+                    }
+                    if($offer->link != $data[2])
+                    {
+                        $url = "http://tinyurl.com/api-create.php?url=".$data[2];
+
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+                
+                        $output = curl_exec($ch);
+                        $info = curl_getinfo($ch);
+                        curl_close($ch);
+                
+                        $offerLink = $output;
+                        $offer->link = $offerLink;
+                        $offer->save();
+                    }
+                    if($offer->startDate != Carbon::parse($data[3]))
+                    {
+                        $offer->startDate = Carbon::parse($data[3]);
+                        $offer->save();
+                    }
+                    if(public_path().$offer->img_src != $data[5])
+                    {
+                        if($offer->img_src)
+                        {
+                            unlink(public_path().$offer->img_src);
+                        }
+                        $img_url = $data[5];
+                        $info = pathinfo($img_url);
+                        $contents = file_get_contents($img_url);
+                        $name = time().$info['basename'];
+                        $img_src = '/images/offer/'.$name;
+                        file_put_contents(public_path().$img_src, $contents);
+                        $offer->img_src = $img_src;
+                        $offer->save();
+                    }
                      if($offer->endDate != null)
                      {
                         if($data[4] == 'Ongoing')

@@ -170,14 +170,14 @@ class CategoryController extends Controller
         }
         $slug = $this->createSlug($request->name);
         $i = 1;
-        if(count(Category::where('slug', $slug)->get()) > 0)
+        if(count(Category::where('slug', $slug)->where('id','<>',$id)->get()) > 0)
         {
             do{
-            $x=Category::where('slug', $slug)->get();
+            $x=Category::where('slug', $slug)->where('id','<>',$id)->get();
             if($x) $newSlug = $slug.$i;
             //$slug = $slug.$i;
             $i++;
-            }while(count(Category::where('slug', $newSlug)->get())>0);
+            }while(count(Category::where('slug', $newSlug)->where('id','<>',$id)->get())>0);
             
             if($newSlug)
             {
