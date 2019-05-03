@@ -96,6 +96,8 @@ class CategoryController extends Controller
             'parent_id' => $parent_id,
             'position' => $request->position,
             'display' => $request->display,
+            'default_words_set' => $request->default_words_set,
+            'default_words_exclude' => $request->default_words_exclude,
         ]);
 
         $newCategoryMetaTag = MetaTag::create([
@@ -211,8 +213,36 @@ class CategoryController extends Controller
             'img_src' => $img_src,
             'slug' => $slug,
             'parent_id' => $parent_id,
-            'position' => $request->position
+            'position' => $request->position,
+            'default_words_set' => $request->default_words_set,
+            'default_words_exclude' => $request->default_words_exclude,
         ]);
+        $offers = $category->offers;
+        if(count($offers) > 0)
+        {
+            foreach($offers as $offer)
+            {
+                $s = $offer->detail;
+                preg_match_all('([A-Z][^\s]*)', $s, $matches);
+                $detailWords = $matches[0];
+                $detailWords = array_map('strtolower',$detailWords);
+                $excludeWords = explode(',',$category->default_words_exclude);
+                $excludeWords = array_map('trim', $excludeWords);
+                foreach($detailWords as $key => $value)
+                {
+                    if(in_array($value,$excludeWords))
+                    {
+                        unset($detailWords[$key]);
+                    }
+                }
+                $setWords = explode(',',$category->default_words_set);
+                $setWords = array_map('trim', $setWords);
+                $tag = implode(',',$detailWords).','.implode(',',$setWords);
+                $offer->alt_tag = $tag;
+                $offer->save();
+            }
+        }
+        
         return redirect()->back()->with('success','Successfully updated category '.$category->name);
     }
 

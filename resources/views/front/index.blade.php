@@ -185,7 +185,7 @@
         @endif
     <section id="row">
    
-        <div id="cont" class="container  main_offers_container " >
+        <div id="cont" class="container main_offers_container home_page_container" >
         
 
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">

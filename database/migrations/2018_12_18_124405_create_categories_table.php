@@ -22,6 +22,8 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->integer('position');
             $table->boolean('display')->default(1);
+            $table->string('default_words_set')->nullable();
+            $table->string('default_words_exclude')->nullable();
             $table->timestamps();
         });
     }

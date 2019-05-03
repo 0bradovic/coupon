@@ -87,10 +87,10 @@
                 <input type="file" name="photo">
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="alt_tag">Image alt tag</label>
               <input type="text" class="form-control" name="alt_tag" placeholder="Enter image alt tag">
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label>Display?</label><br>

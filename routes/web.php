@@ -25,16 +25,6 @@ Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
 Route::post('/subscribe', 'MailChimpController@subscribe')->name('subscribe');
 
 Route::get('/parent-category/{slug}', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
-//TEST
-// Route::get('/return',function(){
-//     $offers = \App\Offer::where('offer_type_id',null)->get();
-//     foreach($offers as $offer)
-//     {
-//         $offer->offer_type_id = 15;
-//         $offer->save();
-//     }
-// });
-//END TEST
 
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){

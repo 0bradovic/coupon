@@ -40,8 +40,8 @@ class FrontController extends Controller
         {   
             $mostPopularOffers = $mostPopularOffers->merge($off);
         }
-        $newestOffers = $newestOffers->unique();
-        $mostPopularOffers = $mostPopularOffers->unique();
+        $newestOffers = $newestOffers->unique('id');
+        $mostPopularOffers = $mostPopularOffers->unique('id');
         $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10)->appends('name',$request->name);
         $mostPopularOffers = (new Collection($mostPopularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         $title = MetaTag::where('link','/')->pluck('title')->first();

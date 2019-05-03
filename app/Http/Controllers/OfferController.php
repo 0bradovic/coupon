@@ -149,7 +149,6 @@ class OfferController extends Controller
             'user_id' => Auth::user()->id,
             'position' => $request->position,
             'img_src' => $img_src,
-            'alt_tag' => $request->alt_tag,
             'display' => $request->display,
         ]);
         foreach($request->categories as $category)
@@ -171,6 +170,30 @@ class OfferController extends Controller
         //$url = env("APP_URL");
         $newOfferMetaTag->link = 'offer/'.$offer->slug;
         $newOfferMetaTag->save();
+
+        //image alt tag populate
+
+        $category = $offer->categories()->first();
+        $s = $offer->detail;
+        preg_match_all('([A-Z][^\s]*)', $s, $matches);
+        $detailWords = $matches[0];
+        $detailWords = array_map('strtolower',$detailWords);
+        $excludeWords = explode(',',$category->default_words_exclude);
+        $excludeWords = array_map('trim', $excludeWords);
+        foreach($detailWords as $key => $value)
+        {
+            if(in_array($value,$excludeWords))
+            {
+                unset($detailWords[$key]);
+            }
+        }
+        $setWords = explode(',',$category->default_words_set);
+        $setWords = array_map('trim', $setWords);
+        $tag = implode(',',$detailWords).','.implode(',',$setWords);
+        $offer->alt_tag = $tag;
+        $offer->save();
+
+        //end image alt tag populate
 
         $metaTag = MetaTag::where('offer_id', $offer->id)->first();
         return redirect()->route('offer.seo.edit', ['id' => $offer->id])->with('success', 'Successfully added offer '.$offer->name);
@@ -801,6 +824,26 @@ class OfferController extends Controller
                             $offer->categories()->attach($category->id);
                         }
                     }
+
+                    $category = $offer->categories()->first();
+                    $s = $offer->detail;
+                    preg_match_all('([A-Z][^\s]*)', $s, $matches);
+                    $detailWords = $matches[0];
+                    $detailWords = array_map('strtolower',$detailWords);
+                    $excludeWords = explode(',',$category->default_words_exclude);
+                    $excludeWords = array_map('trim', $excludeWords);
+                    foreach($detailWords as $key => $value)
+                    {
+                        if(in_array($value,$excludeWords))
+                        {
+                            unset($detailWords[$key]);
+                        }
+                    }
+                    $setWords = explode(',',$category->default_words_set);
+                    $setWords = array_map('trim', $setWords);
+                    $tag = implode(',',$detailWords).','.implode(',',$setWords);
+                    $offer->alt_tag = $tag;
+                    $offer->save();
 
                 }
              }

@@ -11,7 +11,7 @@ class Category extends Model
     //
 
     protected $fillable = [
-        'name', 'sku', 'img_src', 'parent_id','slug', 'position', 'display'
+        'name', 'sku', 'img_src', 'parent_id','slug', 'position', 'display', 'default_words_set', 'default_words_exclude',
     ];
 
 
