@@ -154,7 +154,7 @@
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                         @else style="height:auto;width:100%"; 
                         @endif>
-                            <img src="{{ $offer->img_src }}"  
+                            <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}"
                             @if($height>$width) style="height:100%;width:auto;"
                             @else style="height:auto;width:100%"; 
                             @endif>
@@ -216,7 +216,7 @@
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                         @else style="height:auto;width:100%"; 
                         @endif>
-                            <img src="{{ $offer->img_src }}"  
+                            <img src="{{ $offer->img_src }}"  alt="{{ $offer->alt_tag }}"
                             @if($height>$width) style="height:100%;width:auto;"
                             @else style="height:auto;width:100%"; 
                             @endif>

@@ -183,16 +183,22 @@
             </div>
         </section>
         @endif
+    
     <section id="row">
-   
+        
+        <div class="in-feed-ad">
+            
+        </div>
+
         <div id="cont" class="container main_offers_container home_page_container" >
         
 
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder">
-            <a href="#" class="hidden-xs">Most Popular
+            <a href="#" class="hidden-xs">Most Popular</a>
             
         </div>    
+        @php $k = 1; @endphp
         @foreach($newestOffers as $offer)
                 <div class="red">
                     <div class="image">

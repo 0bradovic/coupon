@@ -223,8 +223,15 @@ class CategoryController extends Controller
             foreach($offers as $offer)
             {
                 $s = $offer->detail;
+                $search = ["</p>","</div>","<br>","</br>","</small>"]; 
+                $replace = " ";
+                $s = str_replace($search,$replace,$s);
                 preg_match_all('([A-Z][^\s]*)', $s, $matches);
                 $detailWords = $matches[0];
+                foreach($detailWords as $key => $value)
+                {
+                    $detailWords[$key] = str_replace( ',', '', $value );
+                }
                 $detailWords = array_map('strtolower',$detailWords);
                 $excludeWords = explode(',',$category->default_words_exclude);
                 $excludeWords = array_map('trim', $excludeWords);
@@ -235,9 +242,17 @@ class CategoryController extends Controller
                         unset($detailWords[$key]);
                     }
                 }
-                $setWords = explode(',',$category->default_words_set);
-                $setWords = array_map('trim', $setWords);
-                $tag = implode(',',$detailWords).','.implode(',',$setWords);
+                if($category->default_words_set != null)
+                {
+                    $setWords = explode(',',$category->default_words_set);
+                    $setWords = array_map('trim', $setWords);
+                    $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                }
+                else
+                {
+                    $setWords = null;
+                    $tag = implode(', ',$detailWords);
+                }
                 $offer->alt_tag = $tag;
                 $offer->save();
             }
