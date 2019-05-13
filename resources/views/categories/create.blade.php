@@ -54,10 +54,10 @@
                   <input type="text" class="form-control" name="default_words_set" placeholder="Enter default keywords to set separated with a comma...">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Default keywords exclude</label>
                   <input type="text" class="form-control" name="default_words_exclude" placeholder="Enter default keywords to exclude separated with a comma...">
-                </div>
+                </div> -->
 
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Add Category</button>

@@ -54,6 +54,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/undo/deleted/category', 'CategoryController@undoDeleted')->name('undo.deleted.category');
         Route::get('/undo/edited/category/{id}', 'CategoryController@undoEdited')->name('undo.edited.category');
 
+        Route::get('/exclude-keywords', 'CategoryController@getKeywords')->name('get.exclude-keywords');
+        Route::post('/update/exclude-keywords', 'CategoryController@updateKeywords')->name('update.exclude-keywords');
     });
 
     Route::group(['middleware' => ['permission:manage offer types']], function () {
@@ -203,5 +205,14 @@ Route::middleware('auth')->group(function () {
 // use Spatie\Permission\Models\Permission;
 // Route::get('/perm', function(){
 //     Permission::create(['name' => 'manage popup']);
+// });
+// use App\Category;
+// Route::get('/clear', function(){
+//     $cats = Category::all();
+//     foreach($cats as $cat)
+//     {
+//         $cat->default_words_exclude = null;
+//         $cat->save();
+//     }
 // });
 

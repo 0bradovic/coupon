@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Support\Collection;
 use Response;
 use App\Undo;
+use App\ExcludeKeywords;
 
 
 class OfferController extends Controller
@@ -172,7 +173,7 @@ class OfferController extends Controller
         $newOfferMetaTag->save();
 
         //image alt tag populate
-
+        $excludeKeywords = ExcludeKeywords::first();
         $category = $offer->categories()->first();
         $s = $offer->detail;
         $search = ["</p>","</div>","<br>","</br>","</small>"]; 
@@ -185,7 +186,7 @@ class OfferController extends Controller
             $detailWords[$key] = str_replace( ',', '', $value );
         }
         $detailWords = array_map('strtolower',$detailWords);
-        $excludeWords = explode(',',$category->default_words_exclude);
+        $excludeWords = explode(',',$excludeKeywords->keywords);
         $excludeWords = array_map('trim', $excludeWords);
         foreach($detailWords as $key => $value)
         {
@@ -194,11 +195,19 @@ class OfferController extends Controller
                 unset($detailWords[$key]);
             }
         }
-        if($category->default_words_set != null)
+        if($category != null)
         {
-            $setWords = explode(',',$category->default_words_set);
-            $setWords = array_map('trim', $setWords);
-            $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+            if($category->default_words_set != null)
+            {
+                $setWords = explode(',',$category->default_words_set);
+                $setWords = array_map('trim', $setWords);
+                $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+            }
+            else
+            {
+                $setWords = null;
+                $tag = implode(', ',$detailWords);
+            }
         }
         else
         {
@@ -207,6 +216,15 @@ class OfferController extends Controller
         }
         $offer->alt_tag = $tag;
         $offer->save();
+
+        if($offer->metaTag)
+        {
+            $metaTag = $offer->metaTag;
+            $metaTag->keywords = $offer->alt_tag;
+            $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
+            $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+            $metaTag->save();
+        }
 
         //end image alt tag populate
 
@@ -839,7 +857,15 @@ class OfferController extends Controller
                             $offer->categories()->attach($category->id);
                         }
                     }
+                    $newOfferMetaTag = MetaTag::create([
+                        'offer_id' => $offer->id
+                    ]);
+            
+                    //$url = env("APP_URL");
+                    $newOfferMetaTag->link = 'offer/'.$offer->slug;
+                    $newOfferMetaTag->save();
 
+                    $excludeKeywords = ExcludeKeywords::first();
                     $category = $offer->categories()->first();
                     $s = $offer->detail;
                     $search = ["</p>","</div>","<br>","</br>","</small>"]; 
@@ -852,7 +878,7 @@ class OfferController extends Controller
                         $detailWords[$key] = str_replace( ',', '', $value );
                     }
                     $detailWords = array_map('strtolower',$detailWords);
-                    $excludeWords = explode(',',$category->default_words_exclude);
+                    $excludeWords = explode(',',$excludeKeywords->keywords);
                     $excludeWords = array_map('trim', $excludeWords);
                     foreach($detailWords as $key => $value)
                     {
@@ -861,11 +887,19 @@ class OfferController extends Controller
                             unset($detailWords[$key]);
                         }
                     }
-                    if($category->default_words_set != null)
+                    if($category != null)
                     {
-                        $setWords = explode(',',$category->default_words_set);
-                        $setWords = array_map('trim', $setWords);
-                        $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                        if($category->default_words_set != null)
+                        {
+                            $setWords = explode(',',$category->default_words_set);
+                            $setWords = array_map('trim', $setWords);
+                            $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                        }
+                        else
+                        {
+                            $setWords = null;
+                            $tag = implode(', ',$detailWords);
+                        }
                     }
                     else
                     {
@@ -874,7 +908,14 @@ class OfferController extends Controller
                     }
                     $offer->alt_tag = $tag;
                     $offer->save();
-
+                    if($offer->metaTag)
+                    {
+                        $metaTag = $offer->metaTag;
+                        $metaTag->keywords = $offer->alt_tag;
+                        $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
+                        $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                        $metaTag->save();
+                    }
                 }
              }
         }else{

@@ -95,6 +95,26 @@ class Offer extends Model
         $offers = collect($offers);
         return $offers;
     }
+
+    public function formatDetailsDescription($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $search = ["</p>","</div>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string)));
+        return $newString;
+    }
+
+    public function firstSentence($string)
+    {
+        $newString = $this->formatDetailsDescription($string);
+        $sentenceArray = explode('.',$newString);
+        $firstSentence = trim($sentenceArray[0]);
+        return $firstSentence;
+    }
     
     public function formatDetails($string)
     {

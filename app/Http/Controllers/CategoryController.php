@@ -8,6 +8,7 @@ use App\MetaTag;
 use Illuminate\Routing\UrlGenerator;
 use App\Undo;
 use App\Offer;
+use App\ExcludeKeywords;
 
 
 class CategoryController extends Controller
@@ -97,7 +98,6 @@ class CategoryController extends Controller
             'position' => $request->position,
             'display' => $request->display,
             'default_words_set' => $request->default_words_set,
-            'default_words_exclude' => $request->default_words_exclude,
         ]);
 
         $newCategoryMetaTag = MetaTag::create([
@@ -215,8 +215,8 @@ class CategoryController extends Controller
             'parent_id' => $parent_id,
             'position' => $request->position,
             'default_words_set' => $request->default_words_set,
-            'default_words_exclude' => $request->default_words_exclude,
         ]);
+        $excludeKeywords = ExcludeKeywords::first();
         $offers = $category->offers;
         if(count($offers) > 0)
         {
@@ -233,7 +233,7 @@ class CategoryController extends Controller
                     $detailWords[$key] = str_replace( ',', '', $value );
                 }
                 $detailWords = array_map('strtolower',$detailWords);
-                $excludeWords = explode(',',$category->default_words_exclude);
+                $excludeWords = explode(',',$excludeKeywords->keywords);
                 $excludeWords = array_map('trim', $excludeWords);
                 foreach($detailWords as $key => $value)
                 {
@@ -255,6 +255,14 @@ class CategoryController extends Controller
                 }
                 $offer->alt_tag = $tag;
                 $offer->save();
+                if($offer->metaTag)
+                {
+                    $metaTag = $offer->metaTag;
+                    $metaTag->keywords = $offer->alt_tag;
+                    $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
+                    $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                    $metaTag->save();
+                }
             }
         }
         
@@ -405,6 +413,82 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect()->back()->with('success', 'Successfully changed visibility of category '.$category->name);
+    }
+
+    public function getKeywords()
+    {
+        $excludeKeywords = ExcludeKeywords::first();
+        return view('categories.exclude-keywords',compact('excludeKeywords'));
+    }
+
+    public function updateKeywords(Request $request)
+    {
+        $this->validate($request,[
+            'keywords' => 'required',
+        ]);
+        $excludeKeywords = ExcludeKeywords::first();
+        $excludeKeywords->keywords = $request->keywords;
+        $excludeKeywords->save();
+        $offers = Offer::all();
+        if(count($offers) > 0)
+        {
+            foreach($offers as $offer)
+            {
+                $category = $offer->categories()->first();
+                $s = $offer->detail;
+                $search = ["</p>","</div>","<br>","</br>","</small>"]; 
+                $replace = " ";
+                $s = str_replace($search,$replace,$s);
+                preg_match_all('([A-Z][^\s]*)', $s, $matches);
+                $detailWords = $matches[0];
+                foreach($detailWords as $key => $value)
+                {
+                    $detailWords[$key] = str_replace( ',', '', $value );
+                }
+                $detailWords = array_map('strtolower',$detailWords);
+                $excludeWords = explode(',',$excludeKeywords->keywords);
+                $excludeWords = array_map('trim', $excludeWords);
+                foreach($detailWords as $key => $value)
+                {
+                    if(in_array($value,$excludeWords))
+                    {
+                        unset($detailWords[$key]);
+                    }
+                }
+                if($category != null)
+                {
+                    if($category->default_words_set != null)
+                    {
+                        $setWords = explode(',',$category->default_words_set);
+                        $setWords = array_map('trim', $setWords);
+                        $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                    }
+                    else
+                    {
+                        $setWords = null;
+                        $tag = implode(', ',$detailWords);
+                    }
+                }
+                else
+                {
+                    $setWords = null;
+                    $tag = implode(', ',$detailWords);
+                }
+               
+                $offer->alt_tag = $tag;
+                $offer->save();
+                if($offer->metaTag)
+                {
+                    $metaTag = $offer->metaTag;
+                    $metaTag->keywords = $offer->alt_tag;
+                    $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
+                    $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                    $metaTag->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Successfully updated default exclude keywords.');
     }
 
 }

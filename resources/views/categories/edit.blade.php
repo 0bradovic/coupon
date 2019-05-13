@@ -63,10 +63,10 @@
                   <input type="text" class="form-control" name="default_words_set" value="{{ $category->default_words_set }}">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Default keywords exclude</label>
                   <input type="text" class="form-control" name="default_words_exclude" value="{{ $category->default_words_exclude }}">
-                </div>
+                </div> -->
 
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Edit Category</button>

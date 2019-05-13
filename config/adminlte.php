@@ -220,6 +220,10 @@ return [
                     'can' => 'manage seo',
                     'url' => '/meta/category',
                 ],
+                [
+                    'text' => 'Exclude keywords',
+                    'url' => '/exclude-keywords',
+                ],
             ],
             
         ],
