@@ -259,7 +259,7 @@
                     </div>
                 @endforeach
         </div>
-            <!-- <div class="adSense">
+            <div class="adSense">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                  style="display:block"
@@ -272,7 +272,7 @@
                     enable_page_level_ads: true
                     });
                 </script>
-            </div> -->
+            </div>
         {{--{!! $popularOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
         

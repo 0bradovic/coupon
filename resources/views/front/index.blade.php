@@ -44,7 +44,7 @@
                     <div class="navbar_search_form" id="navbarSupportedContent">
                     <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.blade')}}" method="GET">
                         <button class="btn btn1" type="submit"><i class="fas fa-search"></i></button>
-                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <input autocomplete="off" id="search" class="form-control mr-sm-2 searchh" type="search" name="search" placeholder="Search for a brand or retailer" aria-label="Search">
                         {!! csrf_field() !!}
                     </form>
 
