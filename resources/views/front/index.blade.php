@@ -32,7 +32,11 @@
                 <div class="header-navbar-right">
                     <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
                     
+                    @if(Helpers::getLogo() == null)
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
+                    @else
+                    <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:40px;width:auto;"></a>
+                    @endif
                 <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
