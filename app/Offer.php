@@ -105,6 +105,12 @@ class Offer extends Model
         $replace = ". ";  
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
         $newString = strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string)));
+        $findAmp = ['&amp;'];
+        $replaceAmp = ['&'];
+        $newString = str_replace($findAmp,$replaceAmp,$newString);
+        $findNbs = ['&nbsp;'];
+        $replaceNbs = [' '];
+        $newString = str_replace($findNbs,$replaceNbs,$newString);
         return $newString;
     }
 

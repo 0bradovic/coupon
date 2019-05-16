@@ -396,10 +396,10 @@ section#boxes {
 
 .in-feed-ad{
   width:76%;
-  height:100px;
-  background-color: #1da1f2;
   margin:10px auto;
+  align-items:center;
 }
+
 .social_icons .social_icons_div .fab,
 .far,
 .fas {
@@ -818,7 +818,7 @@ a.go_top:focus {
 #row .red .sticker {
   position: absolute;
   top: -5px;
-  width: 100px;
+  width: 100%;
   line-height: 2;
   background: #fe9f0a;
   line-height: 1.6;
@@ -827,6 +827,7 @@ a.go_top:focus {
   border-radius: 0 0 5px 5px;
   box-shadow: 0 0 5px 0 #00000082;
   font-size: 14px;
+  
 }
 
 #row .red .image img {
@@ -1540,6 +1541,21 @@ footer .foo a:last-child {
   .in-feed-ad{
     width:95%;
   }
+  #row .container {
+    max-width: 76% !important;
+    }
+    .main_offers_container {
+        width: 100% !important;
+    }
+    .title2,.title_holder .titleFix {
+        margin-left: 0 !important;
+    }
+    .title_holder {
+        width: 76% !important;
+    }
+    #row .red .text{
+        font-size:14px;
+    }
 }
 
 @media screen and (max-width: 1220px) {
@@ -1555,10 +1571,13 @@ footer .foo a:last-child {
     max-width: 100% !important;
   }
   .title_holder {
-    width: 98% !important;
+    width: 100% !important;
   }
   #cont {
     max-width: 100% !important;
+  }
+  #row .singe-container .single-offer{
+      width: 100% !important;
   }
 }
 
@@ -2297,18 +2316,5 @@ footer .foo a:last-child {
         margin-right: 0 !important;
     }
 }
-@media (max-width: 1300px) {
-    #row .container {
-    max-width: 100% !important;
-}
-.main_offers_container {
-    width: 100% !important;
-}
-.title2,.title_holder .titleFix {
-    margin-left: 0 !important;
-}
-.title_holder {
-    width: 100% !important;
-}
-}
+
 /* END MEDIAAAAAAAAA SRCREEN */

@@ -202,17 +202,26 @@ class OfferController extends Controller
                 $setWords = explode(',',$category->default_words_set);
                 $setWords = array_map('trim', $setWords);
                 $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                $tag = explode(', ',$tag);
+                $tag = array_unique($tag);
+                $tag = implode(', ',$tag);
             }
             else
             {
                 $setWords = null;
                 $tag = implode(', ',$detailWords);
+                $tag = explode(', ',$tag);
+                $tag = array_unique($tag);
+                $tag = implode(', ',$tag);
             }
         }
         else
         {
             $setWords = null;
             $tag = implode(', ',$detailWords);
+            $tag = explode(', ',$tag);
+            $tag = array_unique($tag);
+            $tag = implode(', ',$tag);
         }
         $offer->alt_tag = $tag;
         $offer->save();
@@ -254,7 +263,7 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         //$tags = Tag::all();
         $offerTypes = OfferType::all();
-        $categories = Category::all();
+        $categories = Category::where('parent_id', '<>', null)->get();
         $undoEdited = Undo::where('offer_id',$id)->where('type','Edited')->first();
         return view('offers.edit',compact('offer','offerTypes','categories','undoEdited'));
     }
@@ -894,17 +903,26 @@ class OfferController extends Controller
                             $setWords = explode(',',$category->default_words_set);
                             $setWords = array_map('trim', $setWords);
                             $tag = implode(', ',$detailWords).', '.implode(', ',$setWords);
+                            $tag = explode(', ',$tag);
+                            $tag = array_unique($tag);
+                            $tag = implode(', ',$tag);
                         }
                         else
                         {
                             $setWords = null;
                             $tag = implode(', ',$detailWords);
+                            $tag = explode(', ',$tag);
+                            $tag = array_unique($tag);
+                            $tag = implode(', ',$tag);
                         }
                     }
                     else
                     {
                         $setWords = null;
                         $tag = implode(', ',$detailWords);
+                        $tag = explode(', ',$tag);
+                        $tag = array_unique($tag);
+                        $tag = implode(', ',$tag);
                     }
                     $offer->alt_tag = $tag;
                     $offer->save();
