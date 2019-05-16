@@ -1,16 +1,15 @@
 $(document).ready(function() {
   $(".dropdown").hover(function() {
     var id = $(this).data("id");
-   // console.log(id);
+    // console.log(id);
     $(".dropdown-container").addClass("d-none");
-   $('#cont'+id).removeClass('d-none');
-    
+    $("#cont" + id).removeClass("d-none");
   });
 });
 $(document).ready(function() {
-  $('.dropdown-container').hover(function () {
-    $(this).removeClass('d-none')
-  })
+  $(".dropdown-container").hover(function() {
+    $(this).removeClass("d-none");
+  });
   $(".fa-times-circle").on("click", function() {
     $("#cookie").remove();
   });
@@ -205,3 +204,23 @@ $(".close-msg").click(function() {
     .parent()
     .fadeOut(200);
 });
+
+$(document).ready(function() {
+adjustDropdown(),
+$(window).resize(function() {
+  adjustDropdown()
+})
+});
+
+function adjustDropdown() {
+  const hw = $("#header").width();
+  const ddw = $(".dropdowns_holder").width();
+  const pixels = (hw - ddw) / 2;
+  $(".dropdown-container").each(function(i, el) {
+    if (i > 0) {
+      $(el).css({ left: pixels + $(".dropbtn")[i - 1].scrollWidth + "px" });
+    } else {
+      $(el).css({ left: pixels + "px" });
+    }
+  });
+}

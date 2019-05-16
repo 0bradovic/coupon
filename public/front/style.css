@@ -1005,18 +1005,20 @@ header {
 
 #menu .dropdown-content .dropdown-container {
   display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: absolute;
-    z-index: 99999999;
-    padding: 10px;
-    background: white;
-    border-radius: 3px;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.26);
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 99999999;
+  left: 0;
+  padding: 10px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.26);
+  width: 250px;
+  top: 78px;
 }
-
 
 #menu .dropdown-content .dropdown-container a {
   color: #ffa400;
@@ -1589,7 +1591,7 @@ footer .foo a:last-child {
   #menu .dropdowns_holder {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 
@@ -1657,7 +1659,10 @@ footer .foo a:last-child {
     flex-direction: column !important;
     justify-content: center !important;
   }
-
+  
+  #menu .dropdown-content .dropdown-container {
+    top: 110px !important;
+  }
   .header-navbar-right {
     width: 100% !important;
     justify-content: center !important;
@@ -1696,6 +1701,10 @@ footer .foo a:last-child {
 @media screen and (max-width: 991px) {
   .tabs_nav_holder {
     width: 100% !important;
+  }
+  
+  #menu .dropdown-content .dropdown-container {
+    top: 120px !important;
   }
 
   .navbar-toggler {

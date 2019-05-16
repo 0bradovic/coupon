@@ -127,15 +127,15 @@
                     @php $j = 1; @endphp
                     @foreach($categories as $category)
                     <div class="dropdown-content" >
-                            <div class="dropdown-container d-none" id="cont{{$j}}">
+                        <div class="dropdown-container d-none" id="cont{{$j}}">
                             @foreach($category->liveSubcategories as $cat)
                             
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
                            
                             @endforeach
                             @php $j++; @endphp
-                            </div>
                         </div>
+                    </div>
                     
                     @endforeach
                     
