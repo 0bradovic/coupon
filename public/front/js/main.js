@@ -1,16 +1,16 @@
-// $(document).ready(function() {
-//   $(".dropdown").hover(function() {
-//     var id = $(this).data("id");
-//     $(".dropdown-container").addClass("d-none");
-//     $("#" + id + "")
-//       .children()
-//       .removeClass("d-none");
-//   });
-// });
 $(document).ready(function() {
-  // $('.dropdown-container').hover(function () {
-  //   $(this).removeClass('d-none')
-  // })
+  $(".dropdown").hover(function() {
+    var id = $(this).data("id");
+   // console.log(id);
+    $(".dropdown-container").addClass("d-none");
+   $('#cont'+id).removeClass('d-none');
+    
+  });
+});
+$(document).ready(function() {
+  $('.dropdown-container').hover(function () {
+    $(this).removeClass('d-none')
+  })
   $(".fa-times-circle").on("click", function() {
     $("#cookie").remove();
   });

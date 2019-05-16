@@ -105,7 +105,7 @@
                             <p>CATEGORIES (click down icon to see more)</p>
                         </div>
                     @foreach($categories as $category)
-                        <div class="dropdown">
+                        <div class="dropdown" data-id="{{ $i }}">
                         
                         <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
                         
@@ -126,8 +126,8 @@
                     </div>
                     @php $j = 1; @endphp
                     @foreach($categories as $category)
-                    <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if(!$loop->first) d-none @endif">
+                    <div class="dropdown-content" >
+                            <div class="dropdown-container d-none" id="cont{{$j}}">
                             @foreach($category->liveSubcategories as $cat)
                             
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
