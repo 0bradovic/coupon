@@ -201,10 +201,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/popup', 'PopupController@update')->name('update.popup');
     });
 
+    Route::group(['middleware' => ['permission:manage logo']], function () {
+        Route::get('/logo', 'SiteController@index');
+        Route::post('/upload/logo', 'SiteController@store')->name('store.logo');
+        Route::post('/update/logo', 'SiteController@update')->name('update.logo');
+    });
+
 });
 // use Spatie\Permission\Models\Permission;
 // Route::get('/perm', function(){
-//     Permission::create(['name' => 'manage popup']);
+//     Permission::create(['name' => 'manage logo']);
 // });
 // use App\Category;
 // Route::get('/clear', function(){

@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\SiteSetings;
+use Intervention\Image\ImageManagerStatic as Image;
+
+class SiteController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $siteSetings = SiteSetings::first();
+        return view('logo',compact('siteSetings'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'logo' => 'required',
+        ]);
+        $file = $request->logo;
+        $name = time().$file->getClientOriginalName();
+        $image = Image::make($file->getRealPath());
+        $image->save(public_path('images/logo/' .$name));
+        $img_src = '/images/logo/'.$name;
+        SiteSetings::create([
+            'logo' => $img_src,
+        ]);
+        return redirect()->back()->with('success', 'Successfully uploaded logo');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $this->validate($request,[
+            'logo' => 'required',
+        ]);
+        $siteSetings = SiteSetings::first();
+        unlink(public_path().$siteSetings->logo);
+        $file = $request->logo;
+        $name = time().$file->getClientOriginalName();
+        $image = Image::make($file->getRealPath());
+        $image->save(public_path('images/logo/' .$name));
+        $img_src = '/images/logo/'.$name;
+        $siteSetings->logo = $img_src;
+        $siteSetings->save();
+        return redirect()->back()->with('success', 'Successfully updated logo.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

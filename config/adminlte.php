@@ -108,6 +108,12 @@ return [
     */
 
     'menu' => [
+        'LOGO',
+        [
+            'text' => 'Logo',
+            'can' => 'manage logo',
+            'url' => '/logo',
+        ],
         'USERS',
         [
             'text' => 'Users',

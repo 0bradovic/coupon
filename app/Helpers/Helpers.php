@@ -7,6 +7,7 @@ use Request;
 use App\MetaTag;
 use App\Tagline;
 use Carbon\Carbon;
+use App\SiteSetings;
 
 class Helpers
 {
@@ -57,6 +58,19 @@ public static function getMetaTags()
     public static function expireSoon()
     {
         return Carbon::now()->addHours(48);
+    }
+
+    public static function getLogo()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->logo;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }
