@@ -35,7 +35,7 @@
                     @if(Helpers::getLogo() == null)
                     <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
                     @else
-                    <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:40px;width:auto;"></a>
+                    <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:38px;width:auto;"></a>
                     @endif
                 <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

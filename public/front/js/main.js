@@ -4,11 +4,15 @@ $(document).ready(function() {
     // console.log(id);
     $(".dropdown-container").addClass("d-none");
     $("#cont" + id).removeClass("d-none");
+  },function(){
+    $(".dropdown-container").addClass("d-none");
   });
 });
 $(document).ready(function() {
   $(".dropdown-container").hover(function() {
     $(this).removeClass("d-none");
+  },function(){
+    $(this).addClass('d-none');
   });
   $(".fa-times-circle").on("click", function() {
     $("#cookie").remove();
