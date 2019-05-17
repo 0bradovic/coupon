@@ -205,22 +205,22 @@ $(".close-msg").click(function() {
     .fadeOut(200);
 });
 
-$(document).ready(function() {
-adjustDropdown(),
-$(window).resize(function() {
-  adjustDropdown()
-})
-});
+// $(document).ready(function() {
+// adjustDropdown(),
+// $(window).resize(function() {
+//   adjustDropdown()
+// })
+// });
 
-function adjustDropdown() {
-  const hw = $("#header").width();
-  const ddw = $(".dropdowns_holder").width();
-  const pixels = (hw - ddw) / 2;
-  $(".dropdown-container").each(function(i, el) {
-    if (i > 0) {
-      $(el).css({ left: pixels + $(".dropbtn")[i - 1].scrollWidth + "px" });
-    } else {
-      $(el).css({ left: pixels + "px" });
-    }
-  });
-}
+// function adjustDropdown() {
+//   const hw = $("#header").width();
+//   const ddw = $(".dropdowns_holder").width();
+//   const pixels = (hw - ddw) / 2;
+//   $(".dropdown-container").each(function(i, el) {
+//     if (i > 0) {
+//       $(el).css({ left: pixels + $(".dropbtn")[i - 1].scrollWidth + "px" });
+//     } else {
+//       $(el).css({ left: pixels + "px" });
+//     }
+//   });
+// }

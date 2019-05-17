@@ -555,6 +555,7 @@ header .search-div-1:last-child {
   align-items: center;
   justify-content: flex-start;
   margin-right: 20px;
+  position: relative;
 }
 
 #menu .main_offers_container {
@@ -998,10 +999,6 @@ header {
   display: none !important;
 }
 
-.dropdown-content {
-  width: 78%;
-  margin: 0 auto;
-}
 
 #menu .dropdown-content .dropdown-container {
   display: flex;
@@ -1017,7 +1014,7 @@ header {
   border-radius: 3px;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.26);
   width: 250px;
-  top: 78px;
+  top: 40px;
 }
 
 #menu .dropdown-content .dropdown-container a {
@@ -1660,9 +1657,6 @@ footer .foo a:last-child {
     justify-content: center !important;
   }
   
-  #menu .dropdown-content .dropdown-container {
-    top: 110px !important;
-  }
   .header-navbar-right {
     width: 100% !important;
     justify-content: center !important;
@@ -1703,8 +1697,8 @@ footer .foo a:last-child {
     width: 100% !important;
   }
   
-  #menu .dropdown-content .dropdown-container {
-    top: 120px !important;
+  #menu .dropdown-content  {
+    display: none !important;
   }
 
   .navbar-toggler {

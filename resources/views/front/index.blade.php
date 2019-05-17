@@ -112,7 +112,20 @@
                         <div class="dropdown" data-id="{{ $i }}">
                         
                         <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
-                        
+                        @php $j = 1; @endphp
+                   
+                    <div class="dropdown-content" >
+                        <div class="dropdown-container d-none" id="cont{{$i}}">
+                            @foreach($category->liveSubcategories as $cat)
+                            
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
+                           
+                            @endforeach
+                            @php $j++; @endphp
+                        </div>
+                    </div>
+                    
+                   
                             <div class="new_sub_menu" id="{{ $i }}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
                                 @foreach($category->liveSubcategories as $cat)
@@ -128,20 +141,7 @@
                         @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $j = 1; @endphp
-                    @foreach($categories as $category)
-                    <div class="dropdown-content" >
-                        <div class="dropdown-container d-none" id="cont{{$j}}">
-                            @foreach($category->liveSubcategories as $cat)
-                            
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
-                           
-                            @endforeach
-                            @php $j++; @endphp
-                        </div>
-                    </div>
-                    
-                    @endforeach
+                   
                     
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="newest-offers">Viewing newest offers </p>
