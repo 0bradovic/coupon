@@ -13,10 +13,16 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexLogo()
     {
         $siteSetings = SiteSetings::first();
-        return view('logo',compact('siteSetings'));
+        return view('site-setings.logo',compact('siteSetings'));
+    }
+
+    public function indexFavicon()
+    {
+        $siteSetings = SiteSetings::first();
+        return view('site-setings.favicon',compact('siteSetings'));
     }
 
     /**
@@ -35,20 +41,36 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeLogo(Request $request)
     {
         $this->validate($request,[
             'logo' => 'required',
         ]);
+        $siteSetings = SiteSetings::first();
         $file = $request->logo;
         $name = time().$file->getClientOriginalName();
         $image = Image::make($file->getRealPath());
         $image->save(public_path('images/logo/' .$name));
         $img_src = '/images/logo/'.$name;
-        SiteSetings::create([
-            'logo' => $img_src,
-        ]);
+        $siteSetings->logo = $img_src;
+        $siteSetings->save();
         return redirect()->back()->with('success', 'Successfully uploaded logo');
+    }
+
+    public function storeFavicon(Request $request)
+    {
+        $this->validate($request,[
+            'favicon' => 'required',
+        ]);
+        $siteSetings = SiteSetings::first();
+        $file = $request->favicon;
+        $name = time().$file->getClientOriginalName();
+        $image = Image::make($file->getRealPath());
+        $image->save(public_path('images/favicon/' .$name));
+        $img_src = '/images/favicon/'.$name;
+        $siteSetings->favicon = $img_src;
+        $siteSetings->save();
+        return redirect()->back()->with('success', 'Successfully uploaded favicon');
     }
 
     /**
@@ -80,7 +102,7 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function updateLogo(Request $request)
     {
         $this->validate($request,[
             'logo' => 'required',
@@ -95,6 +117,23 @@ class SiteController extends Controller
         $siteSetings->logo = $img_src;
         $siteSetings->save();
         return redirect()->back()->with('success', 'Successfully updated logo.');
+    }
+
+    public function updateFavicon(Request $request)
+    {
+        $this->validate($request,[
+            'favicon' => 'required',
+        ]);
+        $siteSetings = SiteSetings::first();
+        unlink(public_path().$siteSetings->favicon);
+        $file = $request->favicon;
+        $name = time().$file->getClientOriginalName();
+        $image = Image::make($file->getRealPath());
+        $image->save(public_path('images/favicon/' .$name));
+        $img_src = '/images/favicon/'.$name;
+        $siteSetings->favicon = $img_src;
+        $siteSetings->save();
+        return redirect()->back()->with('success', 'Successfully updated favicon.');
     }
 
     /**

@@ -108,11 +108,20 @@ return [
     */
 
     'menu' => [
-        'LOGO',
+        'SITE SETINGS',
         [
-            'text' => 'Logo',
-            'can' => 'manage logo',
-            'url' => '/logo',
+            'text' => 'Site setings',
+            'can' => 'manage site setings',
+            'submenu' => [
+                [
+                    'text' => 'Logo',
+                    'url' => 'site-setings/logo',
+                ],
+                [
+                    'text' => 'Favicon',
+                    'url' => '/site-setings/favicon',
+                ],
+            ],
         ],
         'USERS',
         [

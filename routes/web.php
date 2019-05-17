@@ -201,16 +201,21 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/popup', 'PopupController@update')->name('update.popup');
     });
 
-    Route::group(['middleware' => ['permission:manage logo']], function () {
-        Route::get('/logo', 'SiteController@index');
-        Route::post('/upload/logo', 'SiteController@store')->name('store.logo');
-        Route::post('/update/logo', 'SiteController@update')->name('update.logo');
+    Route::group(['middleware' => ['permission:manage site setings']], function () {
+        //Logo
+        Route::get('/site-setings/logo', 'SiteController@indexLogo');
+        Route::post('/site-setings/upload/logo', 'SiteController@storeLogo')->name('store.logo');
+        Route::post('/site-setings/update/logo', 'SiteController@updateLogo')->name('update.logo');
+        //Favicon
+        Route::get('/site-setings/favicon', 'SiteController@indexFavicon');
+        Route::post('/site-setings/upload/favicon', 'SiteController@storeFavicon')->name('store.favicon');
+        Route::post('/site-setings/update/favicon', 'SiteController@updateFavicon')->name('update.favicon');
     });
 
 });
 // use Spatie\Permission\Models\Permission;
 // Route::get('/perm', function(){
-//     Permission::create(['name' => 'manage logo']);
+//     Permission::create(['name' => 'manage site setings']);
 // });
 // use App\Category;
 // Route::get('/clear', function(){

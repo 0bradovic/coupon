@@ -73,4 +73,17 @@ public static function getMetaTags()
         }
     }
 
+    public static function getFavicon()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->favicon;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }
