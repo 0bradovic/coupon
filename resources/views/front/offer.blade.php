@@ -359,7 +359,7 @@
             @endif
         </div>
         <div class="adSense">
-            <div class="adSense_holder">
+            <div class="adSenseOffer">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                  style="display:block"
