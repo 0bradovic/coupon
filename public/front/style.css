@@ -34,9 +34,15 @@ body {
   height: 600px;
   margin-top: 51px;
   margin-left: 20px;
-  position: fixed;
-  right: 50px;
+}
+
+.adSense .adSense_holder {
   background: red;
+  position: fixed;
+  width: 150px;
+  height: 490px;
+  margin-left: 20px;
+  right: 12%;
 }
 
 .search_adSense {
@@ -1615,6 +1621,10 @@ footer .foo a:last-child {
 }
 
 @media screen and (max-width: 1200px) {
+  .adSense_holder {
+    right: 5px !important;
+    width: 140px !important;
+  }
   #row .container {
     max-width: 100% !important;
   }
@@ -1676,7 +1686,11 @@ footer .foo a:last-child {
     width: 60px !important;
   }
 }
-
+@media (max-width: 1050px) {
+  .adSense {
+    display: none !important;
+  }
+}
 @media screen and (max-width: 1030px) {
   nav.navbar.navbar-expand-lg {
     flex-direction: column !important;
