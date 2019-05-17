@@ -16,6 +16,7 @@ class CreateSiteSetingsTable extends Migration
         Schema::create('site_setings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('logo')->nullable();
+            $table->string('favicon')->nullable();
             $table->timestamps();
         });
     }

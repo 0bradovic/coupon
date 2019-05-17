@@ -15,6 +15,11 @@
     @else
     {!! Helpers::getMetaTags() !!} 
     @endif
+    @if(Helpers::getFavicon() == null)
+    <link rel="shortcut icon" href="/front/image/favicon.png">
+    @else
+    <link rel="shortcut icon" href="{{Helpers::getFavicon()}}">
+    @endif
 </head>
 
 <body>
@@ -23,7 +28,11 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="header-navbar-right">
                 <i id="mob_menu" class="fa fa-bars" aria-hidden="true"></i>
-                <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
+                    @if(Helpers::getLogo() == null)
+                    <a class="navbar-brand" href="/"><b>BeforeTheShop</b></a>
+                    @else
+                    <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:38px;width:auto;"></a>
+                    @endif
                  <a href="#" class="uk-etc">Every	offer	in	the	UK	here	–	and	personalised	suggestions	for you!</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,9 +97,20 @@
                             <p>CATEGORIES (click down icon to see more)</p>
                         </div>
                     @foreach($categories as $cate)
-                        <div class="dropdown">
+                        <div class="dropdown" data-id="{{$i}}">
                         
                             <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($category->name == $cate->name) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
+
+                        <div class="dropdown-content">
+                            <div class="dropdown-container d-none" id="cont{{$i}}">
+                            @foreach($cate->liveSubcategories as $cat)
+                           
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
+                            
+                            @endforeach
+        
+                            </div>
+                        </div>
 
                             <div class="new_sub_menu" id="{{$i}}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
@@ -106,20 +126,7 @@
                         @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $j = 1; @endphp
-                    @foreach($categories as $cate)
-                    <div class="dropdown-content " id="{{$j}}">
-                            <div class="dropdown-container @if($cate->name != $category->name) d-none @endif">
-                            @foreach($cate->liveSubcategories as $cat)
-                           
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}">{{ $cat->name }}<span class="spanr">{{ count($cat->getLiveOffersByCategory($cat->id)) }} offers</span></a>
-                            
-                            @endforeach
-                            @php $j++; @endphp
-                            </div>
-                        </div>
                     
-                    @endforeach
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="dNone newest-offers">Viewing newest</p>
                     <a class="btn btn-default dNone newest-offers" id="most-popular-btn">View most popular</a>

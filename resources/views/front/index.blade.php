@@ -10,7 +10,11 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
+    @if(Helpers::getFavicon() == null)
     <link rel="shortcut icon" href="/front/image/favicon.png">
+    @else
+    <link rel="shortcut icon" href="{{Helpers::getFavicon()}}">
+    @endif
     {!! Helpers::getMetaTags() !!} 
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -112,7 +116,7 @@
                         <div class="dropdown" data-id="{{ $i }}">
                         
                         <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $category->slug]) }}" class="dropbtn @if($loop->first) tdu @endif" data-id="{{$i}}">{{ $category->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
-                        @php $j = 1; @endphp
+                       
                    
                     <div class="dropdown-content" >
                         <div class="dropdown-container d-none" id="cont{{$i}}">
@@ -121,7 +125,7 @@
                                 <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::is($cat->slug)) style="text-decoration: underline;" @endif >{{ $cat->name }}</a>
                            
                             @endforeach
-                            @php $j++; @endphp
+                           
                         </div>
                     </div>
                     

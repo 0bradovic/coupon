@@ -87,9 +87,20 @@
                             <p>CATEGORIES (click down icon to see more)</p>
                         </div>
                     @foreach($categories as $cate)
-                        <div class="dropdown">
+                        <div class="dropdown" data-id="{{ $i }}">
                             <div class="dropdown_row"><a href="{{ route('parent.category.offers',['slug' => $cate->slug]) }}" class="dropbtn @if($cate->liveSubcategories->contains('slug',Request::segment(2))) tdu @endif" data-id="{{$i}}">{{ $cate->name }}</a><i class="fas fa-caret-down open_sub"></i></div>
                             
+                        <div class="dropdown-content" >
+                            <div class="dropdown-container d-none" id="cont{{$i}}">
+                            @foreach($cate->liveSubcategories as $cat)
+                            
+                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::path() == 'category/'.$cat->slug) class="sub-category" @endif >{{ $cat->name }}</a>
+                           
+                            @endforeach
+                            
+                            </div>
+                        </div>
+
                             <div class="new_sub_menu" id="{{ $i }}">
                             <a class="back"><i class="fas fa-caret-left"></i> Main menu</a>               
                                 @foreach($cate->liveSubcategories as $cat)
@@ -104,22 +115,11 @@
                         @php $i++; @endphp
                     @endforeach
                     </div>
-                    @php $i = 1; @endphp
                     
-                    @foreach($categories as $cate)
                     
-                    <div class="dropdown-content" id="{{$i}}">
-                            <div class="dropdown-container" @if($cate->liveSubcategories->contains('slug',Request::segment(2))) @else style="display:none;" @endif>
-                            @foreach($cate->liveSubcategories as $cat)
-                            
-                                <a href="{{ route('category.offers',['slug' => $cat->slug]) }}" @if(Request::path() == 'category/'.$cat->slug) class="sub-category" @endif >{{ $cat->name }}</a>
-                           
-                            @endforeach
-                            @php $i++; @endphp
-                            </div>
-                        </div>
                     
-                    @endforeach
+                    
+                    
                     
                     <div class="hidden-lg hidden-md hidden-sm navbar-buttons">
                     <p class="dNone newest-offers">Viewing newest</p>

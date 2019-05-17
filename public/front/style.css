@@ -34,15 +34,16 @@ body {
   height: 600px;
   margin-top: 51px;
   margin-left: 20px;
+  
 }
 
 .adSense .adSense_holder {
-  background: red;
   position: fixed;
   width: 150px;
   height: 490px;
   margin-left: 20px;
   right: 12%;
+  background:red;
 }
 
 .search_adSense {
