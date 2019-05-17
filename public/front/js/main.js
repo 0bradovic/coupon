@@ -216,9 +216,8 @@ $(".close-msg").click(function() {
 
 $(window).scroll(function() {
   if ($(".adSenseOffer").offset().top > 700) {
-    $(".adSenseOffer").css("top", "150px");
-    console.log($(".adSenseOffer").offset().top);
-  } else if ($(".adSenseOffer").offset().top < 400) {
-    $(".adSenseOffer").css("top", "450px");
+    $(".adSenseOffer").animate({top: "150px"},100);
+  } else if ($(".adSenseOffer").offset().top < 200) {
+    $(".adSenseOffer").animate({top: "440px"},100);
   }
 });

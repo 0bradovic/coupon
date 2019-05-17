@@ -8,6 +8,12 @@ body {
   background: #f4f4f4;
   position: relative;
 }
+.carousel-inner{
+  height:150px;
+}
+#carousel{
+  margin:5px 0 !important;
+}
 .new_sub_menu {
   display: none;
 }
@@ -432,7 +438,7 @@ section#boxes {
 }
 
 #header nav .form-control {
-  border-radius: 0px !important;
+  border-radius: 5px !important;
   width: 280px !important;
   padding-left: 50px;
   background: #fff;
@@ -529,7 +535,6 @@ header .search-div-1:last-child {
   margin: 0;
   font-size: 16px;
   color: #fff;
-  font-weight: bold;
   text-transform: capitalize;
 }
 
@@ -1317,6 +1322,7 @@ footer .foo a:last-child {
   color: #fff;
   text-align: left;
   margin: 0;
+  font-size:12px;
 }
 
 #cookie .cookie_right {
@@ -2244,9 +2250,7 @@ footer .foo a:last-child {
       padding-left: 30px !important;
     }
   }
-  small {
-    font-size: 15px !important;
-  }
+  
   @media screen and (max-width: 480px) {
     #row .red .btn {
       width: 150px;

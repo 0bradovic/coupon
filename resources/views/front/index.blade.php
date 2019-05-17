@@ -193,10 +193,6 @@
         @endif
     
     <section id="row">
-        
-        <div class="in-feed-ad">
-            
-        </div>
 
         <div id="cont" class="container main_offers_container home_page_container" >
         
