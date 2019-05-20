@@ -359,7 +359,7 @@
             @endif
         </div>
         <div class="adSense" style="background:orange;">
-            @for($k = 0;$k < $total;$k+=6)
+            @for($k = 0;$k < $total;$k++)
             <div class="adSenseOffer" style="width:160px;height:600px;background:#fff;">
             
             </div>

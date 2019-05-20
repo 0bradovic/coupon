@@ -401,7 +401,7 @@ $(document).ready(function() {
   
      function fetchPosts() {
   
-         var page = $('.endless-pagination').data('next-page');
+         var page = $('.newestOffers').data('next-page');
        
          if(page !== null && page !== '') {
   
