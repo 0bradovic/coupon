@@ -30,7 +30,7 @@
                     @else
                     <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:38px;width:auto;"></a>
                     @endif
-                 <a href="#" class="uk-etc"><em>All the best UK offers in one place</em></a>
+                    <a class="uk-etc" style="color:{{ Helpers::getTagline()->color }}">{!! Helpers::getTagline()->text !!}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -234,7 +234,7 @@
             
         <div class="offers_list_holder endless-pagination newestOffers" @if($newestSimillarOffers) data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}" @endif>
         <div class="tabs_nav_holder" style="margin-top:0!important">
-            <a href="#" class="suggestions">Most Popular</a>
+            <a class="suggestions">Most Popular {{ $total }}</a>
             <!-- <a href="#" >Most Popular</a>
             <a href="#">Ends soon</a> -->
         </div>
@@ -299,7 +299,7 @@
         <div class="offers_list_holder endless-pagination mostPopularOffers dNone991" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
 <div class="tabs_nav_holder" style="margin-top:0!important">
             <!-- <a href="#">Newest</a> -->
-            <a href="#" class="suggestions">Newest offers</a>
+            <a class="suggestions">Newest offers</a>
             <!-- <a href="#">Ends soon</a> -->
         </div>
         @if($popularSimillarOffers)
@@ -358,21 +358,12 @@
             @endforeach
             @endif
         </div>
-        <div class="adSense">
-            <div class="adSenseOffer">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-5885241180759942"
-                 data-ad-slot=""
-                 data-ad-format="auto"></ins>
-                 <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({
-                    google_ad_client: "ca-pub-5885241180759942",
-                    enable_page_level_ads: true
-                    });
-                </script>
-</div>
+        <div class="adSense" style="background:orange;">
+            @for($k = 0;$k < $total;$k+=6)
+            <div class="adSenseOffer" style="width:160px;height:600px;background:#fff;">
+            
+            </div>
+            @endfor
         </div>
         {{--{!! $popularSimillarOffers->links() !!}--}}
         <a href="#top" class="btn btn-warning go_top"><i class="fas fa-arrow-up"></i></a>
@@ -445,9 +436,9 @@ $(document).ready(function() {
              clearTimeout( $.data( this, "scrollCheck" ) );
   
              $.data( this, "scrollCheck", setTimeout(function() {
-                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
+                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 30;
   
-                 if(scroll_position_for_posts_load >= $(document).height()) {
+                 if(scroll_position_for_posts_load <= $(document).height()) {
                     if(localStorage.getItem('req') != null && localStorage.getItem('req') != undefined){
                         if( localStorage.getItem('req') != page){
                             localStorage.setItem('req',page);

@@ -7,6 +7,7 @@
 
 @section('css')
     <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/texteditor.css">
 @stop
 
 @section('content')
@@ -39,9 +40,17 @@
                     <input type="text" class="form-control" name="alt_tag" value="{{ $slide->alt_tag }}">
                 </div>
 
-                <div class="form-group" style="display:none">
+                <!-- <div class="form-group" style="display:none">
                     <label for="up_text">Up text</label>
                     <input type="text" class="form-control" name="up_text" value="{{ $slide->up_text }}">
+                </div> -->
+
+                <div class="form-group">
+                  <label for="detail">Up text</label>
+                  <div>
+                      <textarea name="up_text" class="textarea"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $slide->up_text }}</textarea>
+                  </div>
                 </div>
 
                 <div class="form-group" style="display:none">
@@ -59,9 +68,17 @@
                     <input type="text" name="down_text_color" class="form-control my-colorpicker1" value="{{ $slide->down_text_color }}">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="center_text">Center text</label>
                     <input type="text" class="form-control" name="center_text" value="{{ $slide->center_text }}">
+                </div> -->
+
+                 <div class="form-group">
+                  <label for="detail">Up text</label>
+                  <div>
+                      <textarea name="center_text" class="textarea"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $slide->center_text }}</textarea>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -106,18 +123,20 @@
 @stop
 @section('js')
 <script src="{{ asset('js/colorpicker.js') }}"></script>
-
+<script src="{{ asset('/js/texteditor.js') }}"></script>
 <script>
 $(function () {
-   
-
     //Colorpicker
     $('.my-colorpicker1').colorpicker()
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
-
-    
-    
+  })
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    //CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
   })
 </script>
 @stop

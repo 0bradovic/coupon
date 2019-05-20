@@ -12,7 +12,10 @@ body {
   height:150px;
 }
 #carousel{
-  margin:5px 0 !important;
+  margin:5px 0 0 0!important;
+}
+#carousel .container{
+    width:76.2%;
 }
 .new_sub_menu {
   display: none;
@@ -42,15 +45,7 @@ body {
   margin-left: 20px;
 }
 
-.adSense .adSense_holder,
-.adSenseOffer {
-  position: fixed;
-  width: 150px;
-  height: 490px;
-  margin-left: 20px;
-  right: 12%;
-  background: red;
-}
+
 
 .search_adSense {
   width: 350px;
@@ -354,6 +349,9 @@ nav.navbar.navbar-expand-lg {
   font-size: 16px;
   margin-top: 5px;
 }
+.uk-etc p{
+  margin:0 !important;
+}
 
 .uk-etc:hover {
   color: #fff;
@@ -595,7 +593,7 @@ header .search-div-1:last-child {
 
 .tabs_nav_holder a {
   font-size: 13px;
-  color: #fff;
+  color: #fff !important;
   text-align: center;
   background: #fe9f0a;
   border-radius: 5px;
@@ -776,7 +774,7 @@ a.go_top:focus {
 }
 
 #row .offers_list_holder {
-  width: 48%;
+  width: 50%;
 }
 
 #row .offers_list_holder:nth-child(odd) {
@@ -1306,7 +1304,7 @@ footer .foo a:last-child {
   position: fixed;
   bottom: 0;
   left: 11.8%;
-  right: 13.8%;
+  right: 11.8%;
   background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;

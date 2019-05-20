@@ -177,43 +177,141 @@
                     </div>
                 @endforeach
         </div>
-        <div class="sidebar_offers" style="display:none;">
-            <div class="sidebar_offers_item">
-                <div class="sidebar_offers_content">
-                    <h3 class="sidebar_offers_title">Title</h3>
-                    <p class="sidebar_offers_text">Lorem Ipsup Dupsum larane halite mada, fera harati es lastima pertun hervatino rate</p>
-                </div>
-                <div class="sidebar_offers_img">
-                    <img src="" alt="">
-                </div>
-
-                <p class="sidebar_offers_date">ends 31.Jan</p>
-            </div>
-
-            <div class="sidebar_offers_item">
-                <div class="sidebar_offers_content">
-                    <h3 class="sidebar_offers_title">Title</h3>
-                    <p class="sidebar_offers_text">Lorem Ipsup Dupsum larane halite mada, fera harati es lastima pertun hervatino rate</p>
-                </div>
-                <div class="sidebar_offers_img">
-                    <img src="" alt="">
-                </div>
-
-                <p class="sidebar_offers_date">ends 31.Jan</p>
-            </div>
-
-            <div class="sidebar_offers_item">
-                <div class="sidebar_offers_content">
-                    <h3 class="sidebar_offers_title">Title</h3>
-                    <p class="sidebar_offers_text">Lorem Ipsup Dupsum larane halite mada, fera harati es lastima pertun hervatino rate</p>
-                </div>
-                <div class="sidebar_offers_img">
-                    <img src="" alt="">
-                </div>
-
-                <p class="sidebar_offers_date">ends 31.Jan</p>
-            </div>
+</section>
+<section id="row">
+        <div class="title_holder"> <h2 class="title2 title-padding titleFix" style="margin-top:0!important">Here's more you might like</h2></div>
+        <div class="container dropdowns_holder">
+           
         </div>
+        <div id="cont" class="container main_offers_container" >
+            
+        <div class="offers_list_holder endless-pagination newestOffers" @if($newestSimillarOffers) data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}" @endif>
+        <div class="tabs_nav_holder" style="margin-top:0!important">
+            <a class="suggestions">Most Popular</a>
+            <!-- <a href="#" >Most Popular</a>
+            <a href="#">Ends soon</a> -->
+        </div>
+        @if($newestSimillarOffers)
+            @foreach($newestSimillarOffers as $off)
+                <div class="red">
+                    <div class="image">
+                    @if($off->img_src)
+                    <?php
+                        list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
+                    ?>
+                    <div class="holdarevitj">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    @else style="height:auto;width:100%"; 
+                    @endif>
+                        <img src="{{ $off->img_src }}"  
+                        @if($height>$width) style="height:100%;width:auto;"
+                        @else style="height:auto;width:100%"; 
+                        @endif>
+                    </a>
+                    </div>
+                    @else
+                    
+                    <div class="holdarevitj">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        
+                    </a>
+                    </div>
+                    
+                    @endif
+                    </div>
+                    <div class="title">
+                         @if($off->offerType)
+                    <div class="sticker" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</div>
+                    @endif
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        <h6>{{ $off->name }}</h6>
+                    </a>
+                    <div class="date"><a  class="dateA"><p>@if($off->endDate)ends</p>  <p>{{ $off->frontDateFormat( $off->endDate ) }}</p>@else Ongoing @endif</a></div>
+                    </div>
+                    <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get offer</a></div>
+                    <div class="text">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        
+                        <small>
+                            {!! $off->formatDetails($off->detail) !!}
+                        </small>  
+                                    
+                    </a>
+                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>    
+                    
+                    </div>
+                    
+                    
+                   
+                </div>
+            @endforeach
+        @endif
+        </div>
+
+        {{--{!! $newestSimillarOffers->links() !!}--}}
+        <div class="offers_list_holder endless-pagination mostPopularOffers dNone991" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
+<div class="tabs_nav_holder" style="margin-top:0!important">
+            <!-- <a href="#">Newest</a> -->
+            <a class="suggestions">Newest offers</a>
+            <!-- <a href="#">Ends soon</a> -->
+        </div>
+        @if($popularSimillarOffers)
+            @foreach($popularSimillarOffers as $off)
+                <div class="red">
+                    <div class="image">
+                    @if($off->img_src)
+                    <?php
+                        list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
+                    ?>
+                    <div class="holdarevitj">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    @else style="height:auto;width:100%"; 
+                    @endif>
+                        <img src="{{ $off->img_src }}"  
+                        @if($height>$width) style="height:100%;width:auto;"
+                        @else style="height:auto;width:100%"; 
+                        @endif>
+                    </a>
+                    </div>
+                    @else
+                    
+                    <div class="holdarevitj">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        
+                    </a>
+                    </div>
+                    
+                    @endif
+                    </div>
+                    <div class="title">
+                        @if($off->offerType)
+                    <div class="sticker" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</div>
+                    @endif
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        <h6>{{ $off->name }}</h6>
+                    </a>
+                    <div class="date"><a  class="dateA"><p>@if($off->endDate)ends</p>  <p>{{ $off->frontDateFormat( $off->endDate ) }}</p>@else Ongoing @endif</a></div>
+                    </div>
+                    <div class="btn mobile"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get offer</a></div>
+                    <div class="text">
+                    <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                        
+                        <small>
+                            {!! $off->formatDetails($off->detail) !!}
+                        </small>  
+                                    
+                    </a>
+                    <div class="btn all-screan"><a href="{{ route('get.offer',['slug' => $off->slug]) }}" target="_blank" class="butt">Get This <i class="fas fa-angle-right"></i></a></div>   
+                    
+                    </div>
+                   
+                    
+                    
+                </div>
+            @endforeach
+            @endif
+        </div>
+        
         <!-- <div class="search_adSense">
         
             <div class="search_adSense_reclame">
@@ -294,6 +392,9 @@ var SITE_URL = '<?php echo env("APP_URL")?>/';
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
+$(window).load(function(){
+    localStorage.clear();
+});
 $(document).ready(function() {
   
      $(window).scroll(fetchPosts);
@@ -301,7 +402,7 @@ $(document).ready(function() {
      function fetchPosts() {
   
          var page = $('.endless-pagination').data('next-page');
-        
+       
          if(page !== null && page !== '') {
   
              clearTimeout( $.data( this, "scrollCheck" ) );
@@ -314,18 +415,21 @@ $(document).ready(function() {
                         if( localStorage.getItem('req') != page){
                             localStorage.setItem('req',page);
                             $.get(page, function(data){
-                                $('.offers').append(data.offers);
-                                $('.endless-pagination').data('next-page', data.next_page);
+                                $('.newestOffers').append(data.newest);
+                                $('.mostPopularOffers').append(data.popular);
+                                $('.newestOffers').data('next-page', data.next_page);
                             });
                         }
                     }else{
                         localStorage.setItem('req',page);
                         $.get(page, function(data){
-                                $('.offers').append(data.offers);
-                                $('.endless-pagination').data('next-page', data.next_page);
+                                $('.newestOffers').append(data.newest);
+                                $('.mostPopularOffers').append(data.popular);
+                                $('.newestOffers').data('next-page', data.next_page);
                             });
+                        }
                     }
-                 }
+                 
              }, 50))
   
          }

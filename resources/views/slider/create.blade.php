@@ -7,9 +7,7 @@
 
 @section('css')
     <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
-@stop
-@section('css')
-    <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/texteditor.css">
 @stop
 @section('content')
     <div class="box box-info">
@@ -32,9 +30,12 @@
                     <input type="text" class="form-control" name="alt_tag" placeholder="Enter image alt tag...">
                 </div>
 
-                <div class="form-group" style="display:none;">
-                    <label for="up_text">Up text</label>
-                    <input type="text" class="form-control" name="up_text" placeholder="Enter up text...">
+                <div class="form-group">
+                  <label for="detail">Up text</label>
+                  <div>
+                      <textarea name="up_text" class="textarea"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  </div>
                 </div>
 
                 <div class="form-group" style="display:none;">
@@ -99,18 +100,20 @@
 @stop
 @section('js')
 <script src="{{ asset('js/colorpicker.js') }}"></script>
-
+<script src="{{ asset('/js/texteditor.js') }}"></script>
 <script>
 $(function () {
-   
-
     //Colorpicker
     $('.my-colorpicker1').colorpicker()
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
-
-    
-    
+  })
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    //CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
   })
 </script>
 @stop

@@ -181,6 +181,7 @@ class FrontController extends Controller
                 }
             }
             $newestSimillarOffers = collect($newestSimillarOffers);
+            $total = count($newestSimillarOffers);
             $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
             $popularSimillarOffers = collect($popularSimillarOffers);
             $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
@@ -191,6 +192,7 @@ class FrontController extends Controller
             $newestSimillarOffers = null;
             $popularSimillarOffers = null;
         }
+        
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
@@ -200,7 +202,7 @@ class FrontController extends Controller
                 'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('offer','newestSimillarOffers','popularSimillarOffers','categories','mainCategory','customPages'));
+        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers','categories','mainCategory','customPages'));
     }
 
     public function ajaxSearch($query)
@@ -230,17 +232,62 @@ class FrontController extends Controller
         }
         $off = new Offer();
         $offers = $off->filterOffers($offers);
+        if(count($offers) > 0)
+        {
+            $newestSimillarOffers = [];
+            $popularSimillarOffers = [];
+            $offer = $offers[0];
+            foreach($offer->categories as $cat)
+            {
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
+                {
+                    if($offer->id != $off->id)
+                    {
+                        array_push($newestSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            foreach($offer->categories as $cat)
+            {
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
+                {
+                    if($offer->id != $off->id)
+                    {
+                        array_push($popularSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            $newestSimillarOffers = collect($newestSimillarOffers);
+            $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
+            $popularSimillarOffers = collect($popularSimillarOffers);
+            $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
+        }
+        else
+        {
+            $mainCategory = null;
+            $newestSimillarOffers = null;
+            $popularSimillarOffers = null;
+        }
         $offers = (new Collection($offers))->paginate(10);
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $search = $request->search;
         if($request->ajax()) {
             return [
-                'offers' => view('front.categoryLazyLoadRaw')->with(compact('offers'))->render(),
-                'next_page' => $offers->nextPageUrl()
+                'newest' => view('front.searchLazyLoadNewest')->with(compact('newestSimillarOffers'))->render(),
+                'popular' => view('front.searchLazyLoadPopular')->with(compact('popularSimillarOffers'))->render(),
+                'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.search', compact('offers', 'categories', 'search','customPages'));
+        return view('front.search', compact('offers', 'newestSimillarOffers', 'popularSimillarOffers', 'categories', 'search','customPages'));
 
     }
     

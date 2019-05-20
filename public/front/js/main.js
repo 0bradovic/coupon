@@ -214,10 +214,3 @@ $(".close-msg").click(function() {
     .fadeOut(200);
 });
 
-$(window).scroll(function() {
-  if ($(".adSenseOffer").offset().top > 700) {
-    $(".adSenseOffer").animate({top: "150px"},100);
-  } else if ($(".adSenseOffer").offset().top < 200) {
-    $(".adSenseOffer").animate({top: "440px"},100);
-  }
-});

@@ -41,7 +41,7 @@
                     @else
                     <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:38px;width:auto;"></a>
                     @endif
-                <a href="#" class="uk-etc" style="color:{{ Helpers::getTagline()->color }}"><em>{{ Helpers::getTagline()->text }}</em></a>
+                <a class="uk-etc" style="color:{{ Helpers::getTagline()->color }}">{!! Helpers::getTagline()->text !!}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -168,13 +168,13 @@
                                 <img class="d-block w-100" src="{{ $slide->img_src }}" alt="{{ $slide->alt_tag }}">
                             
                             @if($slide->center_text)
-                                <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{{ $slide->center_text }}</p>
+                                <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{!! $slide->center_text !!}</p>
                             @endif
                             @if($slide->left_text)
-                                <p class="caroPleft" @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{{ $slide->left_text }}</p>
+                                <p class="caroPleft" @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{!! $slide->left_text !!}</p>
                             @endif
                             @if($slide->right_text)
-                                <p class="caroPright" @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{{ $slide->right_text }}</p>
+                                <p class="caroPright" @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{!! $slide->right_text !!}</p>
                             @endif
                         </div>
                     @endforeach
@@ -199,7 +199,7 @@
 
         <div class="offers_list_holder endless-pagination newestOffers" data-next-page="{{ $newestOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder">
-            <a href="#" class="hidden-xs">Most Popular</a>
+            <a class="hidden-xs">Most Popular</a>
             
         </div>    
         @php $k = 1; @endphp
@@ -262,7 +262,7 @@
         <div class="offers_list_holder endless-pagination mostPopularOffers dNone991" data-next-page="{{ $mostPopularOffers->nextPageUrl() }}">
         <div class="tabs_nav_holder">
            
-            <a href="#" class="hidden-xs">Newest offers</a>
+            <a class="hidden-xs">Newest offers</a>
             
         </div>   
         @foreach($mostPopularOffers as $offer)
