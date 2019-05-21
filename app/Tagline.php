@@ -8,7 +8,7 @@ class Tagline extends Model
 {
     
     protected $fillable = [
-        'text', 'color',
+        'text', 'color', 'font_family', 'font_size',
     ];
 
 }

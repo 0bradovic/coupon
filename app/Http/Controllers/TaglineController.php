@@ -11,7 +11,8 @@ class TaglineController extends Controller
     public function index()
     {
         $tagline = Tagline::first();
-        return view('tagline.index',compact('tagline'));
+        $fonts = $this->fonts();
+        return view('tagline.index',compact('tagline','fonts'));
     }
 
     public function update(Request $request)
@@ -24,6 +25,8 @@ class TaglineController extends Controller
         $tagline->update([
             'text' => $request->text,
             'color' => $request->color,
+            'font_family' => $request->font_family,
+            'font_size' => $request->font_size,
         ]);
         return redirect()->back()->with('success', 'Successfully updated tagline.');
     }

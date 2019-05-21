@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Exo:400,400i,700,700i|Kodchasan:400,400i,700,700i|Lato:400,400i,700,700i|Montserrat:400,400i,700,700i|Muli:400,400i,700,700i|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Roboto:400,400i,700,700i|Titillium+Web:400,400i,700,700i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('front/style.css') }}" />
     @if(Helpers::getFavicon() == null)
@@ -41,7 +42,7 @@
                     @else
                     <a class="navbar-brand" href="/"><img src="{{ Helpers::getLogo() }}" style="height:38px;width:auto;"></a>
                     @endif
-                <a class="uk-etc" style="color:{{ Helpers::getTagline()->color }}">{!! Helpers::getTagline()->text !!}</a>
+                <a class="uk-etc" style="color:{{ Helpers::getTagline()->color }}; @if(Helpers::getTagline()->font_family) font-family:'{{Helpers::getTagline()->font_family}}',sans-serif; @endif @if(Helpers::getTagline()->font_size) font-size:{{Helpers::getTagline()->font_size}} @endif">{!! Helpers::getTagline()->text !!}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -168,13 +169,13 @@
                                 <img class="d-block w-100" src="{{ $slide->img_src }}" alt="{{ $slide->alt_tag }}">
                             
                             @if($slide->center_text)
-                                <p class="caroP" @if($slide->center_text_color) style="color:{{ $slide->center_text_color }}" @endif>{!! $slide->center_text !!}</p>
+                                <p class="caroP"  style="@if($slide->center_text_color) color:{{ $slide->center_text_color }};  @endif @if($slide->font_family) font-family:'{{ $slide->font_family }}',sans-serif; @endif @if($slide->font_size) font-size:{{$slide->font_size}}; @endif">{!! $slide->center_text !!}</p>
                             @endif
                             @if($slide->left_text)
-                                <p class="caroPleft" @if($slide->left_text_color) style="color:{{ $slide->left_text_color }}" @endif>{!! $slide->left_text !!}</p>
+                                <p class="caroPleft"  style="@if($slide->left_text_color) color:{{ $slide->left_text_color }}; @endif @if($slide->font_family) font-family:'{{ $slide->font_family }}',sans-serif; @endif @if($slide->font_size) font-size:{{$slide->font_size}}; @endif" >{!! $slide->left_text !!}</p>
                             @endif
                             @if($slide->right_text)
-                                <p class="caroPright" @if($slide->right_text_color) style="color:{{ $slide->right_text_color }}" @endif>{!! $slide->right_text !!}</p>
+                                <p class="caroPright"  style="@if($slide->right_text_color) color:{{ $slide->right_text_color }}; @endif @if($slide->font_family) font-family:'{{ $slide->font_family }}',sans-serif; @endif @if($slide->font_size) font-size:{{$slide->font_size}}; @endif" >{!! $slide->right_text !!}</p>
                             @endif
                         </div>
                     @endforeach

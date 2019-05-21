@@ -38,4 +38,21 @@ class Controller extends BaseController
        return $text;
     }
 
+    
+    public function fonts()
+    {
+        return [
+            'Roboto', 
+            'Open Sans',
+            'Poppins',
+            'Muli',
+            'Titillium Web',
+            'Cabin',
+            'Exo',
+            'Montserrat',
+            'Lato',
+            'Kodchasan',
+        ];
+    }
+
 }

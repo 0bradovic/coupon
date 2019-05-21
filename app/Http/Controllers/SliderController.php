@@ -28,7 +28,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('slider.create');
+        $fonts = $this->fonts();
+        return view('slider.create',compact('fonts'));
     }
 
     /**
@@ -67,7 +68,9 @@ class SliderController extends Controller
             'right_text_color' => $request->right_text_color,
             'link' => $request->link,
             'position' => $request->position,
-            'active' => 1
+            'active' => 1,
+            'font_family' => $request->font_family,
+            'font_size' => $request->font_size,
         ]);
         return redirect()->back()->with('success', 'Successfully created new slide.');
     }
@@ -93,8 +96,9 @@ class SliderController extends Controller
     public function edit($id)
     {
         $slide = Slider::find($id);
+        $fonts = $this->fonts();
         $undoEdited = Undo::where('slider_id',$slide->id)->where('type','Edited')->first();
-        return view('slider.edit',compact('slide','undoEdited'));
+        return view('slider.edit',compact('slide','undoEdited','fonts'));
     }
 
     /**
@@ -165,6 +169,8 @@ class SliderController extends Controller
             'right_text_color' => $request->right_text_color,
             'link' => $request->link,
             'position' => $request->position,
+            'font_family' => $request->font_family,
+            'font_size' => $request->font_size,
         ]);
         return redirect()->back()->with('success', 'Successfully updated slide.');
     }

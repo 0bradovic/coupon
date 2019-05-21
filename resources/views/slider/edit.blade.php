@@ -7,7 +7,7 @@
 
 @section('css')
     <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/css/texteditor.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i|Exo:400,400i,700,700i|Kodchasan:400,400i,700,700i|Lato:400,400i,700,700i|Montserrat:400,400i,700,700i|Muli:400,400i,700,700i|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Roboto:400,400i,700,700i|Titillium+Web:400,400i,700,700i&display=swap" rel="stylesheet">
 @stop
 
 @section('content')
@@ -40,17 +40,9 @@
                     <input type="text" class="form-control" name="alt_tag" value="{{ $slide->alt_tag }}">
                 </div>
 
-                <!-- <div class="form-group" style="display:none">
+                <div class="form-group" style="display:none">
                     <label for="up_text">Up text</label>
                     <input type="text" class="form-control" name="up_text" value="{{ $slide->up_text }}">
-                </div> -->
-
-                <div class="form-group">
-                  <label for="detail">Up text</label>
-                  <div>
-                      <textarea name="up_text" class="textarea"
-                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $slide->up_text }}</textarea>
-                  </div>
                 </div>
 
                 <div class="form-group" style="display:none">
@@ -68,17 +60,9 @@
                     <input type="text" name="down_text_color" class="form-control my-colorpicker1" value="{{ $slide->down_text_color }}">
                 </div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="center_text">Center text</label>
                     <input type="text" class="form-control" name="center_text" value="{{ $slide->center_text }}">
-                </div> -->
-
-                 <div class="form-group">
-                  <label for="detail">Up text</label>
-                  <div>
-                      <textarea name="center_text" class="textarea"
-                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $slide->center_text }}</textarea>
-                  </div>
                 </div>
 
                 <div class="form-group">
@@ -111,6 +95,38 @@
                     <input type="number" class="form-control" name="position" value="{{ $slide->position }}">
                 </div>
 
+                 <div class="form-group" style="background:#ECF0F5; padding:10px;">
+                  <p id="font-example" style="@if($slide->font_family)font-family:'{{$slide->font_family}}',sans-serif;@endif @if($slide->font_size) font-size:{{$slide->font_size}} @endif">Example of choosen font family and font size</p>
+                </div>
+
+                <div class="form-group">
+                  <label>Select font</label>
+                  <select class="form-control select2 font-family" name="font_family" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option value="">Select font</option>
+                  @foreach($fonts as $font)
+                    @if($font == $slide->font_family)
+                    <option selected="selected" value="{{$font}}">{{$font}}</option>
+                    @else
+                    <option value="{{$font}}">{{$font}}</option>
+                    @endif
+                  @endforeach
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Select font size</label>
+                  <select class="form-control select2 font-size" name="font_size" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option value="">Select font size</option>
+                 @for($i = 8; $i < 27; $i++)
+                    @if($i.'px' == $slide->font_size)
+                    <option selected="selected" value="{{$i}}px">{{$i}} px</option>
+                    @else
+                    <option value="{{$i}}px">{{$i}} px</option>
+                    @endif
+                  @endfor
+                  </select>
+                </div>
+
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Update Slide</button>
               </div>
@@ -123,21 +139,28 @@
 @stop
 @section('js')
 <script src="{{ asset('js/colorpicker.js') }}"></script>
-<script src="{{ asset('/js/texteditor.js') }}"></script>
 <script>
 $(function () {
     //Colorpicker
     $('.my-colorpicker1').colorpicker()
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
+    //Initialize Select2 Elements
+    $('.select2').select2()
   })
-  $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    //CKEDITOR.replace('editor1')
-    //bootstrap WYSIHTML5 - text editor
-    $('.textarea').wysihtml5()
-  })
+</script>
+<script>
+
+$('select.font-family').change(function(){
+  var font = $(this).children("option:selected").val();
+  $('#font-example').css('font-family',font);
+});
+
+$('select.font-size').change(function(){
+  var size = $(this).children("option:selected").val();
+  $('#font-example').css('font-size',size);
+});
+
 </script>
 @stop
 
