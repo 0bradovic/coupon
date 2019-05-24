@@ -7,8 +7,6 @@
                     @foreach($customPages as $customPage)
                          <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank">{{$customPage->name}}</a>
                     @endforeach
-                    <!-- <a href="#">Privacy Notice</a>
-                    <a href="#">Contact Us</a> -->
                 </div>
                 <div class="footer_share">
                     <a href="https://www.facebook.com/BeforeTheShop" target="_blank">Facebook</a>

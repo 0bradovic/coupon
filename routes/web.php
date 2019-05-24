@@ -234,7 +234,13 @@ use App\CustomPage;
 Route::get('/new', function(){
     $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
     $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    return view('front.new.content',compact('categories','customPages'));
+    return view('front.new.index',compact('categories','customPages'));
+});
+
+Route::get('/new-category', function(){
+    $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
+    $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
+    return view('front.new.category',compact('categories','customPages'));
 });
 
 // End testing
