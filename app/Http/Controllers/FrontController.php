@@ -21,11 +21,11 @@ class FrontController extends Controller
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-        $defaultCategory = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->first();
+        $defaultCategory = Category::where('parent_id',null)->where('display', true)->with('subcategories')->orderBy('position')->first();
         //dd($defaultCategory);
         $allNewestOffers = [];
         $allPopularOffers = [];
-        foreach($defaultCategory->liveSubcategories as $cat)
+        foreach($defaultCategory->subcategories as $cat)
         {
             $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
             $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
@@ -124,6 +124,7 @@ class FrontController extends Controller
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
+        $total = floor(count($allNewestOffers)/6);
         $newestOffers = (new Collection($allNewestOffers))->paginate(10);
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
         if($request->ajax()) {
@@ -133,7 +134,8 @@ class FrontController extends Controller
                 'next_page' => $newestOffers->nextPageUrl(),
             ];
         }
-        return view('front.categoryOffers',compact('category','newestOffers','popularOffers','categories','customPages'));
+        $popup = SubscribePopup::first();
+        return view('front.categoryOffers',compact('total','category','newestOffers','popularOffers','categories','customPages','popup'));
     }
 
     public function offer(Request $request,$slug)
@@ -146,54 +148,46 @@ class FrontController extends Controller
             return redirect('/')->withErrors('Offer has expired');
             }
         }
-        if(count($offer->categories) > 0)
-        {
-            $mainCategory = $offer->categories()->first();
-            $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
-            $newestSimillarOffers = [];
-            $popularSimillarOffers = [];
-            foreach($offer->categories as $cat)
-            {
-                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
-                {
-                    if($offer->id != $off->id)
-                    {
-                        array_push($newestSimillarOffers,$off);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-            foreach($offer->categories as $cat)
-            {
-                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
-                {
-                    if($offer->id != $off->id)
-                    {
-                        array_push($popularSimillarOffers,$off);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-            $newestSimillarOffers = collect($newestSimillarOffers);
-            $total = round(count($newestSimillarOffers)/6);
-            //dd($total);
-            $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
-            $popularSimillarOffers = collect($popularSimillarOffers);
-            $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
-        }
-        else
-        {
-            $mainCategory = null;
-            $newestSimillarOffers = null;
-            $popularSimillarOffers = null;
-        }
         
+        $mainCategory = $offer->categories()->first();
+        $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
+        $newestSimillarOffers = [];
+        $popularSimillarOffers = [];
+        foreach($offer->categories as $cat)
+        {
+            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
+            {
+                if($offer->id != $off->id)
+                {
+                    array_push($newestSimillarOffers,$off);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        foreach($offer->categories as $cat)
+        {
+            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
+            {
+                if($offer->id != $off->id)
+                {
+                    array_push($popularSimillarOffers,$off);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        $newestSimillarOffers = collect($newestSimillarOffers);
+
+        $total = floor(count($newestSimillarOffers)/6);
+    
+        $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
+        $popularSimillarOffers = collect($popularSimillarOffers);
+        $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
         $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
         $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         if($request->ajax()) {
@@ -203,7 +197,8 @@ class FrontController extends Controller
                 'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers','categories','mainCategory','customPages'));
+        $popup = SubscribePopup::first();
+        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers','categories','mainCategory','customPages','popup'));
     }
 
     public function ajaxSearch($query)
@@ -297,6 +292,7 @@ class FrontController extends Controller
         }
         $newestOffers = $newestOffers->unique();
         $popularOffers = $popularOffers->unique();
+        $total = floor(count($newestOffers)/6);
         $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10);
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         //dd($newestOffers);
@@ -311,7 +307,8 @@ class FrontController extends Controller
             ];
         }
         //dd($category);
-        return view('front.parentCategoryOffers',compact('newestOffers','popularOffers','categories','customPages','category'));
+        $popup = SubscribePopup::first();
+        return view('front.parentCategoryOffers',compact('total','newestOffers','popularOffers','categories','customPages','category','popup'));
     }
 
 

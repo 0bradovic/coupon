@@ -1,24 +1,18 @@
 $(document).ready(function() {
-  $(".dropdown").hover(
-    function() {
-      var id = $(this).data("id");
-      $(".dropdown-container").addClass("d-none");
-      $("#cont" + id).removeClass("d-none");
-    },
-    function() {
-      $(".dropdown-container").addClass("d-none");
-    }
-  );
+  $(".dropdown").hover(function() {
+    var id = $(this).data("id");
+    $(".dropdown-container").addClass("d-none");
+    $("#cont" + id).removeClass("d-none");
+  },function(){
+    $(".dropdown-container").addClass("d-none");
+  });
 });
 $(document).ready(function() {
-  $(".dropdown-container").hover(
-    function() {
-      $(this).removeClass("d-none");
-    },
-    function() {
-      $(this).addClass("d-none");
-    }
-  );
+  $(".dropdown-container").hover(function() {
+    $(this).removeClass("d-none");
+  },function(){
+    $(this).addClass('d-none');
+  });
   $(".fa-times-circle").on("click", function() {
     $("#cookie").remove();
   });
@@ -136,7 +130,7 @@ $(document).ready(function() {
   if (sessionStorage.getItem("cookie") !== "true") {
     $("body").append(`<div id="cookie">
     <div class="cookie_left">
-    <p>We use cookies to give you the best service. Read our <a href="https://www.beforetheshop.com/public/front/Privacy Policy.pdf" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/public/front/Cookie Policy.pdf" target="_blank" class="cookie_link">cookie</a> policy to learn more.</p>
+    <p>We use cookies to give you the best service. Read our <a href="https://www.beforetheshop.com/page/privacy-policy" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/page/cookie-policy" target="_blank" class="cookie_link">cookie</a> policy to learn more.</p>
     </div>
     <div class="cookie_right">
     <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
