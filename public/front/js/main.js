@@ -1,18 +1,24 @@
 $(document).ready(function() {
-  $(".dropdown").hover(function() {
-    var id = $(this).data("id");
-    $(".dropdown-container").addClass("d-none");
-    $("#cont" + id).removeClass("d-none");
-  },function(){
-    $(".dropdown-container").addClass("d-none");
-  });
+  $(".dropdown").hover(
+    function() {
+      var id = $(this).data("id");
+      $(".dropdown-container").addClass("d-none");
+      $("#cont" + id).removeClass("d-none");
+    },
+    function() {
+      $(".dropdown-container").addClass("d-none");
+    }
+  );
 });
 $(document).ready(function() {
-  $(".dropdown-container").hover(function() {
-    $(this).removeClass("d-none");
-  },function(){
-    $(this).addClass('d-none');
-  });
+  $(".dropdown-container").hover(
+    function() {
+      $(this).removeClass("d-none");
+    },
+    function() {
+      $(this).addClass("d-none");
+    }
+  );
   $(".fa-times-circle").on("click", function() {
     $("#cookie").remove();
   });
@@ -208,3 +214,57 @@ $(".close-msg").click(function() {
     .fadeOut(200);
 });
 
+// NEW JAVASCRIPT
+
+$(document).ready(function() {
+  $(".open_menu").click(function() {
+    if ($("#mobile_navigation").hasClass("show_mobile_navigation")) {
+      $("#mobile_navigation").removeClass("show_mobile_navigation");
+      $("body").css("overflow", "hidden");
+    }
+  });
+  $(".close_menu").click(function() {
+    if ($("#mobile_navigation").hasClass("")) {
+      $("#mobile_navigation").addClass("show_mobile_navigation");
+      $("body").css("overflow", "unset");
+    }
+  });
+  $(".open_dropdown").click(function() {
+    $(this)
+      .parent()
+      .next()
+      .toggleClass("dropdown_list_none");
+    $(this).toggleClass("rotate_arrow");
+  });
+  $(".fa-caret-left").click(function() {
+    $(this)
+      .parent()
+      .parent()
+      .parent()
+      .addClass("dropdown_list_none");
+    $(this)
+      .parent()
+      .parent()
+      .parent()
+      .prev()
+      .children()
+      .removeClass("rotate_arrow");
+  });
+  $(".navigation_item").hover(function() {
+    $(this)
+      .next()
+      .toggleClass("hidden");
+  });
+  $(".submenu").hover(function() {
+    $(this).toggleClass("hidden");
+  });
+  $(window).scroll(function() {
+    let $this = $(this);
+    let $nav = $(".navigation");
+    if ($this.scrollTop() > 45) {
+      $nav.addClass("fixed_navigation");
+    } else {
+      $nav.removeClass("fixed_navigation");
+    }
+  });
+});
