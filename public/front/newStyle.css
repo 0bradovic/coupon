@@ -465,6 +465,21 @@ header {
   display: flex;
   flex-direction: column;
   margin: 0 5px;
+  position: relative;
+}
+
+.coupon {
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  right: 10px;
+  border-radius: 0 0 8px 8px;
+  background: red;
+  color: #fff;
+  line-height: 2;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_date .offer_box_date_top {
@@ -472,6 +487,7 @@ header {
   font-weight: bold;
   text-align: center;
   height: 50%;
+  padding-top: 25px;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_date .offer_box_date_bottom {
