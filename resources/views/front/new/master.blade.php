@@ -41,7 +41,32 @@
     @yield('content')
 
     @include('front.new.footer')
-
+    <a href="" class="go_top hidden">TOP<i class="fas fa-arrow-up"></i></a>
+    <div class="fixed_btn_form" style="display:none;">
+        <span class="close_popUp"><i class="fas fa-times"></i></span>
+            <div class="fixed_btn_in_form">
+                <div class="fixed_btn_in_form_title">
+                    <h2>{{ $popup->title }}</h2>
+                    <h3>{{ $popup->second_title }}</h3>
+                </div>
+                <div class="fixed_btn_in_form_grey">
+                    {!! $popup->first_section !!}
+                </div>
+                <div class="fixed_btn_in_form_submit">
+                    <form method="POST" action="{{ route('subscribe') }}" id="newsletter_form">
+                        <div class="fixedMy">
+                            @csrf
+                            <input type="email" name="email">
+                            <button type="submit" id="newsletter_submit">{{ $popup->button }}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="fixed_btn_in_form_text">
+                    {!! $popup->second_section !!}
+                </div>
+             <button class="btn close-modal">No thanks</button>
+        </div>
+    </div>
 </body>
 <script> 
 var SITE_URL = '<?php echo env("APP_URL")?>/';

@@ -82,10 +82,6 @@ $("#newsletter_submit").click(function(e) {
   $("#newsletter_form").submit();
 });
 
-$('a[href="#top"]').click(function(e) {
-  $("html, body").animate({ scrollTop: "0px" }, 250);
-});
-
 $("#search").keyup(function(e) {
   $.ajax({
     url: SITE_URL + "search/" + e.target.value,
@@ -258,13 +254,20 @@ $(document).ready(function() {
   $(".submenu").hover(function() {
     $(this).toggleClass("hidden");
   });
+  $(".go_top").on("click", function(e) {
+    e.preventDefault();
+    $("html, body").animate({ scrollTop: 0 }, "300");
+  });
   $(window).scroll(function() {
     let $this = $(this);
     let $nav = $(".navigation");
+    let $go_top = $(".go_top");
     if ($this.scrollTop() > 45) {
       $nav.addClass("fixed_navigation");
+      $go_top.removeClass("hidden");
     } else {
       $nav.removeClass("fixed_navigation");
+      $go_top.addClass("hidden");
     }
   });
 });

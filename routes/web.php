@@ -230,17 +230,20 @@ Route::middleware('auth')->group(function () {
 // Testing new layouts
 use App\Category;
 use App\CustomPage;
+use App\SubscribePopup;
 
 Route::get('/new', function(){
     $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
     $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    return view('front.new.index',compact('categories','customPages'));
+    $popup = SubscribePopup::first();
+    return view('front.new.index',compact('categories','customPages','popup'));
 });
 
 Route::get('/new-category', function(){
     $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
     $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    return view('front.new.category',compact('categories','customPages'));
+    $popup = SubscribePopup::first();
+    return view('front.new.category',compact('categories','customPages','popup'));
 });
 
 // End testing

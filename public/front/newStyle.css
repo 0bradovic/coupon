@@ -602,6 +602,216 @@ footer .foo a:last-child {
 
 /* END FOOTER */
 
+/* START POP UP */
+
+.fixed_btn_form {
+  position: fixed;
+  left: 0px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999999999;
+}
+.fixed_btn_in_form {
+  width: 600px;
+  height: 600px;
+  border: 2px solid #ffa400;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_title {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_title h2 {
+  font-size: 4em;
+  font-weight: 200;
+  color: #ffa400;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_title h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
+  color: #222;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_grey {
+  background: rgb(228, 228, 228);
+  width: 100%;
+  padding: 10px 0;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_grey h4 {
+  color: #ffa400;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_grey h5 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_grey h5 span {
+  color: #ffa400;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_submit {
+  width: 100%;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy input {
+  width: 80%;
+  line-height: 2;
+  padding: 7px;
+  text-indent: 10px;
+  background: #fff;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
+  position: absolute;
+  right: 11%;
+  height: 80%;
+  width: 25%;
+  background: #ffa400;
+  border: none;
+  color: #fff;
+  font-weight: 200;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.fixed_btn_in_form .fixed_btn_in_form_submit p {
+  margin-top: 10px;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_text {
+  width: 50%;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_text_first {
+  width: 70%;
+}
+
+.fixed_btn_in_form .fixed_btn_in_form_text_first span {
+  color: #ffa400;
+}
+
+.fixed_btn_form p {
+  font-size: 12px;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.fixed_btn_form .close_popUp {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  color: #fff;
+  font-size: 30px;
+  background: #ffa400;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: 2px solid #fff;
+  text-align: center;
+}
+
+.fixed_btn_form .close_popUp i {
+  font-size: 24px;
+}
+
+.close-modal {
+  border: none;
+  background: transparent;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  padding: 0;
+  margin: 0;
+}
+
+.close-modal:focus {
+  box-shadow: none !important;
+}
+
+@media (max-width: 800px) {
+  .fixed_btn_in_form {
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    width: 80%;
+    height: 90%;
+  }
+  .fixed_btn_form .close_popUp {
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .fixed_btn_form .close_popUp i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .fixed_btn_in_form {
+    overflow-y: scroll;
+    justify-content: flex-start;
+    padding: 10px 0px;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title h2 {
+    font-size: 3em;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_title h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_text {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy {
+    margin: 10px 0;
+  }
+  .fixed_btn_in_form .fixed_btn_in_form_submit .fixedMy button {
+    font-size: 12px;
+  }
+}
+
+/* END POP UP */
+
 /* START COOKIE */
 
 #cookie {
@@ -694,3 +904,33 @@ footer .foo a:last-child {
 }
 
 /* END COOKIE */
+
+/* START GO TOP */
+
+.go_top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #fe9f0a;
+  position: fixed;
+  right: 0;
+  bottom: 120px;
+  width: 45px;
+  height: 45px;
+  color: #fff;
+  border-radius: 8px 0 0 8px;
+  padding: 0;
+  margin: 0;
+  border: 2px solid #fff;
+  font-size: 13px;
+  font-weight: bold;
+  border-right: none;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.go_top:hover {
+  color: #fff;
+}
+
+/* END GO TOP */
