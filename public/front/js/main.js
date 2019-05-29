@@ -210,21 +210,24 @@ $(".close-msg").click(function() {
     .fadeOut(200);
 });
 
-// NEW JAVASCRIPT
+// NEWWWWWWWWWWW      JQUERYYYYYYYYY
 
 $(document).ready(function() {
+  // OPEN MOBILE NAVIGATION
   $(".open_menu").click(function() {
     if ($("#mobile_navigation").hasClass("show_mobile_navigation")) {
       $("#mobile_navigation").removeClass("show_mobile_navigation");
       $("body").css("overflow", "hidden");
     }
   });
+  // CLOSE MOBILE NAVIGATION
   $(".close_menu").click(function() {
     if ($("#mobile_navigation").hasClass("")) {
       $("#mobile_navigation").addClass("show_mobile_navigation");
       $("body").css("overflow", "unset");
     }
   });
+  // DROPDOWN LIST FOR MOBILE
   $(".open_dropdown").click(function() {
     $(this)
       .parent()
@@ -246,6 +249,7 @@ $(document).ready(function() {
       .children()
       .removeClass("rotate_arrow");
   });
+  // SUBMENU
   $(".navigation_item").hover(function() {
     $(this)
       .next()
@@ -254,10 +258,34 @@ $(document).ready(function() {
   $(".submenu").hover(function() {
     $(this).toggleClass("hidden");
   });
+  // GO TOP BUTTON
   $(".go_top").on("click", function(e) {
     e.preventDefault();
     $("html, body").animate({ scrollTop: 0 }, "300");
   });
+  // VIEW MOST POPULAR BUTTONS IN HEADER
+  $(".header_btn_mostPopular").on("click", function() {
+    $(".header_btn_mostPopular, .header_mostPopular, .most_popular").addClass(
+      "hidden800"
+    );
+    $(".header_viewNewest, .header_btn_viewNewest, .newest_offers").removeClass(
+      "hidden800"
+    );
+  });
+  // VIEW NEWEST OFFERS BUTTONS IN HEADER
+  $(".header_btn_viewNewest").on("click", function() {
+    $(".header_viewNewest, .header_btn_viewNewest, .newest_offers").addClass(
+      "hidden800"
+    );
+    $(
+      ".header_btn_mostPopular, .header_mostPopular, .most_popular"
+    ).removeClass("hidden800");
+  });
+  // OPEN EMAIL POP UP
+  $("#email_popup").on("click", function() {
+    $(".email_popup").toggleClass("hidden");
+  });
+  // FIXED NAVIGATON
   $(window).scroll(function() {
     let $this = $(this);
     let $nav = $(".navigation");

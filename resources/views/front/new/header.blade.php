@@ -84,8 +84,10 @@
                     </li>
                 </ol>
                 <div class="header_viewOfferButtons">
-                    <a class="header_viewNewest">Viewing newest offers</a>
-                    <a class="header_btn_mostPopular">View most popular</a>
+                    <p class="header_viewNewest hidden800">Viewing newest offers</p>
+                    <a href="#" class="header_btn_viewNewest hidden800">View newest offers</a>
+                    <p class="header_mostPopular">Viewing most popular</p>
+                    <a href="#" class="header_btn_mostPopular">View most popular</a>
                 </div>
             </div>
         </div>

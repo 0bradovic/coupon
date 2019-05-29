@@ -246,5 +246,12 @@ Route::get('/new-category', function(){
     return view('front.new.category',compact('categories','customPages','popup'));
 });
 
+Route::get('/new-search', function(){
+    $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
+    $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
+    $popup = SubscribePopup::first();
+    return view('front.new.search',compact('categories','customPages','popup'));
+});
+
 // End testing
 
