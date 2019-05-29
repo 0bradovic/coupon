@@ -4,7 +4,6 @@
             <div class="foo">
                 <div class="footer_top">
                     <a href="mailto:hi@madebydigital.com">Contact us</a>
-                    <a href="/front/Privacy Policy.pdf" target="_blank">Cookie Policy</a>
                     @foreach($customPages as $customPage)
                          <a href="{{ route('custom.page.get', ['slug' => $customPage->slug]) }}" target="_blank">{{$customPage->name}}</a>
                     @endforeach

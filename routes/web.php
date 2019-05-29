@@ -232,27 +232,14 @@ use App\Category;
 use App\CustomPage;
 use App\SubscribePopup;
 
-Route::get('/new', function(){
-    $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-    $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    $popup = SubscribePopup::first();
-    return view('front.new.index',compact('categories','customPages','popup'));
-});
+Route::get('/new', 'NewFrontController@index')->name('welcome');
 
 Route::get('/new-category', function(){
-    $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-    $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    $popup = SubscribePopup::first();
-    return view('front.new.category',compact('categories','customPages','popup'));
+    return view('front.new.category');
 });
 
 Route::get('/new-search', function(){
-    $categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-    $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
-    $popup = SubscribePopup::first();
-    return view('front.new.search',compact('categories','customPages','popup'));
+    return view('front.new.search');
 });
 
 // End testing
-
-Route::get('/card-test', 'NewFrontController@index');
