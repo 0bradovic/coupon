@@ -248,3 +248,4 @@ Route::get('/new-category', function(){
 
 // End testing
 
+Route::get('/card-test', 'NewFrontController@index');

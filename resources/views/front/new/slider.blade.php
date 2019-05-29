@@ -1,7 +1,5 @@
-@php
-    $slides = \App\Slider::where('active',1)->get();
-@endphp
-@if(count($slides) > 0)
+
+
     <section id="carousel">
             <div class="container">
                 <div id="my-carousel" class="carousel slide" data-ride="carousel">
@@ -34,4 +32,4 @@
                 </div>
             </div>
         </section>
-        @endif
+       

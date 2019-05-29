@@ -2,487 +2,71 @@
 
 @section('content')
 
+@if(count($slides) > 0)
+    @include('front.new.slider')
+@endif
+
 <div class="offer_holder">
+    @foreach($fpCategories as $fpCategory)
     <div class="offer_holder_row">
         <div class="offer_holder_row_title">
             <span>
-                High Street
+                {{ $fpCategory->name }}
             </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
+                <a href="{{ route('parent.category.offers',['slug' => $fpCategory->slug]) }}">
+                    <h3>See all 147 {{ $fpCategory->name }} offers</h3>
+                </a>
         </div>
+        @foreach($fpCategory->topOffers as $offer)
         <div class="offer_holder_row_content">
             <div class="offer_box">
                 <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
+                @if($offer->img_src)
+                    <?php
+                        list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
+                    ?>
+                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    @else style="height:auto;width:100%"; 
+                    @endif>
+                        <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
+                        @else style="height:auto;width:100%"; 
+                        @endif />
+                    </a>
+                @endif
                 </div>
                 <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
+                @if($offer->offerType)
+                    <span class="coupon" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</span>
+                @endif
+                    <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                        <div class="offer_box_date_top">
+                            {{ $offer->name }}
+                        </div>
+                    </a>
                     <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
+                    @if($offer->endDate)
+                        <p @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>ends</p>
+                        <p @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>
+                    @else
+                        <p>Ongoing</p>
+                    @endif
                     </div>
                 </div>
                 <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
+                    <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                        <div class="offer_box_text_top">
+                        {!! $offer->formatDetails($offer->detail) !!} 
+                        </div>
+                    </a>
                     <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
+                        <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank">Get This <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    <div class="offer_holder_row">
-        <div class="offer_holder_row_title">
-            <span>
-                High Street
-            </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
-        </div>
-        <div class="offer_holder_row_content">
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="offer_holder_row">
-        <div class="offer_holder_row_title">
-            <span>
-                High Street
-            </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
-        </div>
-        <div class="offer_holder_row_content">
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="offer_holder_row">
-        <div class="offer_holder_row_title">
-            <span>
-                High Street
-            </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
-        </div>
-        <div class="offer_holder_row_content">
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="offer_holder_row">
-        <div class="offer_holder_row_title">
-            <span>
-                High Street
-            </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
-        </div>
-        <div class="offer_holder_row_content">
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="offer_holder_row">
-        <div class="offer_holder_row_title">
-            <span>
-                High Street
-            </span>
-            
-                <h3>See all 147 Supermarket offers</h3>
-        </div>
-        <div class="offer_holder_row_content">
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_box">
-                <div class="offer_box_img">
-                    <img src="../../../front/image/aa1.jpg" />
-                </div>
-                <div class="offer_box_date">
-                    <span class="coupon">Coupon</span>
-                    <div class="offer_box_date_top">
-                        FREE welcome gift
-                    </div>
-                    <div class="offer_box_date_bottom">
-                        <p>ends</p>
-                        <p>Jul 10</p>
-                    </div>
-                </div>
-                <div class="offer_box_text">
-                    <div class="offer_box_text_top">
-                    Every 10th drink is free.Instore. Boost.Download the Boost app register. 
-                    </div>
-                    <div class="offer_box_text_bottom">
-                        <button>Get This <i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 
 

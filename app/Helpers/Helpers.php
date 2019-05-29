@@ -8,6 +8,9 @@ use App\MetaTag;
 use App\Tagline;
 use Carbon\Carbon;
 use App\SiteSetings;
+use App\Category;
+use App\SubscribePopup;
+use App\CustomPage;
 
 class Helpers
 {
@@ -84,6 +87,21 @@ public static function getMetaTags()
         {
             return null;
         }
+    }
+
+    public static function getMenuCategories()
+    {
+        return  Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
+    }
+
+    public static function getPopup()
+    {
+        return SubscribePopup::first();
+    }
+
+    public static function getCustomPages()
+    {
+        return CustomPage::where('active', 1)->orderBy('position')->get();
     }
 
 }

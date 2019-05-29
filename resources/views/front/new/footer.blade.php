@@ -1,4 +1,5 @@
 <footer>
+        @php $customPages = Helpers::getCustomPages(); @endphp
         <div class="container">
             <div class="foo">
                 <div class="footer_top">

@@ -35,12 +35,11 @@
 
     @include('layouts.errors')
     @include('layouts.messages')
-
-    @include('front.new.slider')
     
     @yield('content')
 
     @include('front.new.footer')
+    @php $popup = Helpers::getPopup(); @endphp
     <a href="" class="go_top hidden">TOP<i class="fas fa-arrow-up"></i></a>
     <div class="fixed_btn_form" style="display:none;">
         <span class="close_popUp"><i class="fas fa-times"></i></span>
