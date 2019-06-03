@@ -131,6 +131,7 @@ class Offer extends Model
         $replace = ". ";  
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
         $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'95','...');
+        
         return $newString;
     }
 
