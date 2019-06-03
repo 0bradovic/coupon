@@ -51,7 +51,7 @@ class NewFrontController extends Controller
     {
         //$category = Category::where('slug',$slug)->where('display', true)->first();
         //$categories = Category::where('parent_id',null)->where('display', true)->with('liveSubcategories')->orderBy('position')->get();
-        $category = Category::where('parent_id','<>',null)->where('display', true)->first();
+        $category = Category::where('slug',$slug)->where('display', true)->first();
        // $customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         $brands = Brand::orderBy('click','DESC')->limit(8)->get();
         $brands = $brands->sortBy('name',SORT_REGULAR, false);
@@ -73,7 +73,7 @@ class NewFrontController extends Controller
 
     public function offer(Request $request)
     {
-        $offer = Offer::where('display', true)->where('endDate',null)->first();
+        $offer = Offer::where('slug', $slug)->where('display', true)->first();
         if($offer->endDate != null)
         {
             if($offer->dateFormat($offer->endDate) < Carbon::now())

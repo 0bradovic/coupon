@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'FrontController@index');
+Route::get('/', 'FrontController@index')->name('welcome');
 Route::get('/get-offer/{slug}','FrontController@getOffer')->name('get.offer');
 Route::get('/category/{slug}', 'FrontController@categoryOffers')->name('category.offers');
 Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
@@ -246,7 +246,7 @@ use App\Category;
 use App\CustomPage;
 use App\SubscribePopup;
 
-Route::get('/new', 'NewFrontController@index')->name('welcome');
+Route::get('/new', 'NewFrontController@index');
 
 Route::get('/new-category', 'NewFrontController@categoryOffers');
 
