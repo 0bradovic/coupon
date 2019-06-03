@@ -736,6 +736,8 @@ header {
   padding: 5px;
   margin-left: 20px;
   border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
 }
 
 .popular_brands_text h5 {

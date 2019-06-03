@@ -256,4 +256,8 @@ Route::get('/new-search', function(){
     return view('front.new.search');
 });
 
+Route::get('/new-brand', function(){
+    return view('front.new.brand');
+});
+
 // End testing
