@@ -26,7 +26,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                             Every 10th drink is free.Instore. Boost.Download the Boost app register. 
                         </div>
                         <div class="category_blade_box_text_bottom">
-                            <button>Get This <i class="fas fa-chevron-right"></i></button>
+                            <a>Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

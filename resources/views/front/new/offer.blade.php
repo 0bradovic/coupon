@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="single_offer_text">
-            <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+            <a class="a_holder"  href="{{ route('offer',['slug' => $offer->slug]) }}">
                 <div class="single_offer_text_top">
                     {!! $offer->detail !!}
                 </div>
