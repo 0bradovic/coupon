@@ -248,9 +248,7 @@ use App\SubscribePopup;
 
 Route::get('/new', 'NewFrontController@index')->name('welcome');
 
-Route::get('/new-category', function(){
-    return view('front.new.category');
-});
+Route::get('/new-category', 'NewFrontController@categoryOffers');
 
 Route::get('/new-search', function(){
     return view('front.new.search');
