@@ -13,6 +13,7 @@ use App\CustomPage;
 use App\OfferClick;
 use Illuminate\Support\Facades\Redirect;
 use App\SubscribePopup;
+use App\SearchQuery;
 
 class FrontController extends Controller
 {
@@ -220,7 +221,12 @@ class FrontController extends Controller
 
     public function renderSearch(Request $request)
     {
-        
+        if($request->search != null && $request->search != '')
+        {
+            SearchQuery::create([
+                'query' => $request->search,
+            ]);
+        }
         $offers = Offer::where('name','LIKE', '%' . $request->search . '%')->orWhere('detail', 'LIKE' , '%' . $request->search . '%')->get();
         foreach($offers as $key=>$value)
         {

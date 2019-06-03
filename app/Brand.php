@@ -8,7 +8,7 @@ class Brand extends Model
 {
     //
     protected $fillable = [
-        'name', 'sku', 'img_src', 'url', 'description'
+        'name', 'slug', 'sku', 'img_src', 'url', 'description', 'click',
     ];
 
     public function offers()

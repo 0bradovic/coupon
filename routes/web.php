@@ -33,6 +33,8 @@ Route::match(['get', 'post'], 'register', function(){
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/search-queries', 'SearchQueryController@index')->name('get.search-queries');
+
     Route::group(['middleware' => ['permission:manage tagline']], function () {
         Route::get('/tagline', 'TaglineController@index');
         Route::post('/update/tagline', 'TaglineController@update')->name('update.tagline');
@@ -56,6 +58,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/exclude-keywords', 'CategoryController@getKeywords')->name('get.exclude-keywords');
         Route::post('/update/exclude-keywords', 'CategoryController@updateKeywords')->name('update.exclude-keywords');
+
+        Route::get('/front-page/categories', 'CategoryController@frontPageCategories')->name('front-page.categories');
+        Route::post('/update/front-page/category/{id}', 'CategoryController@updateFrontPagePosition')->name('update.front-page.category');
     });
 
     Route::group(['middleware' => ['permission:manage offer types']], function () {
@@ -69,6 +74,16 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/undo/deleted/offer-type', 'OfferTypeController@undoDeleted')->name('undo.deleted.offer-type');
         Route::get('/undo/edited/offer-type/{id}', 'OfferTypeController@undoEdited')->name('undo.edited.offer-type');
+    });
+
+    Route::group(['middleware' => ['permission:manage brands']], function () {
+        // Brand routes
+        Route::get('/brands', 'BrandController@index');
+        Route::get('/create/brand', 'BrandController@create')->name('create.brand');
+        Route::post('/store/brand', 'BrandController@store')->name('store.brand');
+        Route::get('/edit/brand/{id}', 'BrandController@edit')->name('edit.brand');
+        Route::post('/update/brand/{id}', 'BrandController@update')->name('update.brand');
+        Route::get('/delete/brand/{id}', 'BrandController@destroy')->name('delete.brand');
     });
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
@@ -96,7 +111,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/download/offer', 'OfferController@downloadOffer')->name('download.offer');
         Route::get('/download/offer/search', 'OfferController@downloadOfferSearch')->name('search.offers.download');
 
-        Route::get('/get-offers', 'OfferController@getOffers')->name('get-offers');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {
@@ -215,7 +229,7 @@ Route::middleware('auth')->group(function () {
 });
 // use Spatie\Permission\Models\Permission;
 // Route::get('/perm', function(){
-//     Permission::create(['name' => 'manage site setings']);
+//     Permission::create(['name' => 'manage brands']);
 // });
 // use App\Category;
 // Route::get('/clear', function(){

@@ -20,15 +20,14 @@ class NewFrontController extends Controller
     public function index()
     {
         $slides = Slider::where('active',1)->orderBy('position')->get();
+        $title = MetaTag::where('link','/')->pluck('title')->first();
+        if(!$title)
+        {
+            $title = 'BeforeTheShop';
+        }
         $fpCategories = Category::where('parent_id',null)->where('display', true)->where('fp_position','<>',0)->with('liveSubcategories')->orderBy('fp_position')->get();
-        
-        $i = 0;
         foreach($fpCategories as $category)
         {
-            // if($i == 2)
-            // {
-            //     dd($category->liveSubcategories);
-            // }
             $collections = [];
             foreach($category->liveSubcategories as $cat)
             {
@@ -43,11 +42,8 @@ class NewFrontController extends Controller
             
             $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true);
             $category->topOffers = $offers->take(3);
-            
-            $i++;
         }
-        //dd($fpCategories);
-       return view('front.new.index',compact('fpCategories','slides'));
+       return view('front.new.index',compact('fpCategories','slides','title'));
     }
 
 }

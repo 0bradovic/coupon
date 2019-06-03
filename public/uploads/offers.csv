@@ -1,2 +1,2 @@
-Name,Detail1,Link,Todays Date,End Date,Image,Offer Type,Categories
-Alt new offer 1,<p>Alt offer.</p><p>Valid at all supermarkets.</p>,http://tinyurl.com/2tx,5/1/2019 0:00,Ongoing,C:\xampp\htdocs\coupon\public/images/offer/15568050201514305894.png,Sample,cupboard-food
+Name,Detail1,Link,Todays Date,End Date,Image,Offer Type,Categories,Brand
+Test,<p>Test offer</p>,http://google.com,4/26/2019 0:00,Ongoing,,Sample,"babycare,general-freebies",lidl

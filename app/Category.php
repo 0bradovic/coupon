@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\UndoCategory;
+use App\Support\Collection;
 
 class Category extends Model
 {
@@ -99,6 +100,25 @@ class Category extends Model
         }
         $offers = collect($offers);
         return $offers;
+    }
+
+    public function countOfParentCatLiveOffers($id)
+    {
+        $category = Category::find($id);
+        $collections = [];
+        foreach($category->liveSubcategories as $cat)
+        {
+            $collections[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
+        }
+        $offers = new Collection();
+            
+        foreach($collections as $item)
+        {
+            $offers = $offers->merge($item);
+        }
+            
+        $offers = (new Collection($offers));
+        return count($offers);
     }
 
 }

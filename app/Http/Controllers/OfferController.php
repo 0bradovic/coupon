@@ -15,7 +15,7 @@ use App\Support\Collection;
 use Response;
 use App\Undo;
 use App\ExcludeKeywords;
-
+use App\Brand;
 
 class OfferController extends Controller
 {
@@ -40,18 +40,10 @@ class OfferController extends Controller
     public function create()
     {
         //$tags = Tag::all();
+        $brands = Brand::all();
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
-        return view('offers.create',compact('categories','offerTypes'));
-    }
-
-    public function searchOffers(Request $request)
-    {
-        $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('sku', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
-        $categories = Category::where('parent_id',null)->get();
-        $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
-        return view('offers.index',compact('offers','categories','undoDeleted'));
-
+        return view('offers.create',compact('categories','offerTypes','brands'));
     }
 
     /**
@@ -151,6 +143,7 @@ class OfferController extends Controller
             'position' => $request->position,
             'img_src' => $img_src,
             'display' => $request->display,
+            'brand_id' => $request->brand,
         ]);
         foreach($request->categories as $category)
         {
@@ -262,10 +255,11 @@ class OfferController extends Controller
     {
         $offer = Offer::find($id);
         //$tags = Tag::all();
+        $brands = Brand::all();
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
         $undoEdited = Undo::where('offer_id',$id)->where('type','Edited')->first();
-        return view('offers.edit',compact('offer','offerTypes','categories','undoEdited'));
+        return view('offers.edit',compact('offer','offerTypes','categories','undoEdited','brands'));
     }
 
     /**
@@ -345,6 +339,7 @@ class OfferController extends Controller
             $endDate = Carbon::parse($request->endDate);
             $endDateNull = 0;
         }
+        
         $offer->update([
             'name' => $request->name,
             'slug' => $slug,
@@ -359,6 +354,7 @@ class OfferController extends Controller
             'user_id' => Auth::user()->id,
             'position' => $request->position,
             'alt_tag' => $request->alt_tag,
+            'brand_id' => $request->brand,
         ]);
         $offer->categories()->detach();
         foreach($request->categories as $category)
@@ -401,12 +397,16 @@ class OfferController extends Controller
     public function destroy($id)
     {
         $offer = Offer::find($id);
-        $img_url = public_path().$offer->img_src;
-        $info = pathinfo($img_url);
-        $contents = file_get_contents($img_url);
-        $name = $info['basename'];
-        $img_src = '/images/undo/offer/'.$name;
-        file_put_contents(public_path().$img_src, $contents);
+        $img_src = null;
+        if($offer->img_src)
+        {
+            $img_url = public_path().$offer->img_src;
+            $info = pathinfo($img_url);
+            $contents = file_get_contents($img_url);
+            $name = $info['basename'];
+            $img_src = '/images/undo/offer/'.$name;
+            file_put_contents(public_path().$img_src, $contents);
+        }
         $categoryIds = $offer->categories()->pluck('id');
         $properties = $offer->toJson();
         $properties = json_decode($properties);
@@ -618,9 +618,10 @@ class OfferController extends Controller
     public function copy($id)
     {
         $offer = Offer::find($id);
+        $brands = Brand::all();
         $offerTypes = OfferType::all();
         $categories = Category::where('parent_id', '<>', null)->get();
-        return view('offers.copy',compact('offer','offerTypes','categories'));
+        return view('offers.copy',compact('offer','offerTypes','categories','brands'));
     }
 
     public function uploadCsv()
@@ -666,14 +667,15 @@ class OfferController extends Controller
                 
                 for ($c=0; $c < $num; $c++) {
                     
-                    if($filedata [$c] != '')
-                    {
-                        $importData_arr[$i][] = $filedata [$c];
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                    // if($filedata [$c] != '')
+                    // {
+                    //     $importData_arr[$i][] = $filedata [$c];
+                    // }
+                    // else
+                    // {
+                    //     continue;
+                    // }
+                    $importData_arr[$i][] = $filedata [$c];
                    
                 }
                 $i++;
@@ -697,6 +699,14 @@ class OfferController extends Controller
                         $offer->offer_type_id = $offerType->id;
                         $offer->save();
                     }
+                    $brand_id = null;
+                    $brand = Brand::where('slug',$data[8])->first();
+                    if($brand != null)
+                    {
+                        $brand_id = $brand->id;
+                    }
+                    $offer->brand_id = $brand_id;
+                    $offer->save();
                     $offer->categories()->detach();
                     $categorySlugs = explode(',',$data[7]);
                     foreach($categorySlugs as $categorySlug)
@@ -736,12 +746,19 @@ class OfferController extends Controller
                         {
                             unlink(public_path().$offer->img_src);
                         }
-                        $img_url = $data[5];
-                        $info = pathinfo($img_url);
-                        $contents = file_get_contents($img_url);
-                        $name = time().$info['basename'];
-                        $img_src = '/images/offer/'.$name;
-                        file_put_contents(public_path().$img_src, $contents);
+                        if(file_exists($data[5]))
+                        {
+                            $img_url = $data[5];
+                            $info = pathinfo($img_url);
+                            $contents = file_get_contents($img_url);
+                            $name = time().$info['basename'];
+                            $img_src = '/images/offer/'.$name;
+                            file_put_contents(public_path().$img_src, $contents);
+                        }
+                        else
+                        {
+                            $img_src = null;
+                        }
                         $offer->img_src = $img_src;
                         $offer->save();
                     }
@@ -828,12 +845,19 @@ class OfferController extends Controller
                             $endDate = Carbon::parse($endDate);
                             $endDateNull = 0;
                         }
-                    $img_url = $data[5];
-                    $info = pathinfo($img_url);
-                    $contents = file_get_contents($img_url);
-                    $name = time().$info['basename'];
-                    $img_src = '/images/offer/'.$name;
-                    file_put_contents(public_path().$img_src, $contents);
+                    if(file_exists($data[5]))
+                    {
+                        $img_url = $data[5];
+                        $info = pathinfo($img_url);
+                        $contents = file_get_contents($img_url);
+                        $name = time().$info['basename'];
+                        $img_src = '/images/offer/'.$name;
+                        file_put_contents(public_path().$img_src, $contents);
+                    }
+                    else
+                    {
+                        $img_src = null;
+                    }
                     $offerType = OfferType::where('name',$data[6])->first();
                     if($offerType == null)
                     {
@@ -842,6 +866,12 @@ class OfferController extends Controller
                     else
                     {
                         $offer_type_id = $offerType->id;
+                    }
+                    $brand_id = null;
+                    $brand = Brand::where('slug',$data[8])->first();
+                    if($brand != null)
+                    {
+                        $brand_id = $brand->id;
                     }
                     $insertData = array(
                     'name' => $data[0],
@@ -855,6 +885,7 @@ class OfferController extends Controller
                     'img_src' => $img_src,
                     'user_id' => Auth::user()->id,
                     'offer_type_id' => $offer_type_id,
+                    'brand_id' => $brand_id,
                     );
                     $offer = Offer::create($insertData);
                     $categorySlugs = explode(',',$data[7]);
@@ -964,7 +995,7 @@ class OfferController extends Controller
         
         $filename = 'offers.csv';
         $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories'));
+        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories','Brand'));
         foreach($offers as $offer)
         {
             $categories = $offer->categories()->pluck('slug')->toArray();
@@ -974,13 +1005,18 @@ class OfferController extends Controller
             {
                 $offerType = $offer->offerType->name;
             }
+            $brand = null;
+            if($offer->brand)
+            {
+                $brand = $offer->brand->slug;
+            }
             if($offer['endDate'] == null)
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories,$brand));
             }
             else
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories,$brand));
             }
                 
         }
@@ -997,27 +1033,48 @@ class OfferController extends Controller
         return view('offers.download',compact('offers'));
     }
 
-    public function getOffers(Request $request)
+    public function searchOffers(Request $request)
     {
         if($request->category == 'all')
         {
             if($request->offers == 'all')
             {
-                $offers = Offer::orderBy('position')->paginate(15);
+                if($request->term == null)
+                {
+                    $offers = Offer::orderBy('position')->paginate(15);
+                }
+                else
+                {
+                    $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
+                }
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
                 return view('offers.index',compact('offers','categories','undoDeleted'));
             }
             elseif($request->offers == 'most-popular')
             {
-                $offers = Offer::orderBy('click','DESC')->paginate(15);
+                if($request->term == null)
+                {
+                    $offers = Offer::orderBy('click','DESC')->paginate(15);
+                }
+                else
+                {
+                    $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('click','DESC')->paginate(15);
+                }
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
                 return view('offers.index',compact('offers','categories','undoDeleted'));
             }
             elseif($request->offers == 'live')
             {
-                $offers = Offer::orderBy('position')->get();
+                if($request->term == null)
+                {
+                    $offers = Offer::orderBy('position')->get();
+                }
+                else
+                {
+                    $offers = Offer::where('name', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
+                }
                 $offer = new Offer();
                 $offers = $offer->filterOffers($offers);
                 $offers = (new Collection($offers))->paginate(15);
@@ -1027,7 +1084,14 @@ class OfferController extends Controller
             }
             elseif($request->offers == 'expired')
             {
-                $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
+                if($request->term == null)
+                {
+                    $offers = Offer::where('endDate', '<', Carbon::now())->orderBy('position')->paginate(15);
+                }
+                else
+                {
+                    $offers = Offer::where('endDate', '<', Carbon::now())->where('name', 'LIKE', '%'.$request->term.'%')->orWhere('detail', 'LIKE', '%'.$request->term.'%')->orderBy('position')->paginate(15);
+                }
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
                 return view('offers.index',compact('offers','categories','undoDeleted'));
@@ -1036,19 +1100,30 @@ class OfferController extends Controller
         else
         {
             $parentCategory = Category::find($request->category);
-            //dd($parentCategory);
             if($request->offers == 'all')
             {
                 $collections = [];
-                foreach($parentCategory->subcategories as $cat)
+                if($request->term == null)
                 {
-                    $collections[] = $cat->offers;
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers;
+                    }
+                }
+                else
+                {
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers()->where('detail', 'LIKE', '%'.$request->term.'%')->get();
+                        $collections[] = $cat->offers()->where('name', 'LIKE', '%'.$request->term.'%')->get();
+                    }
                 }
                 $offers = new Collection();
                 foreach($collections as $item)
                 {
                     $offers = $offers->merge($item);
                 }
+                $offers = $offers->unique();
                 $offers = (new Collection($offers))->sortBy('position',SORT_REGULAR, false)->paginate(15);
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
@@ -1057,15 +1132,30 @@ class OfferController extends Controller
             elseif($request->offers == 'most-popular')
             {
                 $collections = [];
-                foreach($parentCategory->subcategories as $cat)
+                //dd($parentCategory->subcategories);
+                if($request->term == null)
                 {
-                    $collections[] = $cat->offers;
+                   
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers;
+                    }
                 }
+                else
+                {
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers()->where('name', 'LIKE', '%'.$request->term.'%')->get();
+                        $collections[] = $cat->offers()->where('detail', 'LIKE', '%'.$request->term.'%')->get();
+                    }
+                }
+                
                 $offers = new Collection();
                 foreach($collections as $item)
                 {
                     $offers = $offers->merge($item);
                 }
+                $offers = $offers->unique();
                 $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true)->paginate(15);
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();
@@ -1074,15 +1164,28 @@ class OfferController extends Controller
             elseif($request->offers == 'live')
             {
                 $collections = [];
-                foreach($parentCategory->subcategories as $cat)
+                if($request->term == null)
                 {
-                    $collections[] = $cat->offers;
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers;
+                    }
                 }
+                else
+                {
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers()->where('name', 'LIKE', '%'.$request->term.'%')->get();
+                        $collections[] = $cat->offers()->where('detail', 'LIKE', '%'.$request->term.'%')->get();
+                    }
+                }
+                
                 $offers = new Collection();
                 foreach($collections as $item)
                 {
                     $offers = $offers->merge($item);
                 }
+                $offers = $offers->unique();
                 $offers = (new Collection($offers))->sortBy('position',SORT_REGULAR, false);
                 $offer = new Offer();
                 $offers = $offer->filterOffers($offers);
@@ -1094,15 +1197,28 @@ class OfferController extends Controller
             elseif($request->offers == 'expired')
             {
                 $collections = [];
-                foreach($parentCategory->subcategories as $cat)
+                if($request->term == null)
                 {
-                    $collections[] = $cat->offers;
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers;
+                    }
                 }
+                else
+                {
+                    foreach($parentCategory->subcategories as $cat)
+                    {
+                        $collections[] = $cat->offers()->where('name', 'LIKE', '%'.$request->term.'%')->get();
+                        $collections[] = $cat->offers()->where('detail', 'LIKE', '%'.$request->term.'%')->get();
+                    }
+                }
+                
                 $offers = new Collection();
                 foreach($collections as $item)
                 {
                     $offers = $offers->merge($item);
                 }
+                $offers = $offers->unique();
                 $offers = (new Collection($offers))->where('endDate', '<', Carbon::now())->sortBy('position',SORT_REGULAR, false)->paginate(15);
                 $categories = Category::where('parent_id',null)->get();
                 $undoDeleted = Undo::where('offer_id','<>',null)->where('type','Deleted')->first();

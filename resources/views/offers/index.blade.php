@@ -13,7 +13,7 @@
 <div class="row">
         <div class="col-xs-12">
           
-              <form role="form" method="GET" action="{{ route('get-offers') }}" class="pull-right" style="background-color:#fff;padding:5px;display: flex;
+              <form role="form" method="GET" action="{{ route('search.offers') }}" class="pull-right" style="background-color:#fff;padding:5px;display: flex;
     align-items: center;
     width: 50%;
     justify-content: space-around;">
@@ -21,7 +21,7 @@
                   
                   <div class="form-group">
                     <label>Select parent category</label>
-                    <select class="form-control select2 " name="category" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    <select class="form-control select2 categories" name="category" style="width: 100%;" tabindex="-1" aria-hidden="true">
                     <option value="all" @if(Request::get('category') == null || Request::get('category') == 'all') selected="selected" @endif>All</option>
                     @foreach($categories as $cat)
                       <option value="{{$cat->id}}" @if(Request::get('category') == $cat->id) selected="selected" @endif >{{$cat->name}}</option>
@@ -30,26 +30,27 @@
                   </div>
                   <div class="form-group">
                     <label>Select which offers to show</label>
-                    <select class="form-control select2 " name="offers" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    <select class="form-control select2 offers" name="offers" style="width: 100%;" tabindex="-1" aria-hidden="true">
                     <option value="all" @if(Request::get('offers') == 'all') selected="selected" @endif>All</option>
                     <option value="most-popular" @if(Request::get('offers') == 'most-popular') selected="selected" @endif>Most popular</option>
                     <option value="live" @if(Request::get('offers') == 'live') selected="selected" @endif>Live</option>
                     <option value="expired" @if(Request::get('offers') == 'expired') selected="selected" @endif>Expired</option>
                     </select>
                   </div>
-                
+                  <input type="hidden" name="term" @if(Request::get('term')) value="{{ Request::get('term') }}" @else value="" @endif id="hdn-term-input">
                 <div class="pull-right">
                   <button type="submit" class="btn btn-primary">Filter offers</button>
                 </div>
               </form>  
-            
             
         {{ $offers->appends(Request::except('page'))->links() }}
         <div >
               
               <div>Shows {{$offers->firstItem()}} to {{$offers->lastItem()}} offers of {{$offers->total()}}</div></br>
         </div>
+        </div>
 
+        <div class="col-xs-12">
           <div class="box">
             <div style="z-index:1000;">
               @if($undoDeleted != null)
@@ -67,8 +68,10 @@
               <form method="get" action="{{ route('search.offers') }}">
               <div class="input-group input-group-sm" style="width: 300px;">
               
-                  <input type="text" name="term" class="form-control pull-right" placeholder="Search offers by name or id...">
+                  <input type="text" name="term" id="search_term" class="form-control pull-right" @if(Request::get('term')) value="{{ Request::get('term') }}" @else placeholder="Search offers by name or detail..." @endif>
                   {!! csrf_field() !!}
+                  <input type="hidden" name="offers" @if(Request::get('offers')) value="{{ Request::get('offers') }}" @else value="" @endif id="hdn-offers-input">
+                  <input type="hidden" name="category" @if(Request::get('category')) value="{{ Request::get('category') }}" @else value="" @endif id="hdn-category-input">
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
@@ -144,5 +147,23 @@
     //Initialize Select2 Elements
     $('.select2').select2()
   });
+</script>
+<script>
+    $(document).ready(function(){
+      $('#hdn-offers-input').val($('select.offers').children("option:selected").val());
+      $('#hdn-category-input').val($('select.categories').children("option:selected").val());
+    })
+    $('select.offers').change(function(){
+      var offers = $(this).children("option:selected").val();
+      $('#hdn-offers-input').val(offers);
+    });
+    $('select.categories').change(function(){
+      var categories = $(this).children("option:selected").val();
+      $('#hdn-category-input').val(categories);
+    });
+    $('#search_term').keyup(function(e){
+      var term = e.target.value;
+      $('#hdn-term-input').val(term);
+    })
 </script>
 @endsection

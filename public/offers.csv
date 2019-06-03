@@ -1,2 +1,2 @@
-Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories
-"Alt offer 1","<p>Alt offer.</p><p>Valid at all supermarkets.</p>",http://tinyurl.com/2tx,"2019-05-01 00:00:00",Ongoing,"C:\xampp\htdocs\coupon\public/images/offer/15568050201514305894.png",Sample,frozen
+Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories,Brand
+"30% off","<p><small>Your first £60+ Ocado shop</small></p><p><small>Free deliveries for a year</small></p><p><br></p>",http://tinyurl.com/ybxde7pr,"2019-01-22 00:00:00","2019-02-14 00:00:00","C:\xampp\htdocs\coupon\public/images/offer/1548232525Ocado.png",Code,total-shop,

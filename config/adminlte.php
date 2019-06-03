@@ -174,6 +174,26 @@ return [
             'can' => 'manage tagline',
             'url' => '/tagline',
         ],
+        'SEARCH QUERIES',
+        [
+            'text' => 'Search Queries',
+            'url' => '/search-queries',
+        ],
+        'BRANDS',
+        [
+            'text' => 'Brands',
+            'can' => 'manage brands',
+            'submenu' => [
+                [
+                    'text' => 'All Brands',
+                    'url' => '/brands',
+                ],
+                [
+                    'text' => 'Add Brand',
+                    'url'  => '/create/brand',
+                ],
+            ]
+        ],
         'OFFER TYPES',
         [
             'text' => 'Offer Types',
@@ -229,6 +249,10 @@ return [
                 [
                     'text' => 'Create category',
                     'url' => '/create/category',
+                ],
+                [
+                    'text' => 'Front page categories',
+                    'url' => '/front-page/categories',
                 ],
                 [
                     'text' => 'All category meta tags',

@@ -506,4 +506,21 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Successfully updated default exclude keywords.');
     }
 
+    public function frontPageCategories()
+    {
+        $categories = Category::where('parent_id',null)->orderBy('fp_position')->get();
+        return view('categories.front-page-categories',compact('categories'));
+    }
+
+    public function updateFrontPagePosition($id,Request $request)
+    {
+        $this->validate($request,[
+            'fp_position' => 'required',
+        ]);
+        $category = Category::find($id);
+        $category->fp_position = $request->fp_position;
+        $category->save();
+        return redirect()->back()->with('success', 'Successfully updated front page position for '.$category->name.'.');
+    }
+
 }

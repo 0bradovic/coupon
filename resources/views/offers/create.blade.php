@@ -72,6 +72,18 @@
               
               </select>
             </div>
+
+            <div class="form-group">
+              <label>Brand</label>
+              <select class="form-control select2 " name="brand" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option value="">Select brand</option>
+              @foreach($brands as $brand)
+                <option value="{{$brand->id}}">{{$brand->name}}</option>
+              @endforeach
+              
+              </select>
+            </div>
+
             <div class="form-group">
             <label>Select categories</label>
               <select class="form-control select2" multiple="multiple" name="categories[]" data-placeholder="Select a Category"
