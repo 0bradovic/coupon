@@ -250,6 +250,8 @@ Route::get('/new', 'NewFrontController@index')->name('welcome');
 
 Route::get('/new-category', 'NewFrontController@categoryOffers');
 
+Route::get('/new-offer', 'NewFrontController@offer');
+
 Route::get('/new-search', function(){
     return view('front.new.search');
 });
