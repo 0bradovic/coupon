@@ -223,14 +223,15 @@ class FrontController extends Controller
         //$customPages = CustomPage::where('active', 1)->orderBy('position')->get();
         //$popup = SubscribePopup::first();
         $search = $request->search;
+        
         if($request->ajax()) {
             return [
-                'newest' => view('front.searchLazyLoadNewest')->with(compact('newestSimillarOffers'))->render(),
-                'popular' => view('front.searchLazyLoadPopular')->with(compact('popularSimillarOffers'))->render(),
+                'newest' => view('front.offerNewestLazyLoad')->with(compact('newestSimillarOffers'))->render(),
+                'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
                 'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.search', compact('offers', 'newestSimillarOffers', 'popularSimillarOffers', 'categories', 'search','customPages','popup'));
+        return view('front.search', compact('offers', 'newestSimillarOffers', 'popularSimillarOffers', 'search'));
 
     }
     
