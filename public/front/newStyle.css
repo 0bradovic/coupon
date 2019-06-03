@@ -736,6 +736,8 @@ header {
   padding: 5px;
   margin-left: 20px;
   border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
 }
 
 .popular_brands_text h5 {
@@ -962,9 +964,9 @@ header {
 
 /* END CATEGORY BLADE */
 
-/* START SEARCH BLADE */
+/* START OFFER BLADE */
 
-.search_page {
+.offer_page {
   width: 100%;
 }
 
@@ -1154,17 +1156,17 @@ header {
   background: #52b60f;
 }
 
-.search_content {
+.offer_content {
   display: flex;
   width: 100%;
   padding-bottom: 120px;
 }
 
-.search_page_title {
+.offer_page_title {
   padding: 5px 0;
 }
 
-.search_page_title span {
+.offer_page_title span {
   font-size: 13px;
   color: #fff;
   text-align: center;
@@ -1176,11 +1178,11 @@ header {
   padding: 3px;
 }
 
-.search_page .most_popular .category_blade_title {
+.offer_page .most_popular .category_blade_title {
   padding-left: 0;
 }
 
-.search_page .most_popular .category_blade_box {
+.offer_page .most_popular .category_blade_box {
   margin-left: 0;
 }
 
@@ -1206,8 +1208,52 @@ header {
     left: 10%;
     right: 10%;
   }
-  .search_page .most_popular .category_blade_box {
+  .offer_page .most_popular .category_blade_box {
     margin-right: 0px;
+  }
+}
+
+/* END OFFER BLADE */
+
+/* START SEARCH BLADE */
+
+.search_page {
+  display: flex;
+}
+
+.search_page .category_blade_row {
+  width: 80%;
+  padding-bottom: 120px;
+}
+
+.search_page .category_blade_box {
+  justify-content: space-between;
+}
+
+.search_page .category_blade_box_img {
+  width: 180px;
+}
+
+.search_page .category_blade_box_img img {
+  width: 100%;
+}
+
+.search_page .category_blade_box_text {
+  width: 30%;
+}
+
+@media (max-width: 800px) {
+  .search_page .category_blade_row {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .search_page .category_blade_box_img {
+    width: 20%;
+  }
+  .search_page .category_blade_box_text {
+    width: 50%;
   }
 }
 
