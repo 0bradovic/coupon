@@ -1,7 +1,6 @@
 
 
     <section id="carousel">
-            <div class="container">
                 <div id="my-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                     @foreach($slides as $slide)
@@ -30,6 +29,5 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-            </div>
         </section>
        

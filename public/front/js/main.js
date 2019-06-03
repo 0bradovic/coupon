@@ -1,79 +1,67 @@
-$(document).ready(function() {
-  $(".dropdown").hover(
-    function() {
-      var id = $(this).data("id");
-      $(".dropdown-container").addClass("d-none");
-      $("#cont" + id).removeClass("d-none");
-    },
-    function() {
-      $(".dropdown-container").addClass("d-none");
-    }
-  );
-});
-$(document).ready(function() {
-  $(".dropdown-container").hover(
-    function() {
-      $(this).removeClass("d-none");
-    },
-    function() {
-      $(this).addClass("d-none");
-    }
-  );
-  $(".fa-times-circle").on("click", function() {
-    $("#cookie").remove();
-  });
-  $(".dropdown").on("click", function() {
-    $(this)
-      .find(".fa-caret-right")
-      .toggleClass("rotate_arrow");
-  });
-  $("#mob_menu").on("click", function() {
-    $(".dropdowns_holder").toggleClass("active_dropdown_holder");
-    if ($(this).hasClass("fa-bars")) {
-      $(this).removeClass("fa-bars");
-      $(this).addClass("fa-times");
-      $("body").css("overflow", "hidden");
-    } else if ($(this).hasClass("fa-times")) {
-      $(this).removeClass("fa-times");
-      $(this).addClass("fa-bars");
-      $("body").css("overflow", "scroll");
-    }
-  });
-  $(".back").click(function() {
-    $(this)
-      .parent()
-      .removeClass("active_sub_menu");
-    $(".dropdown_row").show();
-  });
-  $(".open_sub").on("click", function() {
-    $(".dropdown_row").hide();
-  });
-  $(".open_sub").on("click", function() {
-    var id = $(this)
-      .prev()
-      .data("id");
-    $("#" + id).toggleClass("active_sub_menu");
-  });
+// $(document).ready(function() {
+//   $(".dropdown").hover(
+//     function() {
+//       var id = $(this).data("id");
+//       $(".dropdown-container").addClass("d-none");
+//       $("#cont" + id).removeClass("d-none");
+//     },
+//     function() {
+//       $(".dropdown-container").addClass("d-none");
+//     }
+//   );
+// });
+// $(".dropdown-container").hover(
+//   function() {
+//     $(this).removeClass("d-none");
+//   },
+//   function() {
+//     $(this).addClass("d-none");
+//   }
+// );
 
+// $(".dropdown").on("click", function() {
+//   $(this)
+//     .find(".fa-caret-right")
+//     .toggleClass("rotate_arrow");
+// });
+// $("#mob_menu").on("click", function() {
+//   $(".dropdowns_holder").toggleClass("active_dropdown_holder");
+//   if ($(this).hasClass("fa-bars")) {
+//     $(this).removeClass("fa-bars");
+//     $(this).addClass("fa-times");
+//     $("body").css("overflow", "hidden");
+//   } else if ($(this).hasClass("fa-times")) {
+//     $(this).removeClass("fa-times");
+//     $(this).addClass("fa-bars");
+//     $("body").css("overflow", "scroll");
+//   }
+// });
+// $(".back").click(function() {
+//   $(this)
+//     .parent()
+//     .removeClass("active_sub_menu");
+//   $(".dropdown_row").show();
+// });
+// $(".open_sub").on("click", function() {
+//   $(".dropdown_row").hide();
+// });
+// $(".open_sub").on("click", function() {
+//   var id = $(this)
+//     .prev()
+//     .data("id");
+//   $("#" + id).toggleClass("active_sub_menu");
+// });
+
+$(document).ready(function() {
   $(document).ready(function() {
     if (sessionStorage.getItem("newsletter") !== "true") {
       $(".fixed_btn_form").show();
     }
   });
-
-  //newsleter
-  // $('.fixed_btn_form').hide()
   $(".close-modal").click(function() {
     sessionStorage.setItem("newsletter", true);
     $(".fixed_btn_form").hide();
   });
-  $("#open_popup").on("click", function() {
-    $(".fixed_btn_form").fadeToggle(300);
-  });
-});
-$(".close_popUp").on("click", function() {
-  sessionStorage.setItem("newsletter", true);
-  $(".fixed_btn_form").hide();
 });
 
 $("#newsletter_submit").click(function(e) {
@@ -82,77 +70,6 @@ $("#newsletter_submit").click(function(e) {
   $("#newsletter_form").submit();
 });
 
-$("#search").keyup(function(e) {
-  $.ajax({
-    url: SITE_URL + "search/" + e.target.value,
-    type: "GET",
-    success: function(data) {
-      document.getElementById("serachDiv").classList.remove("disable");
-      document.getElementById("serachDiv").innerHTML = "";
-      var serachDiv = document.getElementById("serachDiv");
-      var count = 0;
-      data.forEach(element => {
-        count++;
-        if (count > 5) return;
-        var elementDiv = document.createElement("div");
-        elementDiv.innerHTML =
-          "<a href='/offer/" +
-          element.slug +
-          "'><div class='search-div-1'> <img src='/public" +
-          element.img_src +
-          "'> <div class='articleText'> <p class='article'>" +
-          element.name +
-          "</p></div></div></a>";
-        serachDiv.appendChild(elementDiv);
-        document.getElementById("serachDiv").style.border = "1px solid #A5ACB2";
-      });
-    }
-  });
-});
-
-$(document).click(function() {
-  document.getElementById("serachDiv").classList.add("disable");
-});
-$("#most-popular-btn").click(function(e) {
-  e.preventDefault();
-  $(".newest-offers").addClass("dNone");
-  $(".most-popular-offers").removeClass("dNone");
-  $(".mostPopularOffers").removeClass("dNone991");
-  $(".newestOffers").addClass("dNone991");
-});
-$("#newest-btn").click(function(e) {
-  e.preventDefault();
-  $(".newest-offers").removeClass("dNone");
-  $(".most-popular-offers").addClass("dNone");
-  $(".mostPopularOffers").addClass("dNone991");
-  $(".newestOffers").removeClass("dNone991");
-});
-
-$(document).ready(function() {
-  if (sessionStorage.getItem("cookie") !== "true") {
-    $("body").append(`<div id="cookie">
-    <div class="cookie_left">
-    <p>We use cookies to give you the best service. Read our <a href="https://www.beforetheshop.com/page/privacy-policy" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/page/cookie-policy" target="_blank" class="cookie_link">cookie</a> policy to learn more.</p>
-    </div>
-    <div class="cookie_right">
-    <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
-    <i class="fas fa-times-circle"></i>
-    </div>
-</div>`);
-  }
-  $("#acceptC").on("click", function() {
-    sessionStorage.setItem("cookie", true);
-    $("#cookie").remove();
-  });
-  $(".fa-times-circle").on("click", function() {
-    $("#cookie").remove();
-  });
-  $(".social_icons_div_absolute").hide();
-  $("#email_form").on("click", function(e) {
-    e.preventDefault();
-    $(".social_icons_div_absolute").fadeToggle(200);
-  });
-});
 $(document).click(function(e) {
   if ($(e.target).closest("#email_form").length > 0) {
     return true;
@@ -235,14 +152,12 @@ $(document).ready(function() {
       .toggleClass("dropdown_list_none");
     $(this).toggleClass("rotate_arrow");
   });
-  $(".fa-caret-left").click(function() {
+  $(".main_menu").click(function() {
     $(this)
-      .parent()
       .parent()
       .parent()
       .addClass("dropdown_list_none");
     $(this)
-      .parent()
       .parent()
       .parent()
       .prev()
@@ -285,7 +200,39 @@ $(document).ready(function() {
   $("#email_popup").on("click", function() {
     $(".email_popup").toggleClass("hidden");
   });
-  // FIXED NAVIGATON
+  // OPEN AND CLOSE SIGN IN POP UP
+  $("#open_popup").on("click", function() {
+    $(".fixed_btn_form").fadeToggle(300);
+  });
+  $(".close_popUp").on("click", function() {
+    sessionStorage.setItem("newsletter", true);
+    $(".fixed_btn_form").hide();
+  });
+  // COOKIE
+  if (sessionStorage.getItem("cookie") !== "true") {
+    $("body").append(`<div id="cookie">
+    <div class="cookie_left">
+    <p>We use cookies to give you the best service. Read our <a href="https://www.beforetheshop.com/page/privacy-policy" target="_blank" class="cookie_link">privacy</a> and <a href="https://www.beforetheshop.com/page/cookie-policy" target="_blank" class="cookie_link">cookie</a> policy to learn more.</p>
+    </div>
+    <div class="cookie_right">
+    <button id="acceptC"><i class="fas fa-check"></i> Accept Cookies</button>
+    <i class="fas fa-times-circle"></i>
+    </div>
+</div>`);
+  }
+  $("#acceptC").on("click", function() {
+    sessionStorage.setItem("cookie", true);
+    $("#cookie").remove();
+  });
+  $(".fa-times-circle").on("click", function() {
+    $("#cookie").remove();
+  });
+  $(".social_icons_div_absolute").hide();
+  $("#email_form").on("click", function(e) {
+    e.preventDefault();
+    $(".social_icons_div_absolute").fadeToggle(200);
+  });
+  // FIXED NAVIGATON AND SCROOL TOP
   $(window).scroll(function() {
     let $this = $(this);
     let $nav = $(".navigation");
@@ -298,4 +245,35 @@ $(document).ready(function() {
       $go_top.addClass("hidden");
     }
   });
+});
+// SEARCH FORM
+$("#search").keyup(function(e) {
+  $.ajax({
+    url: SITE_URL + "search/" + e.target.value,
+    type: "GET",
+    success: function(data) {
+      document.querySelector(".search_result").classList.remove("hidden");
+      document.querySelector(".search_result").innerHTML = "";
+      var search_result = document.querySelector(".search_result");
+      var count = 0;
+      data.forEach(element => {
+        count++;
+        if (count > 5) return;
+        var elementDiv = document.createElement("div");
+        elementDiv.classList.add("search_result_item");
+        elementDiv.innerHTML =
+          "<a href='/offer/" +
+          element.slug +
+          "'> <img src='" +
+          element.img_src +
+          "'>  <span class='article'>" +
+          element.name +
+          "</span></a>";
+        search_result.appendChild(elementDiv);
+      });
+    }
+  });
+});
+$(document).click(function() {
+  document.querySelector(".search_result").classList.add("hidden");
 });
