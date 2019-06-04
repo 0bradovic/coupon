@@ -101,11 +101,20 @@ class FrontController extends Controller
     public function categoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->first();
-        $brands = Brand::orderBy('click','DESC')->limit(8)->get();
-        $brands = $brands->sortBy('name',SORT_REGULAR, false);
         $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
         $total = floor(count($allNewestOffers)/6);
+        $brandIds = [];
+        foreach($allNewestOffers as $offer)
+        {
+            if($offer->brand)
+            {
+                $brandIds[] = $offer->brand->id;
+            }
+        }
+        $brandIds = array_unique($brandIds);
+        $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
+        $brands = $brands->sortBy('name',SORT_REGULAR, false);
         $newestOffers = (new Collection($allNewestOffers))->paginate(10);
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
         if($request->ajax()) {
@@ -283,10 +292,19 @@ class FrontController extends Controller
         $newestOffers = $newestOffers->unique();
         $popularOffers = $popularOffers->unique();
         $total = floor(count($newestOffers)/6);
+        $brandIds = [];
+        foreach($newestOffers as $offer)
+        {
+            if($offer->brand)
+            {
+                $brandIds[] = $offer->brand->id;
+            }
+        }
+        $brandIds = array_unique($brandIds);
+        $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
+        $brands = $brands->sortBy('name',SORT_REGULAR, false);
         $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10);
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
-        $brands = Brand::orderBy('click','DESC')->limit(8)->get();
-        $brands = $brands->sortBy('name',SORT_REGULAR, false);
         
         if($request->ajax()) {
             return [
