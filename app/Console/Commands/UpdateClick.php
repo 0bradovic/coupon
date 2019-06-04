@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use App\Offer;
 use App\OfferClick;
 use Carbon\Carbon;
+use App\Brand;
+use App\BrandClick;
 
 class UpdateClick extends Command
 {
@@ -58,6 +60,25 @@ class UpdateClick extends Command
             {
                 $offer->click = 0;
                 $offer->save();
+            }
+        }
+        $brandClicks = BrandClick::where('created_at','<',$date)->get();
+        foreach($brandClicks as $brandClick)
+        {
+            $brandClick->delete();
+        }
+        $brands = Brand::all();
+        foreach($brands as $brand)
+        {
+            if(count($brand->brandClicks) > 0)
+            {
+                $brand->click = count($brand->brandClicks);
+                $brand->save();
+            }
+            else
+            {
+                $brand->click = 0;
+                $brand->save();
             }
         }
     }

@@ -22,6 +22,11 @@ class Brand extends Model
         return $this->belongsToMany(Category::class, 'brand_to_category', 'brand_id', 'category_id');
     }
 
+    public function brandClicks()
+    {
+        return $this->hasMany(BrandClick::class);
+    }
+
     public function getFilteredLiveOffersByBrand($id,$order,$oredrType)
     {
         $brand = Brand::where('id', $id)->first();

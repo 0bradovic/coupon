@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\SubscribePopup;
 use App\SearchQuery;
 use App\Brand;
+use App\BrandClick;
 
 class FrontController extends Controller
 {
@@ -248,6 +249,13 @@ class FrontController extends Controller
         $offer->click += 1;
         $offer->save();
         OfferClick::create(['offer_id'=>$offer->id]);
+        if($offer->brand)
+        {
+            $brand = $offer->brand;
+            $brand->click += 1;
+            $brand->save();
+            BrandClick::create(['brand_id' => $brand->id]);
+        }
         return Redirect::away($offer->link);
     }
 
