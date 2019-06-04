@@ -739,7 +739,7 @@ header {
 .popular_brands_text {
   display: flex;
   align-items: center;
-  background: darkorange;
+  background: orange;
   padding: 5px;
   margin-left: 20px;
   border-radius: 5px;
@@ -1346,7 +1346,6 @@ small {
 .ad_sense {
   width: 160px;
   height: 600px;
-  background: blueviolet;
   margin-top: 43px;
 }
 

@@ -229,37 +229,5 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-// use Spatie\Permission\Models\Permission;
-// Route::get('/perm', function(){
-//     Permission::create(['name' => 'manage brands']);
-// });
-// use App\Category;
-// Route::get('/clear', function(){
-//     $cats = Category::all();
-//     foreach($cats as $cat)
-//     {
-//         $cat->default_words_exclude = null;
-//         $cat->save();
-//     }
-// });
 
-// Testing new layouts
-use App\Category;
-use App\CustomPage;
-use App\SubscribePopup;
 
-Route::get('/new', 'NewFrontController@index');
-
-Route::get('/new-category', 'NewFrontController@categoryOffers');
-
-Route::get('/new-offer', 'NewFrontController@offer');
-
-Route::get('/new-search', function(){
-    return view('front.new.search');
-});
-
-Route::get('/new-brand', function(){
-    return view('front.new.brand');
-});
-
-// End testing

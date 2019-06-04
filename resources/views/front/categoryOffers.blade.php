@@ -161,7 +161,19 @@
         {{--{!! $newestOffers->links() !!}--}}
     </div>
     <div class="ad_sense">
-        
+        @for($k = 0; $k < $total; $k++)
+            <div class="adSense_holder">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Category ad -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:160px;height:600px"
+                 data-ad-client="ca-pub-3613410372125024"
+                 data-ad-slot="3532615081"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            </div> 
+        @endfor
     </div>
 </div>
 </div>

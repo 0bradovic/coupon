@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="{{Helpers::getFavicon()}}">
     @endif
     {!! Helpers::getMetaTags() !!} 
-    
+    <meta name="google-site-verification" content="SgQNy4xCCKPlSXWI5nA4Vz6mW7vWJz6ghcyyH2xitIE" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129562058-1"></script>
     <script>
@@ -31,7 +31,13 @@
     
      gtag('config', 'UA-129562058-1');
     </script>
-    
+    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3613410372125024",
+    enable_page_level_ads: true
+    });
+    </script>-->
 </head>
 
 <body>
