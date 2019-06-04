@@ -1,131 +1,3 @@
-// $(document).ready(function() {
-//   $(".dropdown").hover(
-//     function() {
-//       var id = $(this).data("id");
-//       $(".dropdown-container").addClass("d-none");
-//       $("#cont" + id).removeClass("d-none");
-//     },
-//     function() {
-//       $(".dropdown-container").addClass("d-none");
-//     }
-//   );
-// });
-// $(".dropdown-container").hover(
-//   function() {
-//     $(this).removeClass("d-none");
-//   },
-//   function() {
-//     $(this).addClass("d-none");
-//   }
-// );
-
-// $(".dropdown").on("click", function() {
-//   $(this)
-//     .find(".fa-caret-right")
-//     .toggleClass("rotate_arrow");
-// });
-// $("#mob_menu").on("click", function() {
-//   $(".dropdowns_holder").toggleClass("active_dropdown_holder");
-//   if ($(this).hasClass("fa-bars")) {
-//     $(this).removeClass("fa-bars");
-//     $(this).addClass("fa-times");
-//     $("body").css("overflow", "hidden");
-//   } else if ($(this).hasClass("fa-times")) {
-//     $(this).removeClass("fa-times");
-//     $(this).addClass("fa-bars");
-//     $("body").css("overflow", "scroll");
-//   }
-// });
-// $(".back").click(function() {
-//   $(this)
-//     .parent()
-//     .removeClass("active_sub_menu");
-//   $(".dropdown_row").show();
-// });
-// $(".open_sub").on("click", function() {
-//   $(".dropdown_row").hide();
-// });
-// $(".open_sub").on("click", function() {
-//   var id = $(this)
-//     .prev()
-//     .data("id");
-//   $("#" + id).toggleClass("active_sub_menu");
-// });
-
-$(document).ready(function () {
-  $(document).ready(function () {
-    if (sessionStorage.getItem("newsletter") !== "true") {
-      $(".fixed_btn_form").show();
-    }
-  });
-  $(".close-modal").click(function () {
-    sessionStorage.setItem("newsletter", true);
-    $(".fixed_btn_form").hide();
-  });
-});
-
-$("#newsletter_submit").click(function (e) {
-  e.preventDefault();
-  sessionStorage.setItem("newsletter", true);
-  $("#newsletter_form").submit();
-});
-
-// $(document).click(function (e) {
-//   if ($(e.target).closest("#email_form").length > 0) {
-//     return true;
-//   } else if ($(e.target).closest(".social_icons_div_absolute").length > 0) {
-//     return true;
-//   }
-//   // Otherwise
-//   // trigger your click function
-//   $(".social_icons_div_absolute").fadeOut(200);
-// });
-
-// $("#emailinput").keyup(function () {
-//   var content =
-//     "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
-//   var email = $(this).val();
-//   $("#send_mail").attr(
-//     "href",
-//     "mailto:" + email + "?subject=BeforeTheShop&body=" + content
-//   );
-// });
-// $("#mailto_button").click(function () {
-//   $(".social_icons_div_absolute").fadeOut(200);
-// });
-// $(".social_icons_div_absolute2").hide();
-// $("#abs2").on("click", function () {
-//   $(".social_icons_div_absolute2").fadeToggle(200);
-// });
-// $(document).click(function (e) {
-//   if ($(e.target).closest("#email_form2").length > 0) {
-//     return true;
-//   } else if ($(e.target).closest(".social_icons_div_absolute2").length > 0) {
-//     return true;
-//   }
-//   // Otherwise
-//   // trigger your click function
-//   $(".social_icons_div_absolute2").fadeOut(200);
-// });
-
-$("#offer-email-input").keyup(function () {
-  // var content = window.location.href
-  var content = $(this).data("content");
-  var email = $(this).val();
-  $("#offer-send-mail").attr(
-    "href",
-    "mailto:" + email + "?subject=BeforeTheShop&body=" + content
-  );
-});
-$("#offer-send-mail").click(function () {
-  $(".social_icons_div_absolute2").fadeOut(200);
-});
-
-$(".close-msg").click(function () {
-  $(this)
-    .parent()
-    .fadeOut(200);
-});
 
 // NEWWWWWWWWWWW      JQUERYYYYYYYYY
 
@@ -300,7 +172,27 @@ $("#search").keyup(function (e) {
       });
     }
   });
+  
 });
 $(document).click(function () {
   document.querySelector(".search_result").classList.add("hidden");
+});
+
+// NEWSLETTER
+
+  $(document).ready(function () {
+    if (sessionStorage.getItem("newsletter") !== "true") {
+      $(".fixed_btn_form").show();
+    }
+  });
+  $(".close-modal").click(function () {
+    sessionStorage.setItem("newsletter", true);
+    $(".fixed_btn_form").hide();
+  });
+
+
+$("#newsletter_submit").click(function (e) {
+  e.preventDefault();
+  sessionStorage.setItem("newsletter", true);
+  $("#newsletter_form").submit();
 });

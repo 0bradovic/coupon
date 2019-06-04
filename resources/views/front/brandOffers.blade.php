@@ -1,17 +1,17 @@
-@extends('front.new.master')
+@extends('front.master')
 
 @section('content')
 <div class="category_page">
     <div class="popular_brands_row">
         <div class="popular_brands_row_left">
-        <span>{{ $category->name }}</span> 
+        <span>{{ $brand->name }}</span> 
         <div class="popular_brands_text">
-            <h5>Popular Brands:</h5>
+            <h5>Other popular Brands:</h5>
             @foreach($brands as  $brand)
                 @if($loop->last)
-                <a href="#">{{ $brand->name }}</a>
+                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }}</a>
                 @else
-                <a href="#">{{ $brand->name }},</a>
+                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }},</a>
                 @endif
             @endforeach
         </div>

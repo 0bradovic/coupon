@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Brand extends Model
 {
@@ -19,6 +20,33 @@ class Brand extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'brand_to_category', 'brand_id', 'category_id');
+    }
+
+    public function getFilteredLiveOffersByBrand($id,$order,$oredrType)
+    {
+        $brand = Brand::where('id', $id)->first();
+        if($order == 'endDate')
+        {
+            $allOffers = $brand->offers()->where('endDate','<>',null)->orderBy($order,$oredrType)->get();
+        }
+        else
+        {
+            $allOffers = $brand->offers()->orderBy($order,$oredrType)->get();
+        }
+        
+        $offers = [];
+        foreach($allOffers as $offer)
+        {
+            if($offer->startDate <= Carbon::now())
+            {
+                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                {
+                    array_push($offers,$offer);
+                }
+            }
+        }
+        $offers = collect($offers);
+        return $offers;
     }
 
 }

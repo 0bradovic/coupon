@@ -9,9 +9,9 @@
             <h5>Popular Brands:</h5>
             @foreach($brands as  $brand)
                 @if($loop->last)
-                <a href="#">{{ $brand->name }}</a>
+                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }}</a>
                 @else
-                <a href="#">{{ $brand->name }},</a>
+                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }},</a>
                 @endif
             @endforeach
         </div>

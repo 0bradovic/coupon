@@ -291,5 +291,25 @@ class FrontController extends Controller
         return view('front.parentCategoryOffers',compact('total','newestOffers','popularOffers','category','brands'));
     }
 
+    public function brandOffers(Request $request,$slug)
+    {
+        $brand = Brand::where('slug',$slug)->first();
+        $brands = Brand::where('id','<>',$brand->id)->orderBy('click','DESC')->limit(8)->get();
+        $brands = $brands->sortBy('name',SORT_REGULAR, false);
+        $allNewestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'created_at','DESC');
+        $allPopularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+        $total = floor(count($allNewestOffers)/6);
+        $newestOffers = (new Collection($allNewestOffers))->paginate(10);
+        $popularOffers = (new Collection($allPopularOffers))->paginate(10);
+        if($request->ajax()) {
+            return [
+                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
+                'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                'next_page' => $newestOffers->nextPageUrl(),
+            ];
+        }
+        return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands'));
+    }
+
 
 }

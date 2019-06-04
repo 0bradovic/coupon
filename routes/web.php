@@ -26,6 +26,8 @@ Route::post('/subscribe', 'MailChimpController@subscribe')->name('subscribe');
 
 Route::get('/parent-category/{slug}', 'FrontController@parentCategoryOffers')->name('parent.category.offers');
 
+Route::get('/brand/{slug}', 'FrontController@brandOffers')->name('brand.offers');
+
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){
     return redirect('/');

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="search_page">
-        <div class="category_blade_row most_popular">
+        <div class="category_blade_row ">
             <div class="category_blade_title">
                 <span>Search result for {{ $search }}</span>
             </div>
