@@ -68,10 +68,12 @@
            
         </div>
         
-    <div class="ad_sense">
+    <div class="ad_sense_holder_search_page">
+        <div class="ad_sense"></div>
+        <div class="ad_sense"></div>
     </div>
 </div>
-<div class="offer_page_title">
+<div class="offer_page_title search_page_offer_title">
         <span>Here's more you might like...</span>
     </div>
     <div class="offer_content">

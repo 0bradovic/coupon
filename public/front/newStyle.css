@@ -317,7 +317,7 @@ header {
 
   a.header_btn_viewNewest {
     order: 2;
-}
+  }
 }
 
 @media (max-width: 500px) {
@@ -715,7 +715,7 @@ header {
 /* START CATEGORY BLADE */
 
 .popular_brands_row {
-  padding: 10px  ;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -952,7 +952,7 @@ header {
 
 @media (max-width: 750px) {
   .popular_brands_row {
-    padding: 10px 0px ;
+    padding: 10px 0px;
   }
   .popular_brands_row_left {
     width: 100%;
@@ -1049,7 +1049,7 @@ header {
 }
 
 .single_offer_text_top p {
-  margin:0;
+  margin: 0;
 }
 
 small {
@@ -1277,7 +1277,6 @@ small {
 
 .search_page .category_blade_row {
   width: 80%;
-  padding-bottom: 120px;
 }
 
 .search_page .category_blade_box {
@@ -1285,20 +1284,46 @@ small {
 }
 
 .search_page .category_blade_box_img {
-  width: 180px;
+  width: 120px;
 }
 
 .search_page .category_blade_box_img img {
   width: 100%;
 }
 
+.search_page_offer_title {
+  padding-left: 10px !important;
+}
+
 .search_page .category_blade_box_text {
   width: 30%;
+}
+
+.ad_sense_holder_search_page {
+  width: 350px;
+}
+
+.ad_sense_holder_search_page .ad_sense {
+  width: 350px;
+  height: 200px;
+}
+
+@media (max-width: 1300px) {
+  .search_page .category_blade_box_text_top {
+    font-size: 12px !important;
+  }
 }
 
 @media (max-width: 800px) {
   .search_page .category_blade_row {
     width: 100%;
+  }
+  .search_page_offer_title {
+    padding-left: 0 !important;
+  }
+
+  .search_page {
+    display: block;
   }
 }
 
