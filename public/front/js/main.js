@@ -52,25 +52,25 @@
 //   $("#" + id).toggleClass("active_sub_menu");
 // });
 
-$(document).ready(function() {
-  $(document).ready(function() {
+$(document).ready(function () {
+  $(document).ready(function () {
     if (sessionStorage.getItem("newsletter") !== "true") {
       $(".fixed_btn_form").show();
     }
   });
-  $(".close-modal").click(function() {
+  $(".close-modal").click(function () {
     sessionStorage.setItem("newsletter", true);
     $(".fixed_btn_form").hide();
   });
 });
 
-$("#newsletter_submit").click(function(e) {
+$("#newsletter_submit").click(function (e) {
   e.preventDefault();
   sessionStorage.setItem("newsletter", true);
   $("#newsletter_form").submit();
 });
 
-$(document).click(function(e) {
+$(document).click(function (e) {
   if ($(e.target).closest("#email_form").length > 0) {
     return true;
   } else if ($(e.target).closest(".social_icons_div_absolute").length > 0) {
@@ -81,34 +81,34 @@ $(document).click(function(e) {
   $(".social_icons_div_absolute").fadeOut(200);
 });
 
-$("#emailinput").keyup(function() {
-  var content =
-    "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
-  var email = $(this).val();
-  $("#send_mail").attr(
-    "href",
-    "mailto:" + email + "?subject=BeforeTheShop&body=" + content
-  );
-});
-$("#mailto_button").click(function() {
-  $(".social_icons_div_absolute").fadeOut(200);
-});
-$(".social_icons_div_absolute2").hide();
-$("#abs2").on("click", function() {
-  $(".social_icons_div_absolute2").fadeToggle(200);
-});
-$(document).click(function(e) {
-  if ($(e.target).closest("#email_form2").length > 0) {
-    return true;
-  } else if ($(e.target).closest(".social_icons_div_absolute2").length > 0) {
-    return true;
-  }
-  // Otherwise
-  // trigger your click function
-  $(".social_icons_div_absolute2").fadeOut(200);
-});
+// $("#emailinput").keyup(function () {
+//   var content =
+//     "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
+//   var email = $(this).val();
+//   $("#send_mail").attr(
+//     "href",
+//     "mailto:" + email + "?subject=BeforeTheShop&body=" + content
+//   );
+// });
+// $("#mailto_button").click(function () {
+//   $(".social_icons_div_absolute").fadeOut(200);
+// });
+// $(".social_icons_div_absolute2").hide();
+// $("#abs2").on("click", function () {
+//   $(".social_icons_div_absolute2").fadeToggle(200);
+// });
+// $(document).click(function (e) {
+//   if ($(e.target).closest("#email_form2").length > 0) {
+//     return true;
+//   } else if ($(e.target).closest(".social_icons_div_absolute2").length > 0) {
+//     return true;
+//   }
+//   // Otherwise
+//   // trigger your click function
+//   $(".social_icons_div_absolute2").fadeOut(200);
+// });
 
-$("#offer-email-input").keyup(function() {
+$("#offer-email-input").keyup(function () {
   // var content = window.location.href
   var content = $(this).data("content");
   var email = $(this).val();
@@ -117,11 +117,11 @@ $("#offer-email-input").keyup(function() {
     "mailto:" + email + "?subject=BeforeTheShop&body=" + content
   );
 });
-$("#offer-send-mail").click(function() {
+$("#offer-send-mail").click(function () {
   $(".social_icons_div_absolute2").fadeOut(200);
 });
 
-$(".close-msg").click(function() {
+$(".close-msg").click(function () {
   $(this)
     .parent()
     .fadeOut(200);
@@ -129,30 +129,30 @@ $(".close-msg").click(function() {
 
 // NEWWWWWWWWWWW      JQUERYYYYYYYYY
 
-$(document).ready(function() {
+$(document).ready(function () {
   // OPEN MOBILE NAVIGATION
-  $(".open_menu").click(function() {
+  $(".open_menu").click(function () {
     if ($("#mobile_navigation").hasClass("show_mobile_navigation")) {
       $("#mobile_navigation").removeClass("show_mobile_navigation");
       $("body").css("overflow", "hidden");
     }
   });
   // CLOSE MOBILE NAVIGATION
-  $(".close_menu").click(function() {
+  $(".close_menu").click(function () {
     if ($("#mobile_navigation").hasClass("")) {
       $("#mobile_navigation").addClass("show_mobile_navigation");
       $("body").css("overflow", "unset");
     }
   });
   // DROPDOWN LIST FOR MOBILE
-  $(".open_dropdown").click(function() {
+  $(".open_dropdown").click(function () {
     $(this)
       .parent()
       .next()
       .toggleClass("dropdown_list_none");
     $(this).toggleClass("rotate_arrow");
   });
-  $(".main_menu").click(function() {
+  $(".main_menu").click(function () {
     $(this)
       .parent()
       .parent()
@@ -165,46 +165,73 @@ $(document).ready(function() {
       .removeClass("rotate_arrow");
   });
   // SUBMENU
-  $(".navigation_item").hover(function() {
+  $(".navigation_item").hover(function () {
     $(this)
       .next()
       .toggleClass("hidden");
   });
-  $(".submenu").hover(function() {
+  $(".submenu").hover(function () {
     $(this).toggleClass("hidden");
   });
   // GO TOP BUTTON
-  $(".go_top").on("click", function(e) {
+  $(".go_top").on("click", function (e) {
     e.preventDefault();
-    $("html, body").animate({ scrollTop: 0 }, "300");
+    $("html, body").animate({
+      scrollTop: 0
+    }, "300");
   });
   // VIEW MOST POPULAR BUTTONS IN HEADER
-  $(".header_btn_mostPopular").on("click", function() {
-    $(".header_btn_mostPopular, .header_mostPopular, .most_popular").addClass(
+  $(".header_btn_mostPopular").on("click", function () {
+    $(".header_btn_mostPopular, .header_viewNewest, .newest_offers").addClass(
       "hidden800"
     );
-    $(".header_viewNewest, .header_btn_viewNewest, .newest_offers").removeClass(
+    $(".header_mostPopular, .header_btn_viewNewest, .most_popular").removeClass(
       "hidden800"
     );
   });
   // VIEW NEWEST OFFERS BUTTONS IN HEADER
-  $(".header_btn_viewNewest").on("click", function() {
-    $(".header_viewNewest, .header_btn_viewNewest, .newest_offers").addClass(
+  $(".header_btn_viewNewest").on("click", function () {
+    $(".header_mostPopular, .header_btn_viewNewest, .most_popular").addClass(
       "hidden800"
     );
     $(
-      ".header_btn_mostPopular, .header_mostPopular, .most_popular"
+      ".header_btn_mostPopular, .header_viewNewest, .newest_offers"
     ).removeClass("hidden800");
   });
   // OPEN EMAIL POP UP
-  $("#email_popup").on("click", function() {
+  $("#email_popup").on("click", function () {
     $(".email_popup").toggleClass("hidden");
   });
+  
+$("#emailinput").keyup(function () {
+  var content =
+    "I'm using BeforeTheShop to save £££s every time I shop. I thought you'd love it too! http://www.beforetheshop.com";
+  var email = $(this).val();
+  $("#send_mail").attr(
+    "href",
+    "mailto:" + email + "?subject=BeforeTheShop&body=" + content
+  );
+});
+$("#mailto_button").click(function () {
+  $(".email_popup").toggleClass("hidden");
+});
+
+$(document).click(function (e) {
+  if ($(e.target).closest("#email_popup").length > 0) {
+    return true;
+  } else if ($(e.target).closest(".email_popup").length > 0) {
+    return true;
+  }
+  // Otherwise
+  // trigger your click function
+  $(".email_popup").toggleClass("hidden");
+});
+
   // OPEN AND CLOSE SIGN IN POP UP
-  $("#open_popup").on("click", function() {
+  $("#open_popup").on("click", function () {
     $(".fixed_btn_form").fadeToggle(300);
   });
-  $(".close_popUp").on("click", function() {
+  $(".close_popUp").on("click", function () {
     sessionStorage.setItem("newsletter", true);
     $(".fixed_btn_form").hide();
   });
@@ -220,20 +247,20 @@ $(document).ready(function() {
     </div>
 </div>`);
   }
-  $("#acceptC").on("click", function() {
+  $("#acceptC").on("click", function () {
     sessionStorage.setItem("cookie", true);
     $("#cookie").remove();
   });
-  $(".fa-times-circle").on("click", function() {
+  $(".fa-times-circle").on("click", function () {
     $("#cookie").remove();
   });
   $(".social_icons_div_absolute").hide();
-  $("#email_form").on("click", function(e) {
+  $("#email_form").on("click", function (e) {
     e.preventDefault();
     $(".social_icons_div_absolute").fadeToggle(200);
   });
   // FIXED NAVIGATON AND SCROOL TOP
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     let $this = $(this);
     let $nav = $(".navigation");
     let $go_top = $(".go_top");
@@ -247,11 +274,11 @@ $(document).ready(function() {
   });
 });
 // SEARCH FORM
-$("#search").keyup(function(e) {
+$("#search").keyup(function (e) {
   $.ajax({
     url: SITE_URL + "search/" + e.target.value,
     type: "GET",
-    success: function(data) {
+    success: function (data) {
       document.querySelector(".search_result").classList.remove("hidden");
       document.querySelector(".search_result").innerHTML = "";
       var search_result = document.querySelector(".search_result");
@@ -274,6 +301,6 @@ $("#search").keyup(function(e) {
     }
   });
 });
-$(document).click(function() {
+$(document).click(function () {
   document.querySelector(".search_result").classList.add("hidden");
 });

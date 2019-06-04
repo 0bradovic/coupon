@@ -82,7 +82,7 @@
                     <div class="category_blade_box_text">
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                             <div class="category_blade_box_text_top">
-                                {{ $offer->formatDetails($offer->detail) }}
+                                {!! $offer->formatDetails($offer->detail) !!}
                             </div>
                         </a>
                         <div class="category_blade_box_text_bottom">
@@ -147,7 +147,7 @@
                     <div class="category_blade_box_text">
                         <a href="{{ route('offer',['slug' => $offer->slug]) }}">
                             <div class="category_blade_box_text_top">
-                                {{ $offer->formatDetails($offer->detail) }}
+                                {!! $offer->formatDetails($offer->detail) !!}
                             </div>
                         </a>
                         <div class="category_blade_box_text_bottom">
