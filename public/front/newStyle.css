@@ -736,7 +736,7 @@ header {
 .popular_brands_text {
   display: flex;
   align-items: center;
-  background: orange;
+  background: darkorange;
   padding: 5px;
   margin-left: 20px;
   border-radius: 5px;
