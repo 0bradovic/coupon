@@ -16,7 +16,7 @@
                 </div>
                 <div class="header_search">
                     <form action="{{route('search.blade')}}" method="GET">
-                        <label for="search"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a><input id="search"
+                        <label for="search"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button><input id="search"
                                 type="text" name="search" placeholder="Search for a brand or retailer"></label>
                         <div class="search_result hidden">
                             
@@ -66,7 +66,7 @@
             </div>
             <div class="header_search">
                 <form action="{{route('search.blade')}}" method="GET">
-                    <label for="search"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a><input
+                    <label for="search"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button><input
                             type="text" name="search" placeholder="Search for a brand or retailer"></label>
                     {!! csrf_field() !!}
                 </form>

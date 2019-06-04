@@ -89,12 +89,15 @@ header {
   width: 100%;
 }
 
-.header_search label i {
+.header_search label button  {
   position: absolute;
-  top: 8px;
+  top: 4px;
   left: 8px;
   color: rgb(175, 175, 175);
   font-size: 20px;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 .header_search label input {
