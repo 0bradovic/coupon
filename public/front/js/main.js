@@ -70,16 +70,16 @@ $("#newsletter_submit").click(function (e) {
   $("#newsletter_form").submit();
 });
 
-$(document).click(function (e) {
-  if ($(e.target).closest("#email_form").length > 0) {
-    return true;
-  } else if ($(e.target).closest(".social_icons_div_absolute").length > 0) {
-    return true;
-  }
-  // Otherwise
-  // trigger your click function
-  $(".social_icons_div_absolute").fadeOut(200);
-});
+// $(document).click(function (e) {
+//   if ($(e.target).closest("#email_form").length > 0) {
+//     return true;
+//   } else if ($(e.target).closest(".social_icons_div_absolute").length > 0) {
+//     return true;
+//   }
+//   // Otherwise
+//   // trigger your click function
+//   $(".social_icons_div_absolute").fadeOut(200);
+// });
 
 // $("#emailinput").keyup(function () {
 //   var content =
@@ -224,7 +224,7 @@ $(document).click(function (e) {
   }
   // Otherwise
   // trigger your click function
-  $(".email_popup").toggleClass("hidden");
+  $(".email_popup").addClass("hidden");
 });
 
   // OPEN AND CLOSE SIGN IN POP UP
