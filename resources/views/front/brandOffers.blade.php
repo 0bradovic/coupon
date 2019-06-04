@@ -4,7 +4,7 @@
 <div class="category_page">
     <div class="popular_brands_row">
         <div class="popular_brands_row_left">
-        <span>{{ $brand->name }}</span> 
+        <span style="background: darkorange">{{ $brand->name }}</span> 
         <div class="popular_brands_text">
             <h5>Other popular Brands:</h5>
             @foreach($brands as  $brand)
