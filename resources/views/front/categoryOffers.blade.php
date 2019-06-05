@@ -162,7 +162,7 @@
         {{--{!! $newestOffers->links() !!}--}}
     </div>
     <div class="ad_sense">
-        @for($k = 0; $k < $total; $k++)
+       
             <div class="adSense_holder">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Category ad -->
@@ -174,7 +174,7 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
             </div> 
-        @endfor
+       
     </div>
 </div>
 </div>
