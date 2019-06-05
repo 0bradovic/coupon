@@ -40,10 +40,16 @@ $(document).ready(function () {
   $(".navigation_item").hover(function () {
     $(this)
       .next()
-      .toggleClass("hidden");
+      .removeClass("hidden");
+  },function(){
+    $(this)
+      .next()
+      .addClass("hidden");
   });
   $(".submenu").hover(function () {
-    $(this).toggleClass("hidden");
+    $(this).removeClass("hidden");
+  },function(){
+    $(this).addClass("hidden");
   });
   // GO TOP BUTTON
   $(".go_top").on("click", function (e) {
