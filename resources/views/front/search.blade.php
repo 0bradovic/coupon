@@ -8,10 +8,11 @@
             <div class="category_blade_title">
                 <span>Search result for {{ $search }}</span>
             </div>  
-    
-    <div class="no-result-holder">
-            <a>No offers currently for Aldi</a>
+        @if(count($offers) < 1)
+        <div class="no-result-holder">
+            <a>No offers currently for {{ $search }}</a>
         </div>
+        @else
             @foreach($offers as $offer)
             <div class="category_blade_content">
                 <div class="category_blade_box">
@@ -71,7 +72,7 @@
                 </div>
             </div>
             @endforeach
-           
+           @endif
         </div>
         
     <div class="ad_sense_holder_search_page">
