@@ -21,7 +21,18 @@
         <div class="offer_holder_row_content">
             <div class="offer_box">
                 <div class="offer_box_img">
-                @if($offer->img_src)
+                @if($offer->brand)
+                    <?php
+                    list($width, $height, $type, $attr) = getimagesize(public_path().$offer->brand->img_src);
+                    ?>
+                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    @else style="height:auto;width:100%"; 
+                    @endif>
+                        <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
+                        @else style="height:auto;width:100%"; 
+                        @endif />
+                    </a>
+                @elseif($offer->img_src)
                     <?php
                         list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
                     ?>
