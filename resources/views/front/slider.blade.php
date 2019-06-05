@@ -1,5 +1,5 @@
 
-
+<div class="container">
     <section id="carousel">
                 <div id="my-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
@@ -30,4 +30,4 @@
                     </a>
                 </div>
         </section>
-       
+       </div>

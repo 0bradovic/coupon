@@ -6,6 +6,7 @@
     @include('front.slider')
 @endif
 
+<div class="container">
 <div class="offer_holder">
     @foreach($fpCategories as $fpCategory)
     <div class="offer_holder_row">
@@ -78,6 +79,7 @@
         @endforeach
     </div>
     @endforeach
+</div>
 </div>
 
 

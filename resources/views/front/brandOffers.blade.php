@@ -1,6 +1,7 @@
 @extends('front.master')
 
 @section('content')
+<div class="container">
 <div class="category_page">
     <div class="popular_brands_row">
         <div class="popular_brands_row_left">
@@ -163,6 +164,7 @@
     <div class="ad_sense">
         
     </div>
+</div>
 </div>
 </div>
 @endsection

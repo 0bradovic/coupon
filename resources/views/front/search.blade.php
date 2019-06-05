@@ -1,11 +1,17 @@
 @extends('front.master')
 
 @section('content')
+<div class="container">
 <div class="search_page">
         <div class="category_blade_row ">
+          
             <div class="category_blade_title">
                 <span>Search result for {{ $search }}</span>
-            </div>
+            </div>  
+    
+    <div class="no-result-holder">
+            <a>No offers currently for Aldi</a>
+        </div>
             @foreach($offers as $offer)
             <div class="category_blade_content">
                 <div class="category_blade_box">
@@ -73,9 +79,13 @@
         <div class="ad_sense"></div>
     </div>
 </div>
+</div>
+<div class="container">
 <div class="offer_page_title search_page_offer_title">
         <span>Here's more you might like...</span>
     </div>
+</div>
+    <div class="container">
     <div class="offer_content">
     <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
             <div class="category_blade_title">
@@ -212,6 +222,7 @@
         </div>    
         {{--{!! $newestSimillarOffers->links() !!}--}}
     <div>
+    </div>
 
 @endsection
 
