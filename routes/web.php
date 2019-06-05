@@ -16,11 +16,11 @@ Route::get('/get-offer/{slug}','FrontController@getOffer')->name('get.offer');
 Route::get('/category/{slug}', 'FrontController@categoryOffers')->name('category.offers');
 Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
-Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
+//Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
 Route::get('/search', 'FrontController@renderSearch')->name('search.blade');
-Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
+//Route::get('/seo/meta', 'SeoController@getMetaTags')->name('seo.meta.tag');
 Route::get('/page/{slug}', 'FrontController@getCustomPage')->name('custom.page.get');
-Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
+//Route::get('/pinterest', 'FrontController@pinterest')->name('pinterest');
 
 Route::post('/subscribe', 'MailChimpController@subscribe')->name('subscribe');
 
