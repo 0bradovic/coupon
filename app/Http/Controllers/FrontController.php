@@ -101,7 +101,7 @@ class FrontController extends Controller
     public function categoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->first();
-        $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'created_at','DESC');
+        $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'updated_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
         $total = floor(count($allNewestOffers)/6);
         $brandIds = [];
@@ -144,7 +144,7 @@ class FrontController extends Controller
         $popularSimillarOffers = [];
         foreach($offer->categories as $cat)
         {
-            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC') as $off)
+            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC') as $off)
             {
                 if($offer->id != $off->id)
                 {
@@ -221,7 +221,7 @@ class FrontController extends Controller
         $offers = $off->filterOffers($offers);
         $offers = (new Collection($offers))->paginate(10);
 
-        $newestSimillarOffers = Offer::orderBy('created_at','DESC')->get();
+        $newestSimillarOffers = Offer::orderBy('updated_at','DESC')->get();
         $newestSimillarOffers = $off->filterOffers($newestSimillarOffers);
         $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
 
@@ -276,7 +276,7 @@ class FrontController extends Controller
         $allPopularOffers = [];
         foreach($category->liveSubcategories as $cat)
         {
-            $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'created_at','DESC');
+            $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC');
             $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
         }
         $newestOffers = new Collection();
@@ -303,7 +303,7 @@ class FrontController extends Controller
         $brandIds = array_unique($brandIds);
         $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
         $brands = $brands->sortBy('name',SORT_REGULAR, false);
-        $newestOffers = (new Collection($newestOffers))->sortBy('created_at',SORT_REGULAR, true)->paginate(10);
+        $newestOffers = (new Collection($newestOffers))->sortBy('updated_at',SORT_REGULAR, true)->paginate(10);
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         
         if($request->ajax()) {
@@ -322,7 +322,7 @@ class FrontController extends Controller
         $brand = Brand::where('slug',$slug)->first();
         $brands = Brand::where('id','<>',$brand->id)->orderBy('click','DESC')->limit(8)->get();
         $brands = $brands->sortBy('name',SORT_REGULAR, false);
-        $allNewestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'created_at','DESC');
+        $allNewestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
         $allPopularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
         $total = floor(count($allNewestOffers)/6);
         $newestOffers = (new Collection($allNewestOffers))->paginate(10);
