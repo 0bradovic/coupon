@@ -167,7 +167,7 @@ $("#search").keyup(function (e) {
         var elementDiv = document.createElement("div");
         elementDiv.classList.add("search_result_item");
         elementDiv.innerHTML =
-          "<a href='/offer/" +
+          "<a href='/brand/" +
           element.slug +
           "'> <img src='" +
           element.img_src +

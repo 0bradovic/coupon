@@ -862,6 +862,9 @@ header {
   flex-wrap: wrap;
   padding-bottom: 120px;
 }
+.category_page .category_blade {
+  padding-bottom: 0 !important;
+}
 
 .category_blade_row {
   width: 50%;
