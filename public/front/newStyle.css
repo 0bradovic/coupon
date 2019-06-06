@@ -1039,7 +1039,11 @@ header {
     flex-wrap: wrap;
     width: 100%;
   }
+  .category_blade_box_text_top {
+    font-size: 11px !important;
+  }
 }
+
 
 /* END CATEGORY BLADE */
 
