@@ -218,7 +218,7 @@
         {{--{!! $newestSimillarOffers->links() !!}--}}
     <div>
     <div class="ad_sense">
-        @for($k = 0;$k < $total;$k++)
+       
            
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Offer ad -->
@@ -230,7 +230,7 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>  
              
-        @endfor
+       
     </div>
 </div>
 @endsection

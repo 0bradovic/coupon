@@ -20,7 +20,22 @@
     @else
     <link rel="shortcut icon" href="{{Helpers::getFavicon()}}">
     @endif
-    {!! Helpers::getMetaTags() !!} 
+    @if(\Request::route()->getName() == 'category.offers' || \Request::route()->getName() == 'parent.category.offers')
+        @if(isset($category))
+            @if($category != null)
+                {!! Helpers::getMetaTagsCategory($category->id) !!}
+            @endif
+        @endif
+    @elseif(\Request::route()->getName() == 'offer')
+        @if(isset($offer))
+            @if($offer != null)
+                {!! Helpers::getMetaTagsOffer($offer->id) !!}
+            @endif
+        @endif
+    @else
+        {!! Helpers::getMetaTags() !!} 
+    @endif
+    
     <meta name="google-site-verification" content="SgQNy4xCCKPlSXWI5nA4Vz6mW7vWJz6ghcyyH2xitIE" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129562058-1"></script>

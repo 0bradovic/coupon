@@ -12,10 +12,10 @@
     <div class="offer_holder_row">
         <div class="offer_holder_row_title">
             <span>
-                {{ $fpCategory->name }}
+                Top {{ $fpCategory->name }} offers
             </span>
                 <a href="{{ route('parent.category.offers',['slug' => $fpCategory->slug]) }}">
-                    <h3>See all {{ $fpCategory->countOfParentCatLiveOffers($fpCategory->id) }} {{ $fpCategory->name }} offers</h3>
+                    <h3>See all {{ $fpCategory->countOfParentCatLiveOffers($fpCategory->id) }} offers</h3>
                 </a>
         </div>
         @foreach($fpCategory->topOffers as $offer)

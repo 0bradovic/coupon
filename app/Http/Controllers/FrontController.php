@@ -101,6 +101,23 @@ class FrontController extends Controller
     public function categoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->first();
+        $tag = $category->metaTag;
+        if($tag != null)
+        {
+            if($tag->title != '' && $tag->title != null)
+            {
+                $title = $tag->title;
+            }
+            else
+            {
+                $title = 'BeforeTheShop';
+            }
+
+        }
+        else
+        {
+            $title = 'BeforeTheShop';
+        }
         $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'updated_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
         $total = floor(count($allNewestOffers)/6);
@@ -124,7 +141,7 @@ class FrontController extends Controller
                 'next_page' => $newestOffers->nextPageUrl(),
             ];
         }
-        return view('front.categoryOffers',compact('total','category','newestOffers','popularOffers','brands'));
+        return view('front.categoryOffers',compact('total','category','newestOffers','popularOffers','brands','title'));
     }
 
     public function offer(Request $request,$slug)
@@ -137,7 +154,23 @@ class FrontController extends Controller
             return redirect('/')->withErrors('Offer has expired');
             }
         }
-        
+        $tag = $offer->metaTag;
+        if($tag != null)
+        {
+            if($tag->title != '' && $tag->title != null)
+            {
+                $title = $tag->title;
+            }
+            else
+            {
+                $title = 'BeforeTheShop';
+            }
+
+        }
+        else
+        {
+            $title = 'BeforeTheShop';
+        }
         // $mainCategory = $offer->categories()->first();
         // $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
         $newestSimillarOffers = [];
@@ -184,7 +217,7 @@ class FrontController extends Controller
                 'next_page' => $newestSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers'));
+        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers','title'));
     }
 
     public function ajaxSearch($query)
@@ -271,7 +304,23 @@ class FrontController extends Controller
     public function parentCategoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->with('liveSubcategories')->first();
+        $tag = $category->metaTag;
+        if($tag != null)
+        {
+            if($tag->title != '' && $tag->title != null)
+            {
+                $title = $tag->title;
+            }
+            else
+            {
+                $title = 'BeforeTheShop';
+            }
 
+        }
+        else
+        {
+            $title = 'BeforeTheShop';
+        }
         $allNewestOffers = [];
         $allPopularOffers = [];
         foreach($category->liveSubcategories as $cat)
@@ -314,7 +363,7 @@ class FrontController extends Controller
             ];
         }
         
-        return view('front.parentCategoryOffers',compact('total','newestOffers','popularOffers','category','brands'));
+        return view('front.parentCategoryOffers',compact('total','newestOffers','popularOffers','category','brands','title'));
     }
 
     public function brandOffers(Request $request,$slug)
