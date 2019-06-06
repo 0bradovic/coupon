@@ -973,6 +973,19 @@ header {
   display: flex;
 }
 
+.category_page .offer_page_title {
+  padding-left: 10px !important;
+}
+
+@media (max-width: 800px) {
+  .category_page .offer_page_title {
+    padding-left: 0px !important;
+  }
+  .category_page .offer_page_title span {
+    font-size: 13px !important;
+  }
+}
+
 .category_blade {
   width: 90%;
   display: flex;
