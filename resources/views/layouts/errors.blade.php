@@ -1,6 +1,6 @@
 @if(count($errors))
 
-    <div class="alert alert-danger" style="text-align:center;">
+    <div class="alert alert-danger messages" style="text-align:center;">
 
         <ul class="errors_holder" style="list-style:none;">
 

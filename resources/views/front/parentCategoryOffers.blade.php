@@ -29,11 +29,11 @@
         </div>
     </div>
     <div class="header_viewOfferButtons">
-                    <p class="header_viewNewest hidden800"><b>Viewing newest offers</b></p>
-                    <a href="#" class="header_btn_viewNewest ">View newest offers</a>
-                    <p class="header_mostPopular "><b>Viewing most popular</b></p>
-                    <a href="#" class="header_btn_mostPopular hidden800">View most popular</a>
-                </div>
+        <p class="header_viewNewest hidden800"><b>Viewing newest offers</b></p>
+        <a href="#" class="header_btn_viewNewest " >View newest offers</a>
+        <p class="header_mostPopular " ><b>Viewing most popular</b></p>
+        <a href="#" class="header_btn_mostPopular hidden800" >View most popular</a>
+    </div>
 <div class="category_page_holder">
     <div class="category_blade">
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" data-next-page="{{ $popularOffers->nextPageUrl() }}">
