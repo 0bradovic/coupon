@@ -177,29 +177,35 @@ class FrontController extends Controller
         $popularSimillarOffers = [];
         foreach($offer->categories as $cat)
         {
-            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC') as $off)
+            if($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC'))
             {
-                if($offer->id != $off->id)
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC') as $off)
                 {
-                    array_push($newestSimillarOffers,$off);
-                }
-                else
-                {
-                    continue;
+                    if($offer->id != $off->id)
+                    {
+                        array_push($newestSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
         }
         foreach($offer->categories as $cat)
         {
-            foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
+            if($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC'))
             {
-                if($offer->id != $off->id)
+                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC') as $off)
                 {
-                    array_push($popularSimillarOffers,$off);
-                }
-                else
-                {
-                    continue;
+                    if($offer->id != $off->id)
+                    {
+                        array_push($popularSimillarOffers,$off);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
         }
@@ -242,8 +248,18 @@ class FrontController extends Controller
         }
         else
         {
+            $allOffers = Offer::where('display',true)->orderBy('click','DESC')->get();
+            $off = new Offer();
+            $popularOffers = $off->filterOffers($allOffers);
+            $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
             $search = $request->search;
-            return view('front.search',compact('search'));
+            if($request->ajax()) {
+                return [
+                    'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                    'next_page' => $popularOffers->nextPageUrl()
+                ];
+            }
+            return view('front.search',compact('search','popularOffers'));
         }
     }
     
