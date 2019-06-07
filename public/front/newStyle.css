@@ -297,7 +297,8 @@ header {
 }
 
 .search_result_item img {
-  width: 15% !important;
+  height:60px;
+  margin:5px 0;
 }
 
 .search_result_item span {
