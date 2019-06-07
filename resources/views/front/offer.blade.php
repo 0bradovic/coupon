@@ -218,8 +218,8 @@
         {{--{!! $newestSimillarOffers->links() !!}--}}
     <div>
     <div class="ad_sense">
-       
-           
+        
+            
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Offer ad -->
             <ins class="adsbygoogle"
@@ -230,7 +230,7 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>  
              
-       
+        
     </div>
 </div>
 @endsection
