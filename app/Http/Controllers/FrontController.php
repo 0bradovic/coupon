@@ -274,6 +274,7 @@ class FrontController extends Controller
             }
         }
         $offer->click += 1;
+        $offer->timestamps = false;
         $offer->save();
         OfferClick::create(['offer_id'=>$offer->id]);
         if($offer->brand)
