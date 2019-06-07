@@ -5,7 +5,6 @@
 @if(count($slides) > 0)
     @include('front.slider')
 @endif
-
 <div class="container">
 <div class="offer_holder">
     @foreach($fpCategories as $fpCategory)
@@ -81,6 +80,5 @@
     @endforeach
 </div>
 </div>
-
 
 @endsection

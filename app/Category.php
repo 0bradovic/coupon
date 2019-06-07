@@ -78,28 +78,36 @@ class Category extends Model
      public function getFilteredLiveOffersByCategory($id,$order,$oredrType)
     {
         $cat = Category::where('id', $id)->where('display', true)->first();
-        if($order == 'endDate')
+        if($cat)
         {
-            $allOffers = $cat->offers()->where('endDate','<>',null)->where('display', true)->orderBy($order,$oredrType)->get();
+            if($order == 'endDate')
+            {
+                $allOffers = $cat->offers()->where('endDate','<>',null)->where('display', true)->orderBy($order,$oredrType)->get();
+            }
+            else
+            {
+                $allOffers = $cat->offers()->orderBy($order,$oredrType)->where('display', true)->get();
+            }
+            
+            $offers = [];
+            foreach($allOffers as $offer)
+            {
+                if($offer->startDate <= Carbon::now())
+                {
+                    if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                    {
+                        array_push($offers,$offer);
+                    }
+                }
+            }
+            $offers = collect($offers);
+            return $offers;
         }
         else
         {
-            $allOffers = $cat->offers()->orderBy($order,$oredrType)->where('display', true)->get();
+            return null;
         }
         
-        $offers = [];
-        foreach($allOffers as $offer)
-        {
-            if($offer->startDate <= Carbon::now())
-            {
-                if($offer->endDate > Carbon::now() || $offer->endDate==null)
-                {
-                    array_push($offers,$offer);
-                }
-            }
-        }
-        $offers = collect($offers);
-        return $offers;
     }
 
     public function countOfParentCatLiveOffers($id)
