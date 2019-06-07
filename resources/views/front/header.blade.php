@@ -38,14 +38,7 @@
                     </li>
                     @endforeach
                 </ol>
-                @if(\Request::route()->getName() != 'welcome')
-                <div class="header_viewOfferButtons">
-                    <p class="header_viewNewest hidden800">Viewing newest offers</p>
-                    <a href="#" class="header_btn_viewNewest ">View newest offers</a>
-                    <p class="header_mostPopular ">Viewing most popular</p>
-                    <a href="#" class="header_btn_mostPopular hidden800">View most popular</a>
-                </div>
-                @endif
+               
             </div>
         </div>
     </header>
