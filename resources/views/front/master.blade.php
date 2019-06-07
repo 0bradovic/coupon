@@ -80,8 +80,10 @@
                     <form method="POST" action="{{ route('subscribe') }}" id="newsletter_form">
                         <div class="fixedMy">
                             @csrf
+                            <div class="popUp_miniform">
                             <input type="email" name="email">
                             <button type="submit" id="newsletter_submit">{{ $popup->button }}</button>
+                            </div>
                         </div>
                     </form>
                 </div>

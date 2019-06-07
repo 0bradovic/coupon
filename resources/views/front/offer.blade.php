@@ -81,10 +81,17 @@
     <div class="offer_page_title">
         <span>Here's more you might like...</span>
     </div>
+    <div class="header_viewOfferButtons">
+                    <p class="header_viewNewest hidden800"><b>Viewing newest offers</b></p>
+                    <a href="#" class="header_btn_viewNewest ">View newest offers</a>
+                    <p class="header_mostPopular "><b>Viewing most popular</b></p>
+                    <a href="#" class="header_btn_mostPopular hidden800">View most popular</a>
+                </div>
     <div class="offer_content">
     <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
             <div class="category_blade_title">
                 <span>Most Popular</span>
+                
             </div>
             @if($popularSimillarOffers)
                 @foreach($popularSimillarOffers as $off)
