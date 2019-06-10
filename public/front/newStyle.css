@@ -2017,3 +2017,73 @@ button#newsletter_submit {
   width: 100%;
   line-height: 3;
 }
+
+
+/* REDIRECT POP UP */
+
+.popUp_redirect {
+  position: fixed;
+  top: 0%;
+  padding-top: 100px;
+  bottom: 0;
+  left: 0; 
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.527);
+}
+
+.popUp_redirect .popUp_redirect_holder {
+  width: 600px;
+  height: 300px;
+  box-shadow: 2px 2px 30px 0 rgba(0, 0, 0, 0.6);
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 1fr 50px;
+  position: relative;
+}
+
+.close_redirect_popUp {
+  position: absolute;
+  top: -9px;
+  cursor: pointer;
+  right: -9px;
+  font-size: 40px;
+  color: orange;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_text {
+  color: #000;
+  line-height: 1;
+  font-size: 14px;
+  padding: 10px;
+  text-align: center;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_text p {
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popUp_redirect .popUp_redirect_holder a {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: orange;
+  line-height: 2.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border-radius: 5px;
+}
