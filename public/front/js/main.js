@@ -209,8 +209,9 @@ $("#newsletter_submit").click(function(e) {
   $("#newsletter_form").submit();
 });
 
-// Messages fade out
+// MESSAGES FADE OUT
 setTimeout(function(){
   $('.messages').fadeOut(300);
 },1000);
+
 

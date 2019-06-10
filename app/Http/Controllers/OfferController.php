@@ -61,7 +61,8 @@ class OfferController extends Controller
             'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'categories' => 'required'
+            'categories' => 'required',
+            'brand' => 'required',
         ]);
         $slug = $this->createSlug($request->name);
          $i = 1;
@@ -278,7 +279,8 @@ class OfferController extends Controller
             'detail' => 'max:300',
             'link' => 'required|string',
             'startDate' => 'required|date',
-            'categories' => 'required'
+            'categories' => 'required',
+            'brand' => 'required',
         ]);
         $offer = Offer::find($id);
         $hasUndo = Undo::where('offer_id','<>',null)->where('type','Edited')->first();

@@ -808,6 +808,7 @@ header {
   color: #000;
   font-weight: bold;
   text-align: center;
+  line-height: 1;
   height: 50%;
 }
 
@@ -841,6 +842,7 @@ header {
   font-size: 11px;
   color: #000;
   height: 50%;
+  padding-top:10px;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_bottom {
@@ -1044,6 +1046,8 @@ header {
 .category_blade_title {
   padding: 10px;
   padding-bottom: 0;
+  display:flex;
+  align-items: center;
 }
 
 .category_blade_title span {
