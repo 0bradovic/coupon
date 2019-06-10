@@ -11,6 +11,7 @@ use App\SiteSetings;
 use App\Category;
 use App\SubscribePopup;
 use App\CustomPage;
+use App\RedirectPopup;
 
 class Helpers
 {
@@ -118,6 +119,11 @@ public static function getMetaTags()
     public static function getCustomPages()
     {
         return CustomPage::where('active', 1)->orderBy('position')->get();
+    }
+
+    public static function getRedirectPopup()
+    {
+        return RedirectPopup::first();
     }
 
 }
