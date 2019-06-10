@@ -93,7 +93,7 @@
              <button class="btn close-modal">No thanks</button>
         </div>
     </div>
-    <div class="popUp_redirect">
+    <div class="popUp_redirect hidden">
         <div class="popUp_redirect_holder">
         <i class="fas fa-times-circle close_redirect_popUp"></i>
             <div class="popUp_redirect_text">

@@ -297,8 +297,8 @@ header {
 }
 
 .search_result_item img {
-  height:60px;
-  margin:5px 0;
+  height: 60px;
+  margin: 5px 0;
 }
 
 .search_result_item span {
@@ -842,7 +842,7 @@ header {
   font-size: 11px;
   color: #000;
   height: 50%;
-  padding-top:10px;
+  padding-top: 10px;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_bottom {
@@ -1046,7 +1046,7 @@ header {
 .category_blade_title {
   padding: 10px;
   padding-bottom: 0;
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
@@ -1521,7 +1521,7 @@ small {
 
 .ad_sense_holder_search_page {
   width: 350px;
-  margin-left:auto;
+  margin-left: auto;
 }
 
 .ad_sense_holder_search_page .ad_sense {
@@ -2018,7 +2018,6 @@ button#newsletter_submit {
   line-height: 3;
 }
 
-
 /* REDIRECT POP UP */
 
 .popUp_redirect {
@@ -2026,7 +2025,7 @@ button#newsletter_submit {
   top: 0%;
   padding-top: 100px;
   bottom: 0;
-  left: 0; 
+  left: 0;
   right: 0;
   display: flex;
   justify-content: center;
@@ -2040,8 +2039,10 @@ button#newsletter_submit {
   background: #fff;
   border-radius: 10px;
   padding: 20px;
-  display: grid;
-  grid-template-rows: 1fr 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   position: relative;
 }
 
@@ -2086,4 +2087,16 @@ button#newsletter_submit {
   justify-content: center;
   width: 200px;
   border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+  .popUp_redirect .popUp_redirect_holder {
+    width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .popUp_redirect .popUp_redirect_holder .popUp_redirect_text {
+    font-size: 12px;
+  }
 }
