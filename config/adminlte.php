@@ -282,11 +282,21 @@ return [
             ],
             
         ],
-        'SUBSCRIPTION POPUP',
+        'POPUPS',
         [
-            'text' => 'Subscription Popup',
+            'text' => 'Popups',
             'can' => 'manage popup',
-            'url' => '/subscribe/popup',
+            'submenu' => [
+                [
+                    'text' => 'Subscription popup',
+                    'url' => '/subscribe/popup',
+                ],
+                [
+                    'text' => 'Redirect popup',
+                    'url' => '/redirect/popup'
+                ]
+            ]
+            
         ],
         'CUSTOM PAGES',
         [

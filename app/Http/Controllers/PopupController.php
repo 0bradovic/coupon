@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SubscribePopup;
+use App\RedirectPopup;
 
 class PopupController extends Controller
 {
@@ -18,15 +19,11 @@ class PopupController extends Controller
         return view('popup.index',compact('popup'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   public function indexRedirectPopup()
+   {
+        $popup = RedirectPopup::first();
+        return view('popup.index-redirect',compact('popup'));
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -86,6 +83,20 @@ class PopupController extends Controller
             'button' => $request->button,
         ]);
         return redirect()->back()->with('success', 'Successfully updated subscription popup.');
+    }
+
+    public function updateRedirectPopup(Request $request)
+    {
+        $this->validate($request,[
+            'text' => 'required',
+            'button_text' => 'required',
+        ]);
+        $popup = RedirectPopup::first();
+        $popup->update([
+            'text' => $request->text,
+            'button_text' => $request->button_text,
+        ]);
+        return redirect()->back()->with('success', 'Successfully updated redirect popup.');
     }
 
     /**
