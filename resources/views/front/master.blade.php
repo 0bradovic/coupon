@@ -93,6 +93,19 @@
              <button class="btn close-modal">No thanks</button>
         </div>
     </div>
+    <div class="popUp_redirect hidden">
+        <div class="popUp_redirect_holder">
+        <i class="fas fa-times-circle close_redirect_popUp"></i>
+            <div class="popUp_redirect_text">
+                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
+                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
+                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
+            </div>
+            <div class="popUp_redirect_button">
+                <a href="#">Button</a>
+            </div>
+        </div>
+    </div>
 </body>
 <script> 
 var SITE_URL = '<?php echo env("APP_URL")?>/';

@@ -210,8 +210,12 @@ $("#newsletter_submit").click(function(e) {
 });
 
 // MESSAGES FADE OUT
-setTimeout(function(){
-  $('.messages').fadeOut(300);
-},1000);
+setTimeout(function() {
+  $(".messages").fadeOut(300);
+}, 1000);
 
+// CLOSE REDIRECT POPUP
 
+$(".close_redirect_popUp").on("click", function() {
+  $(".popUp_redirect").remove();
+});

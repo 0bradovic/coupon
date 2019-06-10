@@ -297,8 +297,8 @@ header {
 }
 
 .search_result_item img {
-  height:60px;
-  margin:5px 0;
+  height: 60px;
+  margin: 5px 0;
 }
 
 .search_result_item span {
@@ -842,7 +842,7 @@ header {
   font-size: 11px;
   color: #000;
   height: 50%;
-  padding-top:10px;
+  padding-top: 10px;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_bottom {
@@ -1046,7 +1046,7 @@ header {
 .category_blade_title {
   padding: 10px;
   padding-bottom: 0;
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
@@ -1521,7 +1521,7 @@ small {
 
 .ad_sense_holder_search_page {
   width: 350px;
-  margin-left:auto;
+  margin-left: auto;
 }
 
 .ad_sense_holder_search_page .ad_sense {
@@ -2016,4 +2016,87 @@ button#newsletter_submit {
   display: flex;
   width: 100%;
   line-height: 3;
+}
+
+/* REDIRECT POP UP */
+
+.popUp_redirect {
+  position: fixed;
+  top: 0%;
+  padding-top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.527);
+}
+
+.popUp_redirect .popUp_redirect_holder {
+  width: 600px;
+  height: 300px;
+  box-shadow: 2px 2px 30px 0 rgba(0, 0, 0, 0.6);
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+}
+
+.close_redirect_popUp {
+  position: absolute;
+  top: -9px;
+  cursor: pointer;
+  right: -9px;
+  font-size: 40px;
+  color: orange;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_text {
+  color: #000;
+  line-height: 1;
+  font-size: 14px;
+  padding: 10px;
+  text-align: center;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_text p {
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.popUp_redirect .popUp_redirect_holder .popUp_redirect_button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popUp_redirect .popUp_redirect_holder a {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: orange;
+  line-height: 2.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+  .popUp_redirect .popUp_redirect_holder {
+    width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .popUp_redirect .popUp_redirect_holder .popUp_redirect_text {
+    font-size: 12px;
+  }
 }
