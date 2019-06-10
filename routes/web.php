@@ -14,7 +14,7 @@
 Route::get('/', 'FrontController@index')->name('welcome');
 Route::get('/get-offer/{slug}','FrontController@getOffer')->name('get.offer');
 Route::get('/category/{slug}', 'FrontController@categoryOffers')->name('category.offers');
-Route::get('/offer/{slug}', 'FrontController@offer')->name('offer');
+Route::get('/offer/{brandSlug}/{offerSlug}', 'FrontController@offer')->name('offer');
 Route::get('/search/{id}', 'FrontController@ajaxSearch')->name('ajax.search');
 //Route::post('/comment/send', 'FrontController@sendComment')->name('comment.send');
 Route::get('/search', 'FrontController@renderSearch')->name('search.blade');

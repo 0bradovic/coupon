@@ -1201,7 +1201,7 @@ header {
 .single_offer {
   width: 98%;
   display: flex;
-  margin: 10px auto;
+  margin: 10px 10px 10px 0;
   padding: 5px;
   background: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -1517,6 +1517,7 @@ small {
 
 .ad_sense_holder_search_page {
   width: 350px;
+  margin-left:auto;
 }
 
 .ad_sense_holder_search_page .ad_sense {

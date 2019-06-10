@@ -11,24 +11,25 @@
         </div>
         
         
-    <div class="ad_sense_holder_search_page">
-        <div class="ad_sense"></div>
-        <div class="ad_sense"></div>
-    </div>
+        <div class="ad_sense_holder_search_page">
+            <div class="ad_sense"></div>
+            <div class="ad_sense"></div>
+        </div>
     
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" data-next-page="{{ $popularOffers->nextPageUrl() }}">
             <div class="category_blade_title">
                 <span>Here's more you might like</span>
             </div>
             @foreach($popularOffers as $offer)
+            @if($offer->brand)
             <div class="category_blade_content">
                 <div class="category_blade_box">
                     <div class="category_blade_box_img">
-                        @if($offer->brand)
+                        @if($offer->brand->img_src)
                             <?php
                             list($width, $height, $type, $attr) = getimagesize(public_path().$offer->brand->img_src);
                             ?>
-                             <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                             <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                             @else style="height:auto;width:100%"; 
                             @endif>
                                 <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -39,7 +40,7 @@
                             <?php
                             list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
                             ?>
-                             <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                             <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                             @else style="height:auto;width:100%"; 
                             @endif>
                                 <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -52,7 +53,7 @@
                         @if($offer->offerType)
                             <span class="coupon" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</span>
                         @endif
-                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                        <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                             <div class="category_blade_box_date_top">
                                 {{ $offer->name }}
                             </div>
@@ -67,7 +68,7 @@
                         </div>
                     </div>
                     <div class="category_blade_box_text">
-                        <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                        <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                             <div class="category_blade_box_text_top">
                                 {!! $offer->formatDetails($offer->detail) !!}
                             </div>
@@ -78,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
         {{--{!! $popularOffers->links() !!}--}}

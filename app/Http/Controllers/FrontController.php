@@ -42,7 +42,7 @@ class FrontController extends Controller
             {
                 $offers = $offers->merge($item);
             }
-            
+            $offers = $offers->unique('id');
             $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true);
             $category->topOffers = $offers->take(3);
         }
@@ -144,9 +144,9 @@ class FrontController extends Controller
         return view('front.categoryOffers',compact('total','category','newestOffers','popularOffers','brands','title'));
     }
 
-    public function offer(Request $request,$slug)
+    public function offer(Request $request,$brandSlug,$offerSlug)
     {
-        $offer = Offer::where('slug', $slug)->where('display', true)->first();
+        $offer = Offer::where('slug', $offerSlug)->where('display', true)->first();
         if($offer->endDate != null)
         {
             if($offer->dateFormat($offer->endDate) < Carbon::now())

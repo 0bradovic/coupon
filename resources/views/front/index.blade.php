@@ -25,7 +25,7 @@
                     <?php
                     list($width, $height, $type, $attr) = getimagesize(public_path().$offer->brand->img_src);
                     ?>
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
                         <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -36,7 +36,7 @@
                     <?php
                         list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
                     ?>
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
                         <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -49,7 +49,7 @@
                 @if($offer->offerType)
                     <span class="coupon" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</span>
                 @endif
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                         <div class="offer_box_date_top">
                             {{ $offer->name }}
                         </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="offer_box_text">
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                         <div class="offer_box_text_top">
                         {!! $offer->formatDetails($offer->detail) !!} 
                         </div>

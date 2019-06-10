@@ -9,7 +9,7 @@
                 <?php
                 list($width, $height, $type, $attr) = getimagesize(public_path().$offer->brand->img_src);
                 ?>
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
                         <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -19,7 +19,7 @@
                 <?php
                 list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
                 ?>
-                    <a href="{{ route('offer',['slug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                    <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                     @else style="height:auto;width:100%"; 
                     @endif>
                         <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -31,7 +31,7 @@
             @if($offer->offerType)
                 <span class="coupon" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</span>
             @endif
-            <a href="{{ route('offer',['slug' => $offer->slug]) }}">
+            <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                 <div class="single_offer_date_top">
                     {{ $offer->name }}
                 </div>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="single_offer_text">
-            <a class="a_holder"  href="{{ route('offer',['slug' => $offer->slug]) }}">
+            <a class="a_holder"  href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                 <div class="single_offer_text_top">
                     {!! $offer->detail !!}
                 </div>
@@ -95,14 +95,15 @@
             </div>
             @if($popularSimillarOffers)
                 @foreach($popularSimillarOffers as $off)
+                @if($off->brand)
                 <div class="category_blade_content">
                     <div class="category_blade_box">
                         <div class="category_blade_box_img">
-                            @if($off->brand)
+                            @if($off->brand->img_src)
                                 <?php
                                 list($width, $height, $type, $attr) = getimagesize(public_path().$off->brand->img_src);
                                 ?>
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                                 @else style="height:auto;width:100%"; 
                                 @endif>
                                     <img src="{{ $off->brand->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -113,7 +114,7 @@
                                 <?php
                                 list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
                                 ?>
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                                 @else style="height:auto;width:100%"; 
                                 @endif>
                                     <img src="{{ $off->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -126,7 +127,7 @@
                             @if($off->offerType)
                                 <span class="coupon" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</span>
                             @endif
-                            <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
                                 <div class="category_blade_box_date_top">
                                     {{ $off->name }}
                                 </div>
@@ -141,7 +142,7 @@
                             </div>
                         </div>
                         <div class="category_blade_box_text">
-                            <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
                                 <div class="category_blade_box_text_top">
                                     {!! $off->formatDetails($off->detail) !!}
                                 </div>
@@ -152,6 +153,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             @endif
     </div>
@@ -162,14 +164,15 @@
             </div>
             @if($newestSimillarOffers)
                 @foreach($newestSimillarOffers as $off)
+                @if($off->brand)
                 <div class="category_blade_content">
                     <div class="category_blade_box">
                         <div class="category_blade_box_img">
-                            @if($off->brand)
+                            @if($off->brand->img_src)
                                 <?php
                                 list($width, $height, $type, $attr) = getimagesize(public_path().$off->brand->img_src);
                                 ?>
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                                 @else style="height:auto;width:100%"; 
                                 @endif>
                                     <img src="{{ $off->brand->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -180,7 +183,7 @@
                                 <?php
                                 list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
                                 ?>
-                                <a href="{{ route('offer',['slug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
+                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
                                 @else style="height:auto;width:100%"; 
                                 @endif>
                                     <img src="{{ $off->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
@@ -193,7 +196,7 @@
                             @if($off->offerType)
                                 <span class="coupon" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</span>
                             @endif
-                            <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
                                 <div class="category_blade_box_date_top">
                                     {{ $off->name }}
                                 </div>
@@ -208,7 +211,7 @@
                             </div>
                         </div>
                         <div class="category_blade_box_text">
-                            <a href="{{ route('offer',['slug' => $off->slug]) }}">
+                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
                                 <div class="category_blade_box_text_top">
                                     {!! $off->formatDetails($off->detail) !!}
                                 </div>
@@ -219,6 +222,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             @endif
         </div>    
