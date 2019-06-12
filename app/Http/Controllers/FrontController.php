@@ -324,8 +324,8 @@ class FrontController extends Controller
         {   
             $popularOffers = $popularOffers->merge($off);
         }
-        $newestOffers = $newestOffers->unique();
-        $popularOffers = $popularOffers->unique();
+        $newestOffers = $newestOffers->unique('id');
+        $popularOffers = $popularOffers->unique('id');
         $total = floor(count($newestOffers)/6);
         $brandIds = [];
         foreach($newestOffers as $offer)
