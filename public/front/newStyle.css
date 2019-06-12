@@ -71,6 +71,10 @@ header {
   position: relative;
 }
 
+.navbar-brand {
+  padding: 0 !important;
+}
+
 .header_top {
   display: flex;
   align-items: center;
@@ -330,7 +334,6 @@ header {
   }
 }
 
-
 @media (max-width: 800px) {
   .search_result {
     left: 5% !important;
@@ -342,7 +345,6 @@ header {
 }
 
 @media (max-width: 500px) {
-  
   .search_result_item img {
     width: 20% !important;
   }
@@ -350,8 +352,6 @@ header {
     height: 70px !important;
   }
 }
-
-
 
 /* END SEARCH RESULT */
 .header_search label input {
@@ -479,8 +479,6 @@ header {
     align-items: center;
   }
 
-
-
   .header_btn_viewNewest,
   .header_btn_mostPopular,
   .header_viewNewest,
@@ -515,6 +513,19 @@ header {
 /* END HEADER */
 
 /* START MOBILE NAVIGATION */
+
+@media (max-width: 800px) {
+  #mobile_navigation .header_search label input {
+    font-size: 12px !important;
+    height: 35px !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  #mobile_navigation .header_search label input::placeholder {
+    font-size: 12px !important;
+  }
+}
 
 .open_menu {
   cursor: pointer;
@@ -847,7 +858,7 @@ header {
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_top {
-  font-size: 11px;
+  font-size: 12px;
   color: #000;
   height: 50%;
   padding-top: 10px;
@@ -894,14 +905,14 @@ header {
 }
 
 @media (max-width: 800px) {
-  .category_blade_title span {
-    display: none !important;
-  }
   .offer_holder .offer_holder_row .offer_holder_row_content .offer_box {
     height: 115px !important;
   }
   .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_top {
     line-height: 1.3 !important;
+  }
+  .offer_page .category_blade_title {
+    display: none !important;
   }
 }
 
@@ -1064,6 +1075,19 @@ header {
   align-items: center;
 }
 
+.category_page .category_blade_title {
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.category_page .category_blade_title {
+  display: none !important;
+}
+
+.category_page .header_viewOfferButtons {
+  padding-bottom: 10px;
+}
+
 .category_blade_title span {
   font-size: 13px;
   color: #fff;
@@ -1192,7 +1216,7 @@ header {
     font-size: 12px;
   }
   .category_blade_box .coupon {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
@@ -1214,6 +1238,9 @@ header {
   }
   .category_blade_box_text_top {
     line-height: 1.3 !important;
+  }
+  .ad_sense_holder_search_page {
+    display: none !important;
   }
 }
 
@@ -1446,6 +1473,7 @@ small {
 
 .offer_page_title {
   padding: 5px 0;
+  margin-bottom: 10px;
 }
 
 .offer_page_title span {
@@ -1464,6 +1492,7 @@ small {
   padding-left: 0;
   display: flex;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .offer_page .most_popular .category_blade_box {
@@ -1525,6 +1554,11 @@ small {
 
 .search_page {
   display: flex;
+}
+
+.search_page .category_blade_title {
+  padding-bottom: 10px !important;
+  padding-left: 10px !important;
 }
 
 .search_page .category_blade_row {
@@ -2029,8 +2063,13 @@ button#newsletter_submit {
 
 /* NO RESULT HOLDER */
 
+.newHolder {
+  display: flex;
+}
+
 .no-result-holder {
   margin: 20px 10px;
+  margin-bottom: 0 !important;
   text-indent: 20px;
 }
 
@@ -2060,7 +2099,8 @@ button#newsletter_submit {
 
 .popUp_redirect .popUp_redirect_holder {
   width: 600px;
-  height: 300px;
+  height: 200px;
+  max-height: 500px;
   box-shadow: 2px 2px 30px 0 rgba(0, 0, 0, 0.6);
   background: #fff;
   border-radius: 10px;

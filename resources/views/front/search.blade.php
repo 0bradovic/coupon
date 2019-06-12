@@ -11,11 +11,9 @@
         </div>
         
         
-        <div class="ad_sense_holder_search_page">
-            <div class="ad_sense"></div>
-            <div class="ad_sense"></div>
-        </div>
+        
     
+        <div class="newHolder">
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" data-next-page="{{ $popularOffers->nextPageUrl() }}">
             <div class="category_blade_title">
                 <span>Here's more you might like</span>
@@ -82,6 +80,11 @@
             @endif
             @endforeach
         </div>
+        <div class="ad_sense_holder_search_page">
+            <div class="ad_sense"></div>
+            <div class="ad_sense"></div>
+        </div>
+</div>
         {{--{!! $popularOffers->links() !!}--}}
     
 </div>
