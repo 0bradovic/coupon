@@ -39,6 +39,16 @@
                     @endforeach
                 </ol>
                
+                <div class="search_holder_nav hidden">
+                    <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
+                        <label for="search"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button><input id="search"
+                                type="text" name="search" placeholder="Search for a brand or retailer"></label>
+                        <div class="search_result hidden">
+                            
+                        </div>
+                        {!! csrf_field() !!}
+                    </form>
+                    </div>
             </div>
         </div>
     </header>

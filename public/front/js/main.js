@@ -148,13 +148,15 @@ $(document).ready(function() {
   // FIXED NAVIGATON AND SCROOL TOP
   $(window).scroll(function() {
     let $this = $(this);
-    let $nav = $(".navigation");
+    let $nav = $(".header_bottom");
     let $go_top = $(".go_top");
     if ($this.scrollTop() > 45) {
       $nav.addClass("fixed_navigation");
+      $(".search_holder_nav").removeClass("hidden");
       $go_top.removeClass("hidden");
     } else {
       $nav.removeClass("fixed_navigation");
+      $(".search_holder_nav").addClass("hidden");
       $go_top.addClass("hidden");
     }
   });
