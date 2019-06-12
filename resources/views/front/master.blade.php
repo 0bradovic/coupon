@@ -98,7 +98,7 @@
         <div class="popUp_redirect_holder">
         <i class="fas fa-times-circle close_redirect_popUp"></i>
             <div class="popUp_redirect_text">
-                {!! $redirectPopup->text !!}
+                <p>{!! $redirectPopup->text !!}</p>
             </div>
             <div class="popUp_redirect_button">
                 <a href="" id="redirect-link" target="_blank">{{ $redirectPopup->button_text }}</a>
