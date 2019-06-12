@@ -93,16 +93,15 @@
              <button class="btn close-modal">No thanks</button>
         </div>
     </div>
-    <div class="popUp_redirect hidden">
+    @php $redirectPopup = Helpers::getRedirectPopup(); @endphp
+    <div class="popUp_redirect hidden" id="redirect-popup">
         <div class="popUp_redirect_holder">
         <i class="fas fa-times-circle close_redirect_popUp"></i>
             <div class="popUp_redirect_text">
-                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
-                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
-                <p>NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST NEKI TEKST</p>
+                {!! $redirectPopup->text !!}
             </div>
             <div class="popUp_redirect_button">
-                <a href="#">Button</a>
+                <a href="" id="redirect-link" target="_blank">{{ $redirectPopup->button_text }}</a>
             </div>
         </div>
     </div>

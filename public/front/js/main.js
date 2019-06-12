@@ -214,8 +214,19 @@ setTimeout(function() {
   $(".messages").fadeOut(300);
 }, 1000);
 
-// CLOSE REDIRECT POPUP
+// REDIRECT POPUP
+
+$(document).on('click','.redirect-btn',function(e){
+  e.preventDefault();
+  var link = $(this).attr('href');
+  $('#redirect-link').attr('href',link);
+  $('#redirect-popup').removeClass('hidden');
+})
+
+$('#redirect-link').click(function(){
+  $('#redirect-popup').addClass('hidden');
+})
 
 $(".close_redirect_popUp").on("click", function() {
-  $(".popUp_redirect").remove();
+  $('#redirect-popup').addClass('hidden');
 });

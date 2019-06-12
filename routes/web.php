@@ -215,6 +215,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['permission:manage popup']], function () {
         Route::get('/subscribe/popup', 'PopupController@index');
         Route::post('/update/popup', 'PopupController@update')->name('update.popup');
+        Route::get('/redirect/popup', 'PopupController@indexRedirectPopup');
+        Route::post('/update/redirect/popup', 'PopupController@updateRedirectPopup')->name('update.redirect-popup');
     });
 
     Route::group(['middleware' => ['permission:manage site setings']], function () {

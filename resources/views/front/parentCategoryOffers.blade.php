@@ -94,7 +94,7 @@
                             </div>
                         </a>
                         <div class="category_blade_box_text_bottom">
-                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank">Get This <i class="fas fa-chevron-right"></i></a>
+                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                             </div>
                         </a>
                         <div class="category_blade_box_text_bottom">
-                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" target="_blank">Get This <i class="fas fa-chevron-right"></i></a>
+                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
