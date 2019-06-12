@@ -23,6 +23,10 @@ input {
   outline: none;
 }
 
+input::placeholder {
+  color: rgb(175, 175, 175) !important;
+}
+
 ul,
 ol {
   list-style: none;
@@ -142,15 +146,9 @@ header {
   .header_search label input {
     font-size: 14px !important;
   }
-  .header_search label input::placeholder {
-    font-size: 14px !important;
-  }
   .popular_brands_row label input {
     font-size: 12px !important;
     line-height: 3 !important;
-  }
-  .popular_brands_row label input::placeholder {
-    font-size: 12px !important;
   }
 }
 
@@ -263,9 +261,6 @@ header {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-.header_search label input::placeholder {
-  font-size: 14px;
-}
 
 /* START SEARCH RESULT */
 
@@ -355,10 +350,6 @@ header {
 
 /* END SEARCH RESULT */
 .header_search label input {
-  font-size: 14px;
-}
-.header_search label input::placeholder {
-  color: rgb(175, 175, 175);
   font-size: 14px;
 }
 
@@ -522,9 +513,7 @@ header {
     outline: none !important;
   }
 
-  #mobile_navigation .header_search label input::placeholder {
-    font-size: 12px !important;
-  }
+ 
 }
 
 .open_menu {
@@ -1026,10 +1015,6 @@ header {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-.popular_brands_row label input::placeholder {
-  color: rgb(175, 175, 175);
-  font-size: 14px;
-}
 
 .category_page {
   padding-bottom: 120px;
@@ -1434,10 +1419,7 @@ small {
   background: transparent;
 }
 
-.share_me .envelope .email_popup input::placeholder {
-  font-size: 12px;
-  color: #fff;
-}
+
 
 .share_me .envelope .email_popup button {
   border: none;
