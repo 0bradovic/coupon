@@ -1058,15 +1058,18 @@ header {
   padding-bottom: 0;
   display: flex;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .category_page .category_blade_title {
-  padding-bottom: 5px;
+  padding-bottom: 20px;
   padding-left: 10px;
 }
 
-.category_page .category_blade_title {
-  display: none !important;
+@media (max-width: 800px) {
+  .category_page .category_blade_title {
+    display: none !important;
+  }
 }
 
 .category_page .header_viewOfferButtons {
