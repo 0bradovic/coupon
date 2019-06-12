@@ -73,6 +73,7 @@ class PopupController extends Controller
             'first_section' => 'required',
             'second_section' => 'required',
             'button' => 'required',
+            'success_message' => 'required',
         ]);
         $popup = SubscribePopup::first();
         $popup->update([
@@ -81,6 +82,7 @@ class PopupController extends Controller
             'first_section' => $request->first_section,
             'second_section' => $request->second_section,
             'button' => $request->button,
+            'success_message' => $request->success_message,
         ]);
         return redirect()->back()->with('success', 'Successfully updated subscription popup.');
     }
