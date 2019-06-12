@@ -51,6 +51,11 @@
                     <input type="text" name="button" value="{{ $popup->button }}" class="form-control">
                 </div>
 
+                <div class="form-group">
+                    <label>Success Message</label>
+                    <input type="text" name="success_message" value="{{ $popup->success_message }}" class="form-control">
+                </div>
+
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Update popup</button>
               </div>

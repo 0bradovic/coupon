@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use NZTim\Mailchimp\Mailchimp;
+use App\SubscribePopup;
 
 class MailChimpController extends Controller
 {
@@ -24,7 +25,8 @@ class MailChimpController extends Controller
         else
         {
             $mc->subscribe($this->listId, $emailAddress, $merge = [], $confirm = true);
-            return redirect()->back()->with('success', 'Thanks for registering.');
+            $message = SubscribePopup::first()->success_message;
+            return redirect()->back()->with('success', $message);
         }
     }
 
