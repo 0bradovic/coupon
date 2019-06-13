@@ -261,7 +261,6 @@ header {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-
 /* START SEARCH RESULT */
 
 .search_result {
@@ -541,8 +540,6 @@ header {
     box-shadow: none !important;
     outline: none !important;
   }
-
- 
 }
 
 .open_menu {
@@ -1050,7 +1047,6 @@ header {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-
 .category_page {
   padding-bottom: 120px;
 }
@@ -1456,8 +1452,6 @@ small {
   color: #fff;
   background: transparent;
 }
-
-
 
 .share_me .envelope .email_popup button {
   border: none;
