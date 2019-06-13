@@ -14,7 +14,7 @@
                         {!! Helpers::getTagline()->text !!}
                     </p>
                 </div>
-                <div class="header_search">
+                <div class="header_search" id="main_header_search">
                     <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
                         <label for="search"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button><input id="search"
                                 type="text" name="search" placeholder="Search for a brand or retailer"></label>
