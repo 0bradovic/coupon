@@ -244,7 +244,26 @@ class FrontController extends Controller
         $brand = Brand::where('name','LIKE','%'. $request->search . '%')->first();
         if($brand != null)
         {
-            return redirect()->route('brand.offers', [$brand->slug]);
+            $offers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
+            if(count($offers) > 0)
+            {
+                return redirect()->route('brand.offers', [$brand->slug]);
+            }
+            else
+            {
+                $allOffers = Offer::where('display',true)->orderBy('click','DESC')->get();
+                $off = new Offer();
+                $popularOffers = $off->filterOffers($allOffers);
+                $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
+                $search = $request->search;
+                if($request->ajax()) {
+                    return [
+                        'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                        'next_page' => $popularOffers->nextPageUrl()
+                    ];
+                }
+                return view('front.search',compact('search','popularOffers'));
+                }     
         }
         else
         {
@@ -355,63 +374,83 @@ class FrontController extends Controller
     public function brandOffers(Request $request,$slug)
     {
         $brand = Brand::where('slug',$slug)->first();
+        
         $newestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
         $popularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
-        $total = floor(count($newestOffers)/6);
-        $allCategories = [];
-        foreach($newestOffers as $offer)
+        if(count($newestOffers) > 0)
         {
-            $allCategories[] = $offer->categories;
-        }
-        $categories = new Collection();
-        foreach($allCategories as $cat)
-        {
-            $categories = $categories->merge($cat);
-        }
-        $categories = $categories->unique('id');
-        
-        $allSimilarNewestOffers = [];
-        $allSimilarPopularOffers = [];
-        foreach($categories as $cat)
-        {
-            $allSimilarNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC');
-            $allSimilarPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
-        }
-        $newestSimillarOffers = new Collection();
-        $popularSimillarOffers = new Collection();
-        foreach($allSimilarNewestOffers as $off)
-        {   
-            $newestSimillarOffers = $newestSimillarOffers->merge($off);
-        }
-        foreach($allSimilarPopularOffers as $off)
-        {   
-            $popularSimillarOffers = $popularSimillarOffers->merge($off);
-        }
-        $newestSimillarOffers = $newestSimillarOffers->unique('id');
-        $popularSimillarOffers = $popularSimillarOffers->unique('id');
-        $brandIds = [];
-        foreach($newestSimillarOffers as $offer)
-        {
-            if($offer->brand)
+            $total = floor(count($newestOffers)/6);
+            $allCategories = [];
+            foreach($newestOffers as $offer)
             {
-                $brandIds[] = $offer->brand->id;
+                $allCategories[] = $offer->categories;
             }
-        }
-        $brandIds = array_unique($brandIds);
-        $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
-        $brands = $brands->sortBy('name',SORT_REGULAR, false);
+            $categories = new Collection();
+            foreach($allCategories as $cat)
+            {
+                $categories = $categories->merge($cat);
+            }
+            $categories = $categories->unique('id');
+            
+            $allSimilarNewestOffers = [];
+            $allSimilarPopularOffers = [];
+            foreach($categories as $cat)
+            {
+                $allSimilarNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC');
+                $allSimilarPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
+            }
+            $newestSimillarOffers = new Collection();
+            $popularSimillarOffers = new Collection();
+            foreach($allSimilarNewestOffers as $off)
+            {   
+                $newestSimillarOffers = $newestSimillarOffers->merge($off);
+            }
+            foreach($allSimilarPopularOffers as $off)
+            {   
+                $popularSimillarOffers = $popularSimillarOffers->merge($off);
+            }
+            $newestSimillarOffers = $newestSimillarOffers->unique('id');
+            $popularSimillarOffers = $popularSimillarOffers->unique('id');
+            $brandIds = [];
+            foreach($newestSimillarOffers as $offer)
+            {
+                if($offer->brand)
+                {
+                    $brandIds[] = $offer->brand->id;
+                }
+            }
+            $brandIds = array_unique($brandIds);
+            $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
+            $brands = $brands->sortBy('name',SORT_REGULAR, false);
 
-        $newestSimillarOffers = (new Collection($newestSimillarOffers))->sortBy('updated_at',SORT_REGULAR, true)->paginate(10);
-        $popularSimillarOffers = (new Collection($popularSimillarOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
-        
-        if($request->ajax()) {
-            return [
-                'newest' => view('front.offerNewestLazyLoad')->with(compact('newestSimillarOffers'))->render(),
-                'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
-                'next_page' => $newestSimillarOffers->nextPageUrl(),
-            ];
+            $newestSimillarOffers = (new Collection($newestSimillarOffers))->sortBy('updated_at',SORT_REGULAR, true)->paginate(10);
+            $popularSimillarOffers = (new Collection($popularSimillarOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
+            
+            if($request->ajax()) {
+                return [
+                    'newest' => view('front.offerNewestLazyLoad')->with(compact('newestSimillarOffers'))->render(),
+                    'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
+                    'next_page' => $newestSimillarOffers->nextPageUrl(),
+                ];
+            }
+            return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands','newestSimillarOffers','popularSimillarOffers'));
         }
-        return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands','newestSimillarOffers','popularSimillarOffers'));
+        else
+        {
+            $allOffers = Offer::where('display',true)->orderBy('click','DESC')->get();
+            $off = new Offer();
+            $popularOffers = $off->filterOffers($allOffers);
+            $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
+            $search = $brand->name;
+            if($request->ajax()) {
+                return [
+                    'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                    'next_page' => $popularOffers->nextPageUrl()
+                ];
+            }
+            return view('front.search',compact('search','popularOffers'));
+        }
+        
     }
 
 

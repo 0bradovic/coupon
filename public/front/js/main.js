@@ -6,12 +6,15 @@ $(document).ready(function() {
     if ($("#mobile_navigation").hasClass("show_mobile_navigation")) {
       $("#mobile_navigation").removeClass("show_mobile_navigation");
       $("body").css("overflow", "hidden");
+     
     }
+    $('#main_header_search').fadeOut(1000);
   });
   // CLOSE MOBILE NAVIGATION
   $(".close_menu").click(function() {
     if ($("#mobile_navigation").hasClass("")) {
       $("#mobile_navigation").addClass("show_mobile_navigation");
+      $('#main_header_search').fadeIn(100);
       $("body").css("overflow", "unset");
     }
   });
