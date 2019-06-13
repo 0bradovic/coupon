@@ -876,13 +876,20 @@ header {
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text {
   width: 50%;
   margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text a {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_top {
   font-size: 12px;
   color: #000;
-  height: 50%;
-  padding-top: 10px;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_bottom {
