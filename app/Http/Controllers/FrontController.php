@@ -159,7 +159,15 @@ class FrontController extends Controller
         {
             if($tag->title != '' && $tag->title != null)
             {
-                $title = $tag->title;
+                if($offer->brand)
+                {
+                    $title = $offer->brand->name." | ".$tag->title;
+                }
+                else
+                {
+                    $title = $tag->title;
+                }
+                
             }
             else
             {
