@@ -127,10 +127,16 @@ class Offer extends Model
         $findbr = ["<br>","</br>"];
         $replacebr = "";
         $string = str_replace($findbr,$replacebr,$string);
+        $findAmp = ['&amp;'];
+        $replaceAmp = ['&'];
+        $string = str_replace($findAmp,$replaceAmp,$string);
+        $findNbs = ['&nbsp;'];
+        $replaceNbs = [' '];
+        $string = str_replace($findNbs,$replaceNbs,$string);
         $search = ["</p>","</div>"]; 
         $replace = ". ";  
         $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
-        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'95','...');
+        $newString = str_limit(strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string))),'90','...');
         
         return $newString;
     }

@@ -903,6 +903,7 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
+  flex:3;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_top {
@@ -914,6 +915,7 @@ header {
   height: 50%;
   display: flex;
   align-items: flex-end;
+  flex:1;
 }
 
 .offer_holder .offer_holder_row .offer_holder_row_content .offer_box .offer_box_text .offer_box_text_bottom a {
