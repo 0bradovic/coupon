@@ -165,14 +165,14 @@ $(document).ready(function() {
   });
 });
 // SEARCH FORM
-$("#search").keyup(function(e) {
+$(".search-input").keyup(function(e) {
+  var search_result = $(this).parent().next()[0];
   $.ajax({
     url: SITE_URL + "search/" + e.target.value,
     type: "GET",
     success: function(data) {
-      document.querySelector(".search_result").classList.remove("hidden");
-      document.querySelector(".search_result").innerHTML = "";
-      var search_result = document.querySelector(".search_result");
+      search_result.classList.remove("hidden");
+      search_result.innerHTML = "";
       var count = 0;
       data.forEach(element => {
         count++;
