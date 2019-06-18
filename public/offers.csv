@@ -1,2 +1,2 @@
 Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories,Brand
-"30% off","<p><small>Your first £60+ Ocado shop</small></p><p><small>Free deliveries for a year</small></p><p><br></p>",http://tinyurl.com/ybxde7pr,"2019-01-22 00:00:00","2019-02-14 00:00:00","C:\xampp\htdocs\coupon\public/images/offer/1548232525Ocado.png",Code,total-shop,
+"Test offer","<p>Test offer detail</p>",http://tinyurl.com/yxt22ydq,"2019-06-17 00:00:00",Ongoing,"C:\xampp\htdocs\coupon\public",,frozen,any-brand

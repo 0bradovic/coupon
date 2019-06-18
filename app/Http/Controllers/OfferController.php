@@ -94,6 +94,7 @@ class OfferController extends Controller
         {
             $offer_type_id = $request->offer_type_id;
         }
+        $fullOfferLink = $request->link;
         $url = "http://tinyurl.com/api-create.php?url=".$request->link;
 
         $ch = curl_init();
@@ -136,6 +137,7 @@ class OfferController extends Controller
             'summary' => $request->summary,
             'detail' => $request->detail,
             'link' => $offerLink,
+            'full_link' => $fullOfferLink,
             'startDate' => $startDate,
             'endDate' => $endDate,
             'endDateNull' => $endDateNull,
@@ -334,6 +336,29 @@ class OfferController extends Controller
                 $slug = $newSlug;
             }
         }
+        $fullOfferLink = $offer->full_link;
+        if(strpos($request->link,'tinyurl.com') == false)
+        {
+            $fullOfferLink = $request->link;
+            $url = "http://tinyurl.com/api-create.php?url=".$request->link;
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"GET");
+    
+            $output = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            curl_close($ch);
+    
+            $offerLink = $output;
+        }
+        else
+        {
+            $offerLink = $request->link;
+        }
+        
         $endDate = null;
         $endDateNull = 1;
         if($request->endDate)
@@ -348,7 +373,8 @@ class OfferController extends Controller
             'highlight' => $request->highlight,
             'summary' => $request->summary,
             'detail' => $request->detail,
-            'link' => $request->link,
+            'link' => $offerLink,
+            'full_link' => $fullOfferLink,
             'startDate' => $request->startDate,
             'endDate' => $endDate,
             'endDateNull' => $endDateNull,
@@ -721,6 +747,7 @@ class OfferController extends Controller
                     }
                     if($offer->link != $data[2])
                     {
+                        $fullOfferLink = $data[2];
                         $url = "http://tinyurl.com/api-create.php?url=".$data[2];
 
                         $ch = curl_init();
@@ -735,6 +762,7 @@ class OfferController extends Controller
                 
                         $offerLink = $output;
                         $offer->link = $offerLink;
+                        $offer->full_link = $fullOfferLink;
                         $offer->save();
                     }
                     if($offer->startDate != Carbon::parse($data[3]))
@@ -811,6 +839,7 @@ class OfferController extends Controller
                             $slug = $newSlug;
                         }
                     }
+                    $fullOfferLink = $data[2];
                     $url = "http://tinyurl.com/api-create.php?url=".$data[2];
 
                         $ch = curl_init();
@@ -880,6 +909,7 @@ class OfferController extends Controller
                     'slug' => $slug,
                     'detail' => $data[1],
                     'link' => $offerLink,
+                    'full_link' => $fullOfferLink,
                     'sku' => $sku,
                     'startDate' => $startDate,
                     'endDate' => $endDate,

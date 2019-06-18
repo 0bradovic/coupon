@@ -13,7 +13,7 @@ class Offer extends Model
         'name', 'sku', 'brand_id', 'highlight', 
         'summary', 'detail', 'link',
         'startDate', 'endDate', 'offer_type_id',
-        'position', 'user_id','img_src', 'alt_tag', 'endDateNull','slug','click', 'display'
+        'position', 'user_id','img_src', 'alt_tag', 'endDateNull','slug','click', 'display','full_link',
     ];
 
     public function brand()
