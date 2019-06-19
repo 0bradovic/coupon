@@ -279,7 +279,7 @@ class OfferController extends Controller
             'highlight' => 'max:20',
             'summary' => 'max:50',
             'detail' => 'max:300',
-            'link' => 'required|string',
+            'full_link' => 'required|string',
             'startDate' => 'required|date',
             'categories' => 'required',
             'brand' => 'required',
@@ -336,11 +336,12 @@ class OfferController extends Controller
                 $slug = $newSlug;
             }
         }
-        $fullOfferLink = $offer->full_link;
-        if(strpos($request->link,'tinyurl.com') == false)
+        //$fullOfferLink = $offer->full_link;
+        //strpos($request->link,'tinyurl.com') == false
+        if($request->full_link != $offer->full_link)
         {
-            $fullOfferLink = $request->link;
-            $url = "http://tinyurl.com/api-create.php?url=".$request->link;
+            //$fullOfferLink = $request->full_link;
+            $url = "http://tinyurl.com/api-create.php?url=".$request->full_link;
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -374,7 +375,7 @@ class OfferController extends Controller
             'summary' => $request->summary,
             'detail' => $request->detail,
             'link' => $offerLink,
-            'full_link' => $fullOfferLink,
+            'full_link' => $request->full_link,
             'startDate' => $request->startDate,
             'endDate' => $endDate,
             'endDateNull' => $endDateNull,

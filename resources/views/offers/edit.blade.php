@@ -49,7 +49,11 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="link">Link</label>
+              <label for="link">Full Link</label>
+              <input type="text" class="form-control" name="full_link" value="{{ $offer->full_link }}">
+            </div>
+            <div class="form-group">
+              <label for="link">Short Link</label>
               <input type="text" class="form-control" name="link" value="{{ $offer->link }}">
             </div>
             <div class="form-group">
