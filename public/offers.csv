@@ -1,2 +1,3 @@
-Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories,Brand
-"Test offer","<p>Test offer detail</p>",http://tinyurl.com/yxt22ydq,"2019-06-17 00:00:00",Ongoing,"C:\xampp\htdocs\coupon\public",,frozen,any-brand
+Name,Detail1,Link,"Todays Date","End Date",Image,"Offer Type",Categories,Brand,"Full Link"
+"50p off","<p><small>Water Wipes 60</small></p><p><small>Tesco, Sainsbury's &amp; Waitrose</small></p>",http://tinyurl.com/ybz746vk,"2019-04-17 00:00:00","2019-04-21 00:00:00","C:\xampp\htdocs\coupon\public/images/offer/1555485962waterwipes.jpg",Cashback,baby-toddler,,
+£5,"<p><small>£5 discount when you refer a friend to Who Gives a Crap</small><br></p><p><small>Each friend also receives a £5 discount</small><br></p>",http://tinyurl.com/y4rdxumh,"2019-04-29 00:00:00",Ongoing,"C:\xampp\htdocs\coupon\public/images/offer/1557300317whogives.png",Refer,refer-other,who-gives-a-crap,

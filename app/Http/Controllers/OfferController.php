@@ -746,10 +746,10 @@ class OfferController extends Controller
                             $offer->categories()->attach($category->id);
                         }
                     }
-                    if($offer->link != $data[2])
+                    if($offer->full_link != $data[9])
                     {
-                        $fullOfferLink = $data[2];
-                        $url = "http://tinyurl.com/api-create.php?url=".$data[2];
+                        $fullOfferLink = $data[9];
+                        $url = "http://tinyurl.com/api-create.php?url=".$data[9];
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
@@ -840,8 +840,8 @@ class OfferController extends Controller
                             $slug = $newSlug;
                         }
                     }
-                    $fullOfferLink = $data[2];
-                    $url = "http://tinyurl.com/api-create.php?url=".$data[2];
+                    $fullOfferLink = $data[9];
+                    $url = "http://tinyurl.com/api-create.php?url=".$data[9];
 
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $url);
@@ -1028,7 +1028,7 @@ class OfferController extends Controller
         
         $filename = 'offers.csv';
         $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories','Brand'));
+        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories','Brand','Full Link'));
         foreach($offers as $offer)
         {
             $categories = $offer->categories()->pluck('slug')->toArray();
@@ -1043,13 +1043,18 @@ class OfferController extends Controller
             {
                 $brand = $offer->brand->slug;
             }
+            $fullLink = null;
+            if($offer->full_link)
+            {
+                $fullLink = $offer->full_link;
+            }
             if($offer['endDate'] == null)
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories,$brand));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink));
             }
             else
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories,$brand));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink));
             }
                 
         }

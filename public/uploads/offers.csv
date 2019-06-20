@@ -1,2 +1,2 @@
-Name,Detail1,Link,Todays Date,End Date,Image,Offer Type,Categories,Brand
-Test offer,<p>Test offer detail</p>,http://google.com,6/17/2019 0:00,Ongoing,C:\xampp\htdocs\coupon\public,,frozen,any-brand
+Name,Detail1,Link,Todays Date,End Date,Image,Offer Type,Categories,Brand,Full Link
+30% off1,<p><small>Your first £60+ Ocado shop</small></p><p><small>Free deliveries for a year</small></p><p><br></p>,http://tinyurl.com/y5fzoppp,1/22/2019 0:00,2/14/2019 0:00,C:\xampp\htdocs\coupon\public/images/offer/1548232525Ocado.png,Code,total-shop,ocado,
