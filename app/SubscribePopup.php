@@ -8,7 +8,7 @@ class SubscribePopup extends Model
 {
     
     protected $fillable = [
-        'title', 'second_title', 'button', 'first_section', 'second_section', 'success_message',
+        'title', 'second_title', 'button', 'first_section', 'second_section', 'success_message','active','present_on_session',
     ];
 
 }

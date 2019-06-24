@@ -56,6 +56,17 @@
                     <input type="text" name="success_message" value="{{ $popup->success_message }}" class="form-control">
                 </div>
 
+                <div class="form-group">
+                    <label>Active (On/Off)</label><br>
+                    <input @if($popup->active == 1) checked @endif type="radio" name="active" value="1">On
+                    <input @if($popup->active == 0) checked @endif type="radio" name="active" value="0">Off
+                </div>
+
+                <div class="form-group">
+                    <label>Present on Session</label>
+                    <input type="number" name="present_on_session" value="{{ $popup->present_on_session }}" class="form-control">
+                </div>
+
               <div class="form-group">
                     <button id="submit" class="btn btn-primary">Update popup</button>
               </div>

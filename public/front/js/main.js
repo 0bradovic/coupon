@@ -121,7 +121,6 @@ $(document).ready(function() {
     $(".fixed_btn_form").fadeToggle(300);
   });
   $(".close_popUp").on("click", function() {
-    sessionStorage.setItem("newsletter", true);
     $(".fixed_btn_form").hide();
   });
   // COOKIE
@@ -194,24 +193,6 @@ $(".search-input").keyup(function(e) {
 });
 $(document).click(function() {
   document.querySelector(".search_result").classList.add("hidden");
-});
-
-// NEWSLETTER
-
-$(document).ready(function() {
-  if (sessionStorage.getItem("newsletter") !== "true") {
-    $(".fixed_btn_form").show();
-  }
-});
-$(".close-modal").click(function() {
-  sessionStorage.setItem("newsletter", true);
-  $(".fixed_btn_form").hide();
-});
-
-$("#newsletter_submit").click(function(e) {
-  e.preventDefault();
-  sessionStorage.setItem("newsletter", true);
-  $("#newsletter_form").submit();
 });
 
 // MESSAGES FADE OUT

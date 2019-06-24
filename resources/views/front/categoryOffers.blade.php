@@ -185,7 +185,7 @@
 @section('scripts')
 <script>
 $(window).load(function(){
-    localStorage.clear();
+    localStorage.removeItem('req');
 });
 $(document).ready(function() {
   
