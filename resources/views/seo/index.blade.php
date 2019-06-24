@@ -33,6 +33,8 @@
                   <th>Link</th>
                   @elseif(Request::is('*/category'))
                   <th>Category</th>
+                  @elseif(Request::is('*/brand'))
+                  <th>Brand</th>
                   @else
                   <th>Offer</th>
                   @endif
@@ -53,6 +55,8 @@
                   <td>{{ $metaTag->link }}</td>
                   @elseif(Request::is('*/category'))
                   @if($metaTag->category) <td>{{ $metaTag->category->name }}</td> @else <td></td> @endif
+                  @elseif(Request::is('*/brand'))
+                  @if($metaTag->brand) <td>{{ $metaTag->brand->name }}</td> @else <td></td> @endif
                   @else
                   @if($metaTag->offer) <td>{{ $metaTag->offer->name }}</td>@else <td></td> @endif
                   @endif
@@ -61,6 +65,8 @@
                   <td><a href="{{ route('custom.seo.edit', ['id' => $metaTag->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   @elseif(Request::is('*/category'))
                   <td><a href="{{ route('category.seo.edit', ['id' => $metaTag->category_id]) }}"><i class="fa fa-pencil"></i></a></td>
+                  @elseif(Request::is('*/brand'))
+                  <td><a href="{{ route('brand.seo.edit', ['id' => $metaTag->brand_id]) }}"><i class="fa fa-pencil"></i></a></td>
                   @else
                   <td><a href="{{ route('offer.seo.edit', ['id' => $metaTag->offer_id]) }}"><i class="fa fa-pencil"></i></a></td>
                   @endif

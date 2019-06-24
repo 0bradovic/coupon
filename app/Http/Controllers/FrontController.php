@@ -382,7 +382,20 @@ class FrontController extends Controller
     public function brandOffers(Request $request,$slug)
     {
         $brand = Brand::where('slug',$slug)->first();
-        
+        $title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
+        $tag = $brand->metaTag;
+        if($tag != null)
+        {
+            if($tag->title != '' && $tag->title != null)
+            {
+                $title = $tag->title;
+            }
+            else
+            {
+                $title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
+            }
+
+        }
         $newestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
         $popularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
         if(count($newestOffers) > 0)
@@ -441,7 +454,7 @@ class FrontController extends Controller
                     'next_page' => $newestSimillarOffers->nextPageUrl(),
                 ];
             }
-            return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands','newestSimillarOffers','popularSimillarOffers'));
+            return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands','newestSimillarOffers','popularSimillarOffers','title'));
         }
         else
         {

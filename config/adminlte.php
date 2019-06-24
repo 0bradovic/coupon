@@ -192,6 +192,11 @@ return [
                     'text' => 'Add Brand',
                     'url'  => '/create/brand',
                 ],
+                [
+                    'text' => 'All brand meta tags',
+                    'url'  => '/meta/brand',
+                    'can' => 'manage seo',
+                ],
             ]
         ],
         'OFFER TYPES',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Brand;
 use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\MetaTag;
 
 class BrandController extends Controller
 {
@@ -72,7 +73,18 @@ class BrandController extends Controller
             'slug' => $slug,
             'img_src' => $img_src,
         ]);
-        return redirect()->back()->with('success', 'Successfully added new brand '.$brand->name);
+        $newCategoryMetaTag = MetaTag::create([
+            'brand_id' => $brand->id
+        ]);
+        
+        $newCategoryMetaTag->title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
+        $newCategoryMetaTag->description = "Every ".$brand->name." voucher code, coupon, offer and deal at Before The Shop";
+        $newCategoryMetaTag->link = 'brand/'.$brand->slug;
+        $newCategoryMetaTag->save();
+
+        $metaTag = MetaTag::where('brand_id', $brand->id)->first();
+        return redirect()->route('brand.seo.edit', ['id' => $brand->id])->with('success', 'Successfully added new brand '.$brand->name);
+        //return redirect()->back()->with('success', 'Successfully added new brand '.$brand->name);
     }
 
     /**
@@ -167,6 +179,11 @@ class BrandController extends Controller
                 $offer->brand_id = null;
                 $offer->save();
             }
+        }
+        if($brand->metaTag)
+        {
+            $metaTag = $brand->metaTag;
+            $metaTag->delete();
         }
         $name = $brand->name;
         $brand->delete();

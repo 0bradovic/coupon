@@ -54,11 +54,13 @@ class UpdateClick extends Command
             if(count($offer->offerClicks) > 0)
             {
                 $offer->click = count($offer->offerClicks);
+                $offer->timestamps = false;
                 $offer->save();
             }
             else
             {
                 $offer->click = 0;
+                $offer->timestamps = false;
                 $offer->save();
             }
         }
@@ -73,11 +75,13 @@ class UpdateClick extends Command
             if(count($brand->brandClicks) > 0)
             {
                 $brand->click = count($brand->brandClicks);
+                $brand->timestamps = false;
                 $brand->save();
             }
             else
             {
                 $brand->click = 0;
+                $brand->timestamps = false;
                 $brand->save();
             }
         }

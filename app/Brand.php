@@ -27,6 +27,11 @@ class Brand extends Model
         return $this->hasMany(BrandClick::class);
     }
 
+    public function metaTag()
+    {
+        return $this->hasOne(MetaTag::class);
+    }
+
     public function getFilteredLiveOffersByBrand($id,$order,$oredrType)
     {
         $brand = Brand::where('id', $id)->first();

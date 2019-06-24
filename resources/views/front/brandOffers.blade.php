@@ -8,11 +8,11 @@
         <span>{{ $brand->name }}</span> 
         <div class="popular_brands_text">
             <h5>Other Popular Brands:</h5>
-            @foreach($brands as  $brand)
+            @foreach($brands as  $b)
                 @if($loop->last)
-                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }}</a>
+                <a href="{{ route('brand.offers',['slug' => $b->slug]) }}">{{ $b->name }}</a>
                 @else
-                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">{{ $brand->name }},</a>
+                <a href="{{ route('brand.offers',['slug' => $b->slug]) }}">{{ $b->name }},</a>
                 @endif
             @endforeach
         </div>

@@ -26,6 +26,8 @@
         <form role="form"  action="{{ route('custom.seo.store') }}" method="POST">
         @elseif(Request::is('*/category'))
         <form role="form"  action="{{ route('category.seo.store') }}" method="POST">
+        @elseif(Request::is('*/brand'))
+        <form role="form"  action="{{ route('brand.seo.store') }}" method="POST">
         @else
         <form role="form"  action="{{ route('offer.seo.store') }}" method="POST">
         @endif
@@ -73,6 +75,17 @@
               <option value="">Select category</option>
               @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+              @endforeach
+              </select>
+            </div>
+            @elseif(Request::is('*/brand'))
+            <!--Category Meta Tag-->
+            <div class="form-group">
+              <label>Brand</label>
+              <select class="form-control select2 " name="brand_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option value="">Select brand</option>
+              @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
               @endforeach
               </select>
             </div>

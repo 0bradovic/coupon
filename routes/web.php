@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['permission:manage brands']], function () {
         // Brand routes
-        Route::get('/brands', 'BrandController@index');
+        Route::get('/brands', 'BrandController@index')->name('brand.index');
         Route::get('/create/brand', 'BrandController@create')->name('create.brand');
         Route::post('/store/brand', 'BrandController@store')->name('store.brand');
         Route::get('/edit/brand/{id}', 'BrandController@edit')->name('edit.brand');
@@ -203,6 +203,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/meta/category/{id}', 'SeoController@updateCategory')->name('category.seo.update');
         //Route::get('/delete/meta/category/{id}', 'SeoController@destroy')->name('category.seo.delete');
 
+        // Brand Meta Tags
+        Route::get('/meta/brand', 'SeoController@indexBrand')->name('brand.seo.index');
+        Route::get('/create/meta/brand', 'SeoController@createBrand')->name('brand.seo.create');
+        Route::post('/store/meta/brand', 'SeoController@storeBrand')->name('brand.seo.store');
+        Route::get('/edit/meta/brand/{id}', 'SeoController@editBrand')->name('brand.seo.edit');
+        Route::post('/update/meta/brand/{id}', 'SeoController@updateBrand')->name('brand.seo.update');
+
         //Custom Meta Tags
         Route::get('/meta/custom', 'SeoController@indexCustom')->name('custom.seo.index');
         Route::get('/create/meta/custom', 'SeoController@createCustom')->name('custom.seo.create');
@@ -231,5 +238,4 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-
 

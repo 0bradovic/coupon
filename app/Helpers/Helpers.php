@@ -70,6 +70,23 @@ public static function getMetaTags()
         }
     }
 
+    public static function getMetaTagsBrand($id)
+    {
+        $tag = MetaTag::where('brand_id', $id)->orWhere('is_default', true)->orderBy('is_default', 'asc')->first();
+        if($tag)
+        {
+
+            $tag = $tag->toArray();
+            return '
+                    <meta name="keywords" content="'.$tag['keywords'].'"/>
+                    <meta name="description" content="'.$tag['description'].'"/>
+                    <meta property="og:title" content="'.$tag['og_title'].'"/>
+                    <meta property="og:image" content="'.$tag['og_image'].'"/>
+                    <meta property="og:description" content="'.$tag['og_description'].'"/>';
+
+        }
+    }
+
     public static function getTagline()
     {
         return Tagline::first();

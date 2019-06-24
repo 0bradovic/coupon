@@ -28,6 +28,7 @@
                   <th>Created</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th>SEO</th>
                 </tr>
                 @foreach($brands as $brand)
                 <tr>
@@ -44,6 +45,7 @@
                   <td>{{ $brand->created_at->toFormattedDateString() }}</td>
                   <td><a href="{{ route('edit.brand', ['id' => $brand->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.brand', ['id' => $brand->id]) }}"><i class="fa fa-trash"></i></a></td>
+                  <td><a href="{{ route('brand.seo.edit', ['id' => $brand->id]) }}"><i class="fa fa-cog"></i></a></td>
                 </tr>
                 @endforeach
               </table>

@@ -7,6 +7,7 @@ use App\Offer;
 use App\Category;
 use App\MetaTag;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Brand;
 
 class SeoController extends Controller
 {
@@ -36,6 +37,12 @@ class SeoController extends Controller
         return view('seo.index',compact('metaTags'));
     }
 
+    public function indexBrand()
+    {
+        $metaTags = MetaTag::where('brand_id', '<>', null)->with('brand')->get();
+        return view('seo.index',compact('metaTags'));
+    }
+
     // public function create()
     // {
     //     $offers = Offer::all();
@@ -45,23 +52,34 @@ class SeoController extends Controller
 
     public function createOffer()
     {
+        $brands = Brand::all();
         $offers = Offer::all();
         $categories = Category::all();
-        return view('seo.create',compact('categories','offers'));
+        return view('seo.create',compact('categories','offers','brands'));
     }
 
     public function createCategory()
     {
+        $brands = Brand::all();
         $offers = Offer::all();
         $categories = Category::all();
-        return view('seo.create',compact('categories','offers'));
+        return view('seo.create',compact('categories','offers','brands'));
     }
 
     public function createCustom()
     {
+        $brands = Brand::all();
         $offers = Offer::all();
         $categories = Category::all();
-        return view('seo.create',compact('categories','offers'));
+        return view('seo.create',compact('categories','offers','brands'));
+    }
+
+    public function createBrand()
+    {
+        $brands = Brand::all();
+        $offers = Offer::all();
+        $categories = Category::all();
+        return view('seo.create',compact('categories','offers','brands'));
     }
 
     // public function store(Request $request)
@@ -126,6 +144,28 @@ class SeoController extends Controller
         // $newMetaTag->offer()->attach($request->offer_id);
 
         $newMetaTag->category()->attach($request->category_id);
+
+        return redirect()->back()->with('success', 'Successfully created new meta tag');
+    }
+
+    public function storeBrand(Request $request)
+    {
+        $newMetaTag = MetaTag::create([
+            'keywords' => $request->keywords,
+            'description' => $request->description,
+            'og_title' => $request->og_title,
+            'og_image' => $request->og_image,
+            'og_description' => $request->og_description,
+            'is_default' => $request->is_default,
+            //'link' => $request->link,
+            'title' => $request->title
+        ]);
+
+        
+
+        // $newMetaTag->offer()->attach($request->offer_id);
+
+        $newMetaTag->brand()->attach($request->brand_id);
 
         return redirect()->back()->with('success', 'Successfully created new meta tag');
     }
@@ -205,6 +245,27 @@ class SeoController extends Controller
             $metaTag->link = 'category/'.$category->slug;
             $metaTag->save();
             return view('seo.edit',compact('metaTag','category'));
+        }
+        
+    }
+
+    public function editBrand($id)
+    {
+        $brand = Brand::find($id);
+        $metaTag = MetaTag::where('brand_id', $brand->id)->first();
+        if($metaTag)
+        {
+            return view('seo.edit',compact('metaTag','brand'));
+        }
+        else
+        {
+            $metaTag = MetaTag::create([
+                'brand_id' => $brand->id
+            ]);
+            $url = env("APP_URL");
+            $metaTag->link = 'brand/'.$brand->slug;
+            $metaTag->save();
+            return view('seo.edit',compact('metaTag','brand'));
         }
         
     }
@@ -294,6 +355,29 @@ class SeoController extends Controller
 
         $categories = Category::all();
         return redirect()->route('category.index')->with('success', 'Successfully updated meta tag');
+
+        
+
+        //return redirect()->back()->with('success', 'Successfully updated meta tag');
+
+    }
+
+    public function updateBrand(Request $request, $id)
+    {
+        $metaTag = MetaTag::find($id);
+        $metaTag->update([
+            'keywords' => $request->keywords,
+            'description' => $request->description,
+            'og_title' => $request->og_title,
+            'og_image' => $request->og_image,
+            'og_description' => $request->og_description,
+            'is_default' => $request->is_default,
+            //'link' => $request->link,
+            'title' => $request->title
+        ]);
+
+        $brands = Brand::all();
+        return redirect()->route('brand.index')->with('success', 'Successfully updated meta tag');
 
         
 

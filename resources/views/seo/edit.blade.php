@@ -25,6 +25,8 @@
         <form role="form"  action="{{ route('custom.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
         @elseif(Request::is('*/category/*'))
         <form role="form"  action="{{ route('category.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
+        @elseif(Request::is('*/brand/*'))
+        <form role="form"  action="{{ route('brand.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
         @else
         <form role="form"  action="{{ route('offer.seo.update',['id' => $metaTag->id]) }}') }}" method="POST">
         @endif
@@ -72,6 +74,8 @@
             <a href="{{ route('offer.seo.index')}}" class="btn btn-xs btn-info pull-right">Skip</a>
             @elseif(Request::is('*/category/*'))
             <a href="{{ route('category.seo.index')}}" class="btn btn-xs btn-info pull-right">Skip</a>
+            @elseif(Request::is('*/brand/*'))
+            <a href="{{ route('brand.seo.index')}}" class="btn btn-xs btn-info pull-right">Skip</a>
             @endif
           </div>
         </form>

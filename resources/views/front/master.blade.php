@@ -32,6 +32,12 @@
                 {!! Helpers::getMetaTagsOffer($offer->id) !!}
             @endif
         @endif
+    @elseif(\Request::route()->getName() == 'brand.offers')
+        @if(isset($brand))
+            @if($brand != null)
+                {!! Helpers::getMetaTagsBrand($brand->id) !!}
+            @endif
+        @endif
     @else
         {!! Helpers::getMetaTags() !!} 
     @endif
