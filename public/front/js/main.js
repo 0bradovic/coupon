@@ -123,6 +123,9 @@ $(document).ready(function() {
   $(".close_popUp").on("click", function() {
     $(".fixed_btn_form").hide();
   });
+  $('.close-modal').on("click", function(){
+    $(".fixed_btn_form").hide();
+  });
   // COOKIE
   if (sessionStorage.getItem("cookie") !== "true") {
     $("body").append(`<div id="cookie">
