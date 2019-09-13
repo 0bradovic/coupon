@@ -44,7 +44,7 @@ class FrontController extends Controller
             }
             $offers = $offers->unique('id');
             $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true);
-            $category->topOffers = $offers->take(3);
+            $category->topOffers = $offers->take(5)->unique('brand_id');
         }
        return view('front.index',compact('fpCategories','slides','title'));
     }
