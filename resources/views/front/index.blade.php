@@ -6,6 +6,12 @@
     @include('front.slider')
 @endif
 <div class="container">
+<div class="big_search">
+    <label>
+        <input placeholder="Search for a brand ratailer" />
+        <i class='fa fa-search' aria-hidden='true'></i> 
+    </label>
+</div>
 <div class="offer_holder">
     @foreach($fpCategories as $fpCategory)
     <div class="offer_holder_row">
@@ -32,6 +38,7 @@
                         @else style="height:auto;width:100%"; 
                         @endif />
                     </a>
+                    <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn get_this_btn">Get This <i class="fas fa-chevron-right"></i></a>
                 @elseif($offer->img_src)
                     <?php
                         list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
@@ -43,6 +50,7 @@
                         @else style="height:auto;width:100%"; 
                         @endif />
                     </a>
+                    
                 @endif
                 </div>
                 <div class="offer_box_date">
@@ -69,9 +77,6 @@
                         {!! $offer->formatDetails($offer->detail) !!} 
                         </div>
                     </a>
-                    <div class="offer_box_text_bottom">
-                        <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
-                    </div>
                 </div>
             </div>
         </div>

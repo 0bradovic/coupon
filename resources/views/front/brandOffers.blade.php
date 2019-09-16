@@ -4,32 +4,23 @@
 <div class="container">
 <div class="category_page">
     <div class="popular_brands_row">
-        <div class="popular_brands_row_left">
         <span>{{ $brand->name }}</span> 
-        <div class="popular_brands_text">
-            <h5>Other Popular Brands:</h5>
-            @foreach($brands as  $b)
-                @if($loop->last)
-                <a href="{{ route('brand.offers',['slug' => $b->slug]) }}">{{ $b->name }}</a>
-                @else
-                <a href="{{ route('brand.offers',['slug' => $b->slug]) }}">{{ $b->name }},</a>
-                @endif
-            @endforeach
-        </div>
+        <div class="searchInContent">
+            <label>
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input class="searchInContent_input" type="text" placeholder="Search for a brand or retailer">
+            </label>
         </div>
     </div>
-    <div class="header_viewOfferButtons">
+    <!-- <div class="header_viewOfferButtons">
         <p class="header_viewNewest hidden800"><b>Viewing newest offers</b></p>
         <a href="#" class="header_btn_viewNewest ">View newest offers</a>
         <p class="header_mostPopular "><b>Viewing most popular</b></p>
         <a href="#" class="header_btn_mostPopular hidden800">View most popular</a>
-    </div>
+    </div> -->
 <div class="category_page_holder">
     <div class="category_blade">
         <div class="category_blade_row most_popular">
-            <div class="category_blade_title">
-                <span>Most Popular</span>
-            </div>
             @foreach($popularOffers as $offer)
             @if($offer->brand)
             <div class="category_blade_content">
@@ -45,7 +36,7 @@
                                 <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
                                 @else style="height:auto;width:100%";@endif />
                             </a>
-                        
+                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn get_this_btn">Get This <i class="fas fa-chevron-right"></i></a>
                         @elseif($offer->img_src)
                             <?php
                             list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
@@ -83,9 +74,6 @@
                                 {!! $offer->formatDetails($offer->detail) !!}
                             </div>
                         </a>
-                        <div class="category_blade_box_text_bottom">
-                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
