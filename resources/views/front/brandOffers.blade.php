@@ -12,15 +12,9 @@
             </label>
         </div>
     </div>
-    <!-- <div class="header_viewOfferButtons">
-        <p class="header_viewNewest hidden800"><b>Viewing newest offers</b></p>
-        <a href="#" class="header_btn_viewNewest ">View newest offers</a>
-        <p class="header_mostPopular "><b>Viewing most popular</b></p>
-        <a href="#" class="header_btn_mostPopular hidden800">View most popular</a>
-    </div> -->
 <div class="category_page_holder">
     <div class="category_blade">
-        <div class="category_blade_row most_popular">
+        <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularOffers) data-next-page="{{ $popularOffers->nextPageUrl() }}" @endif>
             @foreach($popularOffers as $offer)
             @if($offer->brand)
             <div class="category_blade_content">
@@ -81,72 +75,7 @@
             @endforeach
         </div>
         
-        <div class="category_blade_row newest_offers hidden800" >
-            <div class="category_blade_title">
-                <span>Newest offers</span>
-            </div>
-            @foreach($newestOffers as $offer)
-            @if($offer->brand)
-            <div class="category_blade_content">
-                <div class="category_blade_box">
-                    <div class="category_blade_box_img">
-                        @if($offer->brand->img_src)
-                            <?php
-                            list($width, $height, $type, $attr) = getimagesize(public_path().$offer->brand->img_src);
-                            ?>
-                             <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                            @else style="height:auto;width:100%"; 
-                            @endif>
-                                <img src="{{ $offer->brand->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                @else style="height:auto;width:100%";@endif />
-                            </a>
-                        
-                        @elseif($offer->img_src)
-                            <?php
-                            list($width, $height, $type, $attr) = getimagesize(public_path().$offer->img_src);
-                            ?>
-                             <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                            @else style="height:auto;width:100%"; 
-                            @endif>
-                                <img src="{{ $offer->img_src }}" alt="{{ $offer->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                @else style="height:auto;width:100%"; 
-                                @endif/>
-                            </a>
-                        @endif
-                    </div>
-                    <div class="category_blade_box_date">
-                        @if($offer->offerType)
-                            <span class="coupon" style="background-color:{{ $offer->offerType->color }}">{{ $offer->offerType->name }}</span>
-                        @endif
-                        <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
-                            <div class="category_blade_box_date_top">
-                                {{ $offer->name }}
-                            </div>
-                        </a>
-                        <div class="category_blade_box_date_bottom">
-                            @if($offer->endDate)
-                                <p @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>ends</p>
-                                <p @if($offer->dateFormat($offer->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>{{ $offer->frontDateFormat( $offer->endDate ) }}</p>
-                            @else
-                                <p>Ongoing</p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="category_blade_box_text">
-                        <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
-                            <div class="category_blade_box_text_top">
-                                {!! $offer->formatDetails($offer->detail) !!}
-                            </div>
-                        </a>
-                        <div class="category_blade_box_text_bottom">
-                            <a href="{{ route('get.offer',['slug' => $offer->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            @endforeach
-        </div>
+        
         
     </div>
     <div class="ad_sense">
@@ -154,150 +83,6 @@
     </div>
 </div>
     
-    <div class="offer_page_title">
-        <span>Here's more you might like...</span>
-    </div>
-    
-    <div class="offer_content">
-    <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
-            <div class="category_blade_title">
-                <span>Most Popular</span>
-            </div>
-            @if($popularSimillarOffers)
-                @foreach($popularSimillarOffers as $off)
-                @if($off->brand)
-                <div class="category_blade_content">
-                    <div class="category_blade_box">
-                        <div class="category_blade_box_img">
-                            @if($off->brand->img_src)
-                                <?php
-                                list($width, $height, $type, $attr) = getimagesize(public_path().$off->brand->img_src);
-                                ?>
-                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                                @else style="height:auto;width:100%"; 
-                                @endif>
-                                    <img src="{{ $off->brand->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                    @else style="height:auto;width:100%";@endif />
-                                </a>
-                            
-                            @elseif($off->img_src)
-                                <?php
-                                list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
-                                ?>
-                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                                @else style="height:auto;width:100%"; 
-                                @endif>
-                                    <img src="{{ $off->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                    @else style="height:auto;width:100%";@endif />
-                                    
-                                </a>
-                            @endif
-                        </div>
-                        <div class="category_blade_box_date">
-                            @if($off->offerType)
-                                <span class="coupon" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</span>
-                            @endif
-                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
-                                <div class="category_blade_box_date_top">
-                                    {{ $off->name }}
-                                </div>
-                            </a>
-                            <div class="category_blade_box_date_bottom">
-                                @if($off->endDate)
-                                    <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>ends</p>
-                                    <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>{{ $off->frontDateFormat( $off->endDate ) }}</p>
-                                @else
-                                    <p>Ongoing</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="category_blade_box_text">
-                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
-                                <div class="category_blade_box_text_top">
-                                    {!! $off->formatDetails($off->detail) !!}
-                                </div>
-                            </a>
-                            <div class="category_blade_box_text_bottom">
-                                <a href="{{ route('get.offer',['slug' => $off->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-            @endif
-    </div>
-    {{--{!! $popularSimillarOffers->links() !!}--}}
-        <div class="category_blade_row newest_offers hidden800 endless-pagination newestOffers" @if($newestSimillarOffers) data-next-page="{{ $newestSimillarOffers->nextPageUrl() }}" @endif>
-            <div class="category_blade_title">
-                <span>Newest offers</span>
-            </div>
-            @if($newestSimillarOffers)
-                @foreach($newestSimillarOffers as $off)
-                @if($off->brand)
-                <div class="category_blade_content">
-                    <div class="category_blade_box">
-                        <div class="category_blade_box_img">
-                            @if($off->brand->img_src)
-                                <?php
-                                list($width, $height, $type, $attr) = getimagesize(public_path().$off->brand->img_src);
-                                ?>
-                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                                @else style="height:auto;width:100%"; 
-                                @endif>
-                                    <img src="{{ $off->brand->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                    @else style="height:auto;width:100%";@endif />
-                                </a>
-                            
-                            @elseif($off->img_src)
-                                <?php
-                                list($width, $height, $type, $attr) = getimagesize(public_path().$off->img_src);
-                                ?>
-                                <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}" @if($height>$width) style="height:100%;width:auto;" 
-                                @else style="height:auto;width:100%"; 
-                                @endif>
-                                    <img src="{{ $off->img_src }}" alt="{{ $off->alt_tag }}" @if($height>$width) style="height:100%;width:auto;"
-                                    @else style="height:auto;width:100%";@endif />
-                                    
-                                </a>
-                            @endif
-                        </div>
-                        <div class="category_blade_box_date">
-                            @if($off->offerType)
-                                <span class="coupon" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</span>
-                            @endif
-                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
-                                <div class="category_blade_box_date_top">
-                                    {{ $off->name }}
-                                </div>
-                            </a>
-                            <div class="category_blade_box_date_bottom">
-                                @if($off->endDate)
-                                    <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>ends</p>
-                                    <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>{{ $off->frontDateFormat( $off->endDate ) }}</p>
-                                @else
-                                    <p>Ongoing</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="category_blade_box_text">
-                            <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
-                                <div class="category_blade_box_text_top">
-                                    {!! $off->formatDetails($off->detail) !!}
-                                </div>
-                            </a>
-                            <div class="category_blade_box_text_bottom">
-                                <a href="{{ route('get.offer',['slug' => $off->slug]) }}" class="redirect-btn">Get This <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-            @endif
-        </div>    
-        {{--{!! $newestSimillarOffers->links() !!}--}}
-    <div>
 </div>
 </div>
 @endsection

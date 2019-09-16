@@ -118,30 +118,16 @@ class FrontController extends Controller
         {
             $title = 'BeforeTheShop';
         }
-        $allNewestOffers = $category->getFilteredLiveOffersByCategory($category->id,'updated_at','DESC');
         $allPopularOffers = $category->getFilteredLiveOffersByCategory($category->id,'click','DESC');
-        $total = floor(count($allNewestOffers)/6);
-        $brandIds = [];
-        foreach($allNewestOffers as $offer)
-        {
-            if($offer->brand)
-            {
-                $brandIds[] = $offer->brand->id;
-            }
-        }
-        $brandIds = array_unique($brandIds);
-        $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
-        $brands = $brands->sortBy('name',SORT_REGULAR, false);
-        $newestOffers = (new Collection($allNewestOffers))->paginate(10);
+        $total = floor(count($allPopularOffers)/6);
         $popularOffers = (new Collection($allPopularOffers))->paginate(10);
         if($request->ajax()) {
             return [
-                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
                 'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
-                'next_page' => $newestOffers->nextPageUrl(),
+                'next_page' => $popularOffers->nextPageUrl(),
             ];
         }
-        return view('front.categoryOffers',compact('total','category','newestOffers','popularOffers','brands','title'));
+        return view('front.categoryOffers',compact('total','category','popularOffers','title'));
     }
 
     public function offer(Request $request,$brandSlug,$offerSlug)
@@ -179,27 +165,7 @@ class FrontController extends Controller
         {
             $title = 'BeforeTheShop';
         }
-        // $mainCategory = $offer->categories()->first();
-        // $mainCategory = Category::where('id', $mainCategory->parent_id)->where('display', true)->first();
-        $newestSimillarOffers = [];
         $popularSimillarOffers = [];
-        foreach($offer->categories as $cat)
-        {
-            if($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC'))
-            {
-                foreach($cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC') as $off)
-                {
-                    if($offer->id != $off->id)
-                    {
-                        array_push($newestSimillarOffers,$off);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-        }
         foreach($offer->categories as $cat)
         {
             if($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC'))
@@ -217,21 +183,17 @@ class FrontController extends Controller
                 }
             }
         }
-        $newestSimillarOffers = collect($newestSimillarOffers);
-
-        $total = floor(count($newestSimillarOffers)/6);
     
-        $newestSimillarOffers = (new Collection($newestSimillarOffers))->paginate(10);
         $popularSimillarOffers = collect($popularSimillarOffers);
+        $total = floor(count($popularSimillarOffers)/6);
         $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
         if($request->ajax()) {
             return [
-                'newest' => view('front.offerNewestLazyLoad')->with(compact('newestSimillarOffers'))->render(),
                 'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
-                'next_page' => $newestSimillarOffers->nextPageUrl()
+                'next_page' => $popularSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('total','offer','newestSimillarOffers','popularSimillarOffers','title'));
+        return view('front.offer',compact('total','offer','popularSimillarOffers','title'));
     }
 
     public function ajaxSearch($query)
@@ -334,49 +296,27 @@ class FrontController extends Controller
         {
             $title = 'BeforeTheShop';
         }
-        $allNewestOffers = [];
         $allPopularOffers = [];
         foreach($category->liveSubcategories as $cat)
         {
-            $allNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC');
             $allPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
         }
-        $newestOffers = new Collection();
         $popularOffers = new Collection();
-        foreach($allNewestOffers as $off)
-        {   
-            $newestOffers = $newestOffers->merge($off);
-        }
         foreach($allPopularOffers as $off)
         {   
             $popularOffers = $popularOffers->merge($off);
         }
-        $newestOffers = $newestOffers->unique('id');
         $popularOffers = $popularOffers->unique('id');
-        $total = floor(count($newestOffers)/6);
-        $brandIds = [];
-        foreach($newestOffers as $offer)
-        {
-            if($offer->brand)
-            {
-                $brandIds[] = $offer->brand->id;
-            }
-        }
-        $brandIds = array_unique($brandIds);
-        $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
-        $brands = $brands->sortBy('name',SORT_REGULAR, false);
-        $newestOffers = (new Collection($newestOffers))->sortBy('updated_at',SORT_REGULAR, true)->paginate(10);
+        $total = floor(count($popularOffers)/6);
         $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
         
         if($request->ajax()) {
             return [
-                'newest' => view('front.categoryNewestLazyLoad')->with(compact('newestOffers'))->render(),
                 'popular' => view('front.categoryPopularLazyLoad')->with(compact('popularOffers'))->render(),
-                'next_page' => $newestOffers->nextPageUrl()
+                'next_page' => $popularOffers->nextPageUrl()
             ];
         }
-        
-        return view('front.parentCategoryOffers',compact('total','newestOffers','popularOffers','category','brands','title'));
+        return view('front.parentCategoryOffers',compact('total','popularOffers','category','title'));
     }
 
     public function brandOffers(Request $request,$slug)
@@ -396,13 +336,12 @@ class FrontController extends Controller
             }
 
         }
-        $newestOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
         $popularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
-        if(count($newestOffers) > 0)
+        if(count($popularOffers) > 0)
         {
-            $total = floor(count($newestOffers)/6);
+            $total = floor(count($popularOffers)/6);
             $allCategories = [];
-            foreach($newestOffers as $offer)
+            foreach($popularOffers as $offer)
             {
                 $allCategories[] = $offer->categories;
             }
@@ -412,49 +351,15 @@ class FrontController extends Controller
                 $categories = $categories->merge($cat);
             }
             $categories = $categories->unique('id');
-            
-            $allSimilarNewestOffers = [];
-            $allSimilarPopularOffers = [];
-            foreach($categories as $cat)
-            {
-                $allSimilarNewestOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'updated_at','DESC');
-                $allSimilarPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
-            }
-            $newestSimillarOffers = new Collection();
-            $popularSimillarOffers = new Collection();
-            foreach($allSimilarNewestOffers as $off)
-            {   
-                $newestSimillarOffers = $newestSimillarOffers->merge($off);
-            }
-            foreach($allSimilarPopularOffers as $off)
-            {   
-                $popularSimillarOffers = $popularSimillarOffers->merge($off);
-            }
-            $newestSimillarOffers = $newestSimillarOffers->unique('id');
-            $popularSimillarOffers = $popularSimillarOffers->unique('id');
-            $brandIds = [];
-            foreach($newestSimillarOffers as $offer)
-            {
-                if($offer->brand)
-                {
-                    $brandIds[] = $offer->brand->id;
-                }
-            }
-            $brandIds = array_unique($brandIds);
-            $brands = Brand::whereIn('id',$brandIds)->orderBy('click','DESC')->limit(8)->get();
-            $brands = $brands->sortBy('name',SORT_REGULAR, false);
-
-            $newestSimillarOffers = (new Collection($newestSimillarOffers))->sortBy('updated_at',SORT_REGULAR, true)->paginate(10);
-            $popularSimillarOffers = (new Collection($popularSimillarOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
+            $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
             
             if($request->ajax()) {
                 return [
-                    'newest' => view('front.offerNewestLazyLoad')->with(compact('newestSimillarOffers'))->render(),
-                    'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
-                    'next_page' => $newestSimillarOffers->nextPageUrl(),
+                    'popular' => view('front.offerPopularLazyLoad')->with(compact('popularOffers'))->render(),
+                    'next_page' => $popularOffers->nextPageUrl(),
                 ];
             }
-            return view('front.brandOffers',compact('total','newestOffers','popularOffers','brand','brands','newestSimillarOffers','popularSimillarOffers','title'));
+            return view('front.brandOffers',compact('total','popularOffers','brand','title'));
         }
         else
         {
