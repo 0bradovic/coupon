@@ -101,7 +101,7 @@ $(document).ready(function() {
   
      function fetchPosts() {
   
-         var page = $('.endless-pagination').data('next-page');
+         var page = $('.mostPopularOffers').data('next-page');
        
          if(page !== null && page !== '') {
   
