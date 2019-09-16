@@ -1233,12 +1233,15 @@ header {
   border: none;
 }
 
-.popular_brands_row label i {
+.popular_brands_row label button {
   position: absolute;
   top: 8px;
   left: 8px;
   color: rgb(175, 175, 175);
   font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .popular_brands_row label input {
@@ -1514,9 +1517,20 @@ header {
 }
 
 .single_offer_img {
-  width: 130px;
+  width: 150px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.single_offer_img a:nth-child(1) {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .single_offer_img {
+    width: 100px;
+  }
 }
 
 .single_offer_img img {
@@ -1779,8 +1793,12 @@ small {
 }
 
 @media (max-width: 500px) {
-  .single_offer_img {
-    width: 20%;
+  .single_offer_img a:nth-child(1) {
+    height: calc(100% - 30px) !important;
+    margin-bottom: 0 !important;
+  }
+  .single_offer_img a:nth-child(1) img {
+    height: 100% !important;
   }
   small {
     font-size: 12px;
@@ -1817,7 +1835,7 @@ small {
 }
 
 .search_page .category_blade_box_img {
-  width: 80px;
+  width: 150px;
 }
 
 .search_page .category_blade_box_img img {
@@ -1827,11 +1845,6 @@ small {
 .search_page_offer_title {
   padding-left: 10px !important;
 }
-
-.search_page .category_blade_box_text {
-  width: 30%;
-}
-
 .ad_sense_holder_search_page {
   width: 350px;
   margin-left: auto;
@@ -1841,6 +1854,8 @@ small {
   width: 350px;
   height: 200px;
 }
+
+
 
 @media (max-width: 1300px) {
   .search_page .category_blade_box_text_top {
@@ -2439,20 +2454,20 @@ button#newsletter_submit {
 }
 
 @media (max-width: 600px) {
-  .searchInContent label .searchInContent_input{
+  .searchInContent label .searchInContent_input {
     height: 35px !important;
     font-size: 16px;
   }
   .searchInContent label .searchInContent_input::placeholder {
     font-size: 16px !important;
   }
-  .searchInContent label i {
-    top: 8px !important;
+  .searchInContent label button {
+    top: 5px !important;
   }
 }
 
 @media (max-width: 400px) {
-  .searchInContent label .searchInContent_input{
+  .searchInContent label .searchInContent_input {
     font-size: 12px !important;
   }
   .searchInContent label .searchInContent_input::placeholder {
