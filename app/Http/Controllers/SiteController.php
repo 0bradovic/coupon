@@ -136,14 +136,25 @@ class SiteController extends Controller
         return redirect()->back()->with('success', 'Successfully updated favicon.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function editSearchText()
     {
-        //
+        $siteSetings = SiteSetings::first();
+        return view('site-setings.search-text',compact('siteSetings'));
+    }
+
+    public function updateSearchText(Request $request)
+    {
+        $this->validate($request,[
+            'front_page_search_text' => 'required',
+            'category_page_search_text' => 'required',
+            'brand_page_search_text' => 'required',
+        ]);
+        $siteSetings = SiteSetings::first();
+        $siteSetings->update([
+            'front_page_search_text' => $request->front_page_search_text,
+            'category_page_search_text' => $request->category_page_search_text,
+            'brand_page_search_text' => $request->brand_page_search_text,
+        ]);
+        return redirect()->back()->with('success', 'Successfully updated search text.');
     }
 }

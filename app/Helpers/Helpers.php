@@ -143,4 +143,43 @@ public static function getMetaTags()
         return RedirectPopup::first();
     }
 
+    public static function getIndexSearchText()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->front_page_search_text;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getCategorySearchText()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->category_page_search_text;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getBrandSearchText()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->brand_page_search_text;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

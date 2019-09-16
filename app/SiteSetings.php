@@ -8,7 +8,7 @@ class SiteSetings extends Model
 {
     
     protected $fillable = [
-        'logo',
+        'logo', 'favicon', 'front_page_search_text', 'category_page_search_text', 'brand_page_search_text',
     ];
 
 }

@@ -17,6 +17,9 @@ class CreateSiteSetingsTable extends Migration
             $table->increments('id');
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
+            $table->string('front_page_search_text');
+            $table->string('category_page_search_text');
+            $table->string('brand_page_search_text');
             $table->timestamps();
         });
     }

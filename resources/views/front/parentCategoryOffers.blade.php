@@ -6,10 +6,12 @@
     <div class="popular_brands_row">
         <span>{{ $category->name }}</span> 
         <div class="searchInContent">
+            <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
             <label>
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <input class="searchInContent_input" type="text" placeholder="Search for a brand or retailer">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <input class="searchInContent_input" type="text" name="search" placeholder="{{ Helpers::getCategorySearchText() }}">
             </label>
+            </form>
         </div>
     </div>
 <div class="category_page_holder">

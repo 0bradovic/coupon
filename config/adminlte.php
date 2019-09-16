@@ -121,6 +121,10 @@ return [
                     'text' => 'Favicon',
                     'url' => '/site-setings/favicon',
                 ],
+                [
+                    'text' => 'Search Text',
+                    'url' => '/site-setings/edit/search-text',
+                ],
             ],
         ],
         'USERS',

@@ -235,6 +235,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/site-setings/favicon', 'SiteController@indexFavicon');
         Route::post('/site-setings/upload/favicon', 'SiteController@storeFavicon')->name('store.favicon');
         Route::post('/site-setings/update/favicon', 'SiteController@updateFavicon')->name('update.favicon');
+        // Search text
+        Route::get('/site-setings/edit/search-text', 'SiteController@editSearchText')->name('edit.search-text');
+        Route::post('/site-setings/update/search-text', 'SiteController@updateSearchText')->name('update.search-text');
     });
 
 });

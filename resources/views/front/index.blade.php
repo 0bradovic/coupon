@@ -7,10 +7,12 @@
 @endif
 <div class="container">
 <div class="big_search">
+    <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
     <label>
-        <input placeholder="Search for a brand ratailer" />
-        <i class='fa fa-search' aria-hidden='true'></i> 
+        <input placeholder="{{ Helpers::getIndexSearchText() }}" name="search" />
+        <button type="submit"><i class='fa fa-search' aria-hidden='true'></i></button>
     </label>
+    </form>
 </div>
 <div class="offer_holder">
     @foreach($fpCategories as $fpCategory)
