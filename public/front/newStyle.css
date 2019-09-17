@@ -160,12 +160,6 @@ header {
   }
 }
 
-@media (max-width: 1250px) {
-  .popular_brands_row {
-    padding: 10px 0 !important;
-    padding-left: 10px !important;
-  }
-}
 
 @media (max-width: 970px) {
   .popular_brands_row_left {
@@ -1212,7 +1206,7 @@ header {
 
 .popular_brands_row {
   padding: 10px;
-  padding-right: 0px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1417,22 +1411,6 @@ header {
   justify-content: center;
 }
 
-.parentCategory_searchInContent {
-  margin-right: 170px !important;
-}
-
-.category_searchInContent {
-  margin-right: 170px !important;
-}
-
-@media (max-width: 800px) {
-  .parentCategory_searchInContent {
-    margin-right: 10px !important;
-  }
-  .category_searchInContent {
-    margin-right: 10px !important;
-  }
-}
 
 .category_blade_box_img a:nth-child(1) img {
   width: 60px !important;
@@ -2543,7 +2521,7 @@ button#newsletter_submit {
 }
 
 .searchInContent {
-  width: calc(100% - 160px);
+  width: 90%;
 }
 
 @media (max-width: 800px) {

@@ -3,6 +3,8 @@
 @section('content')
 <div class="container">
 <div class="category_page">
+<div class="category_page_holder">
+    <div class="category_blade">
     <div class="popular_brands_row">
         <span>{{ $brand->name }}</span> 
         <div class="searchInContent">
@@ -14,8 +16,6 @@
             </form>
         </div>
     </div>
-<div class="category_page_holder">
-    <div class="category_blade">
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularOffers) data-next-page="{{ $popularOffers->nextPageUrl() }}" @endif>
             @foreach($popularOffers as $offer)
             @if($offer->brand)
