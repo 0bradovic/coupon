@@ -5,7 +5,7 @@
 <div class="category_page">
     <div class="popular_brands_row">
         <span>{{ $brand->name }}</span> 
-        <div class="searchInContent">
+        <div class="searchInContent brand_searchInContent">
             <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
             <label>
                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
