@@ -67,7 +67,7 @@
                     <div class="category_blade_box_text">
                         <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                             <div class="category_blade_box_text_top">
-                                {!! $offer->formatDetails($offer->detail) !!}
+                                {!! $offer->formatFullDetails($offer->detail) !!}
                             </div>
                         </a>
                     </div>

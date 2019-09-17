@@ -141,6 +141,25 @@ class Offer extends Model
         return $newString;
     }
 
+    public function formatFullDetails($string)
+    {
+        $findbr = ["<br>","</br>"];
+        $replacebr = "";
+        $string = str_replace($findbr,$replacebr,$string);
+        $findAmp = ['&amp;'];
+        $replaceAmp = ['&'];
+        $string = str_replace($findAmp,$replaceAmp,$string);
+        $findNbs = ['&nbsp;'];
+        $replaceNbs = [' '];
+        $string = str_replace($findNbs,$replaceNbs,$string);
+        $search = ["</p>","</div>"]; 
+        $replace = ". ";  
+        $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/"; 
+        $newString = strip_tags(str_replace($search,$replace,preg_replace($pattern, '',$string)));
+        
+        return $newString;
+    }
+
     public function formatDetailsSearch($string)
     {
         $findbr = ["<br>","</br>"];

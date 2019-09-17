@@ -214,7 +214,7 @@ class FrontController extends Controller
         $brand = Brand::where('name','LIKE','%'. $request->search . '%')->first();
         if($brand != null)
         {
-            $offers = $brand->getFilteredLiveOffersByBrand($brand->id,'updated_at','DESC');
+            $offers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
             if(count($offers) > 0)
             {
                 return redirect()->route('brand.offers', [$brand->slug]);

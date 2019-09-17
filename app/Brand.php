@@ -49,7 +49,7 @@ class Brand extends Model
         {
             if($offer->startDate <= Carbon::now())
             {
-                if($offer->endDate > Carbon::now() || $offer->endDate==null)
+                if($offer->endDate > Carbon::now() || $offer->endDate==null && $offer->display == 1)
                 {
                     array_push($offers,$offer);
                 }

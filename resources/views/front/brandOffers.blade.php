@@ -67,7 +67,7 @@
                     <div class="category_blade_box_text">
                         <a href="{{ route('offer',['brandSlug' => $offer->brand->slug , 'offerSlug' => $offer->slug]) }}">
                             <div class="category_blade_box_text_top">
-                                {!! $offer->formatDetails($offer->detail) !!}
+                                {!! $offer->formatFullDetails($offer->detail) !!}
                             </div>
                         </a>
                     </div>
@@ -100,7 +100,7 @@ $(document).ready(function() {
   
      function fetchPosts() {
   
-         var page = $('.newestOffers').data('next-page');
+         var page = $('.mostPopularOffers').data('next-page');
          if(page !== null && page !== '') {
   
              clearTimeout( $.data( this, "scrollCheck" ) );
@@ -113,17 +113,15 @@ $(document).ready(function() {
                         if( localStorage.getItem('req') != page){
                             localStorage.setItem('req',page);
                             $.get(page, function(data){
-                                $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
-                                $('.newestOffers').data('next-page', data.next_page);
+                                $('.mostPopularOffers').data('next-page', data.next_page);
                             });
                         }
                     }else{
                         localStorage.setItem('req',page);
                         $.get(page, function(data){
-                                $('.newestOffers').append(data.newest);
                                 $('.mostPopularOffers').append(data.popular);
-                                $('.newestOffers').data('next-page', data.next_page);
+                                $('.mostPopularOffers').data('next-page', data.next_page);
                             });
                     }
                  }
