@@ -176,6 +176,15 @@ header {
   }
 }
 
+.brand_offers .popular_brands_row {
+  height: 50px;
+  margin-top: 10px;
+}
+
+.brand_offers .category_blade {
+  display: block !important;
+}
+
 @media (max-width: 800px) {
   .popular_brands_row_right {
     display: none !important;
@@ -2437,16 +2446,6 @@ button#newsletter_submit {
   display: flex;
   justify-content: center;
   background: rgba(0, 0, 0, 0.527);
-}
-
-.brand_searchInContent {
-  margin-right: 180px !important;
-}
-
-@media (max-width: 800px) {
-  .brand_searchInContent {
-    margin-right: 10px !important;
-  }
 }
 
 .popUp_redirect .popUp_redirect_holder {

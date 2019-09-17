@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<div class="category_page">
+<div class="category_page brand_offers">
 <div class="category_page_holder">
     <div class="category_blade">
     <div class="popular_brands_row">
