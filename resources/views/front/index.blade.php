@@ -19,7 +19,7 @@
     <div class="offer_holder_row">
         <div class="offer_holder_row_title">
             <span>
-                Top {{ $fpCategory->name }} offers
+                Top offers in {{ $fpCategory->name }}
             </span>
                 <a href="{{ route('parent.category.offers',['slug' => $fpCategory->slug]) }}">
                     <h3>See all {{ $fpCategory->countOfParentCatLiveOffers($fpCategory->id) }} offers</h3>
