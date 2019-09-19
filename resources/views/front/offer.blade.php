@@ -3,6 +3,10 @@
 @section('content')
 <div class="offer_page">
     <div class="container">
+    
+    
+    <div class="offer_content">
+    <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
     <div class="single_offer">
         <div class="single_offer_img">
             @if($offer->brand)
@@ -80,12 +84,11 @@
     <div class="offer_page_title">
         <span>Here's more you might like...</span>
     </div>
-    <div class="offer_content">
-    <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
             @if($popularSimillarOffers)
                 @foreach($popularSimillarOffers as $off)
                 @if($off->brand)
                 <div class="category_blade_content">
+                
                     <div class="category_blade_box">
                         <div class="category_blade_box_img">
                             @if($off->brand->img_src)
