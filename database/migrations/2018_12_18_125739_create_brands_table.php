@@ -22,6 +22,7 @@ class CreateBrandsTable extends Migration
             $table->string('url')->nullable();
             $table->text('description')->nullable();
             $table->integer('click')->default(0);
+            $table->integer('fp_position')->nullable();
             $table->timestamps();
         });
     }

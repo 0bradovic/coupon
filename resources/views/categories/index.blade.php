@@ -36,6 +36,7 @@
                   <th>Position</th>
                   <th>Created</th>
                   <th>Display</th>
+                  <th>Brands</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>SEO</th>
@@ -59,6 +60,7 @@
                   @else
                   <td> <a href="{{ route('display.category', ['id' => $category->id]) }}" class="btn btn-danger">No</a></td>
                   @endif
+                  <td><a href="{{ route('top-brands.category',['id' => $category->id]) }}"><i class="fa fa-registered"></i></a></td>
                   <td><a href="{{ route('edit.category', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.category', ['id' => $category->id]) }}"><i class="fa fa-trash"></i></a></td>
                   <td><a href="{{ route('category.seo.edit', ['id' => $category->id]) }}"><i class="fa fa-cog"></i></a></td>

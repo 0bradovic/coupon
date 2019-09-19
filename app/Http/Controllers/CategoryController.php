@@ -9,6 +9,7 @@ use Illuminate\Routing\UrlGenerator;
 use App\Undo;
 use App\Offer;
 use App\ExcludeKeywords;
+use App\Brand;
 
 
 class CategoryController extends Controller
@@ -521,6 +522,68 @@ class CategoryController extends Controller
         $category->fp_position = $request->fp_position;
         $category->save();
         return redirect()->back()->with('success', 'Successfully updated front page position for '.$category->name.'.');
+    }
+
+    public function topBrands($id)
+    {
+        $category = Category::find($id);
+        $brandIds = [];
+        if($category->parent_id == null)
+        {
+            foreach($category->subcategories as $cat)
+            {
+                foreach($cat->offers as $offer)
+                {
+                    if($offer->brand)
+                    {
+                        array_push($brandIds,$offer->brand_id);
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach($category->offers as $offer)
+            {
+                if($offer->brand)
+                {
+                    array_push($brandIds,$offer->brand_id);
+                }
+            }
+        }
+        $brandIds = array_unique($brandIds);
+        $brands = Brand::find($brandIds);
+        return view('categories.category-brands',compact('category','brands'));
+    }
+
+    public function updateTopBrands(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if($category->brands)
+        {
+            $category->brands()->detach();
+        }
+        if($request->brands)
+        {
+            foreach($request->brands as $brand)
+            {
+                if($brand['position'] != null)
+                {
+                    $category->brands()->attach($brand['id'], ['position' => $brand['position']]);
+                }
+            
+            }
+        }
+        
+        return redirect()->back()->with('success', 'Successfully updated top brands for '.$category->name);
+    }
+
+    public function categoryBrands($id)
+    {
+        $category = Category::find($id);
+        return response()->json([
+            'brands' => $category->orderedBrands,
+        ]);
     }
 
 }

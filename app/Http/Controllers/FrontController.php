@@ -46,7 +46,8 @@ class FrontController extends Controller
             $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true);
             $category->topOffers = $offers->unique('brand_id')->take(5);
         }
-       return view('front.index',compact('fpCategories','slides','title'));
+        $topBrands = Brand::where('fp_position','<>',null)->orderBy('fp_position')->limit(10)->get();
+       return view('front.index',compact('fpCategories','slides','title','topBrands'));
     }
     
     public function getCustomPage($slug)
@@ -101,6 +102,7 @@ class FrontController extends Controller
     public function categoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->first();
+        $topBrands = $category->orderedBrands()->limit(10)->get();
         $tag = $category->metaTag;
         if($tag != null)
         {
@@ -127,7 +129,7 @@ class FrontController extends Controller
                 'next_page' => $popularOffers->nextPageUrl(),
             ];
         }
-        return view('front.categoryOffers',compact('total','category','popularOffers','title'));
+        return view('front.categoryOffers',compact('total','category','popularOffers','title','topBrands'));
     }
 
     public function offer(Request $request,$brandSlug,$offerSlug)

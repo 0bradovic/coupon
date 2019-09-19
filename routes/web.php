@@ -63,6 +63,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/front-page/categories', 'CategoryController@frontPageCategories')->name('front-page.categories');
         Route::post('/update/front-page/category/{id}', 'CategoryController@updateFrontPagePosition')->name('update.front-page.category');
+
+        Route::get('/category/top-brands/{id}', 'CategoryController@topBrands')->name('top-brands.category');
+        Route::post('/update/category/top-brands/{id}', 'CategoryController@updateTopBrands')->name('top-brands.category.update');
+
+        Route::get('/category-brands/{id}', 'CategoryController@categoryBrands');
     });
 
     Route::group(['middleware' => ['permission:manage offer types']], function () {
@@ -86,6 +91,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/brand/{id}', 'BrandController@edit')->name('edit.brand');
         Route::post('/update/brand/{id}', 'BrandController@update')->name('update.brand');
         Route::get('/delete/brand/{id}', 'BrandController@destroy')->name('delete.brand');
+
+        Route::get('/remove-from-homepage/brand/{id}', 'BrandController@removeFromHomepage')->name('remove-from-fp.brand');
+        Route::post('/update-homepage-position/{id}', 'BrandController@updateHomepagePosition')->name('update-fp-position');
     });
 
     Route::group(['middleware' => ['permission:manage offers']], function () {

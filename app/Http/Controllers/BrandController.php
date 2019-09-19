@@ -189,4 +189,37 @@ class BrandController extends Controller
         $brand->delete();
         return redirect()->back()->with('success', 'Successfully deleted brand '.$name);
     }
+
+    public function removeFromHomepage($id)
+    {
+        $brand = Brand::find($id);
+        if($brand)
+        {
+            $brand->fp_position = null;
+            $brand->save();
+            return redirect()->back()->with('success', 'Successfully removed '.$brand->name.' from homepage.');
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['Brand not found.']);
+        }
+    }
+
+    public function updateHomepagePosition(Request $request,$id)
+    {
+        $this->validate($request,[
+            'position' => 'required',
+        ]);
+        $brand = Brand::find($id);
+        if($brand)
+        {
+            $brand->fp_position = $request->position;
+            $brand->save();
+            return redirect()->back()->with('success', 'Successfully updated '.$brand->name.' homepage position.');
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['Brand not found.']);
+        }
+    }
 }

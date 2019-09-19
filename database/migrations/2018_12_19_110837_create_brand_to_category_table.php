@@ -14,10 +14,11 @@ class CreateBrandToCategoryTable extends Migration
     public function up()
     {
         Schema::create('brand_to_category', function (Blueprint $table) {
-            //$table->increments('id');
+            $table->increments('id');
             $table->integer('brand_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
-            //$table->timestamps();
+            $table->integer('position');
+            $table->timestamps();
         });
     }
 
