@@ -14,6 +14,16 @@
     </label>
     </form>
 </div>
+@if(count($topBrands) > 0)
+<div class="home_top_brands">
+        <p>Top Brands</p>
+        @foreach($topBrands as $brand)
+            <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">
+                <img src="{{ $brand->img_src }}" style="height:100px;width:auto;">
+            </a>
+        @endforeach
+</div>
+@endif
 <div class="offer_holder">
     @foreach($fpCategories as $fpCategory)
     <div class="offer_holder_row">

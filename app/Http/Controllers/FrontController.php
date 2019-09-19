@@ -281,6 +281,7 @@ class FrontController extends Controller
     public function parentCategoryOffers(Request $request,$slug)
     {
         $category = Category::where('slug',$slug)->where('display', true)->with('liveSubcategories')->first();
+        $topBrands = $category->orderedBrands()->limit(10)->get();
         $tag = $category->metaTag;
         if($tag != null)
         {
@@ -318,7 +319,7 @@ class FrontController extends Controller
                 'next_page' => $popularOffers->nextPageUrl()
             ];
         }
-        return view('front.parentCategoryOffers',compact('total','popularOffers','category','title'));
+        return view('front.parentCategoryOffers',compact('total','popularOffers','category','title','topBrands'));
     }
 
     public function brandOffers(Request $request,$slug)
