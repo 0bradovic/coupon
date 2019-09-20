@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/download/offer', 'OfferController@downloadOffer')->name('download.offer');
         Route::get('/download/offer/search', 'OfferController@downloadOfferSearch')->name('search.offers.download');
 
+        Route::post('/update/offer/homepage-position/{id}', 'OfferController@updateHomepagePosition')->name('update.homepage-position.offer');
     });
 
     Route::group(['middleware' => ['permission:manage tags']], function () {

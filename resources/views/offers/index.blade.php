@@ -93,6 +93,7 @@
                   <th>Author</th>
                   <th>Clicks p.24h</th>
                   <th>Date/Time Last Edited</th>
+                  <th>Homepage</th>
                   <th>Display</th>
                   <th>Copy</th>
                   <th>Edit</th>
@@ -114,6 +115,25 @@
                   @else
                   <td>{{ $offer->updated_at->toDayDateTimeString() }}</td>
                   @endif
+                  <td>
+                    @if($offer->fp_position == null)
+                      <button type="button" class="btn btn-secondary fp-position">N/A</button>
+                      <form method="POST" action="{{ route('update.homepage-position.offer',['id' => $offer->id]) }}" style="display:none;">
+                        <input type="number" name="position" placeholder="Position" style="width:70px;" max="100">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        <button type="button" class="btn btn-sm btn-secondary cancel-btn">Cancel</button>
+                        {!! csrf_field() !!}
+                      </form>
+                    @else
+                      <button type="button" class="btn btn-primary fp-position">{{ $offer->fp_position }}</button>
+                      <form method="POST" action="{{ route('update.homepage-position.offer',['id' => $offer->id]) }}" style="display:none;">
+                        <input type="number" name="position" placeholder="Position" value="{{ $offer->fp_position }}" style="width:70px;" max="100">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        <button type="button" class="btn btn-sm btn-secondary cancel-btn">Cancel</button>
+                        {!! csrf_field() !!}
+                      </form>
+                    @endif
+                  </td>
                   @if($offer->display==1)
                   <td> <a href="{{ route('display.offer', ['id' => $offer->id]) }}" class="btn btn-success">Yes</a></td>
                   @else
@@ -165,5 +185,15 @@
       var term = e.target.value;
       $('#hdn-term-input').val(term);
     })
+</script>
+<script type="text/javascript">
+  $('.fp-position').click(function(){
+    $(this).hide();
+    $(this).next().show();
+  });
+  $('.cancel-btn').click(function(){
+    $(this).parent().hide();
+    $(this).parent().prev().show();
+  });
 </script>
 @endsection

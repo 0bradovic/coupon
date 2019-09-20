@@ -1265,4 +1265,12 @@ class OfferController extends Controller
         }
     }
 
+    public function updateHomepagePosition(Request $request,$id)
+    {
+        $offer = Offer::find($id);
+        $offer->fp_position = $request->position;
+        $offer->save();
+        return redirect()->back()->with('success','Successfully updated homepage position for '.$offer->name);
+    }
+
 }

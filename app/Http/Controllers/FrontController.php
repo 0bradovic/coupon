@@ -44,7 +44,9 @@ class FrontController extends Controller
             }
             $offers = $offers->unique('id');
             $offers = (new Collection($offers))->sortBy('click',SORT_REGULAR, true);
-            $category->topOffers = $offers->unique('brand_id')->take(5);
+            $fpOffers = $offers->where('fp_position','!=',null)->sortBy('fp_position');
+            $fpOffers = $fpOffers->concat($offers);
+            $category->topOffers = $fpOffers->unique('id')->unique('brand_id')->take(5);
         }
         $topBrands = Brand::where('fp_position','<>',null)->orderBy('fp_position')->limit(10)->get();
        return view('front.index',compact('fpCategories','slides','title','topBrands'));

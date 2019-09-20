@@ -32,6 +32,7 @@ class CreateOffersTable extends Migration
             $table->integer('position')->nullable();
             $table->boolean('display')->default(1);
             $table->integer('click')->default(0);
+            $table->integer('fp_position')->nullable();
             $table->timestamps();
         });
     }
