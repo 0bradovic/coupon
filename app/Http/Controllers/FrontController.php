@@ -342,6 +342,7 @@ class FrontController extends Controller
 
         }
         $popularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+        $brandOffersIds = $popularOffers->pluck('id')->toArray();
         if(count($popularOffers) > 0)
         {
             $total = floor(count($popularOffers)/6);
@@ -356,15 +357,27 @@ class FrontController extends Controller
                 $categories = $categories->merge($cat);
             }
             $categories = $categories->unique('id');
-            $popularOffers = (new Collection($popularOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
+            $allSimilarPopularOffers = [];
+            foreach($categories as $cat)
+            {
+                $allSimilarPopularOffers[] = $cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC');
+            }
+            $popularSimillarOffers = new Collection();
+            foreach($allSimilarPopularOffers as $off)
+            {   
+                $popularSimillarOffers = $popularSimillarOffers->merge($off);
+            }
+            $popularSimillarOffers = $popularSimillarOffers->unique('id');
+            $popularSimillarOffers = $popularSimillarOffers->whereNotIn('id', $brandOffersIds);
+            $popularSimillarOffers = (new Collection($popularSimillarOffers))->sortBy('click',SORT_REGULAR, true)->paginate(10);
             
             if($request->ajax()) {
                 return [
-                    'popular' => view('front.offerPopularLazyLoad')->with(compact('popularOffers'))->render(),
-                    'next_page' => $popularOffers->nextPageUrl(),
+                    'popular' => view('front.offerPopularLazyLoad')->with(compact('popularSimillarOffers'))->render(),
+                    'next_page' => $popularSimillarOffers->nextPageUrl(),
                 ];
             }
-            return view('front.brandOffers',compact('total','popularOffers','brand','title'));
+            return view('front.brandOffers',compact('total','popularOffers','brand','title','popularSimillarOffers'));
         }
         else
         {
