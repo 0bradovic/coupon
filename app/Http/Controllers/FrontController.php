@@ -170,6 +170,7 @@ class FrontController extends Controller
             $title = 'BeforeTheShop';
         }
         $popularSimillarOffers = [];
+        $sameBrandOffers = [];
         foreach($offer->categories as $cat)
         {
             if($cat->getFilteredLiveOffersByCategory($cat->id,'click','DESC'))
@@ -178,7 +179,14 @@ class FrontController extends Controller
                 {
                     if($offer->id != $off->id)
                     {
-                        array_push($popularSimillarOffers,$off);
+                        if($offer->brand_id != $off->brand_id)
+                        {
+                            array_push($popularSimillarOffers,$off);
+                        }
+                        else
+                        {
+                            array_push($sameBrandOffers,$off);
+                        }
                     }
                     else
                     {
@@ -189,6 +197,9 @@ class FrontController extends Controller
         }
     
         $popularSimillarOffers = collect($popularSimillarOffers);
+        $sameBrandOffers = collect($sameBrandOffers);
+        $sameBrandOffers = $sameBrandOffers->unique('id');
+        $popularSimillarOffers =  $popularSimillarOffers->unique('id');
         $total = floor(count($popularSimillarOffers)/6);
         $popularSimillarOffers = (new Collection($popularSimillarOffers))->paginate(10);
         if($request->ajax()) {
@@ -197,7 +208,7 @@ class FrontController extends Controller
                 'next_page' => $popularSimillarOffers->nextPageUrl()
             ];
         }
-        return view('front.offer',compact('total','offer','popularSimillarOffers','title'));
+        return view('front.offer',compact('total','offer','popularSimillarOffers','title','sameBrandOffers'));
     }
 
     public function ajaxSearch($query)
