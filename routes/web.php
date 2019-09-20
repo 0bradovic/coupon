@@ -94,6 +94,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/remove-from-homepage/brand/{id}', 'BrandController@removeFromHomepage')->name('remove-from-fp.brand');
         Route::post('/update-homepage-position/{id}', 'BrandController@updateHomepagePosition')->name('update-fp-position');
+
+        Route::get('/brand/offers/{id}', 'BrandController@brandOffers')->name('offers.brand');
+        Route::get('/brand/set-top-offer/{id}', 'BrandController@setTopOffer')->name('set-top-offer.brand');
+        Route::get('/brand/unset-top-offer/{id}', 'BrandController@unsetTopOffer')->name('unset-top-offer.brand');
     });
 
     Route::group(['middleware' => ['permission:manage offers']], function () {
@@ -247,6 +251,9 @@ Route::middleware('auth')->group(function () {
         // Search text
         Route::get('/site-setings/edit/search-text', 'SiteController@editSearchText')->name('edit.search-text');
         Route::post('/site-setings/update/search-text', 'SiteController@updateSearchText')->name('update.search-text');
+        // Top offer icon
+        Route::get('/site-setings/top-icon', 'SiteController@indexTopIcon');
+        Route::post('/site-setings/update/top-icon', 'SiteController@updateTopIcon')->name('update.top-icon');
     });
 
 });

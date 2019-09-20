@@ -20,6 +20,7 @@ class CreateSiteSetingsTable extends Migration
             $table->string('front_page_search_text');
             $table->string('category_page_search_text');
             $table->string('brand_page_search_text');
+            $table->string('top_icon');
             $table->timestamps();
         });
     }

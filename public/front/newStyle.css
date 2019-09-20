@@ -598,6 +598,34 @@ header {
   }
 }
 
+@media (max-width: 700px) {
+  .single_offer_text_top small {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .single_offer_text_top small {
+    font-size: 10px !important;
+  }
+  .single_offer_text_top {
+    line-height: 1.2;
+  }
+  .category_blade_box_text_top {
+    line-height: 1.2 !important;
+    font-size: 10px !important; 
+  }
+  .single_offer_text .single_blade_top_img img {
+    width: 45px !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .navbar-brand {
+    margin-left: 20px !important;
+  }
+}
+
 /* END HEADER */
 
 /* START MOBILE NAVIGATION */
@@ -1466,6 +1494,8 @@ header {
 .category_blade_box_text {
   width: 50%;
   margin: 0 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .category_blade_box_text_top {
@@ -1479,6 +1509,22 @@ header {
   display: flex;
   align-items: flex-end;
   color: #fff;
+}
+
+.single_blade_top_img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .single_blade_top_img img {
+    width: 70px !important;
+    height: auto !important;
+  }
+  .single_offer_img {
+    width: 100px !important;
+  }
 }
 
 .category_blade_box_text_bottom a {
@@ -2695,5 +2741,4 @@ aaa
   .home_top_brands_images a img {
     width: 30px !important;
   }
-}
 }

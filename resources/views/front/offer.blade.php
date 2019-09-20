@@ -57,6 +57,11 @@
                     {!! $offer->detail !!}
                 </div>
             </a>
+            @if($offer->top == 1)
+                <div class="single_blade_top_img">   
+                    <img src="{{ Helpers::getTopOfferIcon() }}" style="height:100px;width:auto;">
+                </div>
+            @endif
             <div class="share_me">
             <p>Share Me!</p>
             <div class="share_me_item facebook">
@@ -139,6 +144,11 @@
                                     {!! $off->formatFullDetails($off->detail) !!}
                                 </div>
                             </a>
+                            @if($off->top == 1)
+                            <div class="single_blade_top_img">   
+                                <img src="{{ Helpers::getTopOfferIcon() }}" style="height:100px;width:auto;">
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -205,6 +215,11 @@
                                     {!! $off->formatFullDetails($off->detail) !!}
                                 </div>
                             </a>
+                            @if($off->top == 1)
+                            <div>   
+                                <img src="{{ Helpers::getTopOfferIcon() }}" style="height:100px;width:auto;">
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

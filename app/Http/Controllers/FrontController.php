@@ -353,6 +353,12 @@ class FrontController extends Controller
 
         }
         $popularOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+        $topOffers = $popularOffers->where('top',1);
+        if(count($topOffers) > 0)
+        {
+            $popularOffers =  $topOffers->concat($popularOffers);
+            $popularOffers = $popularOffers->unique('id');
+        }
         $brandOffersIds = $popularOffers->pluck('id')->toArray();
         if(count($popularOffers) > 0)
         {

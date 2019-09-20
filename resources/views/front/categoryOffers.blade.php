@@ -84,6 +84,11 @@
                                 {!! $offer->formatFullDetails($offer->detail) !!}
                             </div>
                         </a>
+                        @if($offer->top == 1)
+                        <div class="single_blade_top_img">   
+                            <img src="{{ Helpers::getTopOfferIcon() }}" style="height:100px;width:auto;">
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

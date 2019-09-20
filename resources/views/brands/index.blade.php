@@ -26,6 +26,7 @@
                   <th>Image</th>
                   <th>Slug</th>
                   <th>Homepage</th>
+                  <th>Offers</th>
                   <th>Created</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -65,6 +66,7 @@
                       </form>
                     @endif
                   </td>
+                  <td><a href="{{ route('offers.brand',['id' => $brand->id]) }}" class="btn btn-secondary">See {{ count($brand->offers) }} offers</a></td>
                   <td>{{ $brand->created_at->toFormattedDateString() }}</td>
                   <td><a href="{{ route('edit.brand', ['id' => $brand->id]) }}"><i class="fa fa-pencil"></i></a></td>
                   <td><a href="{{ route('delete.brand', ['id' => $brand->id]) }}"><i class="fa fa-trash"></i></a></td>

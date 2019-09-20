@@ -122,6 +122,10 @@ return [
                     'url' => '/site-setings/favicon',
                 ],
                 [
+                    'text' => 'Top Offer Icon',
+                    'url' => '/site-setings/top-icon',
+                ],
+                [
                     'text' => 'Search Text',
                     'url' => '/site-setings/edit/search-text',
                 ],

@@ -182,4 +182,17 @@ public static function getMetaTags()
         }
     }
 
+    public static function getTopOfferIcon()
+    {
+        $siteSetings = SiteSetings::first();
+        if($siteSetings)
+        {
+            return $siteSetings->top_icon;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

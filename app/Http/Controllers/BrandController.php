@@ -7,6 +7,7 @@ use App\Brand;
 use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\MetaTag;
+use App\Offer;
 
 class BrandController extends Controller
 {
@@ -221,5 +222,37 @@ class BrandController extends Controller
         {
             return redirect()->back()->withErrors(['Brand not found.']);
         }
+    }
+
+    public function brandOffers($id)
+    {
+        $brand = Brand::with('offers')->find($id);
+        return view('brands.brand-offers',compact('brand'));
+    }
+
+    public function setTopOffer($id)
+    {
+        $offer = Offer::find($id);
+        $brand = $offer->brand;
+        foreach($brand->offers as $off)
+        {
+            $off->top = 0;
+            $off->timestamps = false;
+            $off->save();
+        }
+        $offer->top = 1;
+        $offer->timestamps = false;
+        $offer->save();
+        return redirect()->back()->with('success','Successfully set '.$offer->name.' offer as top offer for '.$brand->name);
+    }
+
+    public function unsetTopOffer($id)
+    {
+        $offer = Offer::find($id);
+        $brand = $offer->brand;
+        $offer->top = 0;
+        $offer->timestamps = false;
+        $offer->save();
+        return redirect()->back()->with('success','Successfully unset '.$offer->name.' offer as top offer for '.$brand->name);
     }
 }

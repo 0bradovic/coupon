@@ -25,6 +25,12 @@ class SiteController extends Controller
         return view('site-setings.favicon',compact('siteSetings'));
     }
 
+    public function indexTopIcon()
+    {
+        $siteSetings = SiteSetings::first();
+        return view('site-setings.top-icon',compact('siteSetings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -156,5 +162,22 @@ class SiteController extends Controller
             'brand_page_search_text' => $request->brand_page_search_text,
         ]);
         return redirect()->back()->with('success', 'Successfully updated search text.');
+    }
+
+    public function updateTopIcon(Request $request)
+    {
+        $this->validate($request,[
+            'top_icon' => 'required',
+        ]);
+        $siteSetings = SiteSetings::first();
+        unlink(public_path().$siteSetings->top_icon);
+        $file = $request->top_icon;
+        $name = time().$file->getClientOriginalName();
+        $image = Image::make($file->getRealPath());
+        $image->save(public_path('images/top/' .$name));
+        $img_src = '/images/top/'.$name;
+        $siteSetings->top_icon = $img_src;
+        $siteSetings->save();
+        return redirect()->back()->with('success', 'Successfully updated top offer icon.');
     }
 }
