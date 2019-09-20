@@ -57,8 +57,7 @@
                     {!! $offer->detail !!}
                 </div>
             </a>
-        </div>
-        <div class="share_me">
+            <div class="share_me">
             <p>Share Me!</p>
             <div class="share_me_item facebook">
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop&summary=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} {{ $offer->formatUrlDetails($offer->detail) }}... I thought you'd love it too! "><i class="fab fa-facebook-f"></i></a>
@@ -80,6 +79,8 @@
                 <a target="_blank" href="https://wa.me/?text=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} {{ $offer->formatUrlDetails($offer->detail) }}... I thought you'd love it too! {{url()->current()}}"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
+        </div>
+      
     </div>
     
     @if(count($sameBrandOffers) > 0)
