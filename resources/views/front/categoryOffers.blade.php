@@ -6,6 +6,18 @@
     
 <div class="category_page_holder">
     <div class="category_blade">
+        @if(count($topBrands) > 0)
+        <div class="home_top_brands">
+                <p>Top Offers</p>
+            <div class="home_top_brands_images">
+                @foreach($topBrands as $brand)
+                    <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">
+                        <img src="{{ $brand->img_src }}" style="height:100px;width:auto;">
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        @endif
         <div class="popular_brands_row">
         <span>{{ $category->name }}</span> 
         <div class="searchInContent category_searchInContent">
@@ -17,18 +29,7 @@
             </form>
         </div>
     </div>
-    @if(count($topBrands) > 0)
-    <div class="home_top_brands">
-            <p>Top Brands</p>
-        <div class="home_top_brands_images">
-            @foreach($topBrands as $brand)
-                <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">
-                    <img src="{{ $brand->img_src }}" style="height:100px;width:auto;">
-                </a>
-            @endforeach
-        </div>
-    </div>
-    @endif
+   
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" data-next-page="{{ $popularOffers->nextPageUrl() }}">
             @foreach($popularOffers as $offer)
             @if($offer->brand)

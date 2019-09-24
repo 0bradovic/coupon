@@ -62,7 +62,7 @@
                     <img src="{{ Helpers::getTopOfferIcon() }}" style="height:100px;width:auto;">
                 </div>
             @endif
-            <div class="share_me">
+            <!-- <div class="share_me">
             <p>Share Me!</p>
             <div class="share_me_item facebook">
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}&title=BeforeTheShop&summary=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} {{ $offer->formatUrlDetails($offer->detail) }}... I thought you'd love it too! "><i class="fab fa-facebook-f"></i></a>
@@ -83,7 +83,7 @@
             <div class="share_me_item whatsapp">
                 <a target="_blank" href="https://wa.me/?text=I'm loving this offer of {{ $offer->urlOfferName($offer->name) }} {{ $offer->formatUrlDetails($offer->detail) }}... I thought you'd love it too! {{url()->current()}}"><i class="fab fa-whatsapp"></i></a>
             </div>
-        </div>
+        </div> -->
         </div>
       
     </div>
@@ -91,10 +91,9 @@
     @if(count($sameBrandOffers) > 0)
                 @foreach($sameBrandOffers as $off)
                 @if($off->brand)
-                <div class="category_blade_content">
                 
-                    <div class="category_blade_box">
-                        <div class="category_blade_box_img">
+                    <div class="single_offer">
+                        <div class="single_offer_img">
                             @if($off->brand->img_src)
                                 <?php
                                 list($width, $height, $type, $attr) = getimagesize(public_path().$off->brand->img_src);
@@ -120,7 +119,7 @@
                                 <a href="{{ route('get.offer',['slug' => $off->slug]) }}" class="redirect-btn get_this_btn">Get This <i class="fas fa-chevron-right"></i></a>
                             @endif
                         </div>
-                        <div class="category_blade_box_date">
+                        <div class="single_offer_date">
                             @if($off->offerType)
                                 <span class="coupon" style="background-color:{{ $off->offerType->color }}">{{ $off->offerType->name }}</span>
                             @endif
@@ -129,7 +128,7 @@
                                     {{ $off->name }}
                                 </div>
                             </a>
-                            <div class="category_blade_box_date_bottom">
+                            <div class="single_offer_date_bottom">
                                 @if($off->endDate)
                                     <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>ends</p>
                                     <p @if($off->dateFormat($off->endDate) <  Helpers::expireSoon() ) style="color:red;" @endif>{{ $off->frontDateFormat( $off->endDate ) }}</p>
@@ -138,9 +137,9 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="category_blade_box_text">
+                        <div class="single_offer_text">
                             <a href="{{ route('offer',['brandSlug' => $off->brand->slug , 'offerSlug' => $off->slug]) }}">
-                                <div class="category_blade_box_text_top">
+                                <div class="single_offer_text_top">
                                     {!! $off->formatFullDetails($off->detail) !!}
                                 </div>
                             </a>
@@ -151,13 +150,13 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                
                 @endif
                 @endforeach
             @endif
         
     <div class="offer_page_title">
-        <span>Here's more you might like...</span>
+        <span>Others you might like...</span>
     </div>
             @if(count($popularSimillarOffers) > 0)
                 @foreach($popularSimillarOffers as $off)
