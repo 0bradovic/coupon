@@ -83,7 +83,7 @@
         </div>
         @if($popularSimillarOffers)
         <div class="offer_page_title">
-            <span>Here's more you might like...</span>
+            <span>Others you might like...</span>
         </div>
         <div class="category_blade_row most_popular endless-pagination mostPopularOffers" @if($popularSimillarOffers) data-next-page="{{ $popularSimillarOffers->nextPageUrl() }}" @endif>
             @foreach($popularSimillarOffers as $off)
