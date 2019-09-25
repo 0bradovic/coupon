@@ -2679,7 +2679,7 @@ aaa
   border: 3px solid #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  height: 80px;
+  height: 100px;
   justify-items: center;
 }
 
@@ -2690,13 +2690,16 @@ aaa
 }
 
 .home_top_brands_images a img {
-  width: 80px !important;
+  width: 60px !important;
   height: auto !important;
 }
 
 @media (max-width: 1200px) {
   .home_top_brands_images a {
     width: 70px !important;
+  }
+  .home_top_brands_images {
+    justify-content: space-between;
   }
 }
 
