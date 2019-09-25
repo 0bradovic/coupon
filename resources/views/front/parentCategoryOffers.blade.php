@@ -8,7 +8,7 @@
     <div class="category_blade">
     @if(count($topBrands) > 0)
     <div class="home_top_brands">
-            <p>Top Offers</p>
+            <p>{{ $category->name }}</p>
         <div class="home_top_brands_images">
             @foreach($topBrands as $brand)
                 <a href="{{ route('brand.offers',['slug' => $brand->slug]) }}">
@@ -19,7 +19,7 @@
     </div>
     @endif
     <div class="popular_brands_row">
-        <span>{{ $category->name }}</span> 
+        <span>Top Offers</span> 
         <div class="searchInContent parentCategory_searchInContent">
             <form action="{{route('search.blade')}}" method="GET" autocomplete="off">
             <label>
