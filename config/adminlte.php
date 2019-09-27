@@ -197,6 +197,10 @@ return [
                     'url' => '/brands',
                 ],
                 [
+                    'text' => 'Brands with Offers',
+                    'url' => '/brands-with-offers',
+                ],
+                [
                     'text' => 'Add Brand',
                     'url'  => '/create/brand',
                 ],

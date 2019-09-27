@@ -8,6 +8,7 @@ use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\MetaTag;
 use App\Offer;
+use App\Support\Collection;
 
 class BrandController extends Controller
 {
@@ -224,10 +225,103 @@ class BrandController extends Controller
         }
     }
 
-    public function brandOffers($id)
+    public function brandWithOffers(Request $request)
     {
-        $brand = Brand::with('offers')->find($id);
-        return view('brands.brand-offers',compact('brand'));
+        if(!$request->term && !$request->filter)
+        {
+            $brands = Brand::with('offers')->paginate(20);
+        }
+        elseif($request->term && !$request->filter || $request->filter == 'all')
+        {
+            $brands = Brand::where('name','LIKE','%'.$request->term.'%')->with('offers')->paginate(20);
+        }
+        elseif($request->term && $request->filter == 'live-offers')
+        {
+            $brands = Brand::where('name','LIKE','%'.$request->term.'%')->get();
+            foreach($brands as $key => $brand)
+            {
+                $liveOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+                if(count($liveOffers) == 0)
+                {
+                    $brands->forget($key);
+                }
+                else
+                {
+                    $brand->liveOffers = $liveOffers;
+                }
+            }
+            $brands = (new Collection($brands))->paginate(20);
+        }
+        elseif($request->term && $request->filter == 'live-offers-no-top')
+        {
+            $brands = Brand::where('name','LIKE','%'.$request->term.'%')->get();
+            foreach($brands as $key => $brand)
+            {
+                $liveOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+                if(count($liveOffers) == 0)
+                {
+                    $brands->forget($key);
+                }
+                else
+                {
+                    $brand->liveOffers = $liveOffers;
+                    foreach($brand->liveOffers as $offer)
+                    {
+                        if($offer->top == 1)
+                        {
+                            $brands->forget($key);
+                        }
+                    }
+                }
+            }
+            $brands = (new Collection($brands))->paginate(20);
+        }
+        elseif(!$request->term && !$request->filter || $request->filter == 'all')
+        {
+            $brands = Brand::with('offers')->paginate(20);
+        }
+        elseif(!$request->term && $request->filter == 'live-offers')
+        {
+            $brands = Brand::all();
+            foreach($brands as $key => $brand)
+            {
+                $liveOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+                if(count($liveOffers) == 0)
+                {
+                    $brands->forget($key);
+                }
+                else
+                {
+                    $brand->liveOffers = $liveOffers;
+                }
+            }
+            $brands = (new Collection($brands))->paginate(20);
+        }
+        elseif(!$request->term && $request->filter == 'live-offers-no-top')
+        {
+            $brands = Brand::all();
+            foreach($brands as $key => $brand)
+            {
+                $liveOffers = $brand->getFilteredLiveOffersByBrand($brand->id,'click','DESC');
+                if(count($liveOffers) == 0)
+                {
+                    $brands->forget($key);
+                }
+                else
+                {
+                    $brand->liveOffers = $liveOffers;
+                    foreach($brand->liveOffers as $offer)
+                    {
+                        if($offer->top == 1)
+                        {
+                            $brands->forget($key);
+                        }
+                    }
+                }
+            }
+            $brands = (new Collection($brands))->paginate(20);
+        }
+        return view('brands.brands-with-offers',compact('brands'));
     }
 
     public function setTopOffer($id)
