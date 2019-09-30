@@ -1354,7 +1354,7 @@ header {
 .category_blade {
   width: calc(100% - 160px);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding-bottom: 120px;
 }
 
