@@ -149,25 +149,31 @@ class FrontController extends Controller
         {
             if($tag->title != '' && $tag->title != null)
             {
-                if($offer->brand)
-                {
-                    $title = $offer->brand->name." | ".$tag->title;
-                }
-                else
-                {
-                    $title = $tag->title;
-                }
-                
+                $title = $tag->title;
             }
             else
             {
-                $title = 'BeforeTheShop';
+                if($offer->brand)
+                {
+                    $title = $offer->brand->name.". ".$offer->firstSentence($offer->detail);
+                }
+                else
+                {
+                    $title = $title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                }
             }
 
         }
         else
         {
-            $title = 'BeforeTheShop';
+            if($offer->brand)
+            {
+                $title = $offer->brand->name.". ".$offer->firstSentence($offer->detail);
+            }
+            else
+            {
+                $title = $title = $offer->name.". ".$offer->firstSentence($offer->detail);
+            }
         }
         $popularSimillarOffers = [];
         $sameBrandOffers = [];
@@ -338,7 +344,7 @@ class FrontController extends Controller
     public function brandOffers(Request $request,$slug)
     {
         $brand = Brand::where('slug',$slug)->first();
-        $title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
+        $title = $brand->name." | vouchercodes, cashback, discount & referral codes, coupons & offers";
         $tag = $brand->metaTag;
         if($tag != null)
         {
@@ -348,7 +354,7 @@ class FrontController extends Controller
             }
             else
             {
-                $title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
+                $title = $brand->name." | vouchercodes, cashback, discount & referral codes, coupons & offers";
             }
 
         }

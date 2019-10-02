@@ -120,6 +120,12 @@
               <input @if($offer->display == 0)checked @endif type="radio" name="display" value="0">No
             </div>
 
+            <div class="form-group">
+              <label>Top Offer?</label><br>
+              <input @if($offer->top == 1)checked @endif type="radio" name="top" value="1">Yes
+              <input @if($offer->top == 0)checked @endif type="radio" name="top" value="0">No
+            </div>
+
           </div>
 
           {!! csrf_field() !!}

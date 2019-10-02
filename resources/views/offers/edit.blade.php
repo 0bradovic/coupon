@@ -129,6 +129,12 @@
               <input type="text" class="form-control" name="alt_tag" value="{{ $offer->alt_tag }}">
             </div>
 
+            <div class="form-group">
+              <label>Top Offer?</label><br>
+              <input @if($offer->top == 1)checked @endif type="radio" name="top" value="1">Yes
+              <input @if($offer->top == 0)checked @endif type="radio" name="top" value="0">No
+            </div>
+
           </div>
 
           {!! csrf_field() !!}

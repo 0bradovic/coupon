@@ -79,8 +79,9 @@ class BrandController extends Controller
             'brand_id' => $brand->id
         ]);
         
-        $newCategoryMetaTag->title = $brand->name." | every ".$brand->name." voucher code, coupon, offer and deal";
-        $newCategoryMetaTag->description = "Every ".$brand->name." voucher code, coupon, offer and deal at Before The Shop";
+        $newCategoryMetaTag->keywords = $brand->name.", vouchercode, voucher code, discount code, refer a friend, referral code, coupon, offer";
+        $newCategoryMetaTag->description = $brand->name." vouchercodes, cashback, discount & referral codes, coupons & offers";
+        $newCategoryMetaTag->title = $brand->name." | vouchercodes, cashback, discount & referral codes, coupons & offers";
         $newCategoryMetaTag->link = 'brand/'.$brand->slug;
         $newCategoryMetaTag->save();
 

@@ -147,6 +147,7 @@ class OfferController extends Controller
             'img_src' => $img_src,
             'display' => $request->display,
             'brand_id' => $request->brand,
+            'top' => $request->top,
         ]);
         foreach($request->categories as $category)
         {
@@ -159,6 +160,19 @@ class OfferController extends Controller
         //         $offer->tags()->attach($tag);
         //     }
         // }
+        if($offer->top == 1 && $offer->brand)
+        {
+            $brand = $offer->brand;
+            foreach($brand->offers as $brandOffer)
+            {
+                if($brandOffer->id != $offer->id)
+                {
+                    $brandOffer->top = 0;
+                    $brandOffer->timestamps = false;
+                    $brandOffer->save();
+                }
+            }
+        }
 
         $newOfferMetaTag = MetaTag::create([
             'offer_id' => $offer->id
@@ -225,9 +239,21 @@ class OfferController extends Controller
         if($offer->metaTag)
         {
             $metaTag = $offer->metaTag;
-            $metaTag->keywords = $offer->alt_tag;
-            $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
-            $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+            if($offer->brand)
+            {
+                $keywords = $offer->brand->name.", vouchercode, voucher code, discount code, refer a friend, referral code, coupon, offer";
+                $description = $offer->brand->name." | ".$offer->name." | ".$offer->formatDetailsDescription($offer->detail);
+                $title = $offer->brand->name.". ".$offer->firstSentence($offer->detail);
+            }
+            else
+            {
+                $keywords = $offer->name.", vouchercode, voucher code, discount code, refer a friend, referral code, coupon, offer";
+                $description = $offer->name." | ".$offer->formatDetailsDescription($offer->detail);
+                $title = $offer->name.". ".$offer->firstSentence($offer->detail);
+            }
+            $metaTag->keywords = $keywords;
+            $metaTag->description = $description;
+            $metaTag->title = $title;
             $metaTag->save();
         }
 
@@ -384,6 +410,7 @@ class OfferController extends Controller
             'position' => $request->position,
             'alt_tag' => $request->alt_tag,
             'brand_id' => $request->brand,
+            'top' => $request->top,
         ]);
         $offer->categories()->detach();
         foreach($request->categories as $category)
@@ -398,6 +425,19 @@ class OfferController extends Controller
         //         $offer->tags()->attach($tag);
         //     }
         // }
+        if($offer->top == 1 && $offer->brand)
+        {
+            $brand = $offer->brand;
+            foreach($brand->offers as $brandOffer)
+            {
+                if($brandOffer->id != $offer->id)
+                {
+                    $brandOffer->top = 0;
+                    $brandOffer->timestamps = false;
+                    $brandOffer->save();
+                }
+            }
+        }
         if($request->photo)
         {
             if($offer->img_src)
@@ -687,7 +727,6 @@ class OfferController extends Controller
             while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
                 
                 $num = count($filedata );
-                //dd($filedata);
                 // Skip first row (Remove below comment if you want to skip the first row)
                 if($i == 0){
                    $i++;
@@ -710,14 +749,13 @@ class OfferController extends Controller
                 $i++;
              }
              fclose($file);
-             
              foreach($importData_arr as $data)
              {
-                 //dd(Carbon::parse($data[4]));
                  if(Offer::where('name',$data[0])->where('detail',$data[1])->first() != null)
                  {
                     $offer = Offer::where('name',$data[0])->where('detail',$data[1])->first();
                     $offerType = OfferType::where('name',$data[6])->first();
+                    
                     if($offerType == null)
                     {
                         $offer->offer_type_id = null;
@@ -736,6 +774,31 @@ class OfferController extends Controller
                     }
                     $offer->brand_id = $brand_id;
                     $offer->save();
+                    $top = (int)$data['10'];
+                    if($top != 0)
+                    {
+                        $offer->top = 1;
+                        $offer->save();
+                        if($offer->brand)
+                        {
+                            $brand = $offer->brand;
+                            foreach($brand->offers as $brandOffer)
+                            {
+                                if($brandOffer->id != $offer->id)
+                                {
+                                    $brandOffer->top = 0;
+                                    $brandOffer->timestamps = false;
+                                    $brandOffer->save();
+                                }
+                            }
+                        }
+                       
+                    }
+                    else
+                    {
+                        $offer->top = 0;
+                        $offer->save();
+                    }
                     $offer->categories()->detach();
                     $categorySlugs = explode(',',$data[7]);
                     foreach($categorySlugs as $categorySlug)
@@ -905,6 +968,14 @@ class OfferController extends Controller
                     {
                         $brand_id = $brand->id;
                     }
+                    if((int)$data['10'] == 0)
+                    {
+                        $top = 0;
+                    }
+                    else
+                    {
+                        $top = 1;
+                    }
                     $insertData = array(
                     'name' => $data[0],
                     'slug' => $slug,
@@ -919,8 +990,22 @@ class OfferController extends Controller
                     'user_id' => Auth::user()->id,
                     'offer_type_id' => $offer_type_id,
                     'brand_id' => $brand_id,
+                    'top' => $top,
                     );
                     $offer = Offer::create($insertData);
+                    if($offer->top == 1 && $offer->brand)
+                    {
+                        $brand = $offer->brand;
+                        foreach($brand->offers as $brandOffer)
+                        {
+                            if($brandOffer->id != $offer->id)
+                            {
+                                $brandOffer->top = 0;
+                                $brandOffer->timestamps = false;
+                                $brandOffer->save();
+                            }
+                        }
+                    }
                     $categorySlugs = explode(',',$data[7]);
                     foreach($categorySlugs as $categorySlug)
                     {
@@ -992,10 +1077,22 @@ class OfferController extends Controller
                     $offer->save();
                     if($offer->metaTag)
                     {
+                        if($offer->brand)
+                        {
+                            $keywords = $offer->brand->name.", vouchercode, voucher code, discount code, refer a friend, referral code, coupon, offer";
+                            $description = $offer->brand->name." | ".$offer->name." | ".$offer->formatDetailsDescription($offer->detail);
+                            $title = $offer->brand->name.". ".$offer->firstSentence($offer->detail);
+                        }
+                        else
+                        {
+                            $keywords = $offer->name.", vouchercode, voucher code, discount code, refer a friend, referral code, coupon, offer";
+                            $description = $offer->name." | ".$offer->formatDetailsDescription($offer->detail);
+                            $title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                        }
                         $metaTag = $offer->metaTag;
-                        $metaTag->keywords = $offer->alt_tag;
-                        $metaTag->description = $offer->name.". ".$offer->formatDetailsDescription($offer->detail);
-                        $metaTag->title = $offer->name.". ".$offer->firstSentence($offer->detail);
+                        $metaTag->keywords = $keywords;
+                        $metaTag->description = $description;
+                        $metaTag->title = $title;
                         $metaTag->save();
                     }
                 }
@@ -1028,7 +1125,7 @@ class OfferController extends Controller
         
         $filename = 'offers.csv';
         $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories','Brand','Full Link'));
+        fputcsv($handle, array('Name', 'Detail1', 'Link', 'Todays Date', 'End Date', 'Image','Offer Type','Categories','Brand','Full Link','Top Offer'));
         foreach($offers as $offer)
         {
             $categories = $offer->categories()->pluck('slug')->toArray();
@@ -1050,11 +1147,11 @@ class OfferController extends Controller
             }
             if($offer['endDate'] == null)
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],'Ongoing',public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink,$offer['top']));
             }
             else
             {
-                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink));
+                fputcsv($handle, array($offer['name'], $offer['detail'], $offer['link'], $offer['startDate'],$offer['endDate'],public_path().$offer['img_src'],$offerType,$categories,$brand,$fullLink,$offer['top']));
             }
                 
         }
@@ -1170,7 +1267,6 @@ class OfferController extends Controller
             elseif($request->offers == 'most-popular')
             {
                 $collections = [];
-                //dd($parentCategory->subcategories);
                 if($request->term == null)
                 {
                    

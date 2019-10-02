@@ -33,6 +33,7 @@ Route::match(['get', 'post'], 'register', function(){
     return redirect('/');
  });
 Route::middleware('auth')->group(function () {
+
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/search-queries', 'SearchQueryController@index')->name('get.search-queries');
