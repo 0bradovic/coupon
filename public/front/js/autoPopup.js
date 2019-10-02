@@ -2,18 +2,20 @@
 
 $(document).ready(function() {
     var present = $('#presentOn').val();
-    if(localStorage.getItem("newsletter") == null || localStorage.getItem("newsletter") == undefined || localStorage.getItem("newsletter") == ''){
-        localStorage.setItem("newsletter",1);
+    if(sessionStorage.getItem("newsletter") == null || sessionStorage.getItem("newsletter") == undefined || sessionStorage.getItem("newsletter") == ''){
+        sessionStorage.setItem("newsletter",1);
     }
-    if(localStorage.getItem("newsletter") == present){
+    if(sessionStorage.getItem("newsletter") == present){
         $(".fixed_btn_form").show();
-        localStorage.removeItem('newsletter');
+        sessionStorage.removeItem('newsletter');
     }
-    else if(localStorage.getItem("newsletter") < present){
-        var count = parseInt(localStorage.getItem("newsletter")) +1;
-        localStorage.setItem("newsletter",count);
+    else if(sessionStorage.getItem("newsletter") < present){
+        var count = parseInt(sessionStorage.getItem("newsletter")) +1;
+        sessionStorage.setItem("newsletter",count);
     }
     else{
-        localStorage.removeItem('newsletter');
+        if(sessionStorage.getItem("newsletter") != "false"){
+            sessionStorage.removeItem('newsletter');
+        }
     }
   });

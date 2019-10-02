@@ -124,6 +124,7 @@ $(document).ready(function() {
     $(".fixed_btn_form").hide();
   });
   $('.close-modal').on("click", function(){
+    sessionStorage.setItem("newsletter",false);
     $(".fixed_btn_form").hide();
   });
   // COOKIE
